@@ -100,6 +100,7 @@ E.g. after the user has selected a food item previously.
 ** `[tags]`: Displays only the food with the corresponding tag.
 
 Examples:
+
 * `menu all` +
 Display the menu for this store.
 * `menu by name` +
@@ -128,9 +129,10 @@ Format: `budget set [PERIOD] [AMOUNT]`
 _Possible inputs are `daily`, `weekly`, `monthly`, `/d`, `/w`, `/m`._
 * `AMOUNT`: defines the limit of your budget.
 
-IMPORTANT: This has to be a *positive numerical number* (decimal places allowed).
+NOTE: This has to be a *positive numerical number* (decimal places allowed).
 
 Examples:
+
 * `budget set weekly 9.50` +
 Sets your weekly budget to $9.50.
 * `budget set /m 100` +
@@ -144,7 +146,7 @@ Format: `budget view`
 
 === Viewing Expense Report: `report`
 
-You can view a report of your spendings and food purchases for any period. +
+This command generate a report for the spendings and food purchases for any period specified. +
 Formats: `report` +
          `report [/f START_DATE] [/t END_DATE]` +
          `report [PERIOD]`
@@ -153,12 +155,11 @@ Formats: `report` +
 _Possible inputs are `weekly`, `monthly`, `yearly`, `/w`, `/m` and `/y`._
 * `PERIOD`, `[/f]` and `[/t]` fields are optional.
 
-IMPORTANT:
-* `START_DATE` cannot be a future date.
-* `END_DATE` cannot be before the start date, or the earliest possible date if the [/f] field is empty.
+NOTE: `START_DATE` cannot be a future date. +
+`END_DATE` cannot be before the start date, or the earliest possible date if the [/f] field is empty.
 
 * Both `[/f]` and `[t]` fields require the date format to be the following: +
-Examples
+Examples:
 ** `report /f 12-02-2020 /t 30-04-2020` +
  Generates a report from 12/2/2020 to 30/4/2020.
 ** `report /w 12-02-2020` +
@@ -180,12 +181,11 @@ Formats: `transaction` +
 _Possible inputs are `weekly`, `monthly`, `yearly`, `/w`, `/m` and `/y`._
 * `PERIOD`, `[/f]` and `[/t]` fields are optional.
 
-IMPORTANT:
-* `START_DATE` cannot be a future date. +
-* `END_DATE` cannot be before the start date, or the earliest possible date if the [/f] field is empty.
+NOTE: `START_DATE` cannot be a future date. +
+`END_DATE` cannot be before the start date, or the earliest possible date if the [/f] field is empty.
 
 * Both `[/f]` and `[t]` fields require the date format to be the following: +
-Examples
+Examples:
 ** `transaction /f 12-02-2020 /t 30-04-2020` +
 Generates a transaction from 12/2/2020 to 30/4/2020.
 ** `transaction /w 12-02-2020` +
@@ -201,7 +201,7 @@ This command allows the user to review food items from the transactions screen a
 
 Format: `review INDEX`
 
-NOTE: User can update existing reviews by using the same command.
+TIP: User can update existing reviews by using the same command.
 
 === Rating of Food Items: `rate`
 
@@ -209,7 +209,7 @@ This command allows user to rate food items from the transactions screen as show
 
 Format: `rate INDEX`
 
-NOTE: User  can also update existing reviews by using the same command.
+TIP: User  can also update existing reviews by using the same command.
 
 == FAQ
 
@@ -232,12 +232,10 @@ e.g. `goto deck /f COM1`
 e.g. `menu chicken`
 * *rate* : `rate INDEX`
 * *randomize* : `randomize`
-* *report* : `report` +
- e.g. `report [/f START_DATE] [/t END_DATE]` +
-  `report [PERIOD]`
+* *report* : `report [/f START_DATE] [/t END_DATE] [PERIOD]` +
+ e.g. `report /f 12-02-2020 /t 30-04-2020`
 * *review* : `review INDEX`
 * *select* : `select INDEX`
-* *transaction* : `transaction` +
- e.g. `transaction [/f START_DATE] [/t END_DATE]` +
- `transaction [PERIOD]`
+* *transaction* : `transaction [/f START_DATE] [/t END_DATE] [PERIOD]` +
+ e.g. `transaction  /w 12-02-2020`
 
