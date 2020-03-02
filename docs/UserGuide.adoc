@@ -14,11 +14,11 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level3
 
-By: `Team SE-EDU`      Since: `Feb 2020`
+By: `Team SE-EDU`      Since: `Feb 2020`    Licence: `MIT`
 
 == Introduction
 
-FoodieBot is a campus food locator application which can help students look for food they want, by recommending the canteens nearest to them. Our user targets are students, staff and tourists, in general anyone who comes to or visits NUS. In particular, for the indecisive user, this application can give a random food suggestion tailored to each user based on their budget and/ or past food selections etcetera.
+FoodieBot is a campus food locator application which can help students look for food they want, by recommending the canteens nearest to them. Our target users are students, staff and tourists, in general anyone who comes to or visits NUS. In particular, for the indecisive user, this application can give a random food suggestion tailored to each user based on their budget and/ or past food selections etcetera.
 
 == Quick Start
 
@@ -33,10 +33,10 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`find`**`nearest COM1` : locate the nearest canteen from COM1.
-* **`goto`**`deck /f COM1` : display direction to go to deck from COM1.
-* *`exit`* : exits the app
+* *`list`* : Lists all canteens.
+* **`find`**`nearest COM1` : Locate the nearest canteen from COM1.
+* **`goto`**`deck /f COM1` : Display direction to go to deck from COM1.
+* *`exit`* : Exits the app
 
 .  Refer to <<Features>> for details of each command.
 
@@ -50,152 +50,168 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 ====
 
-=== List all canteens: `list`
+=== Listing all Canteens: `list`
 
 Display a list of all available canteens on campus.
 
 Format: `list`
 
-=== Find nearest canteens : `find nearest`
+=== Finding the Nearest Canteens : `find nearest`
 
 Display a list of all canteens ordered by increasing distance from current location.
 
 Format: `find nearest BLOCK_NAME`
-****
+
 * The `BLOCK_NAME` will be populated with suggestions as the user types.
-* The `BLOCK_NAME` has to be one of the suggestions; otherwise an error message will be displayed that requires correct location to be provided
-****
+* The `BLOCK_NAME` has to be one of the suggestions; otherwise an error message will be displayed that requires correct location to be provided.
 
-=== Going to nearest canteen : `goto`
+=== Going to Nearest Canteen : `goto`
 
-Display a map with the route between start and destination location.
-Including the travel instructions and bus services that go to the canteen.
+Display a map with the route between start location and destination.
+Includes the travel instructions and bus services that go to the canteen.
 
 Format: `goto CANTEEN_NAME /f CURRENT_LOCATION`
-****
+
 * `CANTEEN_NAME` and `CURRENT_LOCATION` field will be populated with suggestions as the user types.
 * `CANTEEN_NAME` and `CURRENT_LOCATION` field has to be one of the suggestions; otherwise an error message will be displayed that requires the correct location to be provided.
-****
 
-=== Viewing all stores in canteen: `enter`
+=== Viewing All Stores in Canteen: `enter`
 
-Display the stores available at the canteen based on user input. +
+Display the stores available at the canteen based on user input.
+
 Format: `enter CANTEEN_NAME`
 
-****
-* Store rating will be displayed which is determined from ratings given by the user on food items which were previously selected.
-****
+* The display of the store rating is determined from the user past experience on the food items which were selected.
 
-=== Viewing menu of store : `menu`
+=== Viewing Menu of Store : `menu`
 
-Display the menu based on the user input. +
+Display the menu of the store based on the user input.
+
 Format: `menu KEYWORD`
 
-****
-* This function is only available after the user has selected a canteen and store.
-* User ratings will be displayed if they are available e.g. after the user has selected a food item previously.
-* `KEYWORD` include [all, by price/name, filter tag].
-** [all] returns a complete list of food sold at the store.
-** [by price/ name] sorts the menu accordingly.
-** [filter tag] displays only the food with the corresponding tag.
-****
-
-=== Select food : `select`
-
-Select the food to be store in the database. +
-Format: `select INDEX`
-
-=== Randomise food selection : `randomize`
-
-Display a list of suggestions of food. +
-Format: `randomize`
-
-=== Set a budget : `budget set`
-
-You can set a daily, weekly or monthly budget using this function. This budget can also be changed later, however it will reset your budget overview for your current budget cycle. +
-Format: `budget set [PERIOD] [AMOUNT]`
-
-****
-* `PERIOD` defines the length of the cycle for your budget. +
-_Possible inputs are `daily`, `weekly`, `monthly`, `/d`, `/w`, `/m`._
-* `AMOUNT` defines the limit of your budget.
-* This has to be a *positive numerical number* (decimal places allowed).
-****
+NOTE: This function is only available after the user has selected a canteen and store.
+* User ratings will be displayed if they are available +
+E.g. after the user has selected a food item previously.
+* `KEYWORD` includes:
+** `[all]`: Returns a complete list of food sold at the store.
+** `[by price/ name]`: Sorts the menu accordingly.
+** `[tags]`: Displays only the food with the corresponding tag.
 
 Examples:
+ `menu all` +
+ Display the menu for this store.
 
-* `budget set weekly 9.50` +
-::Sets your weekly budget to $9.50
-* `budget set /m 100` +
-Sets your monthly budget to $100
+ `menu by name` +
+ Display the sorted menu based on the names (a-z).
 
-=== Viewing budget: `budget view`
+=== Selecting Food : `select`
 
-You can use this command to view the current budget, along with any spendings made for the week as well as the remaining available budget to spend. +
+This command stores the selected food in the database.
+
+Format: `select INDEX`
+
+=== Randomizing Food Selection : `randomize`
+
+Display a list of suggestions of food.
+
+Format: `randomize`
+
+=== Setting a Budget : `budget set`
+
+This command set a daily, weekly or monthly budget. +
+This budget can be changed, however, this will reset the budget overview for the current budget cycle.
+
+Format: `budget set [PERIOD] [AMOUNT]`
+
+* `PERIOD`: defines the length of the cycle for the budget. +
+_Possible inputs are `daily`, `weekly`, `monthly`, `/d`, `/w`, `/m`._
+* `AMOUNT`: defines the limit of your budget.
+[IMPORTANT] This has to be a *positive numerical number* (decimal places allowed).
+
+Examples:
+ `budget set weekly 9.50` +
+ Sets your weekly budget to $9.50.
+
+ `budget set /m 100` +
+ Sets your monthly budget to $100.
+
+=== Viewing Budget: `budget view`
+
+This command view the current budget, spendings made for the week and the remaining available budget to spend.
+
 Format: `budget view`
 
-
-=== Viewing expense report: `report`
+=== Viewing Expense Report: `report`
 
 You can view a report of your spendings and food purchases for any period. +
 Formats: `report` +
          `report [/f START_DATE] [/t END_DATE]` +
          `report [PERIOD]`
 
-****
-* `START_DATE` cannot be a future date.
-* `END_DATE` cannot be before the start date, or the earliest possible date if the [/f] field is empty.
-* `PERIOD` defines the length of the cycle for the report. +
+* `PERIOD`: Defines the length of the cycle for the report. +
 _Possible inputs are `weekly`, `monthly`, `yearly`, `/w`, `/m` and `/y`._
 * `PERIOD`, `[/f]` and `[/t]` fields are optional.
+
+[IMPORTANT]
+* `START_DATE` cannot be a future date.
+* `END_DATE` cannot be before the start date, or the earliest possible date if the [/f] field is empty.
+
 * Both `[/f]` and `[t]` fields require the date format to be the following:
-****
+ `report /f 12-02-2020 /t 30-04-2020` +
+ Generates a report from 12/2/2020 to 30/4/2020.
 
-Examples:
+ `report /w 12-02-2020` +
+ Generates a report for the week of 12/2/2020.
 
-* `report /f 12-02-2020 /t 30-04-2020` +
-Generates a report from 12/2/2020 to 30/4/2020.
-* `report /w 12-02-2020` +
-Generates a report for the week of 12/2/2020.
-* `report month jan` / `report month january` +
-Generates a report for the month of January.
-* `report /y 2020` +
-Generates a report for the year 2020.
+ `report month jan` / `report month january` +
+ Generates a report for the month of January.
 
-=== Viewing past transactions: `transaction`
+ `report /y 2020` +
+ Generates a report for the year 2020.
 
-You can view your past transactions using this command. +
-Formats: `transaction`::
-         `transaction [/f START_DATE] [/t END_DATE]`::
+=== Viewing Past Transactions: `transaction`
+
+Displays the past transactions using.
+
+Formats: `transaction` +
+         `transaction [/f START_DATE] [/t END_DATE]` +
          `transaction [PERIOD]`
-****
-* `START_DATE` cannot be a future date.
-* `END_DATE` cannot be before the start date, or the earliest possible date if the [/f] field is empty.
-* `PERIOD` defines the length of the cycle for the report. +
+
+* `PERIOD`: Defines the length of the cycle for the report. +
 _Possible inputs are `weekly`, `monthly`, `yearly`, `/w`, `/m` and `/y`._
 * `PERIOD`, `[/f]` and `[/t]` fields are optional.
+
+[IMPORTANT]
+* `START_DATE` cannot be a future date.
+* `END_DATE` cannot be before the start date, or the earliest possible date if the [/f] field is empty.
+
 * Both `[/f]` and `[t]` fields require the date format to be the following:
-****
+ `transaction /f 12-02-2020 /t 30-04-2020` +
+ Generates a transaction from 12/2/2020 to 30/4/2020.
 
-Examples:
+ `transaction /w 12-02-2020` +
+ Generates a transaction for the week of 12/2/2020.
 
-* `report /f 12-02-2020 /t 30-04-2020` +
-Generates a report from 12/2/2020 to 30/4/2020.
-* `report /w 12-02-2020` +
-Generates a report for the week of 12/2/2020.
-* `report month jan` / `report month january` +
-Generates a report for the month of January.
-* `report /y 2020` +
-Generates a report for the year 2020.
+ `transaction month jan` / `report month january` +
+ Generates a transaction for the month of January.
 
-=== Review food items: `review`
+ `transaction /y 2020` +
+ Generates a transaction for the year 2020.
 
-You can review food items from the transactions screen as shown in 3.12. You can also update existing reviews by using the same command. +
+=== Reviewing of Food Items: `review`
+
+This command allows the user to review food items from the transactions screen as shown in 3.12.
+
+NOTE: User can update existing reviews by using the same command.
+
 Format: `review INDEX`
 
-=== Rate food items: `rate`
+=== Rating of Food Items: `rate`
 
-You can rate food items from the transactions screen as shown in 3.12. You can also update existing reviews by using the same command. +
+This command allows user to rate food items from the transactions screen as shown in 3.12.
+
+NOTE: User  can also update existing reviews by using the same command.
+
 Format: `rate INDEX`
 
 
@@ -206,22 +222,26 @@ Format: `rate INDEX`
 
 == Command Summary
 
-* *budget set* : `budget set PERIOD AMOUNT`
+* *budget set* : `budget set PERIOD AMOUNT` +
 e.g. `budget set weekly 9.50`
 * *budget view* : `budget view`
-* *enter* : `enter CANTEEN_NAME`
+* *enter* : `enter CANTEEN_NAME` +
 e.g. `enter deck`
 * *find nearest* : `find nearest BLOCK_NAME` +
 e.g. `find nearest COM1`
 * *goto* : `goto CANTEEN_NAME /f CURRENT_LOCATION` +
 e.g. `goto deck /f COM1`
 * *list* : `list`
-* *menu* : `menu KEYWORD`
+* *menu* : `menu KEYWORD` +
 e.g. `menu chicken`
 * *rate* : `rate INDEX`
 * *randomize* : `randomize`
-* *report* : `report` [/f START_DATE] [/t END_DATE] [PERIOD]
+* *report* : `report` +
+ e.g. `report [/f START_DATE] [/t END_DATE]` +
+  `report [PERIOD]`
 * *review* : `review INDEX`
 * *select* : `select INDEX`
-* *transaction* : `transaction` [/f START_DATE] [/t END_DATE] [PERIOD]
+* *transaction* : `transaction` +
+ e.g. `transaction [/f START_DATE] [/t END_DATE]` +
+ `transaction [PERIOD]`
 
