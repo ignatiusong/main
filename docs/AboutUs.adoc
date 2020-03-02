@@ -29,7 +29,7 @@ Responsibilities: Integration + [Tool] expert + Model
 '''
 
 === Samantha Seah
-image::Samanthaseahpl.png[width="150", align="left"]
+image::samanthaseahpl.png[width="150", align="left"]
 {empty}[http://github.com/Samanthaseahpl[github]] [<<Samanthaseahpl#, portfolio>>]
 
 Role: Developer +
@@ -38,7 +38,7 @@ Responsibilities: Documentation and code quality
 '''
 
 === Shaun Goh
-image::SHAUNGOH97.png[width="150", align="left"]
+image::shaungoh97.png[width="150", align="left"]
 {empty}[http://github.com/SHAUNGOH97[github]] [<<SHAUNGOH97#, portfolio>>]
 
 Role: Developer +

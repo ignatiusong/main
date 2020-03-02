@@ -1,0 +1,9 @@
+{
+  "canteens": [ {
+    "name": "Canteen with valid field",
+    "numberOfStalls": "2"
+  }, {
+    "name": "Person With Invalid numberOfStalls Field",
+    "numberOfStalls": "-1"
+  } ]
+}
