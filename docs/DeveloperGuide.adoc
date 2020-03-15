@@ -30,7 +30,48 @@ We assume that you are using IntelliJ.
 1. Run gradle build.
 2. Run gradle run.
 
+== Implementation
 
+// tag::list[]
+=== [Proposed] List feature
+==== Proposed Implementation
+
+The list command is facilitated by `ListCommandParser`.
+It extends `FoodieBotParser` to handle list canteen commands.
+It implements the following operations:
+
+* `ListCommand#execute()` -- Updates the canteen list to show all the canteens or filtered by location.
+
+[NOTE]
+`ListCommand` extends `Command` with `Command#execute()`.
+
+* `ListCommandParser#arePrefixesPresent()` -- Checks if the prefixes specified in `parse()` are found in the command entered by the user.
+* `ListCommandParser#parse()` -- Identifies if prefixes have been specified and handles them respectively. +
+For example, if ListCommand has the nearest block name passed through as a parameter `list f\com1`, ListCommand will filter the canteen list with the given block name with `new ListCommand("com1")`
+
+
+
+
+The following sequence diagram shows how the list operation works:
+
+
+image::ListSequenceDiagram.png[]
+
+The following activity diagram summarizes what happens when a user executes a list command:
+
+
+image::ListActivityDiagram.png[]
+
+==== Design Considerations
+
+===== Aspect: User command format
+
+* **Alternative 1 (current choice):** `list f/com`
+** Pros: Easy to implement.
+** Cons: `f/` is an optional prefix, user might forget that it exists as no error is shown in the command result box
+* **Alternative 2:** find nearest `BLOCK_NAME`
+** Pros: The user finds it natural to type the word find.
+** Cons: Can be confusing whether find shows the list of canteens, food, or location of the canteen on campus. Having the 'find' command is also one additional command for the user to remember.
 
 [appendix]
 == Product Scope

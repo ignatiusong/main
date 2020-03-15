@@ -8,7 +8,6 @@ import static seedu.foodiebot.commons.util.AppUtil.checkArgument;
  * {@link #isValidName(String)}
  */
 public class Name {
-
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 

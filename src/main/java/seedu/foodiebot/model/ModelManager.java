@@ -187,23 +187,21 @@ public class ModelManager implements Model {
         return new FileReader(String.valueOf(foodieBotStorage.getCanteensFilePath()));
     }
 
-    // =========== Filtered Person List Accessors
+    // =========== Filtered Canteen List Accessors
     // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Canteen List}
      */
     @Override
     public ObservableList<Canteen> getFilteredCanteenList() {
-        return filteredCanteens;
+        SortedList<Canteen> sortedCanteenList = new SortedList<>(filteredCanteens);
+        sortedCanteenList.setComparator(Comparator.comparing((Canteen c) -> c.getName().fullName));
+        return sortedCanteenList;
     }
 
     /**
      * Updates the filter of the filtered canteen list to filter by the given {@code predicate}.
-     *
-     * @param predicate
-     * @throws NullPointerException if {@code predicate} is null.
      */
     @Override
     public ObservableList<Canteen> getFilteredCanteenListSortedByDistance() {
