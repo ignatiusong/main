@@ -1,7 +1,6 @@
 package seedu.foodiebot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.foodiebot.model.Model.PREDICATE_SHOW_ALL_CANTEEN;
 
 import seedu.foodiebot.model.Model;
 
@@ -30,7 +29,7 @@ public class ListCommand extends Command {
         boolean isLocationSpecified = false;
         requireNonNull(model);
         if (nearestBlockName.isBlank()) {
-            model.updateFilteredCanteenList(PREDICATE_SHOW_ALL_CANTEEN);
+            model.updateFilteredCanteenList(Model.PREDICATE_SHOW_ALL);
             model.setLocationSpecified(false);
             return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS, false, false, isLocationSpecified);
         } else {

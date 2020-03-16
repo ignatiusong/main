@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class CommandResultTest {
     private static final String command = "somecommand";
+    private CommandResult commandResult = new CommandResult(command, "feedback");
     @Test
     public void equals() {
 
@@ -59,5 +60,20 @@ public class CommandResultTest {
         assertNotEquals(
             commandResult.hashCode(), new CommandResult(command, "feedback", false, true)
                 .hashCode());
+    }
+
+    @Test
+    void isShowHelp() {
+        assertFalse(commandResult.isShowHelp());
+    }
+
+    @Test
+    void isExit() {
+        assertFalse(commandResult.isExit());
+    }
+
+    @Test
+    void isLocationSpecified() {
+        assertFalse(commandResult.isLocationSpecified());
     }
 }

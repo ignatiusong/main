@@ -1,3 +1,4 @@
+//Insert icon
 = FoodieBot - Developer Guide
 :site-section: DeveloperGuide
 :toc:
@@ -18,9 +19,20 @@ By: `F11-03`      Since: `Feb 2020`      Licence: `MIT`
 
 == Introduction
 
+=== Software Overview
+
+FoodieBot is a campus food locator application which can help students look for food they want, by recommending the canteens nearest to them.
+Foodiebot is one stop application to solve all meal decision on NUS.
+
+=== Purpose
+
 The purpose of this document is to describe the architecture and system design of the FoodieBot. This documentation is for anyone who
 wish to understand more about FoodieBot and how it works.
 
+=== Audience
+
+Our target users are students, staff and tourists, in general anyone who comes to or visits NUS.
+In particular, for the indecisive user, this application can give a random food suggestion tailored to each user based on their budget and/ or past food selections etcetera.
 
 == Setting up
 Our application is being managed by a dependency management tool Gradle.
@@ -30,7 +42,21 @@ We assume that you are using IntelliJ.
 1. Run gradle build.
 2. Run gradle run.
 
+
 == Design
+
+== Definitions
+
+== System Overview
+
+=== Architecture
+// describing the modules used.
+
+=== Algorithms
+
+=== Detailed Class Descriptions
+
+=== Design Considerations
 
 [[Design-Architecture]]
 === Architecture
@@ -228,50 +254,56 @@ The user is not particularly limited to student and stuff, it can be anyone who 
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
 
-[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
+[width="80%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` | new user | see usage instructions. | refer to instructions when I forget how to use the App.
 
-|`* * *` |user |find nearest canteens| get to the canteen quickly
+|`* * *` | user | find nearest canteens. | get to the canteen quickly.
 
-|`* * *` |user |see which stores are open |remove entries that I no longer need
+|`* * *` | user | see which stores are open. | remove entries that I no longer need.
 
-|`* * *` |user who is new to NUS (tourist, visitor or freshman) |get a clear directory to the canteen |
+|`* * *` | user who is new to NUS (tourist, visitor or freshman). | get a clear directory to the canteen | make my way to the canteen with ease.
 
-|`* * *` |user in campus |randomize a food choice |do not have to spend too much time thinking on what food to have
+|`* * *` | user in campus | randomize a food choice. | try something new every now and then.
 
-|`* * *` |user who is budget conscious  |know which food items fall within my budget | I would not overspend
+|`* * *` | user who is budget conscious | know which food items fall within my budget. | I would not overspend.
 
-|`* * *` |user |take down some personal notes about the store, for example which dish at the mixed veg store is good.|
+|`* * *` | user | take down some personal notes about the store, for example which dish at the mixed veg store is good. | see which is my favourite food amongst the NUS canteens.
 
-|`* * *` |user |see which foods I consume the most| see which is my favourite food amongst the NUS canteens.
+|`* *` | user who has an idea of what s/he wants to have | search for food items. | see which canteens sell them.
 
-|`* *` |user who has an idea of what s/he wants to have | search for food items| see which canteens sell them
+|`* *` | user | see which food items I have not tried. | try all food items in the canteen.
 
-|`* *` |user | see which food items I have not tried| try all food items in the canteen
+|`* *` | user with disability | know if there is convenient access to the canteen. | try all food items in the canteen.
 
-|`* *` |user with disability | know if there is convenient access to the canteen| try all food items in the canteen
+|`* *` | student on budget | search through prices of food items in different canteens. | discover which are the cheapest food items.
 
-|`* *` |student on budget | search through prices of food items in different canteens| discover which are the cheapest food items
+|`* *` | user who do not carry a lot of cash | see the type of payment methods available. | prepare myself beforehand.
 
-|`* *` |user who do not carry a lot of cash | see the type of payment methods available |
+|`* *` | user | track the frequency of the food I eat. | eat certain food in moderation and save money if i have been eating expensive food frequently.
 
-|`* *` |user | track the frequency of the food I eat | eat certain food in moderation and save money if i have been eating expensive food frequently
+|`* *` | user | see some images of the food .| get some better understanding of the food aside from just the food description.
 
-|`* *` |user | see some images of the food |
+|`*` | user who is health conscious | view the dietary options available for each canteen. | know which stall i can visit.
 
-|`*` |user who is health conscious |view the dietary options available for each canteen |
+|=======================================================================
 
-|`v2.0` |user |place an order |
 
-|`v2.0` |store owner |add new food items on the menu |
+=== User Story for Version 2.0
+[width="80%",cols="22%,<23%,<25%,<30%",options="header",]
+|=======================================================================
+| Priority | As a ... | I want to ... | So that I can...
 
-|`v2.0` |store owner |set menu items to be on promotion |attract more students to select the menu item
+|`v2.0` | user | place an order. | receive the food when I arrive.
 
-|`v2.0` |user |view the crowd condition | avoid going to the canteen if it is too crowded
+|`v2.0` | store owner | add new food items on the menu. | easily update the menu.
 
-|`v2.0` |user |send invitation to a friend | have meals together with friends
+|`v2.0` | store owner | set menu items to be on promotion. | attract more students to select the menu item.
+
+|`v2.0` | user | view the crowd condition. | avoid going to the canteen if it is too crowded.
+
+|`v2.0` | user | send invitation to a friend. | have meals together with friends.
 
 |=======================================================================
 

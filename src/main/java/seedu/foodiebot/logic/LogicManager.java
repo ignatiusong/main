@@ -32,6 +32,7 @@ import seedu.foodiebot.model.ReadOnlyFoodieBot;
 import seedu.foodiebot.model.budget.Budget;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Stall;
+import seedu.foodiebot.model.favorites.FavoriteFood;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.randomize.Randomize;
 import seedu.foodiebot.storage.Storage;
@@ -101,7 +102,7 @@ public class LogicManager implements Logic {
             return Randomize.class.getSimpleName();
 
         case FavoritesCommand.COMMAND_WORD:
-            //TODO Not Implemented
+            return FavoriteFood.class.getSimpleName();
 
         case TransactionsCommand.COMMAND_WORD:
             //TODO Not Implemented
@@ -173,5 +174,10 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Food> getFilteredFoodList(boolean isInitialised) {
         return model.getFilteredFoodList(isInitialised);
+    }
+
+    @Override
+    public ObservableList<Food> getFilteredFavoriteFoodList(boolean isInitialised) {
+        return model.getFilteredFavoriteFoodList();
     }
 }

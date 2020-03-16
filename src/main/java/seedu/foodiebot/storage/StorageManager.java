@@ -67,6 +67,11 @@ public class StorageManager implements Storage {
     }
 
     @Override
+    public Path getFavoritesFilePath() {
+        return foodieBotStorage.getFavoritesFilePath();
+    }
+
+    @Override
     public Path getFoodFilePath() {
         return foodieBotStorage.getFoodFilePath();
     }

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.FileReader;
 import java.io.IOException;
 
+import seedu.foodiebot.logic.commands.exceptions.CommandException;
 import seedu.foodiebot.model.Model;
 import seedu.foodiebot.model.randomize.Randomize;
 
@@ -22,12 +23,13 @@ public class RandomizeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws IOException {
+    public CommandResult execute(Model model) throws IOException, CommandException {
         requireNonNull(model);
-        FileReader file = model.listOfCanteen();
-        //ObservableList<Canteen> list = model.getFilteredCanteenList();
-        randomize.getSelectedCanteen(file);
-        return new CommandResult(COMMAND_WORD, String.format(MESSAGE_SUCCESS, randomize.selectCanteen()));
+        //FileReader file = model.listOfCanteens();
+        //randomize.getSelectedCanteen(file);
+        FileReader file = model.listOfStalls();
+        randomize.getOptions(file);
+        return new CommandResult(COMMAND_WORD, String.format(MESSAGE_SUCCESS, randomize.output()));
     }
 
     @Override

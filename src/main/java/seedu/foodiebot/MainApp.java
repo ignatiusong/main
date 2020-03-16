@@ -24,6 +24,7 @@ import seedu.foodiebot.model.ReadOnlyUserPrefs;
 import seedu.foodiebot.model.UserPrefs;
 // import seedu.foodiebot.model.budget.Budget;
 import seedu.foodiebot.model.canteen.Canteen;
+import seedu.foodiebot.model.favorites.FavoriteFood;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.util.SampleDataUtil;
 import seedu.foodiebot.storage.FoodieBotStorage;
@@ -65,7 +66,8 @@ public class MainApp extends Application {
         // Loads the specified file paths into the main app.
         FoodieBotStorage foodieBotStorage =
             new JsonFoodieBotStorage(userPrefs.getFoodieBotFilePath(),
-                    userPrefs.getStallsFilePath(), userPrefs.getFoodFilePath(), userPrefs.getBudgetFilePath());
+                    userPrefs.getStallsFilePath(), userPrefs.getFoodFilePath(),
+                    userPrefs.getBudgetFilePath(), userPrefs.getFavoriteFoodFilePath());
 
         storage = new StorageManager(foodieBotStorage, userPrefsStorage);
 
@@ -81,12 +83,12 @@ public class MainApp extends Application {
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s canteen data and {@code
      * userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book
-     * is not found, or an empty address book will be used instead if errors occur when reading
-     * {@code storage}'s address book.
+     * The data from the sample FoodieBot will be used instead if {@code storage}'s FoodieBot
+     * is not found, or an empty FoodieBot will be used instead if errors occur when reading
+     * {@code storage}'s FoodieBot.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyFoodieBot> addressBookOptional;
+        Optional<ReadOnlyFoodieBot> foodieBotOptional;
         ReadOnlyFoodieBot initialData;
         try {
             storage.readFoodieBot(Canteen.class.getSimpleName());
@@ -94,12 +96,11 @@ public class MainApp extends Application {
             // storage.readFoodieBot(Budget.class.getSimpleName());
 
             storage.readFoodieBot(Food.class.getSimpleName());
+            storage.readFoodieBot(FavoriteFood.class.getSimpleName());
 
-            addressBookOptional = Optional.empty();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample FoodieBot");
-            }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleFoodieBot);
+            foodieBotOptional = Optional.empty();
+            logger.info("Data file not found. Will be starting with a sample FoodieBot");
+            initialData = foodieBotOptional.orElseGet(SampleDataUtil::getSampleFoodieBot);
         } catch (DataConversionException e) {
             logger.warning(
                 "Data file not in the correct format. Will be starting with an empty FoodieBot");
@@ -201,7 +202,7 @@ public class MainApp extends Application {
     @Override
     public void stop() {
         logger.info(
-            "============================ [ Stopping Address Book ] =============================");
+            "============================ [ Stopping FoodieBot ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

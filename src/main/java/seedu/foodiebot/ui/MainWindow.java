@@ -19,6 +19,7 @@ import seedu.foodiebot.logic.commands.CommandResult;
 import seedu.foodiebot.logic.commands.DirectionsCommandResult;
 import seedu.foodiebot.logic.commands.EnterCanteenCommand;
 import seedu.foodiebot.logic.commands.ExitCommand;
+import seedu.foodiebot.logic.commands.FavoritesCommand;
 import seedu.foodiebot.logic.commands.ListCommand;
 import seedu.foodiebot.logic.commands.exceptions.CommandException;
 import seedu.foodiebot.logic.parser.ParserContext;
@@ -206,6 +207,17 @@ public class MainWindow extends UiPart<Stage> {
         isFoodInitialised = true;
     }
 
+    /**
+     * Fills the foodListPanel region.
+     */
+    @FXML
+    public void handleListFavorites() {
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(new FoodListPanel(logic.getFilteredFavoriteFoodList(false))
+                .getRoot());
+    }
+
+
 
     void show() {
         primaryStage.show();
@@ -264,6 +276,9 @@ public class MainWindow extends UiPart<Stage> {
                     ParserContext.setCurrentContext(ParserContext.STALL_CONTEXT);
                     handleListFood();
                 }
+                break;
+            case FavoritesCommand.COMMAND_WORD:
+                handleListFavorites();
                 break;
             case ExitCommand.COMMAND_WORD:
                 if (ParserContext.getCurrentContext().equals(ParserContext.MAIN_CONTEXT)) {

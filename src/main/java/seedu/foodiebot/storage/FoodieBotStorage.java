@@ -16,6 +16,8 @@ public interface FoodieBotStorage {
 
     Path getStallsFilePath();
 
+    Path getFavoritesFilePath();
+
     Path getFoodFilePath();
 
     /**

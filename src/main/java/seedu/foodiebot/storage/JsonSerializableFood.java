@@ -13,7 +13,7 @@ import seedu.foodiebot.model.FoodieBot;
 import seedu.foodiebot.model.ReadOnlyFoodieBot;
 import seedu.foodiebot.model.food.Food;
 
-/** An Immutable AddressBook that is serializable to JSON format. */
+/** An Immutable FoodieBot that is serializable to JSON format. */
 @JsonRootName(value = "foods")
 class JsonSerializableFood {
 
@@ -22,17 +22,17 @@ class JsonSerializableFood {
 
     private final List<JsonAdaptedFood> foods = new ArrayList<>();
 
-    /** Constructs a {@code JsonSerializableAddressBook} with the given stalls. */
+    /** Constructs a {@code JsonSerializableFoodieBot} with the given stalls. */
     @JsonCreator
     public JsonSerializableFood(@JsonProperty("foods") List<JsonAdaptedFood> foods) {
         this.foods.addAll(foods);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyFoodieBot} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created {@code
-     *     JsonSerializableAddressBook}.
+     *     JsonSerializableFoodieBot}.
      */
     public JsonSerializableFood(ReadOnlyFoodieBot source) {
         foods.addAll(
@@ -42,7 +42,7 @@ class JsonSerializableFood {
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code FoodieBot} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

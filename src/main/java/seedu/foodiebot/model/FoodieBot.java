@@ -12,6 +12,7 @@ import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.CanteenStub;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.canteen.UniqueCanteenList;
+import seedu.foodiebot.model.favorites.FavoriteFood;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.food.UniqueFoodList;
 import seedu.foodiebot.model.stall.UniqueStallList;
@@ -24,6 +25,7 @@ public class FoodieBot implements ReadOnlyFoodieBot {
     private final UniqueCanteenList canteens;
     private final UniqueStallList stalls;
     private final UniqueFoodList foods;
+    private final UniqueFoodList favoritedFoods;
     private Budget budget;
     private boolean isLocationSpecified;
 
@@ -38,6 +40,7 @@ public class FoodieBot implements ReadOnlyFoodieBot {
         canteens = new UniqueCanteenList();
         stalls = new UniqueStallList();
         foods = new UniqueFoodList();
+        favoritedFoods = new UniqueFoodList();
         budget = new Budget();
         isLocationSpecified = false;
     }
@@ -66,6 +69,10 @@ public class FoodieBot implements ReadOnlyFoodieBot {
 
     public void setFood(List<Food> food) {
         this.foods.setFood(food);
+    }
+
+    public void setFavoritedFoods(List<Food> stalls) {
+        this.foods.setFood(stalls);
     }
 
 
@@ -191,6 +198,11 @@ public class FoodieBot implements ReadOnlyFoodieBot {
         return foods.asUnmodifiableObservableList();
     }
 
+    @Override
+    public ObservableList<Food> getFavoriteList() {
+        return favoritedFoods.asUnmodifiableObservableList();
+    }
+
     /**
      * Adds a food to the foodiebot. The food must not already exist in the foodiebot
      * @param f
@@ -209,5 +221,17 @@ public class FoodieBot implements ReadOnlyFoodieBot {
     @Override
     public int hashCode() {
         return canteens.hashCode();
+    }
+
+    public void setFavorite(Food food) {
+        favoritedFoods.add(food);
+    }
+
+    public ObservableList<Food> getFavoriteFoodList() {
+        return favoritedFoods.asUnmodifiableObservableList();
+    }
+
+    public void addFavoriteFood(FavoriteFood f) {
+        favoritedFoods.add(f);
     }
 }

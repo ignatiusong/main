@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.foodiebot.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.foodiebot.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.foodiebot.testutil.TypicalCanteens.getTypicalFoodieBot;
-import static seedu.foodiebot.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.foodiebot.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +26,8 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Canteen personToDelete =
-            model.getFilteredCanteenList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+            model.getFilteredCanteenList().get(INDEX_FIRST_ITEM.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ITEM);
 
         String expectedMessage =
             String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);

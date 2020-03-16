@@ -102,6 +102,7 @@ public class FoodieBotTest {
         private final ObservableList<Canteen> canteens = FXCollections.observableArrayList();
         private final ObservableList<Stall> stalls = FXCollections.observableArrayList();
         private final ObservableList<Food> foods = FXCollections.observableArrayList();
+        private final ObservableList<Food> favorites = FXCollections.observableArrayList();
         private Budget budget;
 
         FoodieBotStub(Collection<Canteen> canteens, Collection<Stall> stalls, Budget budget) {
@@ -123,6 +124,11 @@ public class FoodieBotTest {
         @Override
         public ObservableList<Food> getFoodList() {
             return foods;
+        }
+
+        @Override
+        public ObservableList<Food> getFavoriteList() {
+            return favorites;
         }
 
         @Override
