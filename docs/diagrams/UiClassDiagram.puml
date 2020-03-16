@@ -12,7 +12,7 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class CanteenListPanel
-Class PersonCard
+Class CanteenCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -36,18 +36,18 @@ MainWindow *-down-> ResultDisplay
 MainWindow *-down-> CanteenListPanel
 MainWindow *-down-> StatusBarFooter
 
-CanteenListPanel -down-> PersonCard
+CanteenListPanel -down-> CanteenCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 CanteenListPanel --|> UiPart
-PersonCard --|> UiPart
+CanteenCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow -down-|> UiPart
 
-PersonCard ..> Model
+CanteenCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
