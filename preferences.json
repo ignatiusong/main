@@ -3,12 +3,13 @@
     "windowWidth" : 740.0,
     "windowHeight" : 600.0,
     "windowCoordinates" : {
-      "x" : 398,
-      "y" : 88
+      "x" : -11,
+      "y" : 128
     }
   },
   "foodieBotFilePath" : "foodiebot.json",
   "stallsFilePath" : "foodiebot-stalls.json",
   "budgetFilePath" : "foodiebot-budget.json",
-  "foodFilePath" : "foodiebot-food.json"
+  "foodFilePath" : "foodiebot-food.json",
+  "favoriteFoodFilePath" : "foodiebot-favorites.json"
 }

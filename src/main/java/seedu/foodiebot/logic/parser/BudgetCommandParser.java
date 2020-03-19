@@ -41,6 +41,12 @@ public class BudgetCommandParser implements Parser<BudgetCommand> {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, BudgetCommand.MESSAGE_USAGE));
     }
 
+    /**
+     * Sets the budget to the specified values given by the user.
+     * @param argMultimap the map storing all arguments by the user.
+     * @return a new Budget object.
+     * @throws ParseException if any input by the user is unable to be parsed into the Budget object.
+     */
     public Budget setBudget(ArgumentMultimap argMultimap) throws ParseException {
 
         if (argMultimap.size(false) == 1 && argMultimap.containsAny(

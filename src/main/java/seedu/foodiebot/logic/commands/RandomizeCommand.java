@@ -17,19 +17,29 @@ public class RandomizeCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Here are the choices: \n%s";
 
-    private final Randomize randomize = new Randomize();
+    private final Randomize randomize;
 
-    public RandomizeCommand() {
+    private String prefix;
+    private String action;
+
+    public RandomizeCommand(String prefix, String action) {
+        this.prefix = prefix;
+        this.action = action;
+        this.randomize = new Randomize(prefix, action);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException, IOException {
 
         requireNonNull(model);
-        //FileReader file = model.listOfCanteens();
-        //randomize.getSelectedCanteen(file);
-        FileReader file = model.listOfStalls();
-        randomize.getOptions(file);
+        FileReader fileC = model.listOfCanteens();
+        FileReader fileS = model.listOfStalls();
+        if (prefix.contains("c")) {
+            randomize.setCanteens(fileC);
+            randomize.getOptionsByCanteen(fileS);
+        } else {
+            randomize.getOptions(fileS);
+        }
         return new CommandResult(COMMAND_WORD, String.format(MESSAGE_SUCCESS, randomize.output()));
     }
     @Override

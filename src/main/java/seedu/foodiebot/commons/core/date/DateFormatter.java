@@ -55,7 +55,12 @@ public class DateFormatter {
 
     /** A helper function for formatDate() to parse a string to a LocalDate object with the given formatter.
      * Returns a LocalDate object encapsulated in an Optional if successful, otherwise an empty Optional
-     * if the parser is unable to parse the date with the given formatter. */
+     * if the parser is unable to parse the date with the given formatter.
+     * @param date the input String to format.
+     * @param formatter the DateTimeFormatter to format the date with the required style.
+     * @return an Optional describing the date in a LocalDate object, or an empty Optional if this formatter
+     * is unable to parse the date.
+     */
     public static Optional<LocalDate> formatDateHelper(String date, DateTimeFormatter formatter) {
         try {
             LocalDate localDate = LocalDate.parse(date, formatter);
@@ -65,7 +70,12 @@ public class DateFormatter {
         }
     }
 
-    /** Formats the given String month into an integer. Throws a ParseException if the month is not valid. */
+    /** Formats the given String month into an integer. Throws a ParseException if the supplied input
+     * is not a valid month.
+     * @param month the input month in a String format.
+     * @return an integer representation of the month.
+     * @throws ParseException if the month cannot be formatted.
+     */
     public static int formatMonth(String month) throws ParseException {
         String monthString = month.toUpperCase();
         List<String> monthFormats = monthFormats();
@@ -77,7 +87,12 @@ public class DateFormatter {
         throw new ParseException(MESSAGE_INVALID_DATE);
     }
 
-    /** Formats the given String year into an integer. Throws a ParseException if the year is not valid. */
+    /** Formats the given String year into an integer. Throws a ParseException if the supplied year is not
+     * a valid year.
+     * @param year the input year in a String format.
+     * @return an integer representation of the year.
+     * @throws ParseException if the year cannot be formatted.
+     */
     public static int formatYear(String year) throws ParseException {
         try {
             return Integer.parseInt(year);

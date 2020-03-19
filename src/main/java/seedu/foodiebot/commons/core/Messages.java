@@ -21,4 +21,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_PREFIX = "Invalid prefix!";
     public static final String MESSAGE_INVALID_DATE_RANGE = "Invalid date range!";
     public static final String MESSAGE_INVALID_FILEREADER = "Problem loading file!";
+    public static final String MESSAGE_INVALID_CANTEEN_NAME = "Invalid canteen name!";
 }
