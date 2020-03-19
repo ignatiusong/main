@@ -18,29 +18,29 @@ By: `Team SE-EDU`      Since: `Feb 2020`    Licence: `MIT`
 
 == Introduction
 
-FoodieBot is a campus food locator application which can help students look for food they want, by recommending the canteens nearest to them. Our target users are students, staff and tourists, in general anyone who comes to or visits NUS. In particular, for the indecisive user, this application can give a random food suggestion tailored to each user based on their budget and/ or past food selections etcetera.
+FoodieBot is an all-in-one application to help both people new to NUS and people experienced in NUS with their campus dining needs. Whether the user needs a random suggestion of what to eat, directions to get to the canteen, help planning their budget for the week or just wants to see what each canteen has to offer, FoodieBot is here to provide for your needs.
 
-// insert image for to show section of UI attributes/ objects
+// insert image to show section of UI attributes/ objects
 
 == About This document
-This document shows you how to use the features of Foodiebot.
+This document shows you how to use the features of FoodieBot.
 
-Note the following symbols and formatting used in this document.
+Note the following symbols and formatting used in this document:
 
 [NOTE]
-This symbol indicate important information.
+This symbol indicates important information.
 
 [TIP]
-This symbol indicate tips for the particular feature.
+This symbol indicates tips for the particular feature.
 
 `list` - A grey highlight (called a mark-up) indicates that this is a command that can be typed into the command line and executed by the application.
 
 == Quick Start
 
-.  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `foodiebot.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Foodiebot.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Ensure that you have **Java 11** or above installed in your Computer.
+.  Download the latest **foodiebot.jar** link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your FoodieBot.
+.  Double-click the file to start the app. The Graphical User Interface(GUI) similar to the image shown below should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
@@ -62,51 +62,52 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 [red]*Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `budget set w/ AMOUNT`, `AMOUNT` is a parameter which can be used as `budget set w/ 9.50`
-* Items in square brackets are optional e.g `report [w/DATE]` can be used as `report [w/ 12-02-2020]` or as `report`.
+* Items in square brackets are optional entries e.g `report [w/DATE]` can be entered as `report [w/ 12-02-2020]` or as `report`.
 ====
 
 === List All Canteens: `*list*`
 
-Display a list of all available canteens on campus.
+Displays a list of all available canteens on campus.
 
 Format: `list`
 
 === Find Nearest Canteens: `*find nearest*`
 
-Display a list of all canteens ordered by increasing distance from current location.
+Displays a list of all canteens ordered by distance from current location with the
+nearest appearing first and the further appearing last.
 
 Format: `find nearest BLOCK_NAME`
 
-* The `BLOCK_NAME` will be populated with suggestions as the user types.
+* Suggestions for the `BLOCK_NAME` will be provided as the user types.
 
-NOTE: The `BLOCK_NAME` has to be one of the suggestions. Otherwise an error message will be displayed that requires correct location to be provided.
+NOTE: The `BLOCK_NAME` has to be one of the suggestions. Otherwise, an error message will be displayed telling the user to provide a valid `BLOCK_NAME`.
 
 image::wireframe/find.png[width="700", align="left"]
 
 === Go to Nearest Canteen: `*goto*`
 
-Display a map with the route between start location and destination.
-Includes the travel instructions and bus services that go to the canteen.
+Displays a map with the route between the starting location and the destination.
+Includes instructions on how to travel there as well as bus services that go to the canteen.
 
 Format: `goto CANTEEN_NAME f/ CURRENT_LOCATION`
 
-* `CANTEEN_NAME` and `CURRENT_LOCATION` field will be populated with suggestions as the user types.
+* Suggestions for the `CANTEEN_NAME` and `CURRENT_LOCATION` field will be provided as the user types.
 
-NOTE: `CANTEEN_NAME` and `CURRENT_LOCATION` field has to be one of the suggestions. Otherwise an error message will be displayed that requires the correct location to be provided.
+NOTE: `CANTEEN_NAME` and `CURRENT_LOCATION` field has to be one of the suggestions. Otherwise an error message will be displayed telling the user to provide a valid `CANTEEN_NAME` and `CURRENT_LOCATION`.
 
 image::wireframe/goto.png[width="700", align="left"]
 
 === View All Stores in Canteen: `*enter*`
 
-Display the stores available at the canteen based on user input.
+Displays the stores available at the canteen specified by the user input.
 
 Format: `enter CANTEEN_NAME`
 
-* The display of the store rating is determined from the user past experience on the food items which were selected.
+* The display of the store rating is determined from the user's past experiences of the food items which were selected.
 
 === View Menu of Store : `*menu*`
 
-Display the menu of the store based on the user input.
+Displays the menu of the store based on the user input.
 
 Format: `menu KEYWORD`
 
@@ -123,14 +124,14 @@ E.g. after the user has selected a food item previously.
 Examples:
 
 * `menu western` +
-Display the food that has been tag with western.
+Displays the food that has been tag with western.
 ****
 
 image::wireframe/menu.png[width="700", align="left"]
 
 === Select the Food : `*select*`
 
-This command stores the selected food in the database.
+Stores the selected food in the database.
 
 Format: `select INDEX`
 
@@ -138,7 +139,7 @@ image::wireframe/select.png[width="700", align="left"]
 
 === Randomize Food Selection : `*randomize*`
 
-Display a list of suggestions of food.
+Displays a list of suggestions of food.
 
 Format: `randomize`
 
@@ -146,8 +147,8 @@ image::wireframe/randomize.png[width="700", align="left"]
 
 === Set a Budget : `*budget set*`
 
-This command set a daily, weekly or monthly budget. +
-This budget can be changed, however, this will reset the budget overview for the current budget cycle.
+Sets a daily, weekly or monthly budget. +
+The budget can be changed. However, this will reset the budget overview for the current budget cycle.
 
 Format: `budget set [PERIOD] [AMOUNT]`
 
@@ -175,13 +176,13 @@ image::wireframe/budget set.png[width="700", align="left"]
 
 === View Budget: `*budget view*`
 
-This command view the current budget, spendings made for the week and the remaining available budget to spend.
+Views the current budget, spendings made for the week and the remaining available budget to spend.
 
 Format: `budget view`
 
 === View Expense Report: `*report*`
 
-This command generates a report for the spending and food purchases for any period specified. +
+Generates a report for the spending and food purchases for any period specified. +
 
 Formats: `report`
 
@@ -223,7 +224,7 @@ image::wireframe/transaction.png[width="700", align="left"]
 
 === Review Food Items: `*review*`
 
-This command allows the user to review food items from the transactions screen as shown in 3.12.
+Allows the user to review food items from the transactions screen as shown in 3.12.
 
 Format: `review INDEX`
 
@@ -233,7 +234,7 @@ image::wireframe/review.png[width="700", align="left"]
 
 === Rate Food Items: `*rate*`
 
-This command allows user to rate food items from the transactions screen as shown in 3.12.
+Allows user to rate food items from the transactions screen as shown in 3.12.
 
 Format: `rate INDEX`
 
@@ -253,33 +254,33 @@ TIP: User  can also update existing ratings by using the same command.
 == Command Summary
 [width="80%",cols="33%,<60%,<60%",options="header",]
 |=======================================================================
-|Function |Usage |Example
+|Command |Function |Example
 
-|budget set |budget set PERIOD AMOUNT |budget set w/ 9.50
+|budget set PERIOD AMOUNT |Set a budget for the allocated period |budget set w/ 9.50
 
-|budget view |budget view |
+|budget view |View current budget|
 
-|enter |enter CANTEEN_NAME |enter deck
+|enter CANTEEN_NAME |Display the menu for the selected canteen |enter deck
 
-|find nearest |find nearest BLOCK_NAME |find nearest COM1
+|find nearest BLOCK_NAME |Find the nearest canteen from location |find nearest COM1
 
-|goto |goto CANTEEN_NAME f/ CURRENT_LOCATION |goto The Deck f/ COM1
+|goto CANTEEN_NAME f/ CURRENT_LOCATION |Get direction to canteen from the current location |goto The Deck f/ COM1
 
-|list |list |
+|list |Display the list of canteen |
 
-|menu |menu KEYWORD |menu chicken
+|menu KEYWORD |Display the menu according to the keyword |menu chicken |
 
-|rate |rate INDEX |
+|rate INDEX | Give a rating to the store |
 
-|randomize |randomize|
+|randomize |Display a list of randomize options |
 
-|report |report |report f/ 12-02-2020 t/ 30-04-2020
+|report |Generate a report of the food consumed |report f/ 12-02-2020 t/ 30-04-2020
 
-|review |review INDEX |
+|review INDEX | Give a review for the store
 
-|select |select INDEX|
+|select INDEX| Store the selected food into the database |
 
-|transaction |transaction |transaction w/ 12-02-2020
+|transaction |Generate the transaction breakdown |transaction w/ 12-02-2020
 
 |=======================================================================
 
