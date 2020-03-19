@@ -20,11 +20,26 @@ By: `Team SE-EDU`      Since: `Feb 2020`    Licence: `MIT`
 
 FoodieBot is a campus food locator application which can help students look for food they want, by recommending the canteens nearest to them. Our target users are students, staff and tourists, in general anyone who comes to or visits NUS. In particular, for the indecisive user, this application can give a random food suggestion tailored to each user based on their budget and/ or past food selections etcetera.
 
+// insert image for to show section of UI attributes/ objects
+
+== About This document
+This document shows you how to use the features of Foodiebot.
+
+Note the following symbols and formatting used in this document.
+
+[NOTE]
+This symbol indicate important information.
+
+[TIP]
+This symbol indicate tips for the particular feature.
+
+`list` - A grey highlight (called a mark-up) indicates that this is a command that can be typed into the command line and executed by the application.
+
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `foodiebot.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Foodiebot.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -38,25 +53,25 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * *`goto`*`deck f/ COM1` : Display direction to go to deck from COM1.
 * *`exit`* : Exits the app
 
-.  Refer to <<Features>> for details of each command.
+//.  Refer to <<Features>> for details of each command.
 
 [[Features]]
 == Features
 
 ====
-*Command Format*
+[red]*Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `budget set w/ AMOUNT`, `AMOUNT` is a parameter which can be used as `budget set w/ 9.50`
+* Items in square brackets are optional e.g `report [w/DATE]` can be used as `report [w/ 12-02-2020]` or as `report`.
 ====
 
-=== List All Canteens: `list`
+=== List All Canteens: `*list*`
 
 Display a list of all available canteens on campus.
 
 Format: `list`
 
-=== Find Nearest Canteens: `find nearest`
+=== Find Nearest Canteens: `*find nearest*`
 
 Display a list of all canteens ordered by increasing distance from current location.
 
@@ -68,7 +83,7 @@ NOTE: The `BLOCK_NAME` has to be one of the suggestions. Otherwise an error mess
 
 image::wireframe/find.png[width="700", align="left"]
 
-=== Go to Nearest Canteen: `goto`
+=== Go to Nearest Canteen: `*goto*`
 
 Display a map with the route between start location and destination.
 Includes the travel instructions and bus services that go to the canteen.
@@ -81,7 +96,7 @@ NOTE: `CANTEEN_NAME` and `CURRENT_LOCATION` field has to be one of the suggestio
 
 image::wireframe/goto.png[width="700", align="left"]
 
-=== View All Stores in Canteen: `enter`
+=== View All Stores in Canteen: `*enter*`
 
 Display the stores available at the canteen based on user input.
 
@@ -89,7 +104,7 @@ Format: `enter CANTEEN_NAME`
 
 * The display of the store rating is determined from the user past experience on the food items which were selected.
 
-=== View Menu of Store : `menu`
+=== View Menu of Store : `*menu*`
 
 Display the menu of the store based on the user input.
 
@@ -104,14 +119,16 @@ E.g. after the user has selected a food item previously.
 ** `[by price/ name]`: Sorts the menu accordingly.
 ** `[tag]`: Displays foods available in the store with the corresponding tag.
 
+****
 Examples:
 
-* `menu tag` +
-Display the food corresponding to the tag.
+* `menu western` +
+Display the food that has been tag with western.
+****
 
 image::wireframe/menu.png[width="700", align="left"]
 
-=== Select the Food : `select`
+=== Select the Food : `*select*`
 
 This command stores the selected food in the database.
 
@@ -119,7 +136,7 @@ Format: `select INDEX`
 
 image::wireframe/select.png[width="700", align="left"]
 
-=== Randomize Food Selection : `randomize`
+=== Randomize Food Selection : `*randomize*`
 
 Display a list of suggestions of food.
 
@@ -127,7 +144,7 @@ Format: `randomize`
 
 image::wireframe/randomize.png[width="700", align="left"]
 
-=== Set a Budget : `budget set`
+=== Set a Budget : `*budget set*`
 
 This command set a daily, weekly or monthly budget. +
 This budget can be changed, however, this will reset the budget overview for the current budget cycle.
@@ -145,35 +162,37 @@ NOTE: `PERIOD` field has to be one of the above suggestions. +
 `AMOUNT` field has to be numeric (with or without decimal places). +
 Otherwise an error message will be displayed requesting a correct type to be provided.
 
+****
 Examples:
 
-* `budget set weekly 9.50` +
-Sets your weekly budget to $9.50.
-* `budget set m/ 100` +
-Sets your monthly budget to $100.
+* `budget set w/ 9.50`
+** Sets your weekly budget to $9.50.
+* `budget set m/ 100`
+** Sets your monthly budget to $100.
+****
 
 image::wireframe/budget set.png[width="700", align="left"]
 
-=== View Budget: `budget view`
+=== View Budget: `*budget view*`
 
 This command view the current budget, spendings made for the week and the remaining available budget to spend.
 
 Format: `budget view`
 
-=== View Expense Report: `report`
+=== View Expense Report: `*report*`
 
-This command generate a report for the spending and food purchases for any period specified. +
+This command generates a report for the spending and food purchases for any period specified. +
 
 Formats: `report`
 
-* `[f/FROM_DATE] [t/TO_DATE]` - Generate report FROM_DATE till TO_DATE. +
-Example: `report [f/ 12-02-2020] [t/ 30-04-2020]`
-* `[w/DATE]` - Generate report for the week of the input date. +
-Example: `report [w/ 12-02-2020]`
-* `[m/MONTH]` - Generate report of the input month. +
-Example: `report [m/ jan]`
-* `[y/YEAR]` - Generate report of the input year. +
-Example: `report [y/ 2020]`
+* `[f/FROM_DATE] [t/TO_DATE]` - Generate report from and till the given dates.
+** Example: `report [f/ 12-02-2020] [t/ 30-04-2020]`
+* `[w/DATE]` - Generate report for the week of the input date.
+** Example: `report [w/ 12-02-2020]`
+* `[m/MONTH]` - Generate report of the input month.
+** Example: `report [m/ jan]`
+* `[y/YEAR]` - Generate report of the input year.
+** Example: `report [y/ 2020]`
 * `[f/]`, `[t/]`, `[m/]`, `[w/]` and `[y/]` fields are optional.
 
 NOTE: `FROM_DATE` cannot be a future date. +
@@ -181,20 +200,20 @@ NOTE: `FROM_DATE` cannot be a future date. +
 
 image::wireframe/report.png[width="700", align="left"]
 
-=== View Past Transactions: `transaction`
+=== View Past Transactions: `*transaction*`
 
 Displays the past transactions using.
 
 Formats: `transaction`
 
-* `[f/FROM_DATE] [t/TO_DATE]` - Generate report FROM_DATE till TO_DATE. +
-Example: `report [f/ 12-02-2020] [t/ 30-04-2020]`
-* `[w/DATE]` - Display transactions for the week of the input date. +
-Example: transactions [w/ 12-02-2020]
-* `[m/MONTH]` - Display transactions of the input month. +
-Example: transactions [m/ jan]
-* `[y/YEAR]` - Display transactions of the input year. +
-Example: transactions [y/ 2020]
+* `[f/FROM_DATE] [t/TO_DATE]` - Generate report from and till the given dates.
+** Example: `report [f/ 12-02-2020] [t/ 30-04-2020]`
+* `[w/DATE]` - Display transactions for the week of the input date.
+** Example: transactions [w/ 12-02-2020]
+* `[m/MONTH]` - Display transactions of the input month.
+** Example: transactions [m/ jan]
+* `[y/YEAR]` - Display transactions of the input year.
+** Example: transactions [y/ 2020]
 * `[f/]`, `[t/]`, `[m/]`, `[w/]` and `[y/]` fields are optional.
 
 NOTE: `FROM_DATE` cannot be a future date. +
@@ -202,7 +221,7 @@ NOTE: `FROM_DATE` cannot be a future date. +
 
 image::wireframe/transaction.png[width="700", align="left"]
 
-=== Reviewing of Food Items: `review`
+=== Review Food Items: `*review*`
 
 This command allows the user to review food items from the transactions screen as shown in 3.12.
 
@@ -212,7 +231,7 @@ TIP: User can update existing reviews by using the same command.
 
 image::wireframe/review.png[width="700", align="left"]
 
-=== Rating of Food Items: `rate`
+=== Rate Food Items: `*rate*`
 
 This command allows user to rate food items from the transactions screen as shown in 3.12.
 
@@ -225,26 +244,42 @@ TIP: User  can also update existing ratings by using the same command.
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
-== Command Summary
+*Q*: Can I write my personal review in other languages?  +
+*A*:
 
-* *budget set* : `budget set PERIOD AMOUNT` +
-e.g. `budget set weekly 9.50`
-* *budget view* : `budget view`
-* *enter* : `enter CANTEEN_NAME` +
-e.g. `enter deck`
-* *find nearest* : `find nearest BLOCK_NAME` +
-e.g. `find nearest COM1`
-* *goto* : `goto CANTEEN_NAME f/ CURRENT_LOCATION` +
-e.g. `goto deck f/ COM1`
-* *list* : `list`
-* *menu* : `menu KEYWORD` +
-e.g. `menu chicken`
-* *rate* : `rate INDEX`
-* *randomize* : `randomize`
-* *report* : `report` +
- e.g. `report f/ 12-02-2020 t/ 30-04-2020`
-* *review* : `review INDEX`
-* *select* : `select INDEX`
-* *transaction* : `transaction` +
- e.g. `transaction w/ 12-02-2020`
+*Q*: How can I edit the list of canteen if one canteen close down? +
+*A*: The json file is publish, you can download the json file and edit accordingly.
+
+== Command Summary
+[width="80%",cols="33%,<60%,<60%",options="header",]
+|=======================================================================
+|Function |Usage |Example
+
+|budget set |budget set PERIOD AMOUNT |budget set w/ 9.50
+
+|budget view |budget view |
+
+|enter |enter CANTEEN_NAME |enter deck
+
+|find nearest |find nearest BLOCK_NAME |find nearest COM1
+
+|goto |goto CANTEEN_NAME f/ CURRENT_LOCATION |goto The Deck f/ COM1
+
+|list |list |
+
+|menu |menu KEYWORD |menu chicken
+
+|rate |rate INDEX |
+
+|randomize |randomize|
+
+|report |report |report f/ 12-02-2020 t/ 30-04-2020
+
+|review |review INDEX |
+
+|select |select INDEX|
+
+|transaction |transaction |transaction w/ 12-02-2020
+
+|=======================================================================
 

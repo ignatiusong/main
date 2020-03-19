@@ -17,10 +17,7 @@ import seedu.foodiebot.model.food.Food;
 /** The API of the Model component. */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Canteen> PREDICATE_SHOW_ALL_CANTEEN = unused -> true;
-
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Stall> PREDICATE_SHOW_ALL_STALLS = unused -> true;
+    Predicate PREDICATE_SHOW_ALL = unused -> true;
 
     /** Replaces user prefs data with the data in {@code userPrefs}. */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
@@ -69,7 +66,11 @@ public interface Model {
 
     Optional<Budget> getBudget();
 
-    FileReader listOfCanteen() throws FileNotFoundException;
+    /** Return a FileReader of the list of canteen in json file */
+    FileReader listOfCanteens() throws FileNotFoundException;
+
+    /** Return a FileReader of the list of Stalls in json file */
+    FileReader listOfStalls() throws FileNotFoundException;
 
     /** Returns an unmodifiable view of the filtered canteen list */
     ObservableList<Canteen> getFilteredCanteenList();
@@ -112,4 +113,10 @@ public interface Model {
     void updateFilteredFoodList(Predicate<Food> predicate);
 
     boolean isLocationSpecified();
+
+    void setFavorite(Food food);
+
+    ObservableList<Food> getFilteredFavoriteFoodList();
+
+    void updateFilteredFavoriteList(Predicate<Food> predicateShowAll);
 }

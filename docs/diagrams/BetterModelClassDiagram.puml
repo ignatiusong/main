@@ -4,18 +4,21 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+FoodieBot *-right-> "1" UniqueCanteenList
+FoodieBot *-right-> "1" UniqueTagList
+UniqueTagList -[hidden]down- UniqueCanteenList
+UniqueTagList -[hidden]down- UniqueCanteenList
 
 UniqueTagList *-right-> "*" Tag
-UniquePersonList o-right-> Person
+UniqueCanteenList o-right-> Canteen
 
-Person o-up-> "*" Tag
+Canteen o-up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Canteen *--> Name
+Canteen *--> NumberOfStalls
+Canteen *--> Distance
+Canteen *--> BlockName
+Canteen *--> DirectionsText
+Canteen *--> DirectionsImageName
+Canteen *--> CanteenImageName
 @enduml

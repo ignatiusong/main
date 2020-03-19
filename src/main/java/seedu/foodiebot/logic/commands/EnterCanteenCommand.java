@@ -57,7 +57,7 @@ public class EnterCanteenCommand extends Command {
         /* All the stalls are retrieved as they contain the canteen name field
            which we filter the canteen name that specified in enter {canteenName}
         */
-        model.updateFilteredStallList(Model.PREDICATE_SHOW_ALL_STALLS);
+        model.updateFilteredStallList(Model.PREDICATE_SHOW_ALL);
         if (index.isPresent()) {
             List<Canteen> canteenList;
             if (model.isLocationSpecified()) {

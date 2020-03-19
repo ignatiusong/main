@@ -5,6 +5,7 @@ import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_FROM_DATE;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import seedu.foodiebot.commons.core.LogsCenter;
@@ -72,7 +73,7 @@ public class GoToCanteenCommand extends Command {
                     && c.getName().equals(canteen.getName()))
                 .findFirst();
 
-        } else if (canteenName.isPresent()) {
+        } else if (canteenName.filter(Predicate.not(String::isEmpty)).isPresent()) {
             result = lastShownList.stream()
                 .filter(c -> c.getBlockName().equalsIgnoreCase(nearestBlockName)
                     && c.getName().equals(new Name(canteenName.get())))

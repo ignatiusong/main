@@ -5,7 +5,6 @@ import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.foodiebot.logic.commands.AddCommand;
 import seedu.foodiebot.logic.commands.EditCommand.EditCanteenDescriptor;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.tag.Tag;
@@ -14,14 +13,6 @@ import seedu.foodiebot.model.tag.Tag;
  * A utility class for Canteen.
  */
 public class CanteenUtil {
-
-    /**
-     * Returns an add command string for adding the {@code Canteen}.
-     */
-    public static String getAddCommand(Canteen canteen) {
-        return AddCommand.COMMAND_WORD + " " + getCanteenDetails(canteen);
-    }
-
     /**
      * Returns the part of command string for the given {@code Canteen}'s details.
      */

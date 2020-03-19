@@ -2,7 +2,6 @@ package seedu.foodiebot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.foodiebot.model.FoodieBot;
 import seedu.foodiebot.model.Model;
 
 /** Select the current list view item. */
@@ -16,7 +15,6 @@ public class SelectItemCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setFoodieBot(new FoodieBot());
         return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS);
     }
 }

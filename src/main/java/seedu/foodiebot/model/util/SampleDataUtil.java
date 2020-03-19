@@ -10,6 +10,7 @@ import seedu.foodiebot.model.ReadOnlyFoodieBot;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Name;
 import seedu.foodiebot.model.canteen.Stall;
+import seedu.foodiebot.model.favorites.FavoriteFood;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.tag.Tag;
 
@@ -132,21 +133,32 @@ public class SampleDataUtil {
                         1, "Nus Flavors", "Western", getTagSet("1"))};
     }
 
+
+    private static FavoriteFood[] getSampleFavoriteFood() {
+        return new FavoriteFood[] { new FavoriteFood("Combo Set", 6, "1 Meat, 1 Pasta, 2 Sides", "ComboSet.png",
+                1, "Nus Flavors", "Western", getTagSet("1"))};
+    }
+
     public static ReadOnlyFoodieBot getSampleFoodieBot() {
-        FoodieBot sampleAb = new FoodieBot();
+        FoodieBot sampleFb = new FoodieBot();
         for (Canteen sampleCanteen : getSampleCanteens()) {
-            sampleAb.addCanteen(sampleCanteen);
+            sampleFb.addCanteen(sampleCanteen);
         }
 
         for (Stall sampleStall : getSampleStalls()) {
-            sampleAb.addStall(sampleStall);
+            sampleFb.addStall(sampleStall);
         }
 
         for (Food sampleFood : getSampleFoods()) {
-            sampleAb.addFood(sampleFood);
+            sampleFb.addFood(sampleFood);
         }
-        return sampleAb;
+
+        for (FavoriteFood sampleFood: getSampleFavoriteFood()) {
+            sampleFb.addFavoriteFood(sampleFood);
+        }
+        return sampleFb;
     }
+
 
     /**
      * Returns a tag set containing the list of strings given.

@@ -187,7 +187,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public FileReader listOfCanteen() throws FileNotFoundException {
+        public FileReader listOfCanteens() throws FileNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public FileReader listOfStalls() throws FileNotFoundException {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -208,6 +213,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setFavorite(Food food) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Food> getFilteredFavoriteFoodList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredFavoriteList(Predicate<Food> predicateShowAll) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Food> getFilteredFoodList() {
             throw new AssertionError("This method is a placeholder");
         }
@@ -219,7 +239,7 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredFoodList(Predicate<Food> predicate) {
-
+            throw new AssertionError("This method should not be called.");
         }
     }
 

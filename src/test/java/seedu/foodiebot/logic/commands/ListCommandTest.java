@@ -18,11 +18,13 @@ public class ListCommandTest {
     private Model model;
     private Model expectedModel;
 
+
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalFoodieBot(), new UserPrefs());
         expectedModel = new ModelManager(model.getFoodieBot(), new UserPrefs());
     }
+
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
@@ -32,8 +34,15 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        //showCanteenAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(), ListCommand.COMMAND_WORD, model,
             ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+
+    @Test
+    public void execute_nearestBlockIsNotBlank() {
+        ListCommand command = new ListCommand("COM1");
+        assertCommandSuccess(command, ListCommand.COMMAND_WORD, model,
+                ListCommand.MESSAGE_NEAREST_BLOCK, expectedModel);
     }
 }

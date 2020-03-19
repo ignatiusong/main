@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":FoodieBotParser" as FoodieBotParser LOGIC_COLOR
+participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
+participant "d:ListCommand" as ListCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list f/com1")
+activate LogicManager
+
+LogicManager -> FoodieBotParser : parseCommand("list f/com1")
+activate FoodieBotParser
+
+create ListCommandParser
+FoodieBotParser -> ListCommandParser
+activate ListCommandParser
+
+ListCommandParser --> FoodieBotParser
+deactivate ListCommandParser
+
+FoodieBotParser -> ListCommandParser : parse("f/com1")
+activate ListCommandParser
+
+create ListCommand
+ListCommandParser -> ListCommand
+activate ListCommand
+
+ListCommand --> ListCommandParser : d
+deactivate ListCommand
+
+ListCommandParser --> FoodieBotParser : d
+deactivate ListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ListCommandParser -[hidden]-> FoodieBotParser
+destroy ListCommandParser
+
+FoodieBotParser --> LogicManager : d
+deactivate FoodieBotParser
+
+LogicManager -> ListCommand : execute()
+activate ListCommand
+
+ListCommand -> Model : updateFilteredCanteenList(com1)
+activate Model
+
+Model --> ListCommand
+deactivate Model
+
+ListCommand -> Model : setLocationSpecified(true)
+activate Model
+
+Model --> ListCommand
+deactivate Model
+
+create CommandResult
+ListCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListCommand
+deactivate CommandResult
+
+ListCommand --> LogicManager : result
+deactivate ListCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
