@@ -22,6 +22,7 @@ import seedu.foodiebot.logic.commands.HelpCommand;
 import seedu.foodiebot.logic.commands.ListCommand;
 import seedu.foodiebot.logic.commands.RandomizeCommand;
 import seedu.foodiebot.logic.commands.ReportCommand;
+import seedu.foodiebot.logic.commands.SelectItemCommand;
 import seedu.foodiebot.logic.commands.TransactionsCommand;
 import seedu.foodiebot.logic.commands.exceptions.CommandException;
 import seedu.foodiebot.logic.parser.FoodieBotParser;
@@ -117,6 +118,8 @@ public class LogicManager implements Logic {
             //TODO Not Implemented
 
         case HelpCommand.COMMAND_WORD:
+            //TODO Not Implemented
+        case SelectItemCommand.COMMAND_WORD:
             //TODO Not Implemented
         default:
             return "";

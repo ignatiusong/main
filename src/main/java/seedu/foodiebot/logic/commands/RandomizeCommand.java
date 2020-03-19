@@ -23,7 +23,8 @@ public class RandomizeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws IOException, CommandException {
+    public CommandResult execute(Model model) throws CommandException, IOException {
+
         requireNonNull(model);
         //FileReader file = model.listOfCanteens();
         //randomize.getSelectedCanteen(file);
@@ -31,7 +32,6 @@ public class RandomizeCommand extends Command {
         randomize.getOptions(file);
         return new CommandResult(COMMAND_WORD, String.format(MESSAGE_SUCCESS, randomize.output()));
     }
-
     @Override
     public boolean needToSaveCommand() {
         return false;

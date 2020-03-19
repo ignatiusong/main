@@ -3,7 +3,6 @@ package seedu.foodiebot.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.foodiebot.model.Model.PREDICATE_SHOW_ALL;
 
 import static seedu.foodiebot.testutil.Assert.assertThrows;
 import static seedu.foodiebot.testutil.TypicalCanteens.DECK;
@@ -12,10 +11,12 @@ import static seedu.foodiebot.testutil.TypicalCanteens.NUSFLAVORS;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.foodiebot.commons.core.GuiSettings;
+import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.NameContainsKeywordsPredicate;
 import seedu.foodiebot.testutil.FoodieBotBuilder;
 
@@ -127,7 +128,8 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(foodieBot, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredCanteenList(PREDICATE_SHOW_ALL);
+        Predicate<Canteen> showAllPredicate = unused -> true;
+        modelManager.updateFilteredCanteenList(showAllPredicate);
 
 
         // different userPrefs -> returns false

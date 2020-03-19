@@ -69,7 +69,7 @@ public class FoodieBotParser {
             return new FoodMenuCommandParser().parse(arguments);
 
         case SelectItemCommand.COMMAND_WORD:
-            return new SelectItemCommand();
+            return new SelectItemCommandParser().parse(arguments);
 
         case BudgetCommand.COMMAND_WORD:
             return new BudgetCommandParser().parse(arguments);

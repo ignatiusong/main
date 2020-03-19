@@ -82,7 +82,6 @@ public class BudgetCommand extends Command {
 
         } else {
             Budget savedBudget = loadBudget(model);
-
             if (!savedBudget.equals(new Budget())) {
                 if (!systemDateIsInCycleRange(savedBudget)) {
                     savedBudget.resetRemainingBudget();
@@ -93,6 +92,5 @@ public class BudgetCommand extends Command {
 
             return new CommandResult(COMMAND_WORD, MESSAGE_FAILURE);
         }
-
     }
 }

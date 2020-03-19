@@ -34,6 +34,8 @@ public class FoodCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label stallName;
+    @FXML
+    private Label price;
     //@FXML
     //private Label cuisine;
     @FXML
@@ -42,19 +44,12 @@ public class FoodCard extends UiPart<Region> {
     public FoodCard(Food food, int displayedIndex) {
         super(FXML);
         this.food = food;
-        //System.out.println("1" + food);
         id.setText(displayedIndex + ". ");
-        //System.out.println("2" + displayedIndex);
         iv.setImage(food.getFoodImage());
-        //System.out.println("3" + food.getFoodImage());
         name.setText(food.getName());
-        //System.out.println("4" + food.getName());
-        //System.out.println("5" + food.getStallName());
+        price.setText("$" + food.getPrice());
         stallName.setText(food.getStallName());
-        //System.out.println("5" + food.getStallName());
-        //cuisine.setText(food.getCuisine());
         description.setText(food.getDescription());
-        //System.out.println("6" + food.getStallName());
     }
 
     @Override

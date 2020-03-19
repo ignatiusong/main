@@ -32,6 +32,7 @@
             </HBox>
 
             <Label fx:id="stallName" styleClass="cell_small_label" text="\$stallName" />
+            <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
             <HBox>
                 <children>
                     <Label text="Description: " />
