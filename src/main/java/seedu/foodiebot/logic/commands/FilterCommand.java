@@ -19,10 +19,6 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "";
 
-    public FilterCommand() {
-
-    }
-
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS);
