@@ -12,6 +12,7 @@ import seedu.foodiebot.logic.commands.Command;
 import seedu.foodiebot.logic.commands.EnterCanteenCommand;
 import seedu.foodiebot.logic.commands.ExitCommand;
 import seedu.foodiebot.logic.commands.FavoritesCommand;
+import seedu.foodiebot.logic.commands.FilterCommand;
 import seedu.foodiebot.logic.commands.FindCommand;
 import seedu.foodiebot.logic.commands.FoodMenuCommand;
 import seedu.foodiebot.logic.commands.GoToCanteenCommand;
@@ -82,6 +83,9 @@ public class FoodieBotParser {
 
         case FavoritesCommand.COMMAND_WORD:
             return new FavoritesCommandParser().parse(arguments);
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommand();
 
         case TransactionsCommand.COMMAND_WORD:
             return new TransactionsCommandParser().parse(arguments);
