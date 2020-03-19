@@ -19,6 +19,12 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "";
 
+    private String tag;
+
+    public FilterCommand(String tag) {
+        this.tag = tag;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS);
