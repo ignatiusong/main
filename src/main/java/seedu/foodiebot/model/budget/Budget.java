@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import seedu.foodiebot.commons.core.date.DateRange;
-import seedu.foodiebot.commons.core.date.DefiniteDate;
 import seedu.foodiebot.logic.parser.exceptions.ParseException;
 
 /**
@@ -69,7 +68,7 @@ public class Budget {
      * @param duration The duration cycle of the budget.
      */
     public Budget(float totalBudget, String duration) {
-        this(totalBudget, totalBudget, duration, DefiniteDate.TODAY);
+        this(totalBudget, totalBudget, duration, LocalDate.now());
     }
 
     public Budget() {
@@ -80,13 +79,13 @@ public class Budget {
     private DateRange setCycleRange(String duration) {
         try {
             if (duration.equals(DAILY)) {
-                return DateRange.ofSingle(DefiniteDate.TODAY);
+                return DateRange.ofSingle(LocalDate.now());
 
             } else if (duration.equals(WEEKLY)) {
-                return DateRange.of(DefiniteDate.TODAY, DefiniteDate.TODAY.plusWeeks(1).minusDays(1));
+                return DateRange.of(LocalDate.now(), LocalDate.now().plusWeeks(1).minusDays(1));
 
             } else if (duration.equals(MONTHLY)) {
-                return DateRange.of(DefiniteDate.TODAY, DefiniteDate.TODAY.plusMonths(1).minusDays(1));
+                return DateRange.of(LocalDate.now(), LocalDate.now().plusMonths(1).minusDays(1));
 
             }
 

@@ -5,7 +5,8 @@ import static seedu.foodiebot.commons.core.Messages.MESSAGE_BUDGET_SET;
 import static seedu.foodiebot.commons.core.Messages.MESSAGE_BUDGET_VIEW;
 import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_DATE_BY_MONTH;
 
-import seedu.foodiebot.commons.core.date.DefiniteDate;
+import java.time.LocalDate;
+
 import seedu.foodiebot.model.Model;
 import seedu.foodiebot.model.budget.Budget;
 
@@ -42,30 +43,46 @@ public class BudgetCommand extends Command {
         this.action = action;
     }
 
-    /** A boolean check if the current system date falls inside the budget range */
+    /** A boolean check if the current system date falls inside the date range of the budget.
+     * @param budget The budget object to check against.
+     * @return true if the system date falls within the date range of the budget, false otherwise.
+     */
     public static boolean systemDateIsInCycleRange(Budget budget) {
-        return budget.getCycleRange().contains(DefiniteDate.TODAY);
+        return budget.getCycleRange().contains(LocalDate.now());
     }
 
-    /** Helper function to write the budget to the model. */
+    /** Helper function to write the budget to the model.
+     * @param model The FoodieBot model.
+     * @param budget The Budget object.
+     * */
     public static void saveBudget(Model model, Budget budget) {
         model.setBudget(budget);
     }
 
-    /** Helper function to read the budget from the model. */
+    /** Helper function to read the budget from the model.
+     * @param model The FoodieBot model.
+     * @return The budget stored in the model if it is present, otherwise a new empty budget with
+     * default values is created.
+     */
     public static Budget loadBudget(Model model) {
         return model.getBudget().isPresent()
                 ? model.getBudget().get()
                 : new Budget();
     }
 
-    /** Helper function to hold a successful return message for 'budget set'. */
+    /** Helper function to hold a successful return message for 'budget set'.
+     * @param budget The budget object.
+     * @return The command result.
+     */
     public static CommandResult commandSetSuccess(Budget budget) {
         return new CommandResult(COMMAND_WORD, String.format(MESSAGE_SET,
                 budget.getDurationAsString(), budget.getTotalBudget(), budget.getRemainingDailyBudget()));
     }
 
-    /** Helper function to hold a successful return message for 'budget view'. */
+    /** Helper function to hold a successful return message for 'budget view'.
+     * @param budget The budget object.
+     * @return The command result.
+     */
     public static CommandResult commandViewSuccess(Budget budget) {
         return new CommandResult(COMMAND_WORD, String.format(MESSAGE_VIEW,
                 budget.getDurationAsString(), budget.getTotalBudget(), budget.getRemainingBudget(),

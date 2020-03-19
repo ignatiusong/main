@@ -79,7 +79,7 @@ public class FoodieBotParser {
             return new ReportCommandParser().parse(arguments);
 
         case RandomizeCommand.COMMAND_WORD:
-            return new RandomizeCommand();
+            return new RandomizeCommandParser().parse(arguments);
 
         case FavoritesCommand.COMMAND_WORD:
             return new FavoritesCommandParser().parse(arguments);

@@ -18,7 +18,7 @@ public class FilterCommand extends Command {
                     + "Western";
 
     public static final String MESSAGE_SUCCESS = "";
-
+  
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS);
