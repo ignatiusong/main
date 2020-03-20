@@ -16,7 +16,7 @@ import seedu.foodiebot.model.tag.Tag;
  * are validated, immutable.
  */
 public class Food {
-    public static final String[] FOOD = new String[]{"Combo Set"};
+    public static final String[] FOOD = new String[]{"Combo Set", "Ayam Penyet", "Cai fan", "Fried Fish"};
     public static final String IMAGE_FOLDER = "/images/canteen/";
     public static final String MESSAGE_CONSTRAINTS = "Food name should be from " + Arrays.toString(FOOD);
 
@@ -48,7 +48,9 @@ public class Food {
         this.description = description;
         this.stallNo = stallNo;
         this.canteen = canteen;
-        this.foodImageName = foodImageName;
+        //this.foodImageName = foodImageName;
+        this.foodImageName = name;
+        //Current foodImageName will get back image object, cannot use
         this.stallName = stallName;
         this.tags.addAll(tags);
     }
@@ -74,8 +76,9 @@ public class Food {
     }
 
     public Image getFoodImage() {
-        String mImageUrl = IMAGE_FOLDER + canteen + "/" + stallName + "/" + foodImageName;
-        Image image = new Image(Food.class.getResourceAsStream("/images/canteen/Nus Flavors/Western/ComboSet.png"));
+        String mImageUrl = IMAGE_FOLDER + canteen + "/" + stallName + "/" + foodImageName + ".png";
+        System.out.println(mImageUrl);
+        Image image = new Image(Food.class.getResourceAsStream(mImageUrl));
         return image;
     }
 

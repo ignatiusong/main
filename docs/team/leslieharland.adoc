@@ -1,0 +1,105 @@
+= Leslie Harland - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: FoodieBot
+
+---
+
+== Overview
+
+Our team were tasked with this software engineering project which we were to morph from the original Address Book Level 3 into FoodieBot.
+The user interacts with the application using a CLI, and it has a GUI created with JavaFX.
+
+FoodieBot is a campus locator desktop application created for students or tourists in NUS to provide canteen/ food information so they can make informed decisions in getting food on campus.
+
+
+Our application saves the user time by randomising food items based on their indicated preferences e.g by canteen/ location/ past preference
+and has a reporting feature as the user's selection of food items are tracked.
+
+
+
+== Summary of contributions
+
+* *Enhancement*: added *the ability to show a list of canteens*
+** What it does: display a list of canteens to the user
+** Justification: In the event that the user wants to find the canteens which are available, or to identify what canteens are near them and possibly the food that the canteen sells
+** Highlights: This command function lays the groundwork so that future commands can rely on information of the canteen, like food selection from the canteen stalls
+** Credits: -
+
+
+* *Code contributed*: [https://github.com/AY1920S2-CS2103T-F11-3/main/commit/c0ebaa77975efb72307ddc6826d2a6cabb40f30b[Functional code]] [https://github.com/AY1920S2-CS2103T-F11-3/main/commit/c0ebaa77975efb72307ddc6826d2a6cabb40f30b[Test code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Created tasks for milestone v1.1 - 1.3
+** Enhancements to existing features:
+*** Updated file storage to read app data only when requested (Pull requests https://github.com/AY1920S2-CS2103T-F11-3/main/pull/63[#63])
+** Documentation:
+*** Did the part on location in user guide: https://github.com/AY1920S2-CS2103T-F11-3/main/pull/44[#44]
+** Community:
+*** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103T-F11-3/main/pull/70[#70]
+*** Contributed to forum discussions (examples:  https://github.com/nus-cs2103-AY1920S2/forum/issues/37[1])
+
+*** Some parts of the canteen feature I added was adopted by several other class mates (https://github.com/AY1920S2-CS2103T-F11-3/main/pull/70[1], https://github.com/AY1920S2-CS2103T-F11-3/main/pull/74[2])
+** Tools:
+*** Integrated continuous integration service to the team repo
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+=== List All Canteens: `list`
+
+Display a list of all available canteens on campus.
+
+Format: `list`
+
+* `[f/BLOCK_NAME]` - displays canteens ordered by increasing distance from current location.
+
+Examples:
+
+* `list` +
+List all canteens.
+* `list f/com1` +
+List all canteens starting with the nearest canteen from com1
+
+image::app/list.png[width="700", align="left"]
+
+=== Go to Canteen: `goto`
+
+Display a map with the route between start location and destination.
+Includes the travel instructions and bus services that go to the canteen.
+
+Format: `goto CANTEEN_NAME f/ CURRENT_LOCATION`
+
+* `CANTEEN_NAME` and `CURRENT_LOCATION` field will be populated with suggestions as the user types.
+
+NOTE: `CANTEEN_NAME` and `CURRENT_LOCATION` field has to be one of the suggestions. Otherwise an error message will be displayed that requires the correct location to be provided.
+
+image::wireframe/goto.png[width="700", align="left"]
+
+=== View All Stores in Canteen: `enter`
+
+Display the stores available at the canteen based on user input.
+
+Format: `enter CANTEEN_NAME`
+
+* The display of the store rating is determined from the user past experience on the food items which were selected.
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+Appendixes
+
+

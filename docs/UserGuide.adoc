@@ -12,9 +12,9 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level3
+:repoURL: https://github.com/AY1920S2-CS2103T-F11-3/main
 
-By: `Team SE-EDU`      Since: `Feb 2020`    Licence: `MIT`
+By: `FoodieBot Team`      Since: `Feb 2020`    Licence: `MIT`
 
 == Introduction
 
@@ -37,10 +37,12 @@ This symbol indicates tips for the particular feature.
 
 == Quick Start
 
+
 .  Ensure that you have **Java 11** or above installed in your Computer.
 .  Download the latest **foodiebot.jar** link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your FoodieBot.
 .  Double-click the file to start the app. The Graphical User Interface(GUI) similar to the image shown below should appear in a few seconds.
+
 +
 image::Ui.png[width="790"]
 +
@@ -49,9 +51,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : Lists all canteens.
-* *`find`*`nearest COM1` : Locate the nearest canteen from COM1.
+* *`list`*`f/ COM1` : Locate the nearest canteen from COM1.
 * *`goto`*`deck f/ COM1` : Display direction to go to deck from COM1.
-* *`exit`* : Exits the app
+* *`exit`* : Go back to the previous view, if the application is at the main screen, the exit command will close the application
 
 //.  Refer to <<Features>> for details of each command.
 
@@ -60,6 +62,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 ====
 [red]*Command Format*
+
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `budget set w/ AMOUNT`, `AMOUNT` is a parameter which can be used as `budget set w/ 9.50`
 * Items in square brackets are optional entries e.g `report [w/DATE]` can be entered as `report [w/ 12-02-2020]` or as `report`.
@@ -71,20 +74,20 @@ Displays a list of all available canteens on campus.
 
 Format: `list`
 
-=== Find Nearest Canteens: `*find nearest*`
+* `[f/BLOCK_NAME]` - displays canteens ordered by increasing distance from current location.
 
-Displays a list of all canteens ordered by distance from current location with the
-nearest appearing first and the further appearing last.
+Examples:
 
-Format: `find nearest BLOCK_NAME`
+* `list` +
+List all canteens.
+* `list f/com1` +
+List all canteens starting with the nearest canteen from com1
 
-* Suggestions for the `BLOCK_NAME` will be provided as the user types.
 
-NOTE: The `BLOCK_NAME` has to be one of the suggestions. Otherwise, an error message will be displayed telling the user to provide a valid `BLOCK_NAME`.
+image::app/list.png[width="700", align="left"]
 
-image::wireframe/find.png[width="700", align="left"]
 
-=== Go to Nearest Canteen: `*goto*`
+=== Go to Canteen: `goto`
 
 Displays a map with the route between the starting location and the destination.
 Includes instructions on how to travel there as well as bus services that go to the canteen.
@@ -120,12 +123,12 @@ E.g. after the user has selected a food item previously.
 ** `[by price/ name]`: Sorts the menu accordingly.
 ** `[tag]`: Displays foods available in the store with the corresponding tag.
 
-****
+
 Examples:
 
 * `menu western` +
 Displays the food that has been tag with western.
-****
+
 
 image::wireframe/menu.png[width="700", align="left"]
 
@@ -163,14 +166,14 @@ NOTE: `PERIOD` field has to be one of the above suggestions. +
 `AMOUNT` field has to be numeric (with or without decimal places). +
 Otherwise an error message will be displayed requesting a correct type to be provided.
 
-****
+
 Examples:
 
 * `budget set w/ 9.50`
 ** Sets your weekly budget to $9.50.
 * `budget set m/ 100`
 ** Sets your monthly budget to $100.
-****
+
 
 image::wireframe/budget set.png[width="700", align="left"]
 
@@ -243,10 +246,11 @@ TIP: User  can also update existing ratings by using the same command.
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FoodieBot folder.
 
 *Q*: Can I write my personal review in other languages?  +
-*A*:
+*A*: Yes, FoodieBot accepts input for different types of language, however it does not support in-app localization.
+
 
 *Q*: How can I edit the list of canteen if one canteen close down? +
 *A*: The json file is publish, you can download the json file and edit accordingly.
@@ -282,5 +286,7 @@ TIP: User  can also update existing ratings by using the same command.
 
 |transaction |Generate the transaction breakdown |transaction w/ 12-02-2020
 
+
 |=======================================================================
+
 

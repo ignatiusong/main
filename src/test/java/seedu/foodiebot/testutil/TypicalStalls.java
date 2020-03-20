@@ -13,7 +13,7 @@ import seedu.foodiebot.model.canteen.Stall;
 public class TypicalStalls {
     // Manually added
     public static final Stall MUSLIM = new StallBuilder().withName("Muslim").withCanteenName("The Deck")
-        .withStallNumber(5).withStallImageName("muslim.png").withCuisine("muslim").withOverallPriceRating("$")
+        .withStallNumber(5).withStallImageName("taiwanese.png").withCuisine("muslim").withOverallPriceRating("$")
         .withFavorite(0)
         .build();
 

@@ -11,7 +11,7 @@ class JsonAdaptedFoodTest {
     @Test
     public void toModelType_validFoodDetails_returnsFood() throws Exception {
         JsonAdaptedFood food = new JsonAdaptedFood("Chicken Chop", "5",
-                "is delicious", "ComboSet.png", "9",
+                "is delicious", "Combo Set.png", "9",
                 "Nus Flavors", "Western");
         //assertEquals(WESTERN, food.toModelType());
     }
@@ -19,7 +19,7 @@ class JsonAdaptedFoodTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedFood food = new JsonAdaptedFood(null, "5",
-                "is delicious", "ComboSet.png", "9",
+                "is delicious", "Combo Set.png", "9",
                 "Nus Flavors", "Western");
         String expectedMessage =
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
