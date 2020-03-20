@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<HBox id="id" fx:id="id" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+<HBox id="id" fx:id="id" styleClass="stack-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 
    <children>
-      <VBox prefHeight="200.0" HBox.hgrow="ALWAYS" nodeOrientation="LEFT_TO_RIGHT">
+      <VBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" HBox.hgrow="ALWAYS">
          <children>
-            <ImageView fx:id="iv"  fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="textArea" prefHeight="200.0" HBox.hgrow="ALWAYS" styleClass="label-bright" />
+            <ImageView fx:id="iv" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" />
+            <!--  prefHeight here is the height of the scrollbar-->
+            <ScrollPane prefHeight="100.0" styleClass="stack-pane" stylesheets="@DarkTheme.css" prefWidth="600" fitToWidth="true">
+               <content>
+                  <VBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="150.0" styleClass="stack-pane" >
+                     <children>
+                        <!--  alternatively use spacing property in vbox -->
+                        <Label fx:id="viewBlock" prefHeight="30" />
+                        <Label fx:id="textArea" styleClass="label-bright" />
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </children>
       </VBox>
    </children>
