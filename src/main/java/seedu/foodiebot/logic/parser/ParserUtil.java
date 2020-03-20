@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.foodiebot.commons.core.index.Index;
 import seedu.foodiebot.commons.util.StringUtil;
+import seedu.foodiebot.logic.commands.FilterCommand;
 import seedu.foodiebot.logic.parser.exceptions.ParseException;
 import seedu.foodiebot.model.canteen.Address;
 import seedu.foodiebot.model.canteen.Block;
@@ -136,6 +137,22 @@ public class ParserUtil {
             throw new ParseException(Food.MESSAGE_CONSTRAINTS);
         }
         return trimmedFoodName;
+
+    }
+
+    /**
+     * Parses a {@code String foodName} into a {@code foodName}. Leading and trailing whitespaces will
+     * be trimmed
+     *
+     * @throws ParseException if the given {@code foodName} is invalid
+     */
+    public static String parseFilterTag(String filterTag) throws ParseException {
+        requireNonNull(filterTag);
+        String trimmedFilterTag = filterTag.trim();
+        if (trimmedFilterTag.isBlank()) {
+            throw new ParseException(FilterCommand.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedFilterTag;
 
     }
 
