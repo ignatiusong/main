@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<MenuBar fx:id="menuBar" VBox.vgrow="NEVER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <Menu mnemonicParsing="false" text="File">
+        <MenuItem mnemonicParsing="false" text="Exit" />
+    </Menu>
+    <Menu mnemonicParsing="false" text="Help">
+        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" text="Help" />
+    </Menu>
+</MenuBar>

@@ -30,6 +30,10 @@ public class CommandBox extends UiPart<Region> {
                 .addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
+    public TextField getCommandTextField() {
+        return commandTextField;
+    }
+
     /** Handles the Enter button pressed event. */
     @FXML
     private void handleCommandEntered() {

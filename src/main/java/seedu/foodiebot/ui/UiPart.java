@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+
 import seedu.foodiebot.MainApp;
 
 /**
@@ -13,7 +15,6 @@ import seedu.foodiebot.MainApp;
  * contains a scene graph with a root node of type {@code T}.
  */
 public abstract class UiPart<T> {
-
     /** Resource folder where FXML files are stored. */
     public static final String FXML_FILE_FOLDER = "/view/";
 
@@ -65,6 +66,8 @@ public abstract class UiPart<T> {
      * @param location Location of the FXML document.
      * @param root Specifies the root of the object hierarchy.
      */
+
+
     private void loadFxmlFile(URL location, T root) {
         requireNonNull(location);
         fxmlLoader.setLocation(location);
@@ -76,6 +79,21 @@ public abstract class UiPart<T> {
             throw new AssertionError(e);
         }
     }
+
+
+    /** Creates a new instance of FXMLLoader without regard to the class using it. */
+    protected Parent loadFxmlFile(String fxmlFileName) {
+        FXMLLoader newLoader = new FXMLLoader();
+        newLoader.setLocation(getFxmlFileUrl(fxmlFileName));
+        newLoader.setController(this);
+        try {
+            return newLoader.load();
+        } catch (IOException e) {
+            throw new AssertionError(e);
+        }
+    }
+
+
 
     /**
      * Returns the FXML file URL for the specified FXML file name within {@link #FXML_FILE_FOLDER}.
