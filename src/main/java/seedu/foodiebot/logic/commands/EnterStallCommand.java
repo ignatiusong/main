@@ -57,6 +57,7 @@ public class EnterStallCommand extends Command {
         requireNonNull(model);
         if (index.isPresent()) {
             Stall stall = model.getFilteredStallList().get(index.get().getZeroBased());
+            ParserContext.setStallContext(stall);
             logger.info("Enter " + stall.getName());
             model.updateFilteredFoodList(f -> f.getStallName().equalsIgnoreCase(stall.getName().toString()));
 

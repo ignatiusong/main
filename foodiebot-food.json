@@ -3,9 +3,39 @@
     "name" : "Combo Set",
     "price" : 6,
     "description" : "1 Meat, 1 Pasta, 2 Sides",
-    "foodImageName" : "javafx.scene.image.Image@4b9777a6",
+    "foodImageName" : "javafx.scene.image.Image@7c11df4",
     "stallNo" : 1,
     "canteen" : "Nus Flavors",
+    "stallName" : "Western",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Cai Fan",
+    "price" : 3,
+    "description" : "1 Meat, 2 Veg",
+    "foodImageName" : "javafx.scene.image.Image@7b8d9806",
+    "stallNo" : 1,
+    "canteen" : "The Deck",
+    "stallName" : "Chinese Cooked Food",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Ayam Penyet",
+    "price" : 5,
+    "description" : "Ayam Penyet",
+    "foodImageName" : "javafx.scene.image.Image@29827cd2",
+    "stallNo" : 15,
+    "canteen" : "The Deck",
+    "stallName" : "Uncle Penyet",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Fried Fish",
+    "price" : 5,
+    "description" : "Fried Fish and chips",
+    "foodImageName" : "javafx.scene.image.Image@667ce547",
+    "stallNo" : 11,
+    "canteen" : "The Deck",
     "stallName" : "Western",
     "tags" : [ ],
     "tagged" : [ ]
