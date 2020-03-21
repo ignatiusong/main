@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -35,6 +36,8 @@ abstract class BaseScene {
 
     protected Logic logic;
     protected Stage primaryStage;
+    @FXML
+    protected MenuItem helpMenuItem;
     private final Logger logger = LogsCenter.getLogger(getClass());
     @FXML
     private StackPane statusbarPlaceholder;
@@ -46,12 +49,14 @@ abstract class BaseScene {
     @FXML
     private StackPane resultDisplayPlaceholder;
 
+    private HelpWindow helpWindow;
 
-    public BaseScene(Stage primaryStage, Logic logic, CommandResult commandResult) {
+
+    public BaseScene(Stage primaryStage, Logic logic) {
         this.primaryStage = primaryStage;
         this.logic = logic;
         fillInnerParts();
-
+        helpWindow = new HelpWindow();
     }
 
     void addToListPanel(UiPart<Region> regionUiPart) {
@@ -81,14 +86,24 @@ abstract class BaseScene {
         statusbarPlaceholder.getChildren().clear();
         statusbarPlaceholder.getChildren().add(new Label(message));
     }
+    StackPane getResultDisplayPlaceholder() {
+        resultDisplayPlaceholder = (StackPane) primaryStage.getScene().lookup("#resultDisplayPlaceholder");
+        return resultDisplayPlaceholder;
+    }
+
+    ResultDisplay getResultDisplay() {
+        resultDisplay = new ResultDisplay();
+        return resultDisplay;
+    }
 
     /** .*/
     void updateResultDisplay(String result) {
         resultDisplayPlaceholder = (StackPane) primaryStage.getScene().lookup("#resultDisplayPlaceholder");
-        resultDisplayPlaceholder.getChildren().clear();
         resultDisplay = new ResultDisplay();
-        resultDisplay.setFeedbackToUser(result);
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        if (!result.isEmpty()) {
+            getResultDisplay().setFeedbackToUser(result);
+            resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        }
     }
 
     @FXML
@@ -114,11 +129,13 @@ abstract class BaseScene {
 
     /** .*/
     @FXML
-    public void handleListCanteens(boolean isLocationSpecified) {
+    public void handleListCanteens(CommandResult commandResult) {
+        changeScene("MainScene.fxml");
+        new MainScene(primaryStage, logic);
         addToListPanel(new CanteenListPanel(
-            isLocationSpecified
+            commandResult.isLocationSpecified()
                 ? logic.getFilteredCanteenListSortedByDistance()
-                : logic.getFilteredCanteenList(), isLocationSpecified));
+                : logic.getFilteredCanteenList(), commandResult.isLocationSpecified()));
     }
 
 
@@ -138,6 +155,7 @@ abstract class BaseScene {
                 Scene scene = new Scene(pane); // optionally specify dimensions too
                 getPrimaryStage().setScene(scene);
                 */
+                ParserContext.setCurrentContext(ParserContext.DIRECTIONS_CONTEXT);
                 primaryStage.getScene().setRoot(pane);
                 new DirectionsScene(primaryStage, logic, (DirectionsCommandResult) commandResult);
 
@@ -146,14 +164,17 @@ abstract class BaseScene {
             switch (commandResult.commandName) {
             case ListCommand.COMMAND_WORD:
                 if (ParserContext.getCurrentContext().equals(ParserContext.MAIN_CONTEXT)) {
-                    changeScene("MainScene.fxml");
-                    new MainScene(primaryStage, logic, commandResult);
-                    handleListCanteens(commandResult.isLocationSpecified());
+                    handleListCanteens(commandResult);
+                    updateResultDisplay(commandResult.getFeedbackToUser());
+                } else if (ParserContext.getCurrentContext().equals(ParserContext.DIRECTIONS_CONTEXT)) {
+                    handleListCanteens(commandResult);
+                    ParserContext.setCurrentContext(ParserContext.MAIN_CONTEXT);
                 } else {
                     updateResultDisplay(ParserContext.INVALID_CONTEXT_MESSAGE);
                 }
                 break;
             case EnterCanteenCommand.COMMAND_WORD:
+                updateResultDisplay(commandResult.getFeedbackToUser());
                 if (ParserContext.getCurrentContext().equals(ParserContext.MAIN_CONTEXT)) {
                     ParserContext.setCurrentContext(ParserContext.CANTEEN_CONTEXT);
                     handleListStalls();
@@ -163,12 +184,14 @@ abstract class BaseScene {
                 }
                 break;
             case FavoritesCommand.COMMAND_WORD:
+                updateResultDisplay(commandResult.getFeedbackToUser());
                 handleListFavorites();
                 break;
             case ExitCommand.COMMAND_WORD:
+                updateResultDisplay(commandResult.getFeedbackToUser());
                 switch (ParserContext.getCurrentContext()) {
                 case ParserContext.MAIN_CONTEXT:
-                    handleListCanteens(commandResult.isLocationSpecified());
+                    handleListCanteens(commandResult);
                     break;
                 case ParserContext.CANTEEN_CONTEXT:
                     handleListStalls();
@@ -181,9 +204,12 @@ abstract class BaseScene {
                 }
                 break;
             default:
+                updateResultDisplay(commandResult.getFeedbackToUser());
                 break;
             }
-
+            if (commandResult.isShowHelp()) {
+                handleHelp();
+            }
             return commandResult;
         } catch (CommandException | ParseException | IOException e) {
             updateResultDisplay(e.getMessage());
@@ -195,6 +221,18 @@ abstract class BaseScene {
     /** Switches the scene of the stage by setting the root. */
     protected void changeScene(String layoutName) {
         primaryStage.getScene().setRoot(loadFxmlFile(layoutName));
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    private void handleHelp() {
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
+        } else {
+            helpWindow.focus();
+        }
     }
 
     /** .*/

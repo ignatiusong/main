@@ -12,7 +12,7 @@ public class DirectionsScene extends BaseScene {
     private Stage primaryStage;
 
     public DirectionsScene(Stage primaryStage, Logic logic, DirectionsCommandResult commandResult) {
-        super(primaryStage, logic, commandResult);
+        super(primaryStage, logic);
         this.primaryStage = primaryStage;
         this.logic = logic;
         handleGoToCanteen(commandResult);

@@ -12,6 +12,7 @@ public class ParserContext {
     public static final String MAIN_CONTEXT = "MAIN";
     public static final String CANTEEN_CONTEXT = "CANTEEN";
     public static final String STALL_CONTEXT = "STALL";
+    public static final String DIRECTIONS_CONTEXT = "GOTO";
     public static final String INVALID_CONTEXT_MESSAGE = "Wrong Context to Call Message. Current Context: ";
 
     private static String currentContext = ParserContext.MAIN_CONTEXT;

@@ -29,7 +29,8 @@ import seedu.foodiebot.logic.parser.exceptions.ParseException;
 public class NoResultDisplayWindow extends UiPart<Stage> {
 
     private static final String FXML = "NoResultDisplayScene.fxml";
-
+    @FXML
+    protected MenuItem helpMenuItem;
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -46,15 +47,10 @@ public class NoResultDisplayWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem helpMenuItem;
-
-    @FXML
     private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
-
-
 
     public NoResultDisplayWindow(Stage primaryStage, Logic logic, String layoutName) {
         super(layoutName, primaryStage);
@@ -129,8 +125,6 @@ public class NoResultDisplayWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-
-
         CommandBox commandBox = new CommandBox(this::executeCommand);
         getCommandBoxPlaceholder().getChildren().add(commandBox.getRoot());
 
@@ -163,7 +157,7 @@ public class NoResultDisplayWindow extends UiPart<Stage> {
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleHelp() {
+    private void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
