@@ -119,7 +119,7 @@ public class SampleDataUtil {
                 getTagSet("asian", "western", "muslim"), "utown.jpg", new ArrayList<>(flavourStalls)),
             new Canteen(
                 new Name("The Deck"),
-                1,
+                14,
                 1000,
                 "COM1",
                 "com1_deck.png",

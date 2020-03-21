@@ -66,6 +66,7 @@ public class EnterCanteenCommand extends Command {
                 canteenList = model.getFilteredCanteenList();
             }
             Canteen canteen = canteenList.get(index.get().getZeroBased());
+            ParserContext.setCanteenContext(canteen);
 
             logger.info("Enter " + canteen.getName());
             model.updateFilteredStallList(s -> s.getCanteenName().equalsIgnoreCase(

@@ -20,7 +20,7 @@ public class FilterCommand extends Command {
                     + " "
                     + "Western";
 
-    public static final String MESSAGE_SUCCESS = "";
+    public static final String MESSAGE_SUCCESS = "Successfully filtered canteens";
 
     public static final String MESSAGE_CONSTRAINTS = "Filter argument cannot be empty";
 
@@ -33,6 +33,7 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         String context = ParserContext.getCurrentContext();
+
         if (context.equals(ParserContext.MAIN_CONTEXT)) {
             model.updateFilteredCanteenList(s -> s.getTags().contains(this.tag));
         } else if (context.equals(ParserContext.CANTEEN_CONTEXT)) {

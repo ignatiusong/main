@@ -132,4 +132,16 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseFilterTag_emptyString_throwsParseException() {
+        assertThrows(ParseException.class , () -> ParserUtil.parseFilterTag(""));
+    }
+
+    @Test
+    public void parseFilterTag_nonEmptyString_returnsString() throws Exception {
+        String testString = "test";
+        String resultString = ParserUtil.parseFilterTag(testString);
+        assertEquals(testString, resultString);
+    }
 }
