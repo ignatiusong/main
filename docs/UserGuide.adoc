@@ -185,7 +185,7 @@ Formats: `report`
 
 * `[f/FROM_DATE] [t/TO_DATE]` - Generate report from and till the given dates.
 ** Example: `report [f/ 12-02-2020] [t/ 30-04-2020]`
-* `[w/DATE]` - Generate report for the week of the input date.
+* `[w/DATE]` - Generate report for the week (Monday-Sunday) of the input date.
 ** Example: `report [w/ 12-02-2020]`
 * `[m/MONTH]` - Generate report of the input month.
 ** Example: `report [m/ jan]`
@@ -206,7 +206,7 @@ Formats: `transaction`
 
 * `[f/FROM_DATE] [t/TO_DATE]` - Generate report from and till the given dates.
 ** Example: `report [f/ 12-02-2020] [t/ 30-04-2020]`
-* `[w/DATE]` - Display transactions for the week of the input date.
+* `[w/DATE]` - Display transactions for the week (Monday-Sunday) of the input date.
 ** Example: transactions [w/ 12-02-2020]
 * `[m/MONTH]` - Display transactions of the input month.
 ** Example: transactions [m/ jan]
@@ -223,7 +223,10 @@ image::wireframe/transaction.png[width="700", align="left"]
 
 Allows the user to review food items from the transactions screen as shown in 3.12.
 
-Format: `review INDEX`
+Format: `review INDEX REVIEW`
+
+* Example:
+** `rate 5 This was yummy!` - Adds your review "This was yummy!" to the 5th item in your transactions list.
 
 TIP: User can update existing reviews by using the same command.
 
@@ -233,9 +236,12 @@ image::wireframe/review.png[width="700", align="left"]
 
 Allows user to rate food items from the transactions screen as shown in 3.12.
 
-Format: `rate INDEX`
+Format: `rate INDEX RATING`
 
-TIP: User  can also update existing ratings by using the same command.
+* Example:
+** `rate 3 8` - Rates the 3rd item in your transactions list as 8.
+
+TIP: User can also update existing ratings by using the same command.
 
 == FAQ
 

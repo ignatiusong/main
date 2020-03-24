@@ -150,6 +150,33 @@ public class DateRange {
     }
 
     /**
+     * Generates a new DateRange object based around the given date, with the range from Monday to Sunday inclusive.
+     * @param dateString The date to base the DateRange to.
+     * @param style The date range style to conform to.
+     * @return a new DateRange object with the default range style of SMART.
+     * @throws ParseException If the attempt to create a date range does not conform to the requirements
+     * of the specified style.
+     */
+    public static DateRange ofWeek(String dateString, DateRangeStyle style) throws ParseException {
+        LocalDate targetDate = DateFormatter.formatDate(dateString);
+        int intervalToStartOfWeek = targetDate.getDayOfWeek().getValue() - 1;
+        LocalDate startDate = targetDate.minusDays(intervalToStartOfWeek);
+        LocalDate endDate = startDate.plusDays(6);
+        return DateRange.of(startDate, endDate, style);
+    }
+
+    /**
+     * Generates a new DateRange object based around the given date, with the range from Monday to Sunday inclusive.
+     * @param dateString The date to base the DateRange to.
+     * @return a new DateRange object with the default range style of SMART.
+     * @throws ParseException If the attempt to create a date range does not conform to the requirements
+     * of the specified style.
+     */
+    public static DateRange ofWeek(String dateString) throws ParseException {
+        return DateRange.ofWeek(dateString, DateRangeStyle.SMART);
+    }
+
+    /**
      * Generates a new DateRange object with range between the first and last day of the supplied month and year.
      * @param month The month.
      * @param year The year.

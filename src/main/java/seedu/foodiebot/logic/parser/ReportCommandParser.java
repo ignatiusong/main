@@ -2,6 +2,7 @@ package seedu.foodiebot.logic.parser;
 
 import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_DATE_BY_MONTH;
+import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_DATE_BY_WEEK;
 import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_DATE_BY_YEAR;
 import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_FROM_DATE;
 import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_TO_DATE;
@@ -24,7 +25,7 @@ public class ReportCommandParser implements Parser<ReportCommand> {
      */
     public ReportCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FROM_DATE, PREFIX_TO_DATE,
-                PREFIX_DATE_BY_MONTH, PREFIX_DATE_BY_YEAR);
+                PREFIX_DATE_BY_WEEK, PREFIX_DATE_BY_MONTH, PREFIX_DATE_BY_YEAR);
 
         if (argMultimap.size() == 1) {
             // The multimap only contains the preamble. No prefixes are present.
@@ -42,6 +43,10 @@ public class ReportCommandParser implements Parser<ReportCommand> {
         } else if (argMultimap.containsExact(PREFIX_TO_DATE)) {
             String end = getArgString(argMultimap, PREFIX_TO_DATE);
             return new ReportCommand(DateRange.of(end, ConceptualDate.END_DATE));
+
+        } else if (argMultimap.containsExact(PREFIX_DATE_BY_WEEK)) {
+            String date = getArgString(argMultimap, PREFIX_DATE_BY_WEEK);
+            return new ReportCommand(DateRange.ofWeek(date, DateRangeStyle.STRICT));
 
         } else if (argMultimap.containsExact(PREFIX_DATE_BY_MONTH)) {
             String monthString = getArgString(argMultimap, PREFIX_DATE_BY_MONTH);
