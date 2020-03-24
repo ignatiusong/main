@@ -37,12 +37,14 @@ public class EnterStallCommandParser implements Parser<EnterStallCommand> {
         }
 
         try {
-            index = ParserUtil.parseIndex(enteredText);
-            return new EnterStallCommand(index);
+            ParserUtil.parseIndex(enteredText);
         } catch (ParseException pe) {
             String stallName = ParserUtil.parseStallName(enteredText);
             return new EnterStallCommand(stallName);
         }
+
+        index = ParserUtil.parseStallIndex(enteredText, ParserContext.getCurrentCanteen().get());
+        return new EnterStallCommand(index);
     }
 }
 

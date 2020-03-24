@@ -57,6 +57,26 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
+     * whitespaces will be trimmed. If the index is more than the number of canteens throws
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer or
+     * if the index is more than number of canteens.
+     */
+    public static Index parseStallIndex(String oneBasedIndex, Canteen canteen)
+            throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        int index = Integer.parseInt(trimmedIndex);
+        if(index > canteen.getNumberOfStalls()) {
+            throw new ParseException(canteen.INVALID_STALL_INDEX_MESSAGE);
+        }
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be
      * trimmed.
      *

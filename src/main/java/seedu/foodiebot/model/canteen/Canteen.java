@@ -27,6 +27,7 @@ public class Canteen {
             CANTEENS.length;
     private static final Logger logger = LogsCenter.getLogger(Canteen.class);
 
+
     // Identity fields
     private final Name name;
     private final int numberOfStalls;
@@ -39,6 +40,9 @@ public class Canteen {
 
     // Data fields
     private final Set<Tag> cuisines = new HashSet<>();
+
+    public final String INVALID_STALL_INDEX_MESSAGE = "The stall index must be between 1 and " +
+            getNumberOfStalls();
 
     /** Every field must be present and not null. */
     public Canteen(
