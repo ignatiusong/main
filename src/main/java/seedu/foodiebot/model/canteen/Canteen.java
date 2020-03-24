@@ -20,9 +20,11 @@ import seedu.foodiebot.model.tag.Tag;
  * values are validated, immutable.
  */
 public class Canteen {
-    public static final String[] CANTEENS = new String[]{"The Deck", "Fine Food", "NUS Flavors"};
+    public static final String[] CANTEENS = new String[]{"The Deck", "NUS Flavors"};
     public static final String IMAGE_FOLDER = "/images/canteen/";
     public static final String MESSAGE_CONSTRAINTS = "Canteen name should be from " + Arrays.toString(CANTEENS);
+    public static final String INVALID_CANTEEN_INDEX = "The canteen index must be between 1 and " +
+            CANTEENS.length;
     private static final Logger logger = LogsCenter.getLogger(Canteen.class);
 
     // Identity fields
@@ -58,6 +60,10 @@ public class Canteen {
     public static boolean isValidCanteen(String trimmedCanteenName) {
         return Arrays.stream(CANTEENS)
             .anyMatch(trimmedCanteenName::equalsIgnoreCase);
+    }
+
+    public static int getNumCanteens() {
+        return CANTEENS.length;
     }
 
     public Name getName() {

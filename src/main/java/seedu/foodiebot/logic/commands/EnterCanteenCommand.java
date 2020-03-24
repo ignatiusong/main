@@ -28,6 +28,7 @@ public class EnterCanteenCommand extends Command {
                     + "deck ";
 
     public static final String MESSAGE_SUCCESS = "";
+    public static final String INVALID_INDEX_MESSAGE = "Please provide a valid index";
     private static final Logger logger = LogsCenter.getLogger(EnterCanteenCommand.class);
 
     private final Optional<String> canteenName;
@@ -57,7 +58,6 @@ public class EnterCanteenCommand extends Command {
         /* All the stalls are retrieved as they contain the canteen name field
            which we filter the canteen name that specified in enter {canteenName}
         */
-        model.updateFilteredStallList(Model.PREDICATE_SHOW_ALL);
         if (index.isPresent()) {
             List<Canteen> canteenList;
             if (model.isLocationSpecified()) {
@@ -65,11 +65,16 @@ public class EnterCanteenCommand extends Command {
             } else {
                 canteenList = model.getFilteredCanteenList();
             }
-            Canteen canteen = canteenList.get(index.get().getZeroBased());
-            ParserContext.setCanteenContext(canteen);
-            logger.info("Enter " + canteen.getName());
-            model.updateFilteredStallList(s -> s.getCanteenName().equalsIgnoreCase(
-                    canteen.getName().toString()));
+            if(index.get().getZeroBased() <= canteenList.size()) {
+                model.updateFilteredStallList(Model.PREDICATE_SHOW_ALL);
+                Canteen canteen = canteenList.get(index.get().getZeroBased());
+                ParserContext.setCanteenContext(canteen);
+                logger.info("Enter " + canteen.getName());
+                model.updateFilteredStallList(s -> s.getCanteenName().equalsIgnoreCase(
+                        canteen.getName().toString()));
+            } else {
+                return new CommandResult(COMMAND_WORD, INVALID_INDEX_MESSAGE);
+            }
 
         } else if (canteenName.isPresent()) {
             List<Canteen> canteens = model.getFilteredCanteenList();
