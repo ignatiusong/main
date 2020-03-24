@@ -27,6 +27,10 @@ public class FoodListPanel extends UiPart<Region> {
         simpleListView.setCellFactory(listView -> new FoodListViewCell());
     }
 
+    public ListView<Food> getSimpleListView() {
+        return simpleListView;
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Food} using a {@code
      * FoodCard}.

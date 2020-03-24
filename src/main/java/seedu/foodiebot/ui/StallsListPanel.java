@@ -27,6 +27,10 @@ public class StallsListPanel extends UiPart<Region> {
         simpleListView.setCellFactory(listView -> new StallListViewCell());
     }
 
+    public ListView<Stall> getSimpleListView() {
+        return simpleListView;
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Stall} using a {@code
      * CanteenCard}.

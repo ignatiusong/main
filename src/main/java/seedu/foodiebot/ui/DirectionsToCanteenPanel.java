@@ -58,6 +58,6 @@ public class DirectionsToCanteenPanel extends UiPart<Region> {
 
         // state check
         DirectionsToCanteenPanel card = (DirectionsToCanteenPanel) other;
-        return id.equals(card.id) && canteen.equals(card.canteen);
+        return canteen.equals(card.canteen);
     }
 }

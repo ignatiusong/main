@@ -8,7 +8,7 @@ import seedu.foodiebot.logic.parser.exceptions.ParseException;
 /**
  * .
  */
-public class FavoritesCommandParser {
+public class FavoritesCommandParser implements Parser<FavoritesCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FavoritesCommand and returns a
@@ -21,6 +21,10 @@ public class FavoritesCommandParser {
 
         String[] enteredText = argMultimap.getPreamble().split(" ");
         String action = enteredText[0];
+        if (!ParserContext.getCurrentContext().equals(ParserContext.STALL_CONTEXT)) {
+            throw new ParseException(ParserContext.INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext());
+        }
+
         switch (action) {
         case "set":
             try {
@@ -34,9 +38,7 @@ public class FavoritesCommandParser {
             break;
         }
 
-        if (!ParserContext.getCurrentContext().equals(ParserContext.MAIN_CONTEXT)) {
-            throw new ParseException(ParserContext.INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext());
-        }
+
         throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoritesCommand.MESSAGE_USAGE));
     }

@@ -22,4 +22,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_DATE_RANGE = "Invalid date range!";
     public static final String MESSAGE_INVALID_FILEREADER = "Problem loading file!";
     public static final String MESSAGE_INVALID_CANTEEN_NAME = "Invalid canteen name!";
+    public static final String MESSAGE_INVALID_FAVORITE_NAME_SPECIFIED = "Please specify the number in the menu "
+        + "of the food stall";
 }

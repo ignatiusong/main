@@ -104,39 +104,33 @@ image::wireframe/goto.png[width="700", align="left"]
 
 Displays the stores available at the canteen specified by the user input.
 
-Format: `enter CANTEEN_NAME`
+Formats: `enter`
 
-* The display of the store rating is determined from the user's past experiences of the food items which were selected.
+* `INDEX`: Enter canteen by listed index.
 
-=== View Menu of Store : `*menu*`
+* `CANTEEN_NAME`: Enter canteen by its name.
 
-Displays the menu of the store based on the user input.
-
-Format: `menu KEYWORD`
-
-NOTE: This function is only available after the user has selected a canteen and store.
-
-* User ratings will be displayed if they are available +
-E.g. after the user has selected a food item previously.
-
-* `KEYWORD` includes:
-** `[by price/ name]`: Sorts the menu accordingly.
-** `[tag]`: Displays foods available in the store with the corresponding tag.
-
-
-Examples:
-
-* `menu western` +
-Displays the food that has been tag with western.
-
-
-image::wireframe/menu.png[width="700", align="left"]
+NOTE: The display of the store rating is determined from the user's past experiences of the food items which were selected.
 
 === Select the Food : `*select*`
 
 Stores the selected food in the database.
 
-Format: `select INDEX`
+Formats: `select`
+
+* `INDEX`: Select by the food's index on the list.
+* `FOOD_NAME`: Select by name of the food.
+
+NOTE: If a budget has been set up, the budget will be automatically
+reduce by the price of the selected food.
+
+Examples:
+
+* `select 1`
+** Select food listed at index 1.
+
+* `select Combo Set`
+** Select the food item Combo Set.
 
 image::wireframe/select.png[width="700", align="left"]
 
@@ -272,8 +266,6 @@ TIP: User  can also update existing ratings by using the same command.
 
 |list |Display the list of canteen |
 
-|menu KEYWORD |Display the menu according to the keyword |menu chicken |
-
 |rate INDEX | Give a rating to the store |
 
 |randomize |Display a list of randomize options |
@@ -284,6 +276,7 @@ TIP: User  can also update existing ratings by using the same command.
 
 |select INDEX| Store the selected food into the database |
 
+|transaction |Generate the transaction breakdown |transaction w/ 12-02-2020
 |transaction |Generate the transaction breakdown |transaction w/ 12-02-2020
 
 

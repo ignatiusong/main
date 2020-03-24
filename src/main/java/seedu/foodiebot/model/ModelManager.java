@@ -22,6 +22,7 @@ import seedu.foodiebot.model.budget.Budget;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.food.Food;
+import seedu.foodiebot.model.transaction.PurchasedFood;
 import seedu.foodiebot.storage.FoodieBotStorage;
 import seedu.foodiebot.storage.JsonFoodieBotStorage;
 import seedu.foodiebot.storage.Storage;
@@ -41,6 +42,7 @@ public class ModelManager implements Model {
 
     private final Budget budget;
     private final FilteredList<Food> filteredFavoriteFoodList;
+    private FilteredList<PurchasedFood> filteredTransactionsList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -57,6 +59,7 @@ public class ModelManager implements Model {
         filteredStalls = new FilteredList<>(this.foodieBot.getStallList());
         filteredFoods = new FilteredList<>(this.foodieBot.getFoodList());
         filteredFavoriteFoodList = new FilteredList<>(this.foodieBot.getFavoriteFoodList());
+        filteredTransactionsList = new FilteredList<>(this.foodieBot.getTransactionsList());
         budget = this.foodieBot.getBudget();
     }
 
@@ -147,7 +150,9 @@ public class ModelManager implements Model {
     public Optional<Budget> getBudget() {
         try {
             FoodieBotStorage foodieBotStorage =
-                    new JsonFoodieBotStorage(userPrefs.getBudgetFilePath());
+                    new JsonFoodieBotStorage(userPrefs.getFoodieBotFilePath(), userPrefs.getStallsFilePath(),
+                            userPrefs.getBudgetFilePath(), userPrefs.getFoodieBotFilePath(),
+                            userPrefs.getFavoriteFoodFilePath(), userPrefs.getTransactionsFilePath());
             Storage storage = new StorageManager(foodieBotStorage);
             Optional<ReadOnlyFoodieBot> newBot = storage.readFoodieBot(Budget.class.getSimpleName());
             if (newBot.equals(Optional.empty())) {
@@ -194,7 +199,7 @@ public class ModelManager implements Model {
         FoodieBotStorage foodieBotStorage =
                 new JsonFoodieBotStorage(userPrefs.getFoodieBotFilePath(), userPrefs.getStallsFilePath(),
                         userPrefs.getBudgetFilePath(), userPrefs.getFoodieBotFilePath(),
-                        userPrefs.getFavoriteFoodFilePath());
+                        userPrefs.getFavoriteFoodFilePath(), userPrefs.getTransactionsFilePath());
         return new FileReader(String.valueOf(foodieBotStorage.getStallsFilePath()));
     }
 
@@ -321,6 +326,47 @@ public class ModelManager implements Model {
     public void updateFilteredFavoriteList(Predicate<Food> predicate) {
         requireNonNull(predicate);
         filteredFavoriteFoodList.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<PurchasedFood> getFilteredTransactionsList() {
+        return filteredTransactionsList;
+    }
+
+    @Override
+    public void updateFilteredTransactionsList(Predicate<PurchasedFood> predicate) {
+        requireNonNull(predicate);
+        filteredTransactionsList.setPredicate(predicate);
+    }
+
+    @Override
+    public void addPurchasedFood(PurchasedFood food) {
+        requireNonNull(food);
+
+        foodieBot.addPurchasedFood(food);
+
+    }
+
+    @Override
+    public void loadFilteredTransactionsList() {
+        try {
+            FoodieBotStorage foodieBotStorage =
+                    new JsonFoodieBotStorage(userPrefs.getFoodieBotFilePath(), userPrefs.getStallsFilePath(),
+                            userPrefs.getBudgetFilePath(), userPrefs.getFoodieBotFilePath(),
+                            userPrefs.getFavoriteFoodFilePath(), userPrefs.getTransactionsFilePath());
+            Storage storage = new StorageManager(foodieBotStorage);
+            Optional<ReadOnlyFoodieBot> newBot = storage.readFoodieBot("Transactions");
+
+            if (!newBot.equals(Optional.empty())) {
+                this.foodieBot.setTransactionsList(newBot.get().getTransactionsList());
+                filteredTransactionsList = new FilteredList<PurchasedFood>(newBot.get().getTransactionsList());
+            }
+
+        } catch (DataConversionException e) {
+            // return Optional.empty();
+        } catch (IOException e) {
+            // return Optional.empty();
+        }
     }
 
     /**

@@ -47,7 +47,8 @@
             <StackPane fx:id="listPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
 
-    <VBox fx:id="stallList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+    <VBox fx:id="stallList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS"
+      alignment="BOTTOM_CENTER">
         <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
         </padding>

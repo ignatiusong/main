@@ -26,6 +26,7 @@ import seedu.foodiebot.logic.commands.EnterCanteenCommand;
 import seedu.foodiebot.logic.commands.ExitCommand;
 import seedu.foodiebot.logic.commands.FavoritesCommand;
 import seedu.foodiebot.logic.commands.ListCommand;
+import seedu.foodiebot.logic.commands.TransactionsCommand;
 import seedu.foodiebot.logic.commands.exceptions.CommandException;
 import seedu.foodiebot.logic.parser.ParserContext;
 import seedu.foodiebot.logic.parser.exceptions.ParseException;
@@ -156,6 +157,14 @@ abstract class BaseScene {
                 : logic.getFilteredCanteenList(), commandResult.isLocationSpecified()));
     }
 
+    /** Fills the foodListPanel region.*/
+    @FXML
+    public void handleListTransactions() {
+        // changeScene("MainScene.fxml");
+        // new MainScene(primaryStage, logic);
+        addToListPanel(new TransactionsPanel(logic.getFilteredTransactionsList()));
+
+    }
 
     /** The method passed from logic to UI. */
     protected CommandResult executeCommand(String commandText)
@@ -204,6 +213,10 @@ abstract class BaseScene {
             case FavoritesCommand.COMMAND_WORD:
                 updateResultDisplay(commandResult.getFeedbackToUser());
                 handleListFavorites();
+                break;
+            case TransactionsCommand.COMMAND_WORD:
+                updateResultDisplay(commandResult.getFeedbackToUser());
+                handleListTransactions();
                 break;
             case ExitCommand.COMMAND_WORD:
                 updateResultDisplay(commandResult.getFeedbackToUser());

@@ -21,8 +21,8 @@ public class SelectItemCommandParser implements Parser<SelectItemCommand> {
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EnterStallCommand and returns a
-     * EnterStallCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SelectItemCommand and returns a
+     * SelectItemCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */

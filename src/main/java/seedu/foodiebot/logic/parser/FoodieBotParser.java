@@ -2,6 +2,7 @@ package seedu.foodiebot.logic.parser;
 
 import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.foodiebot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.foodiebot.logic.parser.ParserContext.INVALID_CONTEXT_MESSAGE;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,12 +15,13 @@ import seedu.foodiebot.logic.commands.ExitCommand;
 import seedu.foodiebot.logic.commands.FavoritesCommand;
 import seedu.foodiebot.logic.commands.FilterCommand;
 import seedu.foodiebot.logic.commands.FindCommand;
-import seedu.foodiebot.logic.commands.FoodMenuCommand;
 import seedu.foodiebot.logic.commands.GoToCanteenCommand;
 import seedu.foodiebot.logic.commands.HelpCommand;
 import seedu.foodiebot.logic.commands.ListCommand;
 import seedu.foodiebot.logic.commands.RandomizeCommand;
+import seedu.foodiebot.logic.commands.RateCommand;
 import seedu.foodiebot.logic.commands.ReportCommand;
+import seedu.foodiebot.logic.commands.ReviewCommand;
 import seedu.foodiebot.logic.commands.SelectItemCommand;
 import seedu.foodiebot.logic.commands.TransactionsCommand;
 import seedu.foodiebot.logic.parser.exceptions.ParseException;
@@ -66,9 +68,6 @@ public class FoodieBotParser {
                 return new EnterStallCommandParser().parse(arguments);
             }
 
-        case FoodMenuCommand.COMMAND_WORD:
-            return new FoodMenuCommandParser().parse(arguments);
-
         case SelectItemCommand.COMMAND_WORD:
             return new SelectItemCommandParser().parse(arguments);
 
@@ -89,6 +88,20 @@ public class FoodieBotParser {
 
         case TransactionsCommand.COMMAND_WORD:
             return new TransactionsCommandParser().parse(arguments);
+
+        case RateCommand.COMMAND_WORD:
+            if (ParserContext.getCurrentContext().equals(ParserContext.TRANSACTIONS_CONTEXT)) {
+                return new RateCommandParser().parse(arguments);
+            } else {
+                throw new ParseException(INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext());
+            }
+
+        case ReviewCommand.COMMAND_WORD:
+            if (ParserContext.getCurrentContext().equals(ParserContext.TRANSACTIONS_CONTEXT)) {
+                return new ReviewCommandParser().parse(arguments);
+            } else {
+                throw new ParseException(INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext());
+            }
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

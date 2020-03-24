@@ -5,6 +5,7 @@ import seedu.foodiebot.model.budget.Budget;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.food.Food;
+import seedu.foodiebot.model.transaction.PurchasedFood;
 
 /**
  * Unmodifiable view of an foodiebot
@@ -26,6 +27,8 @@ public interface ReadOnlyFoodieBot {
     Budget getBudget();
 
     boolean isLocationSpecified();
+
+    ObservableList<PurchasedFood> getTransactionsList();
 
 
 }

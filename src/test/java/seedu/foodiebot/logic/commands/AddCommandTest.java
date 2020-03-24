@@ -20,6 +20,7 @@ import seedu.foodiebot.model.budget.Budget;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.food.Food;
+import seedu.foodiebot.model.transaction.PurchasedFood;
 
 public class AddCommandTest {
 
@@ -239,6 +240,26 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredFoodList(Predicate<Food> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<PurchasedFood> getFilteredTransactionsList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void loadFilteredTransactionsList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTransactionsList(Predicate<PurchasedFood> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPurchasedFood(PurchasedFood food) {
             throw new AssertionError("This method should not be called.");
         }
     }

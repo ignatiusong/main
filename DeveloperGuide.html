@@ -236,8 +236,10 @@ The user is not particularly limited to student and stuff, it can be anyone who 
 <div class="paragraph">
 <p>(For all use cases below, the System is FoodieBot and the Actor is the user, unless specified otherwise)</p>
 </div>
-<h3 id="use-case-uc1-remove-randomiser-suggestion" class="discrete">Use case: UC1 - Remove randomiser suggestion</h3>
+<h3 id="use-case-uc1-Select a randomised stall suggestion" class="discrete">Use case: UC1 - Select a randomised stall suggestion</h3>
 <div class="paragraph">
+<p><strong>System: FoodieBot</strong></p>
+<p><strong>Actor: User</strong></p></pr>
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
@@ -246,13 +248,10 @@ The user is not particularly limited to student and stuff, it can be anyone who 
 <p>User requests to randomise</p>
 </li>
 <li>
-<p>FoodieBot shows the past randomized suggestions</p>
+<p>FoodieBot shows the randomised suggestions</p>
 </li>
 <li>
-<p>User request to remove suggestion</p>
-</li>
-<li>
-<p>FoodieBot updates the food item not to be suggested in the future</p>
+<p>User selects one of the randomised suggestion</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -265,11 +264,14 @@ The user is not particularly limited to student and stuff, it can be anyone who 
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a. The given index is invalid.</p>
+<p>1a. User wants to remove a randomiser suggestion.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. FoodieBot shows an error message.</p>
+<p>1a1. User request to remove suggestion.</p>
+</li>
+<li>
+<p>1a2. FoodieBot updates the food item not to be suggested in the future</p>
 <div class="paragraph">
 <p>Use case resumes at step 2.</p>
 </div>
@@ -281,6 +283,8 @@ The user is not particularly limited to student and stuff, it can be anyone who 
 </div>
 <h3 id="use-case-uc2-set-budget" class="discrete">Use case: UC2 - Set Budget</h3>
 <div class="paragraph">
+<p><strong>System: FoodieBot</strong></p>
+<p><strong>Actor: User</strong></p></pr>
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
@@ -341,6 +345,8 @@ The user is not particularly limited to student and stuff, it can be anyone who 
 </div>
 <h3 id="use-case-uc3-review-food-item" class="discrete">Use case: UC3 - Review Food Item</h3>
 <div class="paragraph">
+<p><strong>System: FoodieBot</strong></p>
+<p><strong>Actor: User</strong></p></pr>
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
@@ -407,6 +413,8 @@ The user is not particularly limited to student and stuff, it can be anyone who 
 </div>
 <h3 id="use-case-uc4-rate-food-item" class="discrete">Use case: UC4 - Rate Food Item</h3>
 <div class="paragraph">
+<p><strong>System: FoodieBot</strong></p>
+<p><strong>Actor: User</strong></p></pr>
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
@@ -477,6 +485,12 @@ The user is not particularly limited to student and stuff, it can be anyone who 
 </div>
 </div>
 </div>
+<div class="imageblock">
+        <div class="content">
+            <img src="images/UseCase.png" alt="UseCase" width="400">
+            <p style="margin-left: 160px"> Fig1. Use Case Diagram</p>
+        </div>
+    </div>
 <div class="sect1">
 <h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></h2>
 <div class="sectionbody">

@@ -2,7 +2,7 @@
   "canteens" : [ {
     "name" : "The Deck",
     "distance" : 800,
-    "numberOfStalls" : 2,
+    "numberOfStalls" : 14,
     "nearestBlockName" : "COM1",
     "directionsImageName" : "com1_deck.png",
     "canteenImageName" : "deck.jpg",
@@ -11,7 +11,7 @@
   }, {
     "name" : "Nus Flavors",
     "distance" : 3200,
-    "numberOfStalls" : 2,
+    "numberOfStalls" : 11,
     "nearestBlockName" : "COM1",
     "directionsImageName" : "utown_flavors.png",
     "canteenImageName" : "utown.jpg",

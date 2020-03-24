@@ -4,6 +4,7 @@ import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORM
 import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_CANTEEN;
 import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.foodiebot.commons.core.index.Index;
 import seedu.foodiebot.logic.commands.RandomizeCommand;
 import seedu.foodiebot.logic.parser.exceptions.ParseException;
 
@@ -36,7 +37,12 @@ public class RandomizeCommandParser implements Parser<RandomizeCommand> {
         try {
             Prefix firstPrefix = argMultimap.prefixSet().stream().findFirst().get();
             String argValue = getArgString(argMultimap, firstPrefix);
-            return new RandomizeCommand(firstPrefix.toString(), argValue);
+            try {
+                Index index = ParserUtil.parseIndex(argValue);
+                return new RandomizeCommand(firstPrefix.toString(), index);
+            } catch (ParseException pe) {
+                return new RandomizeCommand(firstPrefix.toString(), argValue);
+            }
         } catch (NullPointerException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT));
         }

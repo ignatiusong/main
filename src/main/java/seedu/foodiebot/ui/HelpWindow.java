@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import seedu.foodiebot.commons.core.LogsCenter;
 
 /** Controller for a help page */
+
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL =

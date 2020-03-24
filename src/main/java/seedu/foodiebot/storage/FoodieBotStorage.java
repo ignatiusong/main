@@ -20,6 +20,10 @@ public interface FoodieBotStorage {
 
     Path getFoodFilePath();
 
+    Path getTransactionsFilePath();
+
+    Path getBudgetFilePath();
+
     /**
      * Returns AddressBook data as a {@link ReadOnlyFoodieBot}. Returns {@code Optional.empty()} if
      * storage file is not found.

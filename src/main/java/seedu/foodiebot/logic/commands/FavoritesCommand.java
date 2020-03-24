@@ -55,5 +55,18 @@ public class FavoritesCommand extends Command {
         }
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
 
+        if (!(other instanceof FavoritesCommand)) {
+            return false;
+        }
+
+        FavoritesCommand otherFavorite = (FavoritesCommand) other;
+        return otherFavorite.index.orElseGet(() -> Index.fromZeroBased(0))
+            .equals(index.orElseGet(() -> Index.fromZeroBased(0)));
+    }
 }

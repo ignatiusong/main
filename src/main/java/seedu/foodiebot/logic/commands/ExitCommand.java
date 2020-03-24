@@ -32,6 +32,12 @@ public class ExitCommand extends Command {
             return new CommandResult(COMMAND_WORD, CHANGE_CONTEXT_ACKNOWLEDGEMENT + context,
                 false, false);
 
+        case ParserContext.TRANSACTIONS_CONTEXT:
+            ParserContext.setCurrentContext(ParserContext.MAIN_CONTEXT);
+            ParserContext.setCurrentCanteen(Optional.empty());
+            return new CommandResult(COMMAND_WORD, CHANGE_CONTEXT_ACKNOWLEDGEMENT + context,
+                    false, false);
+
         default:
             return new CommandResult(COMMAND_WORD, MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
         }

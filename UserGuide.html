@@ -173,7 +173,8 @@ Including the travel instructions and bus services that go to the canteen.</p>
 <h3 id="viewing-all-stores-in-canteen-code-enter-code"><a class="link" href="#viewing-all-stores-in-canteen-code-enter-code">3.4. Viewing all stores in canteen: <code>enter</code></a></h3>
 <div class="paragraph">
 <p>Display the stores available at the canteen based on user input.<br>
-Format: <code>enter CANTEEN_NAME</code></p>
+Format: <code> enter CANTEEN_INDEX</code><br>
+        <code>enter CANTEEN_NAME</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -227,8 +228,9 @@ Format: <code>menu KEYWORD</code></p>
 <div class="sect2">
 <h3 id="select-food-code-select-code"><a class="link" href="#select-food-code-select-code">3.6. Select food : <code>select</code></a></h3>
 <div class="paragraph">
-<p>Select the food to be store in the database.<br>
-Format: <code>select INDEX</code></p>
+<p>Select the food to be store in the database. If you have set up a budget, your budget will be reduced based on the food's price<br>
+    Formats: <code>select INDEX</code><br>
+    <code> select FOOD_NAME</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -269,7 +271,7 @@ Format: <code>budget set [PERIOD] [AMOUNT]</code></p>
 <ul>
 <li>
 <p><code>budget set weekly 9.50</code><br>
-::Sets your weekly budget to $9.50</p>
+Sets your weekly budget to $9.50</p>
 </li>
 <li>
 <p><code>budget set /m 100</code><br>
@@ -428,14 +430,14 @@ Format: <code>rate INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>budget set</strong> : <code>budget set PERIOD AMOUNT</code>
+<p><strong>budget set</strong> : <code>budget set PERIOD AMOUNT</code><br>
 e.g. <code>budget set weekly 9.50</code></p>
 </li>
 <li>
 <p><strong>budget view</strong> : <code>budget view</code></p>
 </li>
 <li>
-<p><strong>enter</strong> : <code>enter CANTEEN_NAME</code>
+<p><strong>enter</strong> : <code>enter CANTEEN_NAME</code><br>
 e.g. <code>enter deck</code></p>
 </li>
 <li>
@@ -450,7 +452,7 @@ e.g. <code>goto deck /f COM1</code></p>
 <p><strong>list</strong> : <code>list</code></p>
 </li>
 <li>
-<p><strong>menu</strong> : <code>menu KEYWORD</code>
+<p><strong>menu</strong> : <code>menu KEYWORD</code><br>
 e.g. <code>menu chicken</code></p>
 </li>
 <li>
@@ -466,7 +468,8 @@ e.g. <code>menu chicken</code></p>
 <p><strong>review</strong> : <code>review INDEX</code></p>
 </li>
 <li>
-<p><strong>select</strong> : <code>select INDEX</code></p>
+<p><strong>select</strong> : <code>select INDEX</code><br>
+    eg. <code>select Chicken Rice</code></p>
 </li>
 <li>
 <p><strong>transaction</strong> : <code>transaction</code> [/f START_DATE] [/t END_DATE] [PERIOD]</p>

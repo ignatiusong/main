@@ -27,6 +27,7 @@ public class JsonFoodieBotStorage implements FoodieBotStorage {
     private Path favoritesFilePath;
     private Path budgetFilePath;
     private Path foodFilePath;
+    private Path transactionsFilePath;
 
     public JsonFoodieBotStorage(Path filePath) {
         this.canteensFilePath = filePath;
@@ -39,12 +40,13 @@ public class JsonFoodieBotStorage implements FoodieBotStorage {
     }
 
     public JsonFoodieBotStorage(Path canteensFilePath, Path stallsFilePath, Path budgetFilePath,
-            Path foodFilePath, Path favoritesFilePath) {
+            Path foodFilePath, Path favoritesFilePath, Path transactionsFilePath) {
         this.canteensFilePath = canteensFilePath;
         this.stallsFilePath = stallsFilePath;
         this.budgetFilePath = budgetFilePath;
         this.foodFilePath = foodFilePath;
         this.favoritesFilePath = favoritesFilePath;
+        this.transactionsFilePath = transactionsFilePath;
     }
 
     /**
@@ -68,6 +70,16 @@ public class JsonFoodieBotStorage implements FoodieBotStorage {
     @Override
     public Path getFavoritesFilePath() {
         return favoritesFilePath;
+    }
+
+    @Override
+    public Path getTransactionsFilePath() {
+        return transactionsFilePath;
+    }
+
+    @Override
+    public Path getBudgetFilePath() {
+        return budgetFilePath;
     }
 
 
@@ -113,6 +125,7 @@ public class JsonFoodieBotStorage implements FoodieBotStorage {
                 logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
                 throw new DataConversionException(ive);
             }
+
         case "Stall":
             Optional<JsonSerializableStall> json2 = JsonUtil.readJsonFile(filePath, JsonSerializableStall.class);
             if (json2.isEmpty()) {
@@ -125,12 +138,14 @@ public class JsonFoodieBotStorage implements FoodieBotStorage {
                 logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
                 throw new DataConversionException(ive);
             }
+
         case "Budget":
             Optional<JsonAdaptedBudget>jsonAdaptedBudget = JsonUtil.readJsonFile(filePath, JsonAdaptedBudget.class);
             if (jsonAdaptedBudget.isEmpty()) {
                 return Optional.empty();
             }
             return Optional.of(jsonAdaptedBudget.get().toModelType());
+
         case "Food":
             Optional<JsonSerializableFood> json3 = JsonUtil.readJsonFile(filePath,
                     JsonSerializableFood.class);
@@ -144,6 +159,21 @@ public class JsonFoodieBotStorage implements FoodieBotStorage {
                 logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
                 throw new DataConversionException(ive);
             }
+
+        case "Transactions":
+            Optional<JsonSerializableTransactions> jsonTransactions = JsonUtil.readJsonFile(filePath,
+                    JsonSerializableTransactions.class);
+            if (jsonTransactions.isEmpty()) {
+                return Optional.empty();
+            }
+
+            try {
+                return Optional.of(jsonTransactions.get().toModelType());
+            } catch (IllegalValueException ive) {
+                logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
+                throw new DataConversionException(ive);
+            }
+
         default:
             break;
 
@@ -166,6 +196,8 @@ public class JsonFoodieBotStorage implements FoodieBotStorage {
             return new UserPrefs().getFoodFilePath();
         case "FavoriteFood":
             return new UserPrefs().getFavoriteFoodFilePath();
+        case "Transactions":
+            return new UserPrefs().getTransactionsFilePath();
         default:
             break;
         }
@@ -194,7 +226,7 @@ public class JsonFoodieBotStorage implements FoodieBotStorage {
     /**
      * Similar to {@link #saveFoodieBot(ReadOnlyFoodieBot)}.
      *
-     * TIP: When adding a new entity, a new {@link JsonSerialiablexxx} needs to be created
+     * TIP: When adding a new entity, a new {@code JsonSerialiablexxx} needs to be created
      * and filePath has to be specified in {@link JsonFoodieBotStorage}.
      * @param filePath location of the data. Cannot be null.
      */
@@ -225,6 +257,10 @@ public class JsonFoodieBotStorage implements FoodieBotStorage {
         case "FavoriteFood":
             requireNonNull(foodieBot);
             JsonUtil.saveJsonFile(new JsonSerializableFavorites(foodieBot), filePath);
+            break;
+        case "Transactions":
+            requireNonNull(foodieBot);
+            JsonUtil.saveJsonFile(new JsonSerializableTransactions(foodieBot), filePath);
             break;
         default:
             requireNonNull(foodieBot);

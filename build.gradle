@@ -64,15 +64,20 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+    compile group: 'org.testfx', name: 'testfx-junit5', version: '4.0.15-alpha'
+    compile group: 'org.testfx', name: 'testfx-core', version: '4.0.15-alpha'
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.5.1'
+    testCompile "org.testfx:testfx-junit5:4.0.15-alpha"
+    testCompile "org.testfx:testfx-core:4.0.15-alpha"
+    testCompile "org.testfx:openjfx-monocle:jdk-11+26"
 
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
 }
 
 shadowJar {
-    archiveName = 'foodiebot.jar'
-
-    destinationDir = file("${buildDir}/jar/")
+    archiveFileName = 'foodiebot.jar'
+    destinationDirectory = file("${buildDir}/jar/")
 }
 
 task coverage(type: JacocoReport) {

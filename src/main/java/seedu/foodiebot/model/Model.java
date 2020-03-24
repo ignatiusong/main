@@ -13,6 +13,7 @@ import seedu.foodiebot.model.budget.Budget;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.food.Food;
+import seedu.foodiebot.model.transaction.PurchasedFood;
 
 /** The API of the Model component. */
 public interface Model {
@@ -119,4 +120,12 @@ public interface Model {
     ObservableList<Food> getFilteredFavoriteFoodList();
 
     void updateFilteredFavoriteList(Predicate<Food> predicateShowAll);
+
+    ObservableList<PurchasedFood> getFilteredTransactionsList();
+
+    void loadFilteredTransactionsList();
+
+    void updateFilteredTransactionsList(Predicate<PurchasedFood> predicate);
+
+    void addPurchasedFood(PurchasedFood food);
 }

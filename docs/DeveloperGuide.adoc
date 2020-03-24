@@ -57,6 +57,20 @@ We assume that you are using IntelliJ.
 === Detailed Class Descriptions
 
 === Design Considerations
+Aspect: Executing similar task but for different objects
+eg. Selecting canteen, stalls, food.
+
+* Alternative 1 (current choice): Create a context class that
+executes commands based on the context the user is in.
+** Pros: Higher quality user interface, user does not need to remember
+so many commands.
+** Cons: More difficult to implement.
+
+* Alternative 2: Create different commands for different objects
+** Pros: Easier to implement. There will not be any chance
+of overlapping commands
+** Cons: Reduce quality of user interface as user has to remember many
+different commands.
 
 [[Design-Architecture]]
 === Architecture
@@ -134,7 +148,7 @@ image::LogicClassDiagram.png[]
 *API* :
 link:{repoURL}/src/main/java/seedu/foodiebot/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `FoodieBotParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a person).
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -314,14 +328,13 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 (For all use cases below, the System is FoodieBot and the Actor is the user, unless specified otherwise)
 
 [discrete]
-=== Use case: UC1 - Remove randomiser suggestion
+=== Use case: UC1 - Select a randomised stall suggestion
 
 *MSS*
 
 1. User requests to randomise
-2. FoodieBot shows the past randomized suggestions
-3. User request to remove suggestion
-4. FoodieBot updates the food item not to be suggested in the future
+2. FoodieBot shows the randomised suggestions
+3. User selects one of the randomised suggestion
 
 +
 Use case ends.
@@ -329,10 +342,13 @@ Use case ends.
 *Extensions*
 
 [none]
-* 3a. The given index is invalid.
+* 1a. User wants to remove a randomised suggestion.
 +
 [none]
-** 3a1. FoodieBot shows an error message.
+** 1a1. User request to remove suggestion.
++
+[none]
+** 1a2. FoodieBot updates the food item not to be suggested in the future
 +
 Use case resumes at step 2.
 
@@ -441,6 +457,9 @@ Use case resumes at step 2.
 +
 Use case resumes at step 2.
 
++
+image::UseCase.png[width="400"]
+* Fig1. Use Case Diagram
 
 [appendix]
 == Non Functional Requirements

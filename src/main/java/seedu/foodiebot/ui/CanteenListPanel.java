@@ -23,6 +23,10 @@ public class CanteenListPanel extends UiPart<Region> {
         simpleListView.setCellFactory(listView -> new CanteenListViewCell(showDistanceField));
     }
 
+    public ListView<Canteen> getSimpleListView() {
+        return simpleListView;
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Canteen} using a {@code
      * CanteenCard}.

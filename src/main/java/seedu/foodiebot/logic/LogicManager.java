@@ -16,12 +16,13 @@ import seedu.foodiebot.logic.commands.EnterCanteenCommand;
 import seedu.foodiebot.logic.commands.ExitCommand;
 import seedu.foodiebot.logic.commands.FavoritesCommand;
 import seedu.foodiebot.logic.commands.FindCommand;
-import seedu.foodiebot.logic.commands.FoodMenuCommand;
 import seedu.foodiebot.logic.commands.GoToCanteenCommand;
 import seedu.foodiebot.logic.commands.HelpCommand;
 import seedu.foodiebot.logic.commands.ListCommand;
 import seedu.foodiebot.logic.commands.RandomizeCommand;
+import seedu.foodiebot.logic.commands.RateCommand;
 import seedu.foodiebot.logic.commands.ReportCommand;
+import seedu.foodiebot.logic.commands.ReviewCommand;
 import seedu.foodiebot.logic.commands.SelectItemCommand;
 import seedu.foodiebot.logic.commands.TransactionsCommand;
 import seedu.foodiebot.logic.commands.exceptions.CommandException;
@@ -36,6 +37,7 @@ import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.favorites.FavoriteFood;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.randomize.Randomize;
+import seedu.foodiebot.model.transaction.PurchasedFood;
 import seedu.foodiebot.storage.Storage;
 
 /**
@@ -89,8 +91,6 @@ public class LogicManager implements Logic {
             } else {
                 return Food.class.getSimpleName();
             }
-        case FoodMenuCommand.COMMAND_WORD:
-            return Food.class.getSimpleName();
 
         case BudgetCommand.COMMAND_WORD:
             return Budget.class.getSimpleName();
@@ -106,10 +106,16 @@ public class LogicManager implements Logic {
             return FavoriteFood.class.getSimpleName();
 
         case TransactionsCommand.COMMAND_WORD:
-            //TODO Not Implemented
+            return "Transactions";
 
         case ClearCommand.COMMAND_WORD:
             //TODO Not Implemented
+
+        case RateCommand.COMMAND_WORD:
+            return "Transactions";
+
+        case ReviewCommand.COMMAND_WORD:
+            return "Transactions";
 
         case FindCommand.COMMAND_WORD:
             //TODO Not Implemented
@@ -120,7 +126,7 @@ public class LogicManager implements Logic {
         case HelpCommand.COMMAND_WORD:
             //TODO Not Implemented
         case SelectItemCommand.COMMAND_WORD:
-            //TODO Not Implemented
+            return "Transactions";
         default:
             return "";
         }
@@ -182,5 +188,10 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Food> getFilteredFavoriteFoodList(boolean isInitialised) {
         return model.getFilteredFavoriteFoodList();
+    }
+
+    @Override
+    public ObservableList<PurchasedFood> getFilteredTransactionsList() {
+        return model.getFilteredTransactionsList();
     }
 }

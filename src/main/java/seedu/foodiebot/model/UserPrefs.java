@@ -17,6 +17,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private Path budgetFilePath = Paths.get("foodiebot-budget.json");
     private Path foodFilePath = Paths.get("foodiebot-food.json");
     private Path favoriteFoodFilePath = Paths.get("foodiebot-favorites.json");
+    private Path transactionsFilePath = Paths.get("foodiebot-transactions.json");
 
 
     /** Creates a {@code UserPrefs} with default values. */
@@ -62,6 +63,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public Path getFavoriteFoodFilePath() {
         return favoriteFoodFilePath;
+    }
+
+    public Path getTransactionsFilePath() {
+        return transactionsFilePath;
     }
 
     public void setFoodieBotFilePath(Path foodieBotFilePath) {

@@ -76,10 +76,19 @@ public class StorageManager implements Storage {
         return foodieBotStorage.getFoodFilePath();
     }
 
+    @Override
+    public Path getTransactionsFilePath() {
+        return foodieBotStorage.getTransactionsFilePath();
+    }
+
+    @Override
+    public Path getBudgetFilePath() {
+        return foodieBotStorage.getBudgetFilePath();
+    }
+
 
     @Override
     public Optional<ReadOnlyFoodieBot> readFoodieBot(String modelType) throws DataConversionException, IOException {
-        // return readFoodieBot(foodieBotStorage.getCanteensFilePath(), modelType);
         return readFoodieBot(foodieBotStorage.getModelFilePath(modelType), modelType);
     }
 

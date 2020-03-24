@@ -84,4 +84,17 @@ public class GoToCanteenCommand extends Command {
         }
         return new DirectionsCommandResult(result.get(), MESSAGE_SUCCESS);
     }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof GoToCanteenCommand)) {
+            return false;
+        }
+
+        GoToCanteenCommand otherCanteen = (GoToCanteenCommand) other;
+        return otherCanteen.nearestBlockName.equalsIgnoreCase(nearestBlockName);
+    }
 }

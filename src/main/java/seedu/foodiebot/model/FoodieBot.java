@@ -16,6 +16,8 @@ import seedu.foodiebot.model.favorites.FavoriteFood;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.food.UniqueFoodList;
 import seedu.foodiebot.model.stall.UniqueStallList;
+import seedu.foodiebot.model.transaction.PurchasedFood;
+import seedu.foodiebot.model.transaction.PurchasedFoodList;
 
 /**
  * Wraps all data at the application level Duplicates are not allowed (by .isSame_____ comparison)
@@ -26,6 +28,7 @@ public class FoodieBot implements ReadOnlyFoodieBot {
     private final UniqueStallList stalls;
     private final UniqueFoodList foods;
     private final UniqueFoodList favoritedFoods;
+    private final PurchasedFoodList transactions;
     private Budget budget;
     private boolean isLocationSpecified;
 
@@ -41,6 +44,7 @@ public class FoodieBot implements ReadOnlyFoodieBot {
         stalls = new UniqueStallList();
         foods = new UniqueFoodList();
         favoritedFoods = new UniqueFoodList();
+        transactions = new PurchasedFoodList();
         budget = new Budget();
         isLocationSpecified = false;
     }
@@ -233,5 +237,19 @@ public class FoodieBot implements ReadOnlyFoodieBot {
 
     public void addFavoriteFood(FavoriteFood f) {
         favoritedFoods.add(f);
+    }
+
+    public void addPurchasedFood(PurchasedFood pf) {
+        transactions.addReverse(pf);
+    }
+
+    @Override
+    public ObservableList<PurchasedFood> getTransactionsList() {
+        return transactions.getList();
+    }
+
+    public void setTransactionsList(ObservableList<PurchasedFood> newList) {
+        transactions.removeAll();
+        transactions.setFoods(newList);
     }
 }

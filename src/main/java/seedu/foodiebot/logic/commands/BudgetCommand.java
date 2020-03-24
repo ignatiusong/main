@@ -110,4 +110,19 @@ public class BudgetCommand extends Command {
             return new CommandResult(COMMAND_WORD, MESSAGE_FAILURE);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof BudgetCommand)) {
+            return false;
+        }
+
+        BudgetCommand otherBudget = (BudgetCommand) other;
+        return otherBudget.budget.getTotalBudget() == budget.getTotalBudget()
+            && otherBudget.action.equals(action);
+    }
 }

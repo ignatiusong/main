@@ -43,8 +43,8 @@ public class UniqueFoodList implements Iterable<Food> {
     }
 
     /**
-     * Replaces the canteen {@code target} in the list with {@code editedPerson}. {@code target}
-     * must exist in the list. The canteen identity of {@code editedPerson} must not be the same as
+     * Replaces the canteen {@code target} in the list with {@code editedFood}. {@code target}
+     * must exist in the list. The canteen identity of {@code editedFood} must not be the same as
      * another existing canteen in the list.
      */
     public void setFood(Food target, Food editedFood) {

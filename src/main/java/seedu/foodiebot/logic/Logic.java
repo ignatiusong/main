@@ -12,6 +12,7 @@ import seedu.foodiebot.model.ReadOnlyFoodieBot;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.food.Food;
+import seedu.foodiebot.model.transaction.PurchasedFood;
 
 /** API of the Logic component */
 public interface Logic {
@@ -55,5 +56,8 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of favorited food */
     ObservableList<Food> getFilteredFavoriteFoodList(boolean isInitialised);
+
+    /** Returns an unmodifiable view of the filtered list of purchased food. */
+    ObservableList<PurchasedFood> getFilteredTransactionsList();
 }
 

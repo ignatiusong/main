@@ -3,7 +3,8 @@ ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/AY1920S2-CS2103T-F11-3/main[image:https://travis-ci.org/AY1920S2-CS2103T-F11-3/main.svg?branch=master[Build Status]]
 https://ci.appveyor.com/project/damithc/addressbook-level3[image:https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true[Build status]]
-https://coveralls.io/github/AY1920S2-CS2103T-F11-3/main?branch=master[image:https://coveralls.io/repos/github/AY1920S2-CS2103T-F11-3/main/badge.svg?branch=master[Coverage Status]]
+https://coveralls.io/github/AY1920S2-CS2103T-F11-3/main?branch=master[image:https://coveralls.io/repos/github/AY1920S2-CS2103T-F11-3/main/badge.svg?branch=master&service=github&kill-cache=1[Coverage Status]]
+https://www.codacy.com/gh/AY1920S2-CS2103T-F11-3/main?utm_source=github.com&utm_medium=referral&utm_content=AY1920S2-CS2103T-F11-3/main&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/3f316be5c02a4726a5eb5298cd829401[Codacy Badge]]
 
 
 
@@ -26,7 +27,6 @@ In particular, for the indecisive user, this application can give a random food 
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
-* <<LearningOutcomes#, Learning Outcomes>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
 

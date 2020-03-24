@@ -57,8 +57,14 @@ public class MainApp extends Application {
             "=============================[ Initializing FoodieBot ]===========================");
         super.init();
 
-        AppParameters appParameters = AppParameters.parse(getParameters());
-        config = initConfig(appParameters.getConfigPath());
+        try {
+            AppParameters appParameters = AppParameters.parse(getParameters());
+            config = initConfig(appParameters.getConfigPath());
+        } catch (Exception ex) {
+            config = new Config();
+            logger.info("Parameters are empty");
+        }
+
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
@@ -67,7 +73,8 @@ public class MainApp extends Application {
         FoodieBotStorage foodieBotStorage =
             new JsonFoodieBotStorage(userPrefs.getFoodieBotFilePath(),
                     userPrefs.getStallsFilePath(), userPrefs.getFoodFilePath(),
-                    userPrefs.getBudgetFilePath(), userPrefs.getFavoriteFoodFilePath());
+                    userPrefs.getBudgetFilePath(), userPrefs.getFavoriteFoodFilePath(),
+                    userPrefs.getTransactionsFilePath());
 
         storage = new StorageManager(foodieBotStorage, userPrefsStorage);
 
@@ -78,6 +85,10 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+    }
+
+    protected static Logger getLogger() {
+        return logger;
     }
 
     /**
@@ -94,6 +105,7 @@ public class MainApp extends Application {
             storage.readFoodieBot(Canteen.class.getSimpleName());
 
             // storage.readFoodieBot(Budget.class.getSimpleName());
+            storage.readFoodieBot("Transactions");
 
             storage.readFoodieBot(Food.class.getSimpleName());
             storage.readFoodieBot(FavoriteFood.class.getSimpleName());
