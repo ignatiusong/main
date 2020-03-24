@@ -50,7 +50,7 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         int index = Integer.parseInt(trimmedIndex);
-        if(index > Canteen.getNumCanteens()) {
+        if (index > Canteen.getNumCanteens()) {
             throw new ParseException(Canteen.INVALID_CANTEEN_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
@@ -70,8 +70,8 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         int index = Integer.parseInt(trimmedIndex);
-        if(index > canteen.getNumberOfStalls()) {
-            throw new ParseException(canteen.INVALID_STALL_INDEX_MESSAGE);
+        if (index > canteen.getNumberOfStalls()) {
+            throw new ParseException(canteen.INVALID_STALL_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }

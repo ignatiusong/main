@@ -65,7 +65,7 @@ public class EnterCanteenCommand extends Command {
             } else {
                 canteenList = model.getFilteredCanteenList();
             }
-            if(index.get().getZeroBased() <= canteenList.size()) {
+            if (index.get().getZeroBased() <= canteenList.size()) {
                 model.updateFilteredStallList(Model.PREDICATE_SHOW_ALL);
                 Canteen canteen = canteenList.get(index.get().getZeroBased());
                 ParserContext.setCanteenContext(canteen);
