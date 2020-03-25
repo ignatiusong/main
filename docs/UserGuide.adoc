@@ -102,27 +102,28 @@ image::wireframe/goto.png[width="700", align="left"]
 
 === View All Stores in Canteen: `*enter*`
 
-Displays the stores available at the canteen specified by the user input.
+Displays the stores available at the canteen specified by the user input. Contains information about the cuisine
+sold at the store, the rating of the store and various other things which we haven't implemented yet.
 
 Formats: `enter`
 
-* `INDEX`: Enter canteen by listed index.
+* `INDEX`: Enter the canteen with the entered index.
 
-* `CANTEEN_NAME`: Enter canteen by its name.
+* `CANTEEN_NAME`: Enter the canteen with the entered name.
 
-NOTE: The display of the store rating is determined from the user's past experiences of the food items which were selected.
+NOTE: The store's rating is determined from the user's past experiences of the food items which were selected.
 
 === Select the Food : `*select*`
 
-Stores the selected food in the database.
+Stores the selected food in the database of food to help the user track his history of food consumption.
 
 Formats: `select`
 
-* `INDEX`: Select by the food's index on the list.
-* `FOOD_NAME`: Select by name of the food.
+* `INDEX`: Select the food with the given index from the list displayed on the GUI
+* `FOOD_NAME`: Select the food with the given name from the list displayed on the GUI
 
 NOTE: If a budget has been set up, the budget will be automatically
-reduce by the price of the selected food.
+reduced by the price of the selected food.
 
 Examples:
 
@@ -136,13 +137,13 @@ image::wireframe/select.png[width="700", align="left"]
 
 === Randomize Food Selection : `*randomize*`
 
-Displays a list of suggestions of food.
+Displays a list of randomized suggestions of food.
 
 Format: `randomize`
 
-* `[c/ CANTEEN_NAME]` - Randomize based on the canteen selected.
+* `[c/ CANTEEN_NAME]` - Produce a randomized list of foods from foods available at the particular canteen .
 ** Example: `randomize c/ The Deck`
-* `[t/ TAG]` - Randomize based on the tag provided.
+* `[t/ TAG]` - Randomize based on foods which are tagged with the tag provided.
 ** Example: `randomize t/ rice`
 * `[c/]` and `[t/]` are optional.
 
@@ -150,9 +151,9 @@ image::wireframe/randomize.png[width="700", align="left"]
 
 === Set a Budget : `*budget set*`
 
-Sets a daily, weekly or monthly budget. +
-The budget can be changed. However, this will reset the budget overview for the current budget cycle.
+Sets a daily, weekly or monthly budget.  The budget can be changed.
 
+NOTE: Changing the budget will reset the budget overview for the current budget cycle. +
 For example, if you have $5 remaining from a weekly budget of $20, setting a new monthly budget of $150
 will update your current budget settings to the new one, but at the same time resets both the start date
 of the cycle as well as the amount remaining. +
@@ -160,8 +161,8 @@ of the cycle as well as the amount remaining. +
 
 Format: `budget set [PERIOD] [AMOUNT]`
 
-* `AMOUNT`: Defines the limit of your budget.
-* `PERIOD`: Defines the length of each period that the budget is effective for.
+* `AMOUNT`: Defines the maximum amount you can spend in your budget.
+* `PERIOD`: Defines the length of the cycle that a budget is effective for and when it will refresh.
 * List of `PERIOD` inputs includes:
 ** `[d/]` - Daily
 ** `[w/]` - Weekly
@@ -185,23 +186,24 @@ image::wireframe/budget set.png[width="700", align="left"]
 === View Budget: `*budget view*`
 
 Views the current budget, spendings made during the current budget cycle,
-as well as the remaining available budget to spend.
+as well as the remaining budget available to spend.
 
 Format: `budget view`
 
 === View Expense Report: `*report*`
 
-Generates a report for your spending and food purchases for any period specified.
+Generates a report for your spending and food purchases for the period specified.
 
 Format: `report`
 
-* `[f/FROM_DATE] [t/TO_DATE]` - Generate report from and till the given dates.
+* `[f/FROM_DATE] [t/TO_DATE]` - Generate report from `FROM_DATE` until `TO_DATE`.
 ** Example: `report [f/ 12-02-2020] [t/ 30-04-2020]`
 * `[w/DATE]` - Generate report for the week (Monday-Sunday) of the input date.
 ** Example: `report [w/ 12-02-2020]`
 * `[m/MONTH]` - Generate report of the input month.
-** Example: `report [m/ jan]` - Generates a report for the month of the current year.
-** Example: transactions `[m/ jul] [y/ 2019]` - Generates a report for the month of the specified year.
+** Example: `report [m/ jan]` - Generates a report for the month of January for the current year.
+** Example: 'report [m/ jul] [y/ 2019]` - Generates a report for the month of July of the specified year
+of 2019.
 * `[y/YEAR]` - Generate report of the input year.
 ** Example: `report [y/ 2020]`
 * `[f/]`, `[t/]`, `[m/]`, `[w/]` and `[y/]` fields are optional.
@@ -235,7 +237,7 @@ image::wireframe/transaction.png[width="700", align="left"]
 
 === Review Food Items: `*review*`
 
-You can review food items from the transactions screen as shown in 3.12.
+Reviews food items from the transactions screen as shown in 3.12.
 
 Format: `review INDEX REVIEW`
 
@@ -248,7 +250,7 @@ image::wireframe/review.png[width="700", align="left"]
 
 === Rate Food Items: `*rate*`
 
-You can rate food items from the transactions screen as shown in 3.12.
+Rates food items from the transactions screen as shown in 3.12.
 This rating is on a scale from 0 to 10.
 
 Format: `rate INDEX RATING`
@@ -258,17 +260,27 @@ Format: `rate INDEX RATING`
 
 TIP: You can also update existing ratings by using the same command.
 
+=== Filter Canteens or Stalls: `*filter*`
+
+Filter canteens or stalls based on whether they have the tag entered by the user. This depends on the menu
+that the user is currently in. If they are in the canteen menu, this will filter the canteens and similarly in
+the stall menu, this will filter the stalls.
+
+Format: `filter TAG`
+
+* Example:
+** `filter asian` - Only displays canteens with the asian tag.
+
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
+*Q*: How do I transfer my data to another computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FoodieBot folder.
 
 *Q*: Can I write my personal review in other languages?  +
 *A*: Yes, FoodieBot accepts input for different types of language, however it does not support in-app localization.
 
-
-*Q*: How can I edit the list of canteen if one canteen close down? +
-*A*: The json file is publish, you can download the json file and edit accordingly.
+*Q*: How can I edit the list of canteen if one canteen closes down? +
+*A*: You can download the json file which we have published and edit it accordingly.
 
 == Command Summary
 [width="80%",cols="33%,<60%,<60%",options="header",]
@@ -293,12 +305,15 @@ TIP: You can also update existing ratings by using the same command.
 
 |report |Generate a report of the food consumed |report f/ 12-02-2020 t/ 30-04-2020
 
-|review INDEX | Give a review for the store
+|review INDEX | Give a review for the store|
 
 |select INDEX| Store the selected food into the database |
 
 |transaction |Generate the transaction breakdown |transaction w/ 12-02-2020
+
 |transaction |Generate the transaction breakdown |transaction w/ 12-02-2020
+
+|filter |Show only canteens or stalls with a specified tag |filter asian
 
 
 |=======================================================================
