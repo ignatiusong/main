@@ -140,12 +140,23 @@ Displays a list of suggestions of food.
 
 Format: `randomize`
 
+* `[c/ CANTEEN_NAME]` - Randomize based on the canteen selected.
+** Example: `randomize c/ The Deck`
+* `[t/ TAG]` - Randomize based on the tag provided.
+** Example: `randomize t/ rice`
+* `[c/]` and `[t/]` are optional.
+
 image::wireframe/randomize.png[width="700", align="left"]
 
 === Set a Budget : `*budget set*`
 
 Sets a daily, weekly or monthly budget. +
 The budget can be changed. However, this will reset the budget overview for the current budget cycle.
+
+For example, if you have $5 remaining from a weekly budget of $20, setting a new monthly budget of $150
+will update your current budget settings to the new one, but at the same time resets both the start date
+of the cycle as well as the amount remaining. +
+(But not to worry, your transactions are still saved!)
 
 Format: `budget set [PERIOD] [AMOUNT]`
 
@@ -173,75 +184,79 @@ image::wireframe/budget set.png[width="700", align="left"]
 
 === View Budget: `*budget view*`
 
-Views the current budget, spendings made for the week and the remaining available budget to spend.
+Views the current budget, spendings made during the current budget cycle,
+as well as the remaining available budget to spend.
 
 Format: `budget view`
 
 === View Expense Report: `*report*`
 
-Generates a report for the spending and food purchases for any period specified. +
+Generates a report for your spending and food purchases for any period specified.
 
-Formats: `report`
+Format: `report`
 
 * `[f/FROM_DATE] [t/TO_DATE]` - Generate report from and till the given dates.
 ** Example: `report [f/ 12-02-2020] [t/ 30-04-2020]`
 * `[w/DATE]` - Generate report for the week (Monday-Sunday) of the input date.
 ** Example: `report [w/ 12-02-2020]`
 * `[m/MONTH]` - Generate report of the input month.
-** Example: `report [m/ jan]`
+** Example: `report [m/ jan]` - Generates a report for the month of the current year.
+** Example: transactions `[m/ jul] [y/ 2019]` - Generates a report for the month of the specified year.
 * `[y/YEAR]` - Generate report of the input year.
 ** Example: `report [y/ 2020]`
 * `[f/]`, `[t/]`, `[m/]`, `[w/]` and `[y/]` fields are optional.
 
 NOTE: `FROM_DATE` cannot be a future date. +
-`TILL_DATE` cannot be before the FROM_DATE, or the earliest possible date if the [f/] field is empty.
+`TO_DATE` cannot be before the `FROM_DATE`, or the earliest possible date if the [f/] field is empty.
 
 image::wireframe/report.png[width="700", align="left"]
 
 === View Past Transactions: `*transaction*`
 
-Displays the past transactions using.
+Displays your past transactions of food purchases for any period specified.
 
-Formats: `transaction`
+Format: `transaction`
 
-* `[f/FROM_DATE] [t/TO_DATE]` - Generate report from and till the given dates.
+* `[f/FROM_DATE] [t/TO_DATE]` - Display transactions from and till the given dates.
 ** Example: `report [f/ 12-02-2020] [t/ 30-04-2020]`
 * `[w/DATE]` - Display transactions for the week (Monday-Sunday) of the input date.
-** Example: transactions [w/ 12-02-2020]
+** Example: transactions `[w/ 12-02-2020]`
 * `[m/MONTH]` - Display transactions of the input month.
-** Example: transactions [m/ jan]
+** Example: transactions `[m/ jan]` - Displays all transactions in the month of the current year.
+** Example: transactions `[m/ jul] [y/ 2019]` - Displays all transactions in the month of the specified year.
 * `[y/YEAR]` - Display transactions of the input year.
-** Example: transactions [y/ 2020]
+** Example: transactions `[y/ 2020]`
 * `[f/]`, `[t/]`, `[m/]`, `[w/]` and `[y/]` fields are optional.
 
 NOTE: `FROM_DATE` cannot be a future date. +
-`TILL_DATE` cannot be before the FROM_DATE, or the earliest possible date if the [f/] field is empty.
+`TO_DATE` cannot be before the `FROM_DATE`, or the earliest possible date if the [f/] field is empty.
 
 image::wireframe/transaction.png[width="700", align="left"]
 
 === Review Food Items: `*review*`
 
-Allows the user to review food items from the transactions screen as shown in 3.12.
+You can review food items from the transactions screen as shown in 3.12.
 
 Format: `review INDEX REVIEW`
 
 * Example:
 ** `rate 5 This was yummy!` - Adds your review "This was yummy!" to the 5th item in your transactions list.
 
-TIP: User can update existing reviews by using the same command.
+TIP: You can update existing reviews by using the same command.
 
 image::wireframe/review.png[width="700", align="left"]
 
 === Rate Food Items: `*rate*`
 
-Allows user to rate food items from the transactions screen as shown in 3.12.
+You can rate food items from the transactions screen as shown in 3.12.
+This rating is on a scale from 0 to 10.
 
 Format: `rate INDEX RATING`
 
 * Example:
 ** `rate 3 8` - Rates the 3rd item in your transactions list as 8.
 
-TIP: User can also update existing ratings by using the same command.
+TIP: You can also update existing ratings by using the same command.
 
 == FAQ
 
@@ -274,7 +289,7 @@ TIP: User can also update existing ratings by using the same command.
 
 |rate INDEX | Give a rating to the store |
 
-|randomize |Display a list of randomize options |
+|randomize |Display a list of randomize options | randomize c/ The Deck
 
 |report |Generate a report of the food consumed |report f/ 12-02-2020 t/ 30-04-2020
 

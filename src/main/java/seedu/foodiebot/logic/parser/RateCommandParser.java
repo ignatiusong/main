@@ -26,7 +26,13 @@ public class RateCommandParser implements Parser<RateCommand> {
 
         String[] enteredText = argMultimap.getPreamble().split(" ");
         Index index = Index.fromOneBased(Integer.parseInt(enteredText[0]));
-        Rating rating = new Rating(Integer.parseInt(enteredText[1]));
+        Rating rating;
+        try {
+            rating = new Rating(Integer.parseInt(enteredText[1]));
+        } catch (IllegalArgumentException iae) {
+            throw new ParseException("Rating must be a whole number from 0 to 10!");
+        }
+
 
         return new RateCommand(index, rating);
     }

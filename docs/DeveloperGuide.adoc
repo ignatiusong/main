@@ -49,9 +49,6 @@ We assume that you are using IntelliJ.
 
 == System Overview
 
-=== Architecture
-// describing the modules used.
-
 === Algorithms
 
 === Detailed Class Descriptions
