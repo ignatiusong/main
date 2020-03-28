@@ -28,8 +28,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
         String enteredText = argMultimap.getPreamble();
-        String tag = ParserUtil.parseFilterTag(enteredText);
-        return new FilterCommand(tag);
+        try {
+            int price = ParserUtil.parseIndex(args).getOneBased();
+            return new FilterCommand(price);
+        } catch (ParseException e) {
+            String tag = ParserUtil.parseFilterTag(enteredText);
+            return new FilterCommand(tag);
+        }
 
     }
 }

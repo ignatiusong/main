@@ -1,8 +1,11 @@
 package seedu.foodiebot.logic.commands;
 
+import static seedu.foodiebot.logic.parser.ParserContext.INVALID_CONTEXT_MESSAGE;
+
 import seedu.foodiebot.logic.parser.ParserContext;
 import seedu.foodiebot.model.Model;
 import seedu.foodiebot.model.canteen.Canteen;
+import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.tag.Tag;
 
 /**
@@ -25,14 +28,33 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_CONSTRAINTS = "Filter argument cannot be empty";
 
     private Tag tag;
+    private Integer price;
 
     public FilterCommand(String tag) {
         this.tag = new Tag(tag);
     }
 
+    public FilterCommand(int price) {
+        this.price = price;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         String context = ParserContext.getCurrentContext();
+
+        if (price != null) {
+            if (ParserContext.getCurrentContext().equals(ParserContext.STALL_CONTEXT)) {
+                Stall stall = ParserContext.getCurrentStall().get();
+
+                model.updateFilteredFoodList(f -> f.getStallName().equalsIgnoreCase(
+                        stall.getName().toString()) && f.getPrice() <= price);
+
+                return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS);
+
+            } else {
+                return new CommandResult(COMMAND_WORD, INVALID_CONTEXT_MESSAGE);
+            }
+        }
 
         if (context.equals(ParserContext.MAIN_CONTEXT)) {
             model.updateFilteredCanteenList(s -> s.getTags().contains(this.tag));
@@ -40,6 +62,12 @@ public class FilterCommand extends Command {
             Canteen canteen = ParserContext.getCurrentCanteen().get();
             model.updateFilteredStallList(s -> s.getCanteenName().equalsIgnoreCase(
                     canteen.getName().toString()) && s.getTags().contains(this.tag));
+        } else if (context.equals(ParserContext.STALL_CONTEXT)) {
+            Stall stall = ParserContext.getCurrentStall().get();
+            model.updateFilteredFoodList(f -> f.getStallName().equalsIgnoreCase(
+                    stall.getName().toString()) && f.getTags().contains(this.tag));
+        } else {
+            return new CommandResult(COMMAND_WORD, INVALID_CONTEXT_MESSAGE);
         }
         return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS);
     }

@@ -1,6 +1,7 @@
 package seedu.foodiebot.ui;
 
 import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -55,8 +56,8 @@ public class StallCard extends UiPart<Region> {
             stall.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        } catch (Exception e) {
-
+        } catch (ClassCastException e) {
+            System.out.println(e);
         }
     }
 
