@@ -21,5 +21,5 @@ public interface Storage extends FoodieBotStorage, UserPrefsStorage {
 
 
     @Override
-    void saveFoodieBot(ReadOnlyFoodieBot addressBook) throws IOException;
+    void saveFoodieBot(ReadOnlyFoodieBot foodieBot) throws IOException;
 }

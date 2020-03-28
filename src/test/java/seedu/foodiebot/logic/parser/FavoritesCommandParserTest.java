@@ -20,8 +20,8 @@ class FavoritesCommandParserTest {
 
     @Test
     void parse_validArgs_returnsFavoritesCommand() {
-        assertParseSuccess(parser, "set 1", new FavoritesCommand(INDEX_FIRST_ITEM));
-        assertParseSuccess(parser, "view", new FavoritesCommand());
+        assertParseSuccess(parser, "set 1", new FavoritesCommand(INDEX_FIRST_ITEM, "set"));
+        assertParseSuccess(parser, "view", new FavoritesCommand("view"));
     }
 
     @Test

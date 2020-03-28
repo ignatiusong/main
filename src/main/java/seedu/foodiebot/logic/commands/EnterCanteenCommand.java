@@ -58,6 +58,7 @@ public class EnterCanteenCommand extends Command {
         /* All the stalls are retrieved as they contain the canteen name field
            which we filter the canteen name that specified in enter {canteenName}
         */
+        boolean found = false;
         if (index.isPresent()) {
             List<Canteen> canteenList;
             if (model.isLocationSpecified()) {
@@ -69,6 +70,7 @@ public class EnterCanteenCommand extends Command {
                 model.updateFilteredStallList(Model.PREDICATE_SHOW_ALL);
                 Canteen canteen = canteenList.get(index.get().getZeroBased());
                 ParserContext.setCanteenContext(canteen);
+                ParserContext.setCurrentCanteen(Optional.of(canteen));
                 logger.info("Enter " + canteen.getName());
                 model.updateFilteredStallList(s -> s.getCanteenName().equalsIgnoreCase(
                         canteen.getName().toString()));
@@ -82,8 +84,12 @@ public class EnterCanteenCommand extends Command {
                 if (c.getName().toString().equalsIgnoreCase(canteenName.get())) {
                     ParserContext.setCanteenContext(c);
                     model.updateFilteredStallList(s -> s.getCanteenName().equalsIgnoreCase(c.getName().toString()));
+                    found = true;
                     break;
                 }
+            }
+            if (!found) {
+                return new CommandResult(COMMAND_WORD, Canteen.MESSAGE_CONSTRAINTS);
             }
         }
         return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS);

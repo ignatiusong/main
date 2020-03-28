@@ -92,19 +92,6 @@ public class UniqueFoodList implements Iterable<Food> {
     }
 
     /**
-     * Replaces the contents of this list with {@code food}. {@code food} must not contain
-     * duplicate food.
-     */
-    public void setFoods(List<Food> foods) {
-        requireAllNonNull(foods);
-        if (!foodsAreUnique(foods)) {
-            throw new DuplicateStallException();
-        }
-
-        internalList.setAll(foods);
-    }
-
-    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Food> asUnmodifiableObservableList() {

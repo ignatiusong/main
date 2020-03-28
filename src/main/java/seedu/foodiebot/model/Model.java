@@ -33,15 +33,15 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /** Returns the user prefs' address book file path. */
-    Path getAddressBookFilePath();
+    Path getFoodieBotFilePath();
 
     /** Sets the user prefs' address book file path. */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setFoodieBotFilePath(Path foodieBotFilePath);
 
-    /** Replaces address book data with the data in {@code addressBook}. */
+    /** Replaces address book data with the data in {@code foodieBot}. */
     void setFoodieBot(ReadOnlyFoodieBot foodieBot);
 
-    /** Returns the AddressBook */
+    /** Returns the FoodieBot */
     ReadOnlyFoodieBot getFoodieBot();
 
     /**
@@ -57,8 +57,8 @@ public interface Model {
     void addCanteen(Canteen canteen);
 
     /**
-     * Replaces the given canteen {@code target} with {@code editedPerson}. {@code target} must
-     * exist in the address book. The canteen identity of {@code editedPerson} must not be the same
+     * Replaces the given canteen {@code target} with {@code editedCanteen}. {@code target} must
+     * exist in the address book. The canteen identity of {@code editedCanteen} must not be the same
      * as another existing canteen in the address book.
      */
     void setCanteen(Canteen target, Canteen editedCanteen);
@@ -117,7 +117,7 @@ public interface Model {
 
     void setFavorite(Food food);
 
-    ObservableList<Food> getFilteredFavoriteFoodList();
+    ObservableList<Food> getFilteredFavoriteFoodList(boolean isInitialised);
 
     void updateFilteredFavoriteList(Predicate<Food> predicateShowAll);
 
@@ -128,4 +128,10 @@ public interface Model {
     void updateFilteredTransactionsList(Predicate<PurchasedFood> predicate);
 
     void addPurchasedFood(PurchasedFood food);
+
+    ObservableList<Stall> getFilteredRandomizeList();
+
+    void removeFavorite(Food food);
+
+    void setFavoriteList(ObservableList<Food> filteredFavoriteFoodList);
 }

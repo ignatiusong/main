@@ -1,5 +1,6 @@
 package seedu.foodiebot.logic.parser;
 
+import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX;
 import static seedu.foodiebot.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.foodiebot.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.foodiebot.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -8,7 +9,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import seedu.foodiebot.logic.commands.EnterCanteenCommand;
-import seedu.foodiebot.model.canteen.Canteen;
 
 class EnterCanteenCommandParserTest {
 
@@ -29,17 +29,11 @@ class EnterCanteenCommandParserTest {
         assertParseFailure(
             parser,
             "0",
-            Canteen.MESSAGE_CONSTRAINTS);
+            MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
 
     @Test
     public void parse_validName_returnsCanteenCommand() {
         assertParseSuccess(parser, "The Deck", new EnterCanteenCommand("The Deck"));
-    }
-
-
-    @Test
-    public void parse_invalidName_throwsParseException() {
-        assertParseFailure(parser, "a", Canteen.MESSAGE_CONSTRAINTS);
     }
 }

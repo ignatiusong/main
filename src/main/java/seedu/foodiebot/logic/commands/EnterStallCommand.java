@@ -65,14 +65,20 @@ public class EnterStallCommand extends Command {
 
         } else if (stallName.isPresent()) {
             List<Stall> stalls = model.getFilteredStallList();
+            boolean found = false;
             for (Stall s : stalls) {
                 if (s.getName().toString().equalsIgnoreCase(stallName.get())) {
                     ParserContext.setStallContext(s);
+                    ParserContext.setCurrentStall(Optional.of(s));
                     //Might have 2 stalls from 2 canteens with same name
                     model.updateFilteredFoodList(f -> f.getStallName().equalsIgnoreCase(s.getName().toString())
                             && f.getCanteen().equals(currentCanteenName));
+                    found = true;
                     break;
                 }
+            }
+            if (!found) {
+                return new CommandResult(COMMAND_WORD, Stall.MESSAGE_CONSTRAINTS);
             }
         }
         return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS);

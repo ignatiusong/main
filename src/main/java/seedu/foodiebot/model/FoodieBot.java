@@ -12,9 +12,9 @@ import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.CanteenStub;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.canteen.UniqueCanteenList;
-import seedu.foodiebot.model.favorites.FavoriteFood;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.food.UniqueFoodList;
+import seedu.foodiebot.model.randomize.Randomize;
 import seedu.foodiebot.model.stall.UniqueStallList;
 import seedu.foodiebot.model.transaction.PurchasedFood;
 import seedu.foodiebot.model.transaction.PurchasedFoodList;
@@ -31,6 +31,7 @@ public class FoodieBot implements ReadOnlyFoodieBot {
     private final PurchasedFoodList transactions;
     private Budget budget;
     private boolean isLocationSpecified;
+    private Randomize randomize;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -47,6 +48,7 @@ public class FoodieBot implements ReadOnlyFoodieBot {
         transactions = new PurchasedFoodList();
         budget = new Budget();
         isLocationSpecified = false;
+        randomize = Randomize.checkRandomize();
     }
 
     public FoodieBot() {}
@@ -76,7 +78,7 @@ public class FoodieBot implements ReadOnlyFoodieBot {
     }
 
     public void setFavoritedFoods(List<Food> stalls) {
-        this.foods.setFood(stalls);
+        this.favoritedFoods.setFood(stalls);
     }
 
 
@@ -166,6 +168,11 @@ public class FoodieBot implements ReadOnlyFoodieBot {
         return isLocationSpecified;
     }
 
+    @Override
+    public Randomize getRandomize() {
+        return randomize;
+    }
+
 
     //// stall-level operations
 
@@ -235,7 +242,7 @@ public class FoodieBot implements ReadOnlyFoodieBot {
         return favoritedFoods.asUnmodifiableObservableList();
     }
 
-    public void addFavoriteFood(FavoriteFood f) {
+    public void addFavoriteFood(Food f) {
         favoritedFoods.add(f);
     }
 
@@ -246,6 +253,11 @@ public class FoodieBot implements ReadOnlyFoodieBot {
     @Override
     public ObservableList<PurchasedFood> getTransactionsList() {
         return transactions.getList();
+    }
+
+    @Override
+    public void removeFavorite(Food food) {
+        favoritedFoods.remove(food);
     }
 
     public void setTransactionsList(ObservableList<PurchasedFood> newList) {

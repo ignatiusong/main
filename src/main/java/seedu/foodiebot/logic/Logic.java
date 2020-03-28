@@ -59,5 +59,8 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of purchased food. */
     ObservableList<PurchasedFood> getFilteredTransactionsList();
+
+    ObservableList<Stall> getFilteredRandomizeList();
+
 }
 

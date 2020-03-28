@@ -105,12 +105,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getFoodieBotFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setFoodieBotFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -219,8 +219,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Food> getFilteredFavoriteFoodList() {
-            return null;
+        public ObservableList<Food> getFilteredFavoriteFoodList(boolean isInitialised) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -235,7 +235,7 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Food> getFilteredFoodList(boolean isInitialised) {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -261,6 +261,21 @@ public class AddCommandTest {
         @Override
         public void addPurchasedFood(PurchasedFood food) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Stall> getFilteredRandomizeList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeFavorite(Food food) {
+
+        }
+
+        @Override
+        public void setFavoriteList(ObservableList<Food> filteredFavoriteFoodList) {
+
         }
     }
 

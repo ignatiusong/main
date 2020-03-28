@@ -5,6 +5,7 @@ import static seedu.foodiebot.logic.commands.CommandTestUtil.assertCommandSucces
 import static seedu.foodiebot.testutil.TypicalCanteens.getTypicalFoodieBot;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class BudgetCommandTest {
     private LocalDate endDate = LocalDate.of(2020, 2, 20);
     private DateRange dr = DateRange.of
             (startDate, endDate);
-    private Budget budget = new Budget(15, 10, "daily", LocalDate.now(), dr);
+    private Budget budget = new Budget(15, 10, "daily", LocalDateTime.now(), dr);
     private BudgetCommand budgetView = new BudgetCommand("view");
     private BudgetCommand budgetSet = new BudgetCommand(budget, "set");
     private Model model;

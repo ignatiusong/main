@@ -246,10 +246,6 @@ public class SampleDataUtil {
         for (Food sampleFood : getSampleFoods()) {
             sampleFb.addFood(sampleFood);
         }
-
-        for (FavoriteFood sampleFood: getSampleFavoriteFood()) {
-            sampleFb.addFavoriteFood(sampleFood);
-        }
         return sampleFb;
     }
 

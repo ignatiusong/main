@@ -24,7 +24,6 @@ import seedu.foodiebot.model.ReadOnlyUserPrefs;
 import seedu.foodiebot.model.UserPrefs;
 // import seedu.foodiebot.model.budget.Budget;
 import seedu.foodiebot.model.canteen.Canteen;
-import seedu.foodiebot.model.favorites.FavoriteFood;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.util.SampleDataUtil;
 import seedu.foodiebot.storage.FoodieBotStorage;
@@ -108,11 +107,13 @@ public class MainApp extends Application {
             storage.readFoodieBot("Transactions");
 
             storage.readFoodieBot(Food.class.getSimpleName());
-            storage.readFoodieBot(FavoriteFood.class.getSimpleName());
 
             foodieBotOptional = Optional.empty();
-            logger.info("Data file not found. Will be starting with a sample FoodieBot");
-            initialData = foodieBotOptional.orElseGet(SampleDataUtil::getSampleFoodieBot);
+            initialData = foodieBotOptional.orElseGet(() -> {
+                logger.info("Data file not found. Will be starting with a sample FoodieBot");
+                return SampleDataUtil.getSampleFoodieBot();
+            });
+
         } catch (DataConversionException e) {
             logger.warning(
                 "Data file not in the correct format. Will be starting with an empty FoodieBot");

@@ -38,7 +38,8 @@ public class PurchasedFoodList implements Iterable<PurchasedFood> {
      */
     public void addReverse(PurchasedFood toAdd) {
         add(toAdd);
-        internalList.sort((a, b) -> b.getTimeAdded().compareTo(a.getTimeAdded()));
+        internalList.sort((a, b) -> b.getDateAdded().atTime(b.getTimeAdded())
+                .compareTo(a.getDateAdded().atTime(a.getTimeAdded())));
     }
 
 
@@ -95,6 +96,8 @@ public class PurchasedFoodList implements Iterable<PurchasedFood> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<PurchasedFood> getList() {
+        internalList.sort((a, b) -> b.getDateAdded().atTime(b.getTimeAdded())
+                .compareTo(a.getDateAdded().atTime(a.getTimeAdded())));
         return internalList;
     }
 

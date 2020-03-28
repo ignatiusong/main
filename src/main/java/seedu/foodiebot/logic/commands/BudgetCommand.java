@@ -6,7 +6,9 @@ import static seedu.foodiebot.commons.core.Messages.MESSAGE_BUDGET_VIEW;
 import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_DATE_BY_MONTH;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
+import seedu.foodiebot.commons.core.date.DateRange;
 import seedu.foodiebot.model.Model;
 import seedu.foodiebot.model.budget.Budget;
 
@@ -95,10 +97,24 @@ public class BudgetCommand extends Command {
 
         if (action.equals("set")) {
             saveBudget(model, budget);
+
+            // Displays an empty list
+            model.loadFilteredTransactionsList();
+            model.updateFilteredTransactionsList(Objects::isNull);
+
             return commandSetSuccess(budget);
 
         } else {
             Budget savedBudget = loadBudget(model);
+
+            DateRange budgetCycleRange = savedBudget.getCycleRange();
+            model.loadFilteredTransactionsList();
+            model.updateFilteredTransactionsList(purchase ->
+                    budgetCycleRange.contains(purchase.getDateAdded())
+                    && purchase.getDateAdded().atTime(purchase.getTimeAdded()).isAfter(
+                            savedBudget.getDateTimeOfCreation()
+                    ));
+
             if (!savedBudget.equals(new Budget())) {
                 if (!systemDateIsInCycleRange(savedBudget)) {
                     savedBudget.resetRemainingBudget();

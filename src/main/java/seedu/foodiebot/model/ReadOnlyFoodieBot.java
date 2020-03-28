@@ -5,6 +5,7 @@ import seedu.foodiebot.model.budget.Budget;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.food.Food;
+import seedu.foodiebot.model.randomize.Randomize;
 import seedu.foodiebot.model.transaction.PurchasedFood;
 
 /**
@@ -26,9 +27,12 @@ public interface ReadOnlyFoodieBot {
 
     Budget getBudget();
 
+    Randomize getRandomize();
+
     boolean isLocationSpecified();
 
     ObservableList<PurchasedFood> getTransactionsList();
 
 
+    void removeFavorite(Food food);
 }

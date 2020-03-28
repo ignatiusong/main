@@ -1,5 +1,7 @@
 package seedu.foodiebot.logic.parser;
 
+import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX;
+
 import java.util.stream.Stream;
 
 import seedu.foodiebot.commons.core.index.Index;
@@ -37,14 +39,14 @@ public class EnterStallCommandParser implements Parser<EnterStallCommand> {
         }
 
         try {
-            ParserUtil.parseIndex(enteredText);
-        } catch (ParseException pe) {
-            String stallName = ParserUtil.parseStallName(enteredText);
-            return new EnterStallCommand(stallName);
+            index = ParserUtil.parseStallIndex(enteredText, ParserContext.getCurrentCanteen().get());
+            return new EnterStallCommand(index);
+        } catch (Exception ex) {
+            if (ex instanceof IndexOutOfBoundsException) {
+                throw new ParseException(MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+            }
+            return new EnterStallCommand(enteredText);
         }
-
-        index = ParserUtil.parseStallIndex(enteredText, ParserContext.getCurrentCanteen().get());
-        return new EnterStallCommand(index);
     }
 }
 

@@ -7,9 +7,12 @@ import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.foodiebot.commons.core.index.Index;
 import seedu.foodiebot.logic.commands.RandomizeCommand;
 import seedu.foodiebot.logic.parser.exceptions.ParseException;
+import seedu.foodiebot.model.randomize.Randomize;
 
 /** Process the arguments for Randomize */
 public class RandomizeCommandParser implements Parser<RandomizeCommand> {
+
+    private Randomize randomize = Randomize.checkRandomize();
 
     /**
      * This method process the input for the correct execution.
@@ -19,11 +22,10 @@ public class RandomizeCommandParser implements Parser<RandomizeCommand> {
      */
     public RandomizeCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CANTEEN, PREFIX_TAG);
-
         if (arePrefixesPresent(argMultimap)) {
             return separatePrefix(argMultimap);
         } else {
-            return new RandomizeCommand("", "all");
+            return new RandomizeCommand("", "all", randomize);
         }
     }
 
@@ -39,9 +41,9 @@ public class RandomizeCommandParser implements Parser<RandomizeCommand> {
             String argValue = getArgString(argMultimap, firstPrefix);
             try {
                 Index index = ParserUtil.parseIndex(argValue);
-                return new RandomizeCommand(firstPrefix.toString(), index);
+                return new RandomizeCommand(firstPrefix.toString(), index, randomize);
             } catch (ParseException pe) {
-                return new RandomizeCommand(firstPrefix.toString(), argValue);
+                return new RandomizeCommand(firstPrefix.toString(), argValue, randomize);
             }
         } catch (NullPointerException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT));

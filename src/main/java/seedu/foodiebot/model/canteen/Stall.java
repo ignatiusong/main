@@ -28,9 +28,8 @@ public class Stall {
         "Muslim", "Noodle", "Pasta Express", "Roasted Delights", "Salad Express", "Snacks & Fried Kway Teow",
         "Uncle Penyet", "Vegetarian", "Western", "Yong Tau Foo & Laksa"};
     public static final String IMAGE_FOLDER = "/images/canteen/";
+    public static final String MESSAGE_CONSTRAINTS = "Stall not found";
     private static final Logger logger = LogsCenter.getLogger(Stall.class);
-    public static final String MESSAGE_CONSTRAINTS = "Stall name should be from " + Arrays.toString(STALLS);
-
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
@@ -62,6 +61,14 @@ public class Stall {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Returns true if the {@code trimmedStallName} is a valid stall name
+     */
+    public static boolean isValidStall(String trimmedStallName) {
+        return Arrays.stream(STALLS)
+            .anyMatch(trimmedStallName::equalsIgnoreCase);
+    }
+
     public Name getName() {
         return name;
     }
@@ -86,8 +93,9 @@ public class Stall {
         return overallPriceRating;
     }
 
-    /** Retrieves the images within the folder with the canteen name.
-     *  e.g. Stall in The Deck with appear in The Deck folder
+    /**
+     * Retrieves the images within the folder with the canteen name.
+     * e.g. Stall in The Deck with appear in The Deck folder
      **/
     public Image getStallImage() {
         String mImageUrl = IMAGE_FOLDER + canteenName + "/" + stallImageName;
@@ -105,14 +113,6 @@ public class Stall {
 
     public Set<Tag> getTags() {
         return tags;
-    }
-
-    /**
-     * Returns true if the {@code trimmedStallName} is a valid stall name
-     */
-    public static boolean isValidStall(String trimmedStallName) {
-        return Arrays.stream(STALLS)
-            .anyMatch(trimmedStallName::equalsIgnoreCase);
     }
 
     /**

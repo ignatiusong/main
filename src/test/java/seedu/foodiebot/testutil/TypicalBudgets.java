@@ -1,6 +1,7 @@
 package seedu.foodiebot.testutil;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import seedu.foodiebot.model.budget.Budget;
 
@@ -16,13 +17,13 @@ public class TypicalBudgets {
     public static final LocalDate LOCAL_DATE_G = LocalDate.of(2021, 3, 1);
     public static final LocalDate LOCAL_DATE_H = LocalDate.of(2022, 8, 18);
 
-    public static final Budget BUDGET_A = new Budget(15, 15, "w/", LOCAL_DATE_A);
-    public static final Budget BUDGET_B = new Budget(15, 15, "w/", LOCAL_DATE_B);
-    public static final Budget BUDGET_C = new Budget(15, 15, "w/", LOCAL_DATE_C);
-    public static final Budget BUDGET_D = new Budget(15, 15, "w/", LOCAL_DATE_D);
-    public static final Budget BUDGET_E = new Budget(15, 15, "w/", LOCAL_DATE_E);
-    public static final Budget BUDGET_F = new Budget(15, 15, "w/", LOCAL_DATE_F);
-    public static final Budget BUDGET_G = new Budget(15, 15, "w/", LOCAL_DATE_G);
-    public static final Budget BUDGET_H = new Budget(15, 15, "w/", LOCAL_DATE_H);
+    public static final Budget BUDGET_A = new Budget(15, 15, "w/", LOCAL_DATE_A.atTime(LocalTime.now()));
+    public static final Budget BUDGET_B = new Budget(15, 15, "w/", LOCAL_DATE_B.atTime(LocalTime.now()));
+    public static final Budget BUDGET_C = new Budget(15, 15, "w/", LOCAL_DATE_C.atTime(LocalTime.now()));
+    public static final Budget BUDGET_D = new Budget(15, 15, "w/", LOCAL_DATE_D.atTime(LocalTime.now()));
+    public static final Budget BUDGET_E = new Budget(15, 15, "w/", LOCAL_DATE_E.atTime(LocalTime.now()));
+    public static final Budget BUDGET_F = new Budget(15, 15, "w/", LOCAL_DATE_F.atTime(LocalTime.now()));
+    public static final Budget BUDGET_G = new Budget(15, 15, "w/", LOCAL_DATE_G.atTime(LocalTime.now()));
+    public static final Budget BUDGET_H = new Budget(15, 15, "w/", LOCAL_DATE_H.atTime(LocalTime.now()));
 
 }

@@ -1,15 +1,21 @@
 package seedu.foodiebot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_FAVORITE_NAME_SPECIFIED;
+import static seedu.foodiebot.logic.parser.ParserContext.FAVORITE_CONTEXT;
 import static seedu.foodiebot.model.Model.PREDICATE_SHOW_ALL;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
+
 import seedu.foodiebot.commons.core.LogsCenter;
 import seedu.foodiebot.commons.core.index.Index;
 
+import seedu.foodiebot.logic.parser.ParserContext;
 import seedu.foodiebot.model.Model;
 import seedu.foodiebot.model.food.Food;
 
@@ -29,30 +35,67 @@ public class FavoritesCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(FavoritesCommand.class);
 
     private final Optional<Index> index;
+    private final String action;
 
     /**
      * @param index of the canteen in the filtered stall list to edit
      */
-    public FavoritesCommand(Index index) {
+    public FavoritesCommand(Index index, String action) {
         requireNonNull(index);
         this.index = Optional.of(index);
+        this.action = action;
     }
-    public FavoritesCommand() {
+    public FavoritesCommand(String action) {
         this.index = Optional.empty();
+        this.action = action;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (index.isPresent()) {
-            List<Food> foodList = model.getFilteredFoodList();
-            Food food = foodList.get(index.get().getZeroBased());
-            model.setFavorite(food);
-            return new CommandResult(COMMAND_WORD, String.format(MESSAGE_SET_SUCCESS, food.getName()));
-        } else {
+        switch (action) {
+        case "set":
+            if (index.isPresent()) {
+                List<Food> foodList = model.getFilteredFoodList();
+                if (!foodList.isEmpty()) {
+                    int indexInteger = index.get().getZeroBased();
+                    if (indexInteger + 1 > foodList.size()) {
+                        return new ActionCommandResult(COMMAND_WORD, action, Food.INVALID_FOOD_INDEX);
+                    }
+                    Food food = foodList.get(indexInteger);
+                    model.setFavorite(food);
+                    return new ActionCommandResult(COMMAND_WORD, action,
+                        String.format(MESSAGE_SET_SUCCESS, food.getName()));
+                }
+            }
+            return new ActionCommandResult(COMMAND_WORD, action,
+                MESSAGE_INVALID_FAVORITE_NAME_SPECIFIED);
+        case "view":
+            ParserContext.setCurrentContext(FAVORITE_CONTEXT);
+            ObservableList<Food> list = model.getFilteredFavoriteFoodList(false);
             model.updateFilteredFavoriteList(PREDICATE_SHOW_ALL);
-            return new CommandResult(COMMAND_WORD, MESSAGE_VIEW_SUCCESS, false, false);
+            return new ActionCommandResult(COMMAND_WORD, action, MESSAGE_VIEW_SUCCESS);
+        case "remove":
+            if (index.isPresent()) {
+                List<Food> foodList = model.getFilteredFoodList();
+                if (!foodList.isEmpty()) {
+                    int indexInteger = index.get().getZeroBased();
+                    if (indexInteger + 1 > foodList.size()) {
+                        return new ActionCommandResult(COMMAND_WORD, action, Food.INVALID_FOOD_INDEX);
+                    }
+                    Food food = foodList.get(indexInteger);
+                    model.removeFavorite(food);
+                    return new ActionCommandResult(COMMAND_WORD, action,
+                        String.format(MESSAGE_SET_SUCCESS, food.getName()));
+                }
+            }
+            return new ActionCommandResult(COMMAND_WORD, action,
+                MESSAGE_INVALID_FAVORITE_NAME_SPECIFIED);
+        default:
+            break;
         }
+        return new ActionCommandResult(COMMAND_WORD, action,
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoritesCommand.MESSAGE_USAGE));
     }
 
     @Override

@@ -29,26 +29,29 @@ public class RandomizeCommand extends Command {
     private String action = "";
     private Optional<Index> index;
 
-    public RandomizeCommand(String prefix, String action) {
+    public RandomizeCommand(String prefix, String action, Randomize randomize) {
         this.prefix = prefix;
         this.action = action;
-        this.randomize = new Randomize(prefix, action);
+        this.randomize = randomize;
     }
 
-    public RandomizeCommand(String prefix, Index index) {
+    public RandomizeCommand(String prefix, Index index, Randomize randomize) {
         this.prefix = prefix;
         this.index = Optional.of(index);
-        this.randomize = new Randomize(prefix, index);
+        this.randomize = randomize;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException, IOException {
-
         requireNonNull(model);
+
+        randomize.setPrefix(prefix);
+        randomize.setAction(action);
+
         FileReader fileC = model.listOfCanteens();
         FileReader fileS = model.listOfStalls();
         if (prefix.contains("c")) {
-            if (index.isPresent()) {
+            if (index != null) {
                 List<Canteen> canteenList = model.getFilteredCanteenList();
                 Canteen canteen = canteenList.get(index.get().getZeroBased());
                 randomize.setCanteenIndex(canteen);
@@ -62,6 +65,7 @@ public class RandomizeCommand extends Command {
         } else {
             randomize.getOptions(fileS);
         }
+
         return new CommandResult(COMMAND_WORD, randomize.output());
     }
 

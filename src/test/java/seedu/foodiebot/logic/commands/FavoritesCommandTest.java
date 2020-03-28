@@ -24,7 +24,7 @@ class FavoritesCommandTest {
 
     @Test
     void execute_viewFavorite_success() {
-        assertCommandSuccess(new FavoritesCommand(), FavoritesCommand.COMMAND_WORD, model,
+        assertCommandSuccess(new FavoritesCommand("view"), FavoritesCommand.COMMAND_WORD, model,
                 FavoritesCommand.MESSAGE_VIEW_SUCCESS, expectedModel);
     }
 }

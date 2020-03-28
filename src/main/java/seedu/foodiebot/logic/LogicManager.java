@@ -99,7 +99,6 @@ public class LogicManager implements Logic {
             //TODO Not Implemented
 
         case RandomizeCommand.COMMAND_WORD:
-            //no storage yet.
             return Randomize.class.getSimpleName();
 
         case FavoritesCommand.COMMAND_WORD:
@@ -158,7 +157,7 @@ public class LogicManager implements Logic {
 
     @Override
     public Path getFoodieBotFilePath() {
-        return model.getAddressBookFilePath();
+        return model.getFoodieBotFilePath();
     }
 
     @Override
@@ -187,11 +186,17 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Food> getFilteredFavoriteFoodList(boolean isInitialised) {
-        return model.getFilteredFavoriteFoodList();
+        return model.getFilteredFavoriteFoodList(isInitialised);
     }
 
     @Override
     public ObservableList<PurchasedFood> getFilteredTransactionsList() {
         return model.getFilteredTransactionsList();
     }
+
+    @Override
+    public ObservableList<Stall> getFilteredRandomizeList() {
+        return model.getFilteredRandomizeList();
+    }
+
 }

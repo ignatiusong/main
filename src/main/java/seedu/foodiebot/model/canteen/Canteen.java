@@ -22,7 +22,7 @@ import seedu.foodiebot.model.tag.Tag;
 public class Canteen {
     public static final String[] CANTEENS = new String[]{"The Deck", "NUS Flavors"};
     public static final String IMAGE_FOLDER = "/images/canteen/";
-    public static final String MESSAGE_CONSTRAINTS = "Canteen name should be from " + Arrays.toString(CANTEENS);
+    public static final String MESSAGE_CONSTRAINTS = "Canteen not found";
     public static final String INVALID_CANTEEN_INDEX = "The canteen index must be between 1 and "
             + CANTEENS.length;
     public static final String INVALID_STALL_INDEX = "Please provide a valid stall index";

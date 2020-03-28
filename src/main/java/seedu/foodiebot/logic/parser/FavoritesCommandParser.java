@@ -19,21 +19,24 @@ public class FavoritesCommandParser implements Parser<FavoritesCommand> {
     public FavoritesCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
 
-        String[] enteredText = argMultimap.getPreamble().split(" ");
+        String[] enteredText = argMultimap.getPreamble().split("\\s+");
         String action = enteredText[0];
-        if (!ParserContext.getCurrentContext().equals(ParserContext.STALL_CONTEXT)) {
-            throw new ParseException(ParserContext.INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext());
-        }
 
         switch (action) {
         case "set":
+            if (!ParserContext.getCurrentContext().equals(ParserContext.STALL_CONTEXT)) {
+                throw new ParseException(ParserContext.INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext());
+            }
+
             try {
-                return new FavoritesCommand(ParserUtil.parseIndex(enteredText[1]));
+                return new FavoritesCommand(ParserUtil.parseIndex(enteredText[1]), "set");
             } catch (IndexOutOfBoundsException oobe) {
                 break;
             }
+        case "remove":
+            return new FavoritesCommand("remove");
         case "view":
-            return new FavoritesCommand();
+            return new FavoritesCommand("view");
         default:
             break;
         }

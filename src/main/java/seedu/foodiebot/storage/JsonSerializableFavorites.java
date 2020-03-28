@@ -54,7 +54,7 @@ class JsonSerializableFavorites {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_FAVORITE);
             }
 
-            foodieBot.addFood(food);
+            foodieBot.addFavoriteFood(food);
         }
         return foodieBot;
     }
