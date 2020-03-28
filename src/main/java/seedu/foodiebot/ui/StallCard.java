@@ -56,7 +56,7 @@ public class StallCard extends UiPart<Region> {
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         } catch (Exception e) {
-            
+
         }
     }
 

@@ -35,15 +35,21 @@
             <Label text="Stall Number :" />
             <Label fx:id="stallNumber" styleClass="cell_small_label" text="\$stallNumber" />
       </HBox>
-        <FlowPane fx:id="tags">
-      <Label fx:id="cuisine" styleClass="cell_small_label" text="\$cuisine" visible="false" />
-        </FlowPane>
          <HBox>
             <children>
                <Label text="Price Rating: " />
             <Label fx:id="overallPriceRating" styleClass="cell_small_label" text="\$overallPriceRating" />
             </children>
          </HBox>
+
+
+        <FlowPane fx:id="tags">
+            <HBox>
+                <children>
+                    <Label fx:id="cuisine" styleClass="cell_small_label" text="\$numberOfStalls" />
+                </children>
+            </HBox>
+        </FlowPane>
 
     </VBox>
       <rowConstraints>
