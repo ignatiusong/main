@@ -22,3 +22,7 @@ src/test/data/sandbox/
 .DS_Store
 foodiebot-budget.json
 foodiebot.json
+src/main/resources/.idea/misc.xml
+*.xml
+*.iml
+*.pdf
