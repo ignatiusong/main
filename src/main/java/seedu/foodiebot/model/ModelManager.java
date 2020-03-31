@@ -23,6 +23,7 @@ import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.randomize.Randomize;
+import seedu.foodiebot.model.report.Report;
 import seedu.foodiebot.model.transaction.PurchasedFood;
 import seedu.foodiebot.storage.FoodieBotStorage;
 import seedu.foodiebot.storage.JsonFoodieBotStorage;
@@ -45,6 +46,7 @@ public class ModelManager implements Model {
     private final Randomize randomize;
     private FilteredList<Food> filteredFavoriteFoodList;
     private FilteredList<PurchasedFood> filteredTransactionsList;
+    private final Report report;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -64,6 +66,7 @@ public class ModelManager implements Model {
         filteredTransactionsList = new FilteredList<>(this.foodieBot.getTransactionsList());
         budget = this.foodieBot.getBudget();
         randomize = this.foodieBot.getRandomize();
+        report = this.foodieBot.getReport();
     }
 
     public ModelManager() {
@@ -392,6 +395,11 @@ public class ModelManager implements Model {
     @Override
     public void setFavoriteList(ObservableList<Food> filteredFavoriteFoodList) {
         foodieBot.setFavoritedFoods(filteredFavoriteFoodList);
+    }
+
+    @Override
+    public Report getReport() {
+        return foodieBot.getReport();
     }
 
 

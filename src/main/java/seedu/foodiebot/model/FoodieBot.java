@@ -15,6 +15,7 @@ import seedu.foodiebot.model.canteen.UniqueCanteenList;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.food.UniqueFoodList;
 import seedu.foodiebot.model.randomize.Randomize;
+import seedu.foodiebot.model.report.Report;
 import seedu.foodiebot.model.stall.UniqueStallList;
 import seedu.foodiebot.model.transaction.PurchasedFood;
 import seedu.foodiebot.model.transaction.PurchasedFoodList;
@@ -32,6 +33,7 @@ public class FoodieBot implements ReadOnlyFoodieBot {
     private Budget budget;
     private boolean isLocationSpecified;
     private Randomize randomize;
+    private Report report;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -49,6 +51,7 @@ public class FoodieBot implements ReadOnlyFoodieBot {
         budget = new Budget();
         isLocationSpecified = false;
         randomize = Randomize.checkRandomize();
+        report = new Report();
     }
 
     public FoodieBot() {}
@@ -263,5 +266,10 @@ public class FoodieBot implements ReadOnlyFoodieBot {
     public void setTransactionsList(ObservableList<PurchasedFood> newList) {
         transactions.removeAll();
         transactions.setFoods(newList);
+    }
+
+    @Override
+    public Report getReport() {
+        return this.report;
     }
 }

@@ -40,6 +40,7 @@ public class SelectItemCommand extends Command {
     public static final String MESSAGE_SUCCESS_BUDGET = "You have selected: %s, this costs: $%.2f\n"
             + "Your remaining budget is $%.2f\nYou still have $%.2f to spend today:)";
     public static final String MESSAGE_FAILURE = "Food not found!";
+    public static final String INVALID_INDEX_MESSAGE = "Please provide a valid index!";
     private static final Logger logger = LogsCenter.getLogger(SelectItemCommand.class);
 
     private final Optional<String> foodName;
@@ -71,10 +72,14 @@ public class SelectItemCommand extends Command {
         Optional<Food> food = Optional.empty();
         if (index.isPresent()) {
             List<Food> foodList = model.getFilteredFoodList();
-            food = Optional.of(foodList.get(index.get().getZeroBased()));
-            nameOfFood = food.get().getName();
-            priceOfFood = food.get().getPrice();
-            logger.info("Enter " + food.get().getName());
+            try {
+                food = Optional.of(foodList.get(index.get().getZeroBased()));
+                nameOfFood = food.get().getName();
+                priceOfFood = food.get().getPrice();
+                logger.info("Enter " + food.get().getName());
+            } catch (IndexOutOfBoundsException e) {
+                return new CommandResult(COMMAND_WORD, INVALID_INDEX_MESSAGE);
+            }
         } else if (foodName.isPresent()) {
             List<Food> foodList = model.getFilteredFoodList();
             for (Food f : foodList) {

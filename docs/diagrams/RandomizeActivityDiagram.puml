@@ -1,0 +1,26 @@
+@startuml
+start
+:User Executes Randomize Command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Update Canteen List;
+:Update Stall List;
+
+if () then ([randomize c/ CANTEEN_NAME])
+    :Set Canteens;
+    :Get 5 Options from Chosen Canteen;
+    :Add Options for Display;
+else ([else])
+    if () then ([randomize t/ TAG])
+        :Set Canteens;
+        :Get 5 Options by Tag;
+        :Add Options for Display;
+    else ([else])
+        :Get 5 Options;
+        :Add Options for Display;
+    endif
+endif
+stop
+@enduml

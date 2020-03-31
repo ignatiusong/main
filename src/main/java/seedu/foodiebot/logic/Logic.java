@@ -12,6 +12,7 @@ import seedu.foodiebot.model.ReadOnlyFoodieBot;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.food.Food;
+import seedu.foodiebot.model.report.Report;
 import seedu.foodiebot.model.transaction.PurchasedFood;
 
 /** API of the Logic component */
@@ -61,6 +62,8 @@ public interface Logic {
     ObservableList<PurchasedFood> getFilteredTransactionsList();
 
     ObservableList<Stall> getFilteredRandomizeList();
+
+    Report getReport();
 
 }
 

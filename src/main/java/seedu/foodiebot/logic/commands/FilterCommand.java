@@ -52,7 +52,7 @@ public class FilterCommand extends Command {
                 return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS);
 
             } else {
-                return new CommandResult(COMMAND_WORD, INVALID_CONTEXT_MESSAGE);
+                return new CommandResult(COMMAND_WORD, INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext());
             }
         }
 
@@ -67,7 +67,7 @@ public class FilterCommand extends Command {
             model.updateFilteredFoodList(f -> f.getStallName().equalsIgnoreCase(
                     stall.getName().toString()) && f.getTags().contains(this.tag));
         } else {
-            return new CommandResult(COMMAND_WORD, INVALID_CONTEXT_MESSAGE);
+            return new CommandResult(COMMAND_WORD, INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext());
         }
         return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS);
     }

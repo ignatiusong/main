@@ -20,6 +20,7 @@ import seedu.foodiebot.model.budget.Budget;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.food.Food;
+import seedu.foodiebot.model.report.Report;
 import seedu.foodiebot.model.transaction.PurchasedFood;
 
 public class AddCommandTest {
@@ -276,6 +277,11 @@ public class AddCommandTest {
         @Override
         public void setFavoriteList(ObservableList<Food> filteredFavoriteFoodList) {
 
+        }
+
+        @Override
+        public Report getReport() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

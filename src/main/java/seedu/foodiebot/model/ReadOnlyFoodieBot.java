@@ -6,6 +6,7 @@ import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.randomize.Randomize;
+import seedu.foodiebot.model.report.Report;
 import seedu.foodiebot.model.transaction.PurchasedFood;
 
 /**
@@ -35,4 +36,6 @@ public interface ReadOnlyFoodieBot {
 
 
     void removeFavorite(Food food);
+
+    Report getReport();
 }

@@ -1,0 +1,93 @@
+@startuml
+!include ../style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":FoodieBotParser" as FoodieBotParser LOGIC_COLOR
+participant ":RandomizeCommandParser" as RandomizeCommandParser LOGIC_COLOR
+participant "rc:RandomizeCommand" as RandomizeCommand LOGIC_COLOR
+participant ":Randomize" as Randomize LOGIC_COLOR
+participant "cr:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("randomize")
+activate LogicManager
+
+LogicManager -> FoodieBotParser : parseCommand("randomize")
+activate FoodieBotParser
+
+create RandomizeCommandParser
+FoodieBotParser -> RandomizeCommandParser
+activate RandomizeCommandParser
+
+create Randomize
+RandomizeCommandParser -> Randomize : checkRandomize()
+activate Randomize
+
+Randomize --> RandomizeCommandParser
+deactivate Randomize
+
+RandomizeCommandParser --> FoodieBotParser
+deactivate RandomizeCommandParser
+
+FoodieBotParser -> RandomizeCommandParser : parse("")
+activate RandomizeCommandParser
+
+create RandomizeCommand
+RandomizeCommandParser -> RandomizeCommand
+activate RandomizeCommand
+
+RandomizeCommand --> RandomizeCommandParser :
+deactivate RandomizeCommand
+
+RandomizeCommandParser --> FoodieBotParser : rc
+deactivate RandomizeCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RandomizeCommandParser -[hidden]-> FoodieBotParser
+destroy RandomizeCommandParser
+
+FoodieBotParser --> LogicManager : rc
+deactivate FoodieBotParser
+
+LogicManager -> RandomizeCommand : execute(model)
+activate RandomizeCommand
+
+RandomizeCommand -> Model : listOfCanteen()
+activate Model
+
+Model --> RandomizeCommand
+deactivate Model
+
+RandomizeCommand -> Model : listOfStall()
+activate Model
+
+Model --> RandomizeCommand
+deactivate Model
+
+RandomizeCommand -> Randomize : getOptions(File)
+activate Randomize
+
+Randomize -> Randomize : generateListByCriteria()
+
+Randomize -> Randomize : generateFiveOptions()
+
+Randomize --> RandomizeCommand
+deactivate Randomize
+
+create CommandResult
+RandomizeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> RandomizeCommand
+deactivate CommandResult
+
+RandomizeCommand --> LogicManager : cr
+deactivate RandomizeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

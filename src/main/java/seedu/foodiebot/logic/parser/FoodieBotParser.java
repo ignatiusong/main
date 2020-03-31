@@ -2,7 +2,6 @@ package seedu.foodiebot.logic.parser;
 
 import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.foodiebot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.foodiebot.logic.parser.ParserContext.INVALID_CONTEXT_MESSAGE;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -93,14 +92,18 @@ public class FoodieBotParser {
             if (ParserContext.getCurrentContext().equals(ParserContext.TRANSACTIONS_CONTEXT)) {
                 return new RateCommandParser().parse(arguments);
             } else {
-                throw new ParseException(INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext());
+                throw new ParseException(ParserContext.INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext()
+                        + "\n" + ParserContext.SUGGESTED_CONTEXT_MESSAGE
+                        + ParserContext.TRANSACTIONS_CONTEXT);
             }
 
         case ReviewCommand.COMMAND_WORD:
             if (ParserContext.getCurrentContext().equals(ParserContext.TRANSACTIONS_CONTEXT)) {
                 return new ReviewCommandParser().parse(arguments);
             } else {
-                throw new ParseException(INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext());
+                throw new ParseException(ParserContext.INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext()
+                        + "\n" + ParserContext.SUGGESTED_CONTEXT_MESSAGE
+                        + ParserContext.TRANSACTIONS_CONTEXT);
             }
 
         case ClearCommand.COMMAND_WORD:

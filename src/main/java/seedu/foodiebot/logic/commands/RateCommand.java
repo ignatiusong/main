@@ -25,7 +25,8 @@ public class RateCommand extends Command {
                     + " "
                     + "1 7";;
     public static final String MESSAGE_SUCCESS = "You have rated %s as %s\n";
-    public static final String MESSAGE_FAILURE = "Invalid parameters!";
+    public static final String MESSAGE_FAILURE = "Invalid parameters!\n";
+    public static final String INDEX_OUT_OF_BOUNDS = "Index does not exist!\n";
 
     private static final Logger logger = LogsCenter.getLogger(RateCommand.class);
 
@@ -45,16 +46,21 @@ public class RateCommand extends Command {
         model.loadFilteredTransactionsList();
 
         if (index.isPresent() && rating.isPresent()) {
-            PurchasedFood food = model.getFoodieBot()
-                    .getTransactionsList()
-                    .get(index.get().getZeroBased());
+            try {
+                PurchasedFood food = model.getFoodieBot()
+                        .getTransactionsList()
+                        .get(index.get().getZeroBased());
 
-            food.setRating(rating.get());
+                food.setRating(rating.get());
 
-            return new CommandResult(COMMAND_WORD, String.format(
-                    MESSAGE_SUCCESS, food.getName(), food.getRating().toString()));
+                return new CommandResult(COMMAND_WORD, String.format(
+                        MESSAGE_SUCCESS, food.getName(), food.getRating().toString()));
+            } catch (IndexOutOfBoundsException oobe) {
+                throw new CommandException(MESSAGE_FAILURE + INDEX_OUT_OF_BOUNDS);
+            }
+
         } else {
-            throw new CommandException(MESSAGE_FAILURE);
+            throw new CommandException(MESSAGE_FAILURE + MESSAGE_USAGE);
         }
     }
 

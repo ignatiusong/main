@@ -106,8 +106,7 @@ public class Food {
 
         return otherCanteen != null
                 && otherCanteen.getName().equals(getName())
-                && (otherCanteen.getPrice() == (getPrice()))
-                && otherCanteen.getTags().equals(getTags());
+                && (otherCanteen.getPrice() == (getPrice()));
     }
 
     /**
@@ -134,8 +133,7 @@ public class Food {
 
         Food otherCanteen = (Food) other;
         return otherCanteen.getName().equals(getName())
-                && otherCanteen.getPrice() == (getPrice())
-                && otherCanteen.getTags().equals(getTags());
+                && otherCanteen.getPrice() == (getPrice());
     }
 
     @Override

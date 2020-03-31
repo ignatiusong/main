@@ -3,7 +3,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
 
+<?import org.fxmisc.richtext.InlineCssTextField?>
+<?import java.net.URL?>
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <TextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter command here..."/>
+  <InlineCssTextField fx:id="commandTextField" onAction="#handleCommandEntered" minHeight="40" prefHeight="40" styleClass="styled-text-area" />
 </StackPane>
 

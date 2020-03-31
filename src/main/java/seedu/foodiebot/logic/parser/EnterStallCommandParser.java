@@ -35,7 +35,9 @@ public class EnterStallCommandParser implements Parser<EnterStallCommand> {
         Index index;
 
         if (!ParserContext.getCurrentContext().equals(ParserContext.CANTEEN_CONTEXT)) {
-            throw new ParseException(ParserContext.INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext());
+            throw new ParseException(ParserContext.INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext()
+                    + "\n" + ParserContext.SUGGESTED_CONTEXT_MESSAGE
+                    + ParserContext.MAIN_CONTEXT + ", " + ParserContext.CANTEEN_CONTEXT);
         }
 
         try {

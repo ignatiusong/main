@@ -40,38 +40,19 @@ In particular, for the indecisive user, this application can give a random food 
 Our application is being managed by the dependency management tool Gradle.
 The project is available at https://github.com/AY1920S2-CS2103T-F11-3/main. After cloning the repository, you can follow these steps:
 
-a. For IntelliJ users
+For IntelliJ users
 
 1. Run gradle build.
 2. Run gradle run.
 
-
-== Design
-
 == Definitions
 
-== System Overview
+Defined below are common terminology that will be used frequently throughout this document.
 
-=== Algorithms
+[BLUE]#Context#::
+Refers to which state the application is in. Use interchangeably with user interface.
 
-=== Detailed Class Descriptions
-
-=== Design Considerations
-Aspect: Executing similar tasks but for different objects
-e.g. Selecting canteens, stalls, food.
-
-* Alternative 1 (current choice): Create a context class that
-executes commands based on the context the user is in.
-** Pros: Higher quality user interface, user does not need to remember
-so many commands.
-** Cons: More difficult to implement.
-
-* Alternative 2: Create different commands for different objects
-** Pros: Easier to implement. There will not be any chance
-of overlapping commands
-** Cons: Reduce quality of user interface as user has to remember many
-different commands.
-
+== Design
 [[Design-Architecture]]
 === Architecture
 
@@ -196,9 +177,26 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.foodiebot.commons` package.
 
 
+=== Design Considerations
+==== Aspect: Executing similar tasks but for different objects
+
+e.g. Selecting canteens, stalls, food.
+
+* Alternative 1 (current choice): Create a context class that
+executes commands based on the context the user is in.
+** Pros: Higher quality user interface, user does not need to remember
+so many commands.
+** Cons: More difficult to implement.
+
+* Alternative 2: Create different commands for different objects
+** Pros: Easier to implement. There will not be any chance
+of overlapping commands
+** Cons: Reduce quality of user interface as user has to remember many
+different commands.
+
+
 == Implementation
 
-// tag::list[]
 === [Proposed] List feature
 ==== Proposed Implementation
 
@@ -215,9 +213,6 @@ It implements the following operations:
 * `ListCommandParser#parse()` -- Identifies if prefixes have been specified and handles them respectively. +
 For example, if ListCommand has the nearest block name passed through as a parameter `list f\com1`, ListCommand will filter the canteen list with the given block name with `new ListCommand("com1")`
 
-
-
-
 The following sequence diagram shows how the list operation works:
 
 
@@ -228,8 +223,8 @@ The following activity diagram summarizes what happens when a user executes a li
 
 image::ListActivityDiagram.png[]
 
-==== Design Considerations
 
+==== List Design Considerations
 ===== Aspect: User command format
 
 * **Alternative 1 (current choice):** `list f/com`
@@ -238,6 +233,380 @@ image::ListActivityDiagram.png[]
 * **Alternative 2:** find nearest `BLOCK_NAME`
 ** Pros: The user finds it natural to type the word find.
 ** Cons: Can be confusing whether find shows the list of canteens, food, or location of the canteen on campus. Having the 'find' command is also one additional command for the user to remember.
+
+=== Budget Command
+
+The `budget` command is implemented by the `BudgetCommand` class.
+
+This command is accessed by the `LogicManager#execute()` to set the budget for the user or to view the current budget of the user.
+
+The following _activity diagram_ illustrate the different scenario for the budge command:
+
+//image::
+
+==== Budget Command Implementation
+
+. The `LogicManager` first executes `FoodieBotParser` to create a `BudgetCommandParse` object.
+. `BudgetCommandParse` then parse the budget command to determine if the action of the budget is `set`, `view` or invalid. +
+This process returns a new `BudgetCommand` object.
+. The `LogicManager` then access then `BudgetCommand#execute()` to determine the type of execution.
+. If the action is `set` then the `budget` object saves the user input accordingly.
+. If the action is `view` then the budge is retrieve from the storage.
+. The `BudgetCommand#execute()` returns a `CommandResult` object to the `LogicManger`.
+
+Below is the _sequence diagram_ that summarizes what happens during the execution of the `budget` command:
+
+//image::
+
+==== Budget Design Considerations
+===== Aspect:
+
+* **Alternative 1 (current choice):** `
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
+=== Enter Command
+
+The `enter` command is implemented by either the `EnterCanteenCommand` class or the `EnterStallCommand` class.
+
+These commands are accessed by the `LogicManager#execute()` to switch the user interface accordingly base on where the user is at.
+
+The following _activity diagram_ illustrates the different scenario for the enter command:
+
+//image::
+
+==== Enter Command Implementation
+
+. The `LogicManager` first executes `FoodieBotParser` which parses the user input into a `ParserContext` to determine if the user is currently on the main context.
+. If the user has input `enter` on the main context, it creates a `EnterCanteenCommandParser` object that parses in the user input to determine which canteen to enter.
+. Otherwise if the user has Input `enter` on the stall context, it creates a `EnterStallCommandParser` object that parses in the user input to determine which stall to enter
+This process returns a new `EnterCanteenCommand` */* `EnterStallCommand` object accordingly to the `LogicManager`.
+. The `LogicManager` then access `EnterCanteenCommand#execute()` */* `EnterStallCommand#execute()` to switch the current display to the stalls/food available within the selected canteen/stall.
+. Both `EnterCanteenCommand#execute()` and `EnterStallCommand#execute()` returns a `CommandResult` object to the `LogicManger`.
+
+Below is the _sequence diagram_ that summarizes what happens during the execution of the `enter` command:
+
+//image::
+
+==== Enter Design Considerations
+===== Aspect:
+
+* **Alternative 1 (current choice):** `
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
+=== Favorites Command
+
+The `favorites` command is implemented by the `FavoritesCommand` class.
+
+This command is accessed by the `LogicManager#execute()` to edit or view the favorite on food items.
+
+The following _activity diagram_ illustrates what happens when a user executes the `favorite` command:
+
+//image::
+
+==== Favorites Command Implementation
+
+. The `LogicManager` first executes `FoodieBotParser` to create a `FavoritesCommandParser` object.
+. `FavoritesCommandParser` then parse the user input to determine if the favorite command is `set`, `remove`, or `view`.
+This process returns a new `FavoritesCommand` object.
+. The `LogicManager` then access `FavoritesCommand#execute()`.
+. If `set` was chosen, the selected food item favorite is then updated.
+. If `view` was chosen, a list of favorite food items are displayed.
+. If `remove` was chosen, the respective food item is remove from the favorite food item list.
+. `FavoritesCommand#execute()` creates a new `ActionCommandResult` that extends the `CommandResult` which is to be returned
+to the `LogicManager`.
+
+Below is the _sequence diagram_ that summarizes what happens during the execution of the `favorites` command:
+
+//image::
+
+==== Favorites Design Considerations
+===== Aspect:
+
+* **Alternative 1 (current choice):** `
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
+=== Filter Command
+
+The `filter` command is implemented by the `FilterCommand` class.
+
+This command is accessed by the `LogicManager#execute()` to filter outputs according to th euser input.
+
+The following _activity diagram_ illustrates what happens when a user executes the `filter` command:
+
+//image::
+
+==== Filter Command Implementation
+
+. The `LogicManager` first executes `FoodieBotParser` to create a `FilterCommandParser` object.
+. `FilterCommandParser` then parse the filter command to determine if the filter output should be by price range or tags +
+This process returns a new `FilterCommand` object.
+. The `LogicManager` then access `FilterCommand#execute()` which filter the options based on the user input and the context where `filter` is called.
+. If the filter option is based on a price, the current context has to be the stall, otherwise an error message is thrown.
+. If the option is based on a tag, the filter option will return a list of option base on the current context.
+. `FilterCommand#execute()` returns a `CommandResult` to the `LogicManager`.
+
+Below is the _sequence diagram_ that summarizes what happens during the execution of the `filter` command:
+
+//image::
+
+==== Filter Design Considerations
+===== Aspect:
+
+* **Alternative 1 (current choice):** `
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
+
+
+=== Goto Command
+
+The `goto` command is implemented by the `GoToCanteenCommand` class.
+
+This command is accessed by the `LogicManager#execute()` to display the direction to a canteen base on the user input.
+
+The following _activity diagram_ illustrates what happens when a user executes the `goto` command:
+
+//image::
+
+==== Goto Command Implementation
+
+. The `LogicManager` first executes `FoodieBotParser` to create a `GoToCanteenCommandParser` object.
+. `GoToCanteenCommandParser` then parse the goto command to determine the canteen name and the current location. +
+This process returns a new `GoToCanteenCommand` object.
+. The `LogicManager` then access `GoToCanteenCommand#execute()` to retrieve the directions based on the user input.
+. `GoToCanteenCommand#execute()` creates a new `DirectionsCommandResults` that extends the `CommandResult` which is to be returned
+to the `LogicManager`.
+
+Below is the _sequence diagram_ that summarizes what happens during the execution of the `goto` command:
+
+//image::
+
+==== Goto Design Considerations
+===== Aspect:
+
+* **Alternative 1 (current choice):** `
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
+=== Randomize Command
+
+The `randomize` command is implemented  by the `RandomizeCommand` class.
+
+This command is accessed by the `LogicManager#execute()` to generate five random options based on the user input.
+
+The following _activity diagram_ illustrates the different scenario for the randomize command:
+
+image::RandomizeActivityDiagram.png[]
+
+==== Randomize Command Implementation
+
+. The `LogicManager` first executes `FoodieBotParser` to create a `RandomizeCommandParser` object.
+. `RandomizeCommandParser` then parse the randomize command to separate the prefix if any and return a command object.
+In this case a `RandomizeCommand` object is created and returned to the `LogicManager`.
+. The `LogicManager` then access `RandomizeCommand#execute()`.
+. From `RandomizeCommand#execute()`, `randomize` objects are called to generate five random options based on the user input.
+. The `RandomizeCommand#execute()` returns a  `CommandResult` object to the `LogicManger`.
+
+Below is the _sequence diagram_ that summarizes what happens during the execution of the `randomize` command:
+
+image::RandomizeSequenceDiagram.png[]
+
+==== Randomize Design Considerations
+===== Aspect: Context where `randomize` can be called from
+
+* **Alternative 1 (current choice):** `randomize` function is only called from the canteen context.
+** Pros: Easy to implement.
+** Cons: Prefix are necessary to indicate if randomize is to be within one canteen only.
+* **Alternative 2:** `randomize` can be called after entering a canteen and/or stall.
+** Pros: Reduce user inputs.
+** Cons: Additional method will be needed to store the knowledge of the current canteen and/or stall entered.
+
+=== Rate Command
+
+The `rate` command is implemented by the `RateCommand` class.
+
+This command is accessed by the `LogicManager#execute()` to rate a food item.
+
+The following _activity diagram_ illustrates what happens when a user executes the `rate` command:
+
+//image::
+
+==== Rate Command Implementation
+
+. The `LogicManager` first executes `FoodieBotParser` to create a `RateCommandParser` object.
+. `RateCommandParser` then parse in the user input to ensure that the `rate` command is only use in the transaction context
+and that the inputs are valid. +
+This process creates and return a `RateCommand` object to the `LogicManager`.
+. The `LogicManager` then access the `RateCommand#execute()` to retrieve the food item from the transaction storage and
+update the rating of the food.
+. The `RateCommand#execute()` returns a  `CommandResult` object to the `LogicManger`.
+
+Below is the _sequence diagram_ that summarizes what happens during the execution of the `rate` command:
+
+//image::
+
+==== Rate Design Considerations
+===== Aspect:
+
+* **Alternative 1 (current choice):** `
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
+=== Review Command
+
+The `review` command is implemented by the `ReviewCommand` class.
+
+This command is accessed by the `LogicManager#execute()` to review a food item.
+
+The following _activity diagram_ illustrates what happens when a user executes the `review` command:
+
+//image::
+
+==== Review Command Implementation
+
+. The `LogicManager` first executes `FoodieBotParser` to create a `ReviewCommandParser` object.
+. `ReviewCommandParser` then parse in the user input to ensure that the `review` command is only use in the transaction context
+and that the inputs are valid. +
+This process creates and return a `ReviewCommand` object to the `LogicManager`.
+. The `LogicManager` then access the `ReviewCommand#execute()` to retrieve the food item from the transaction storage and
+update the review of the food.
+. The `ReviewCommand#execute()` returns a  `CommandResult` object to the `LogicManger`.
+
+Below is the _sequence diagram_ that summarizes what happens during the execution of the `review` command:
+
+//image::
+
+==== Review Design Considerations
+===== Aspect:
+
+* **Alternative 1 (current choice):** `
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
+=== Report Command (Please Update, IDK how it works)
+
+The `report` command is implemented by the `ReportCommand` class.
+
+This command is accessed by the `LogicManager#execute()` to review a food item.
+
+The following _activity diagram_ illustrates what happens when a user executes the `report` command:
+
+//image::
+
+==== Report Command Implementation
+
+. The `LogicManager` first executes `FoodieBotParser` to create a `ReportCommandParser` object.
+. `ReportCommandParser` then parse the user input to determine the period of report to display. +
+This Process returns a `ReportCommand` object to the `LogicManager`.
+. The `LogicManager` then access `ReportCommand#execute()`.
+. The `ReportCommand#execute()`
+. The `ReportCommand#execute()` returns a  `CommandResult` object to the `LogicManger`.
+
+Below is the _sequence diagram_ that summarizes what happens during the execution of the `report` command:
+
+//image::
+
+==== Review Design Considerations
+===== Aspect:
+
+* **Alternative 1 (current choice):** `
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
+
+=== Select Command
+
+The `select` command is implemented  by the `SelectItemCommand` class.
+
+This command is accessed by the `LogicManager#execute()` to store the current selected food item into the storage as well as to update the current budget of the user.
+
+The following _activity diagram_ illustrates what happens when a user executes the `select` command:
+
+//image::
+
+==== Select Command Implementation
+
+. The `LogicManager` first executes `FoodieBotParser` to create a `SelectItemCommandParser` object.
+. `SelectItemCommandParser` then parse the select command to ensure that the select command is called only on the stall context.
+This process also checks if the user input is the food index or the food name that is available in that stall.
+Returning a `SelectItemCommand` object to the `LogicManager`.
+. The `LogicManager` then access `SelectItemCommand#execute()`.
+. The `SelectItemCommand#execute()` retrieve that food selected and update other variables within its class for storage.
+. The `SelectItemCommand#execute()` returns a  `CommandResult` object to the `LogicManger`.
+
+Below is the _sequence diagram_ that summarizes what happens during the execution of the `select` command:
+
+//image::
+
+==== Select Design Considerations
+===== Aspect:
+
+* **Alternative 1 (current choice):** `
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
+
+=== Transactions Command
+
+The `transaction` command is implemented  by the `TransactionsCommand` class.
+
+This command is accessed by the `LogicManager#execute()` to display the transaction of the given period if stated.
+
+The following _activity diagram_ illustrates what happens when a user executes the `transactions` command:
+
+//image::
+
+==== Transactions Command Implementation
+
+. The `LogicManager` first executes `FoodieBotParser` to create a `TransactionsCommandParser` object.
+. `TransactionsCommandParser` then parse the user input to determine the period of transaction report to display. +
+This Process returns a `TransactionsCommand` object to the `LogicManager`.
+. The `LogicManager` then access `TransactionsCommand#execute()`.
+. The `TransactionsCommand#execute()` retrieve the transaction list from storage and display the list within the given period or everything of period is not stated.
+. The `TransactionsCommand#execute()` returns a  `CommandResult` object to the `LogicManger`.
+
+Below is the _sequence diagram_ that summarizes what happens during the execution of the `transactions` command:
+
+//image::
+
+==== Transactions Design Considerations
+===== Aspect:
+
+* **Alternative 1 (current choice):** `
+** Pros:
+** Cons:
+* **Alternative 2:**
+** Pros:
+** Cons:
 
 
 == Testing
@@ -474,9 +843,34 @@ image::UseCase.png[width="400"]
 
 [appendix]
 == Glossary
+Activity Diagram::
+Use to a model workflow.
 
-[[mainstream-os]] Mainstream OS::
+API::
+Application Programming Interface
+
+CLI::
+Command Line Interface
+
+In-Memory::
+Type of database that relies primarily on memory for data storage.
+
+MSS::
+Main Success Scenario
+
+Mainstream OS::
 Windows, Linux, Unix, OS-X
+
+PlantUML::
+Component used to write diagrams.
+
+Sequence Diagram::
+Captures the interactions between multiple objects for a given scenario.
+
+UI::
+User Interface
+
+
 
 [appendix]
 == Product Survey

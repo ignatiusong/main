@@ -34,9 +34,15 @@ This symbol indicates tips for the particular feature.
 
 `list` - A grey highlight (called a mark-up) indicates that this is a command that can be typed into the command line and executed by the application.
 
-=== How to Use this Document
-Section 4. Features will introduce you the commands to enter in the application.
+=== Definition of Common Words Use
 
+GUI::
+Graphic User Interface is a type of interface that allows users to interact with.
+
+
+
+=== How to Use this Document
+Section 4. Features will introduce you to the commands for the application.
 
 == Quick Start
 
@@ -47,16 +53,16 @@ Section 4. Features will introduce you the commands to enter in the application.
 .  Double-click the file to start the app. The Graphical User Interface(GUI) similar to the image shown below should appear in a few seconds.
 
 +
-image::Ui.png[width="790"]
+image::Ui_labeled.png[width="850"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : Lists all canteens.
-* *`list`*`f/ COM1` : Locate the nearest canteen from COM1.
-* *`goto`*`deck f/ COM1` : Display direction to go to deck from COM1.
-* *`exit`* : Go back to the previous view, if the application is at the main screen, the exit command will close the application
+* `*list*` : Lists all canteens.
+* `*enter* The Deck` : Display all the stalls location within The Deck.
+* `*goto* The Deck f/ COM1` : Display direction to go to deck from COM1.
+* `*exit*` : Go back to the previous view, if the application is at the main screen, the exit command will close the application
 
 //.  Refer to <<Features>> for details of each command.
 
@@ -79,15 +85,16 @@ Format: `list`
 
 Parameters:
 
-*  `[f/BLOCK_NAME]` - displays canteens ordered by increasing distance from current location.
+*  `[f/BLOCK_NAME]` - Displays canteens ordered by increasing distance from current location.
 
 Examples:
 
-* `list` +
+****
+`*list*`::
 List all canteens.
-* `list f/com1` +
+`*list f/com1*`::
 List all canteens starting with the nearest canteen from com1
-
+****
 
 image::app/list.png[width="700", align="left"]
 
@@ -99,7 +106,7 @@ Includes instructions on how to travel there as well as bus services that go to 
 
 Format: `goto CANTEEN_NAME f/ CURRENT_LOCATION`
 
-* Suggestions for the `CANTEEN_NAME` and `CURRENT_LOCATION` field will be provided as you type.
+//* Suggestions for the `CANTEEN_NAME` and `CURRENT_LOCATION` field will be provided as you type.
 
 NOTE: `CANTEEN_NAME` and `CURRENT_LOCATION` field has to be one of the suggestions. Otherwise an error message will be displayed telling the user to provide a valid `CANTEEN_NAME` and `CURRENT_LOCATION`.
 
@@ -107,9 +114,6 @@ image::wireframe/goto.png[width="700", align="left"]
 
 === View All Stalls in Canteen: `*enter*`
 Displays the stalls available at the specified canteen.
-
-NOTE: Information about the cuisine
-sold at the stall, the rating of the stall and various other things will be implemented in v2.0.
 
 Format: `enter`
 
@@ -120,11 +124,30 @@ Parameters:
 
 * `CANTEEN_NAME`: Enter the canteen with the entered name.
 
-NOTE: The stall's rating is determined from the user's past experiences of the food items which were selected.
+NOTE: Information about the cuisine sold at the stall, the rating of the stall and various other things will be implemented in v2.0. +
+The stall's rating is determined from the user's past experiences of the food items which were selected.
+
+=== View All Food Items in a Stall: `*enter*`
+
+Displays the food items available at the specified stall.
+
+NOTE: This method works after entering a canteen.
+
+Format: `enter`
+
+Parameters:
+
+* `INDEX`: Enter the stall with the entered index.
+
+* `STALL_NAME`: Enter the stall with the entered name.
+
+NOTE: Information about the cuisine sold at the stall, the rating of the food item and various other things will be implemented in v2.0. +
+The stall's rating is determined from the user's past experiences of the food items which were selected.
+
 
 === Select the Food : `*select*`
 
-Stalls the selected food in the database of food to help the user track his history of food consumption.
+Saves the selected food into transactions to help the user track his history of food consumption.
 
 Format: `select`
 
@@ -137,11 +160,12 @@ reduced by the price of the selected food.
 
 Examples:
 
-* `select 1`
-** Selects the food item listed at index 1.
-
-* `select Combo Set`
-** Selects the food item Combo Set.
+****
+`*select 1*`::
+Selects the food item listed at index 1.
+`*select Combo Set*`::
+ Selects the food item Combo Set.
+****
 
 image::wireframe/select.png[width="700", align="left"]
 
@@ -154,16 +178,22 @@ Format: `randomize`
 Parameters:
 
 * `[c/ CANTEEN_NAME]` - Produce a randomized list of foods from foods available at the particular canteen .
-** Example: `randomize c/ The Deck`
 * `[t/ TAG]` - Randomize based on foods which are tagged with the tag provided.
-** Example: `randomize t/ rice`
-* `c/` and `t/` are optional.
+
+Examples:
+
+****
+`*randomize c/ The Deck*`::
+Display five stall that are located in The Deck.
+`*randomize t/ rice*`::
+Display five stall that contain the tag `rice`.
+****
 
 image::wireframe/randomize.png[width="700", align="left"]
 
 === Set a Budget : `*budget set*`
 
-Sets a daily, weekly or monthly budget.  The budget can be changed.
+Sets a daily, weekly or monthly budget. The budget can be changed.
 
 NOTE: Changing the budget will reset the budget overview for the current budget cycle. +
 For example, if you have $5 remaining from a weekly budget of $20, setting a new monthly budget of $150
@@ -192,12 +222,12 @@ Otherwise an error message will be displayed requesting a correct type to be pro
 
 Examples:
 
-* `budget set w/ 9.50`
-** Sets your weekly budget to $9.50.
-* `budget set m/ 100`
-** Sets your monthly budget to $100.
-
-
+****
+`*budget set w/ 9.50*`::
+** Sets weekly budget to $9.50.
+`*budget set m/ 100*`::
+Sets monthly budget to $100.
+****
 
 === View Budget: `*budget view*`
 
@@ -207,12 +237,11 @@ as well as the remaining budget available to spend.
 Format: `budget view`
 
 === View Expense Report: `*report*`
-Generatess a report for your spending and food purchases for the period specified.
+Generates a report of the spending and food purchases for the period specified.
 
 Format: `report`
 
 Parameters:
-
 
 * `[f/FROM_DATE] [t/TO_DATE]` - Generates report from `FROM_DATE` until `TO_DATE`.
 ** Example: `report f/ 12-02-2020 t/ 30-04-2020`
@@ -224,7 +253,6 @@ Parameters:
 of 2019.
 * `[y/YEAR]` - Generates report of the input year.
 ** Example: `report y/ 2020`
-* `f/`, `t/`, `m/`, `w/` and `y/` fields are optional.
 
 NOTE: `FROM_DATE` cannot be a future date. +
 `TO_DATE` cannot be before the `FROM_DATE`, or the earliest possible date if the [f/] field is empty.
@@ -233,12 +261,11 @@ NOTE: `FROM_DATE` cannot be a future date. +
 
 === View Past Transactions: `*transactions*`
 
-Displays your past transactions of food purchases for any period specified.
+Displays the past transactions of food purchases for any period specified.
 
 Format: `transactions`
 
 Parameters:
-
 
 * `[f/FROM_DATE] [t/TO_DATE]` - Displays transactions from and till the given dates.
 ** Example: `report f/ 12-02-2020 t/ 30-04-2020`
@@ -249,7 +276,6 @@ Parameters:
 ** Example: transactions `m/ jul y/ 2019` - Displays all transactions in the month of the specified year.
 * `[y/YEAR]` - Displays transactions of the input year.
 ** Example: transactions `y/ 2020`
-* `f/`, `t/`, `m/`, `w/` and `y/` fields are optional.
 
 NOTE: `FROM_DATE` cannot be a future date. +
 `TO_DATE` cannot be before the `FROM_DATE`, or the earliest possible date if the f/ field is empty.
@@ -258,7 +284,7 @@ image::wireframe/transaction.png[width="700", align="left"]
 
 === Review Food Items: `*review*`
 
-Reviews food items from the transactions screen as shown in 3.12.
+Reviews food items from the transactions user interface.
 
 Format: `review INDEX REVIEW`
 
@@ -267,8 +293,12 @@ Parameters:
 * `INDEX` - This must be the first parameter and an index from the list has to be specified.
 * `REVIEW`- This must be the second parameter and the review message cannot be blank.
 
-* Example:
-** `rate 5 This was yummy!` - Adds your review "This was yummy!" to the 5th item in your transactions list.
+Examples:
+
+****
+`*rate 5 This was yummy!*`::
+Adds review "This was yummy!" to the 5th item in the transactions list.
+****
 
 TIP: You can update existing reviews by using the same command.
 
@@ -276,7 +306,7 @@ TIP: You can update existing reviews by using the same command.
 
 === Rate Food Items: `*rate*`
 
-Rates food items from the transactions screen as shown in 3.12.
+Rates food items from the transactions screen.
 This rating is on a scale from 0 to 10.
 
 Format: `rate INDEX RATING`
@@ -288,7 +318,10 @@ Parameters:
 
 Examples:
 
-** `rate 3 8` - Rates the 3rd item in your transactions list as 8.
+****
+`*rate 3 8*`::
+Rate the 3rd item in the transactions list as 8.
+****
 
 TIP: You can also update existing ratings by using the rate on the same food item.
 
@@ -303,13 +336,11 @@ Parameters:
 * `INDEX` - This must be the first parameter and an index from the list has to be specified.
 
 
-
 === View Favorited Food Items: `*favorites view*`
 
 View the food items that have been set as favorites.
 
 Format: `favorites view`
-
 
 === Remove Favorited Food Items: `*favorites remove*`
 
@@ -320,8 +351,6 @@ Format: `favorites remove INDEX`
 Parameters:
 
 * `INDEX` - This must be the first parameter and an index from the list has to be specified.
-
-
 
 === Filter Canteens or Stalls: `*filter*`
 
@@ -335,7 +364,10 @@ Parameters:
 
 Examples:
 
-** `filter asian` - Only displays canteens with the asian tag.
+****
+`*filter asian*`::
+Only displays canteens with the asian tag.
+****
 
 === Filter Canteens or Stalls: `*filter*`
 

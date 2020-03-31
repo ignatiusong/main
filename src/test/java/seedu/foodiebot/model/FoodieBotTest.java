@@ -26,6 +26,7 @@ import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.canteen.exceptions.DuplicateCanteenException;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.randomize.Randomize;
+import seedu.foodiebot.model.report.Report;
 import seedu.foodiebot.model.transaction.PurchasedFood;
 import seedu.foodiebot.testutil.CanteenBuilder;
 
@@ -108,12 +109,14 @@ public class FoodieBotTest {
         private final ObservableList<PurchasedFood> transactions = FXCollections.observableArrayList();
         private Budget budget;
         private Randomize randomize;
+        private Report report;
 
         FoodieBotStub(Collection<Canteen> canteens, Collection<Stall> stalls, Budget budget) {
             this.canteens.setAll(canteens);
             this.stalls.setAll(stalls);
             this.budget = budget;
             this.randomize = Randomize.checkRandomize();
+            this.report = new Report();
         }
 
         @Override
@@ -159,6 +162,11 @@ public class FoodieBotTest {
         @Override
         public Randomize getRandomize() {
             return randomize;
+        }
+
+        @Override
+        public Report getReport() {
+            return report;
         }
     }
 }

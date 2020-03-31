@@ -27,4 +27,14 @@ public class MainScene extends BaseScene {
         addToListPanel(canteenListPanel);
         getResultDisplayPlaceholder().getChildren().add(getResultDisplay().getRoot());
     }
+
+    @Override
+    protected void handleHelp() {
+        super.handleHelp();
+    }
+
+    @Override
+    protected void handleExit() {
+        super.handleExit();
+    }
 }

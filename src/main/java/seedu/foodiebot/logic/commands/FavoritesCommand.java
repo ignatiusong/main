@@ -2,6 +2,7 @@ package seedu.foodiebot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_DATA_COMMAND;
 import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_FAVORITE_NAME_SPECIFIED;
 import static seedu.foodiebot.logic.parser.ParserContext.FAVORITE_CONTEXT;
 import static seedu.foodiebot.model.Model.PREDICATE_SHOW_ALL;
@@ -9,8 +10,6 @@ import static seedu.foodiebot.model.Model.PREDICATE_SHOW_ALL;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
-
-import javafx.collections.ObservableList;
 
 import seedu.foodiebot.commons.core.LogsCenter;
 import seedu.foodiebot.commons.core.index.Index;
@@ -30,6 +29,7 @@ public class FavoritesCommand extends Command {
 
     public static final String MESSAGE_VIEW_SUCCESS = "Listed all favorites";
     public static final String MESSAGE_SET_SUCCESS = "Favorited %s";
+    public static final String MESSAGE_REMOVE_SUCCESS = "Removed %s";
 
 
     private static final Logger logger = LogsCenter.getLogger(FavoritesCommand.class);
@@ -72,12 +72,17 @@ public class FavoritesCommand extends Command {
                 MESSAGE_INVALID_FAVORITE_NAME_SPECIFIED);
         case "view":
             ParserContext.setCurrentContext(FAVORITE_CONTEXT);
-            ObservableList<Food> list = model.getFilteredFavoriteFoodList(false);
+            try {
+                model.getFilteredFavoriteFoodList(false);
+            } catch (Exception ex) {
+                return new ActionCommandResult(COMMAND_WORD, action,
+                    MESSAGE_INVALID_DATA_COMMAND);
+            }
             model.updateFilteredFavoriteList(PREDICATE_SHOW_ALL);
             return new ActionCommandResult(COMMAND_WORD, action, MESSAGE_VIEW_SUCCESS);
         case "remove":
             if (index.isPresent()) {
-                List<Food> foodList = model.getFilteredFoodList();
+                List<Food> foodList = model.getFilteredFavoriteFoodList(false);
                 if (!foodList.isEmpty()) {
                     int indexInteger = index.get().getZeroBased();
                     if (indexInteger + 1 > foodList.size()) {
@@ -86,8 +91,9 @@ public class FavoritesCommand extends Command {
                     Food food = foodList.get(indexInteger);
                     model.removeFavorite(food);
                     return new ActionCommandResult(COMMAND_WORD, action,
-                        String.format(MESSAGE_SET_SUCCESS, food.getName()));
+                        String.format(MESSAGE_REMOVE_SUCCESS, food.getName()));
                 }
+                return new ActionCommandResult(COMMAND_WORD, action, Food.INVALID_FOOD_INDEX);
             }
             return new ActionCommandResult(COMMAND_WORD, action,
                 MESSAGE_INVALID_FAVORITE_NAME_SPECIFIED);
