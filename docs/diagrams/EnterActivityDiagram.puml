@@ -1,0 +1,43 @@
+@startuml
+
+(*) --> if "" then
+
+  -->[ParserContext = MainContext] "EnterCanteenCommand"
+
+  if "" then
+    --> [(argument is empty)] "Throw parse exception"
+  else
+	if "" then
+	  --> [(argument is integer)] "Find Canteen with Specified Index"
+      --> "List all stalls in canteen"
+      --> "Update ui"
+	else
+	  --> "Find canteen with specified name"
+	  --> "List all stalls in canteen"
+	endif
+  endif
+
+else
+
+  ->[ParserContext = CanteenContext] "EnterStallCommand"
+
+  if "" then
+    --> [(argument is empty)] "Throw parse exception"
+    --> "Update ui"
+  else
+  	if "" then
+  	  --> [(argument is integer)]"Find Stall with Specified Index"
+      --> "List all foods in stall"
+      --> "Update ui"
+      --> (*)
+  	else
+  	  --> "Find stall with specified name"
+  	  --> "List all foods in stall"
+  	endif
+
+  endif
+
+endif
+
+
+@enduml

@@ -287,9 +287,9 @@ This process returns a new `EnterCanteenCommand` */* `EnterStallCommand` object 
 . The `LogicManager` then access `EnterCanteenCommand#execute()` */* `EnterStallCommand#execute()` to switch the current display to the stalls/food available within the selected canteen/stall.
 . Both `EnterCanteenCommand#execute()` and `EnterStallCommand#execute()` returns a `CommandResult` object to the `LogicManger`.
 
-Below is the _sequence diagram_ that summarizes what happens during the execution of the `enter` command:
+Below is the _activity diagram_ that summarizes what happens during the execution of the `enter` command:
 
-//image::
+image::EnterActivityDiagram.png[]
 
 ==== Enter Design Considerations
 ===== Aspect:
