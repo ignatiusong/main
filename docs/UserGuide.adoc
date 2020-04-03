@@ -57,12 +57,14 @@ image::Ui_labeled.png[width="850"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+
+NOTE:  Some example commands you can try are listed below:
 
 * `*list*` : Lists all canteens.
 * `*enter* The Deck` : Display all the stalls location within The Deck.
 * `*goto* The Deck f/ COM1` : Display direction to go to deck from COM1.
-* `*exit*` : Go back to the previous view, if the application is at the main screen, the exit command will close the application
+* `*back*` : Go back to the previous view
+*  `*exit*` : the exit command will close the application
 
 //.  Refer to <<Features>> for details of each command.
 
@@ -76,6 +78,12 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `budget set w/ AMOUNT`, `AMOUNT` is a parameter which can be used as `budget set w/ 9.50`
 * Items in square brackets are optional entries e.g `report [w/DATE]` can be entered as `report [w/ 12-02-2020]` or as `report`.
 ====
+
+=== Back Command: `*back*`
+
+Allows the user to return to the previous screen if one is available
+
+Format: `back`
 
 === List All Canteens: `*list*`
 
@@ -213,7 +221,6 @@ List of values for `PERIOD` are:
 ** `d/` - Daily
 ** `w/` - Weekly
 ** `m/` - Monthly
->>>>>>> upstream/master
 
 NOTE: `PERIOD` field has to be one of the above suggestions. +
 `AMOUNT` field has to be numeric (with or without decimal places). +

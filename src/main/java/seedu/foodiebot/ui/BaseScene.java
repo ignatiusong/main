@@ -23,11 +23,11 @@ import seedu.foodiebot.commons.core.LogsCenter;
 import seedu.foodiebot.logic.Logic;
 
 import seedu.foodiebot.logic.commands.ActionCommandResult;
+import seedu.foodiebot.logic.commands.BackCommand;
 import seedu.foodiebot.logic.commands.BudgetCommand;
 import seedu.foodiebot.logic.commands.CommandResult;
 import seedu.foodiebot.logic.commands.DirectionsCommandResult;
 import seedu.foodiebot.logic.commands.EnterCanteenCommand;
-import seedu.foodiebot.logic.commands.ExitCommand;
 import seedu.foodiebot.logic.commands.FavoritesCommand;
 import seedu.foodiebot.logic.commands.ListCommand;
 import seedu.foodiebot.logic.commands.RandomizeCommand;
@@ -318,7 +318,7 @@ public class BaseScene {
                 handleListRandomize();
                 updateResultDisplay(commandResult.getFeedbackToUser());
                 break;
-            case ExitCommand.COMMAND_WORD:
+            case BackCommand.COMMAND_WORD:
                 switch (ParserContext.getCurrentContext()) {
                 case ParserContext.MAIN_CONTEXT:
                     handleListCanteens(commandResult);

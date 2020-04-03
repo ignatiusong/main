@@ -6,6 +6,7 @@ import static seedu.foodiebot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.foodiebot.logic.commands.BackCommand;
 import seedu.foodiebot.logic.commands.BudgetCommand;
 import seedu.foodiebot.logic.commands.ClearCommand;
 import seedu.foodiebot.logic.commands.Command;
@@ -114,6 +115,9 @@ public class FoodieBotParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
+
+        case BackCommand.COMMAND_WORD:
+            return new BackCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

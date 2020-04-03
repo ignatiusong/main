@@ -30,6 +30,7 @@ import seedu.foodiebot.logic.commands.SelectItemCommand;
 import seedu.foodiebot.logic.commands.TransactionsCommand;
 import seedu.foodiebot.logic.parser.exceptions.ParseException;
 import seedu.foodiebot.model.canteen.NameContainsKeywordsPredicate;
+import seedu.foodiebot.model.util.SampleDataUtil;
 
 public class FoodieBotParserTest {
 
@@ -51,6 +52,7 @@ public class FoodieBotParserTest {
         ParserContext.setCurrentContext(ParserContext.MAIN_CONTEXT);
         assertTrue(parser.parseCommand(EnterCanteenCommand.COMMAND_WORD + " The Deck") instanceof EnterCanteenCommand);
         ParserContext.setCurrentContext(ParserContext.CANTEEN_CONTEXT);
+        ParserContext.setCanteenContext(SampleDataUtil.getSampleCanteens()[0]);
         assertTrue(parser.parseCommand(EnterStallCommand.COMMAND_WORD + " 1") instanceof EnterStallCommand);
 
     }

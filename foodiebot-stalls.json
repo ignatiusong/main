@@ -7,7 +7,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "rice", "cheap", "noodle" ]
+    "tags" : [ "rice", "noodle", "cheap" ]
   }, {
     "name" : "Claypot Seafood Soup",
     "canteenName" : "The Deck",
@@ -16,7 +16,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "rice", "cheap" ]
+    "tags" : [ "cheap", "rice" ]
   }, {
     "name" : "Indian",
     "canteenName" : "The Deck",
@@ -25,7 +25,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "cheap", "spicy", "asian", "halal" ]
+    "tags" : [ "spicy", "cheap", "asian", "halal" ]
   }, {
     "name" : "Japanese",
     "canteenName" : "The Deck",
@@ -43,7 +43,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "halal", "spicy", "rice", "cheap" ]
+    "tags" : [ "halal", "rice", "cheap", "spicy" ]
   }, {
     "name" : "Noodle",
     "canteenName" : "The Deck",
@@ -52,7 +52,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "asian", "cheap", "noodle" ]
+    "tags" : [ "noodle", "asian", "cheap" ]
   }, {
     "name" : "Roasted Delights",
     "canteenName" : "The Deck",
@@ -70,7 +70,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "cheap", "asian", "noodle" ]
+    "tags" : [ "asian", "noodle", "cheap" ]
   }, {
     "name" : "Yong Tau Foo and Laksa",
     "canteenName" : "The Deck",
@@ -79,7 +79,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "noodle", "expensive" ]
+    "tags" : [ "expensive", "noodle" ]
   }, {
     "name" : "Vegetarian",
     "canteenName" : "The Deck",
@@ -88,7 +88,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "halal", "rice", "cheap" ]
+    "tags" : [ "halal", "cheap", "rice" ]
   }, {
     "name" : "Western",
     "canteenName" : "The Deck",
@@ -97,11 +97,11 @@
     "cuisine" : "western",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "expensive", "western" ]
+    "tags" : [ "western", "expensive" ]
   }, {
     "name" : "Pasta Express",
     "canteenName" : "The Deck",
-    "stallNumber" : 13,
+    "stallNumber" : 12,
     "stallImageName" : "PastaExpress.png",
     "cuisine" : "western",
     "overallPriceRating" : "$$",
@@ -110,7 +110,7 @@
   }, {
     "name" : "Salad Express",
     "canteenName" : "The Deck",
-    "stallNumber" : 14,
+    "stallNumber" : 13,
     "stallImageName" : "SaladExpress.png",
     "cuisine" : "asian",
     "overallPriceRating" : "$",
@@ -119,12 +119,12 @@
   }, {
     "name" : "Uncle Penyet",
     "canteenName" : "The Deck",
-    "stallNumber" : 15,
+    "stallNumber" : 14,
     "stallImageName" : "UnclePenyet.png",
     "cuisine" : "fusion",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "spicy", "asian", "rice", "expensive", "western" ]
+    "tags" : [ "asian", "western", "expensive", "spicy", "rice" ]
   }, {
     "name" : "Duck and Chicken Rice",
     "canteenName" : "Nus Flavors",
@@ -133,7 +133,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "rice", "asian" ]
+    "tags" : [ "asian", "rice" ]
   }, {
     "name" : "Five Grains Bee Hoon",
     "canteenName" : "Nus Flavors",
@@ -142,7 +142,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "noodle", "asian" ]
+    "tags" : [ "asian", "noodle" ]
   }, {
     "name" : "Indian Cuisine",
     "canteenName" : "Nus Flavors",
@@ -151,16 +151,16 @@
     "cuisine" : "Indian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "cheap", "asian", "spicy" ]
+    "tags" : [ "cheap", "spicy", "asian" ]
   }, {
-    "name" : "Japenese and Korean",
+    "name" : "Japanese and Korean",
     "canteenName" : "Nus Flavors",
     "stallNumber" : 4,
     "stallImageName" : "JapKor.png",
     "cuisine" : "Fusion",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "asian", "expensive" ]
+    "tags" : [ "expensive", "asian" ]
   }, {
     "name" : "Mala Hot Pot",
     "canteenName" : "Nus Flavors",
@@ -178,7 +178,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "noodle", "asian", "cheap" ]
+    "tags" : [ "cheap", "noodle", "asian" ]
   }, {
     "name" : "Mixed Veg Rice",
     "canteenName" : "Nus Flavors",
@@ -187,7 +187,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "asian", "rice", "cheap" ]
+    "tags" : [ "cheap", "rice", "asian" ]
   }, {
     "name" : "Taiwan Cuisine",
     "canteenName" : "Nus Flavors",
@@ -196,7 +196,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "asian", "expensive" ]
+    "tags" : [ "expensive", "asian" ]
   }, {
     "name" : "Western",
     "canteenName" : "Nus Flavors",
@@ -223,6 +223,6 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "asian", "expensive" ]
+    "tags" : [ "expensive", "asian" ]
   } ]
 }

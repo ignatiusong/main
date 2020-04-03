@@ -1,42 +1,252 @@
 {
   "foods" : [ {
+    "name" : "Roasted Chicken Rice",
+    "price" : 4,
+    "description" : "Roasted Meat and Chicken Rice",
+    "foodImageName" : "javafx.scene.image.Image@1bf5eb9f",
+    "stallNo" : 1,
+    "canteen" : "Nus Flavors",
+    "stallName" : "Duck and Chicken Rice",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Fish Bee Hoon",
+    "price" : 4,
+    "description" : "Been Hoon with Fish",
+    "foodImageName" : "javafx.scene.image.Image@54d3641a",
+    "stallNo" : 2,
+    "canteen" : "Nus Flavors",
+    "stallName" : "Five Grains Bee Hoon",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Roti Prata Set",
+    "price" : 3,
+    "description" : "2 Pieces and Curry",
+    "foodImageName" : "javafx.scene.image.Image@6cc536eb",
+    "stallNo" : 3,
+    "canteen" : "Nus Flavors",
+    "stallName" : "Indian Cuisine",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Beef Rice Set",
+    "price" : 5,
+    "description" : "Fried Korean Beef with Rice",
+    "foodImageName" : "javafx.scene.image.Image@60509c2a",
+    "stallNo" : 4,
+    "canteen" : "Nus Flavors",
+    "stallName" : "Japanese and Korean",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Mala",
+    "price" : 10,
+    "description" : "Assorted Meat and Veg with Mala Sauce",
+    "foodImageName" : "javafx.scene.image.Image@399817bb",
+    "stallNo" : 5,
+    "canteen" : "Nus Flavors",
+    "stallName" : "Mala Hot Pot",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Fried Meatball Noodle",
+    "price" : 5,
+    "description" : "Fried Meatball with Minced Meat Noodles",
+    "foodImageName" : "javafx.scene.image.Image@141bea08",
+    "stallNo" : 6,
+    "canteen" : "Nus Flavors",
+    "stallName" : "Minced Meat Noodle",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Cai Fan Set",
+    "price" : 3,
+    "description" : "2 Meat 1 Veg",
+    "foodImageName" : "javafx.scene.image.Image@6949d61a",
+    "stallNo" : 7,
+    "canteen" : "Nus Flavors",
+    "stallName" : "Mixed Veg Rice",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Popcorn Chicken with Veg Set",
+    "price" : 6,
+    "description" : "Popcorn Chicken, vegetable and rice",
+    "foodImageName" : "javafx.scene.image.Image@264c97fe",
+    "stallNo" : 8,
+    "canteen" : "Nus Flavors",
+    "stallName" : "Taiwan Cuisine",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
     "name" : "Combo Set",
     "price" : 6,
     "description" : "1 Meat, 1 Pasta, 2 Sides",
-    "foodImageName" : "javafx.scene.image.Image@21dc8fe0",
-    "stallNo" : 1,
+    "foodImageName" : "javafx.scene.image.Image@384d476b",
+    "stallNo" : 9,
     "canteen" : "Nus Flavors",
     "stallName" : "Western",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Fried Rice",
+    "price" : 4,
+    "description" : "Local Fried Rice",
+    "foodImageName" : "javafx.scene.image.Image@74e11217",
+    "stallNo" : 10,
+    "canteen" : "Nus Flavors",
+    "stallName" : "Wok Fried",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Xiao Long Bao",
+    "price" : 5,
+    "description" : "7 pieces",
+    "foodImageName" : "javafx.scene.image.Image@2488373c",
+    "stallNo" : 11,
+    "canteen" : "Nus Flavors",
+    "stallName" : "Xiao Long Bao",
     "tags" : [ ],
     "tagged" : [ ]
   }, {
     "name" : "Cai Fan",
     "price" : 3,
     "description" : "1 Meat, 2 Veg",
-    "foodImageName" : "javafx.scene.image.Image@7671bce3",
+    "foodImageName" : "javafx.scene.image.Image@6a6508b9",
     "stallNo" : 1,
     "canteen" : "The Deck",
     "stallName" : "Chinese Cooked Food",
     "tags" : [ ],
     "tagged" : [ ]
   }, {
-    "name" : "Ayam Penyet",
-    "price" : 5,
-    "description" : "Ayam Penyet",
-    "foodImageName" : "javafx.scene.image.Image@52c6f830",
-    "stallNo" : 15,
+    "name" : "Assorted Claypot Chicken with Rice",
+    "price" : 4,
+    "description" : "Black sauce chicken wtih rice",
+    "foodImageName" : "javafx.scene.image.Image@1b8dfc60",
+    "stallNo" : 2,
     "canteen" : "The Deck",
-    "stallName" : "Uncle Penyet",
+    "stallName" : "Claypot Seafood Soup",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Roti Prata",
+    "price" : 3,
+    "description" : "2 pieces and curry",
+    "foodImageName" : "javafx.scene.image.Image@9d9e9cf",
+    "stallNo" : 3,
+    "canteen" : "The Deck",
+    "stallName" : "Indian",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Katsudon Rice Set",
+    "price" : 5,
+    "description" : "Chicken Cutlet with rice",
+    "foodImageName" : "javafx.scene.image.Image@4b860b5e",
+    "stallNo" : 4,
+    "canteen" : "The Deck",
+    "stallName" : "Japanese",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Beef Rendang",
+    "price" : 5,
+    "description" : "Nasi Goodness",
+    "foodImageName" : "javafx.scene.image.Image@1ef9aaac",
+    "stallNo" : 5,
+    "canteen" : "The Deck",
+    "stallName" : "Muslim",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Mini Hot Pot Noodle",
+    "price" : 4,
+    "description" : "Minced Meat Noodle with Soup",
+    "foodImageName" : "javafx.scene.image.Image@3ee8edd8",
+    "stallNo" : 6,
+    "canteen" : "The Deck",
+    "stallName" : "Noodle",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Chicken Rice Set",
+    "price" : 4,
+    "description" : "Rice, Chicken, Vegetable and Soup",
+    "foodImageName" : "javafx.scene.image.Image@709d8077",
+    "stallNo" : 7,
+    "canteen" : "The Deck",
+    "stallName" : "Roasted Delights",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Fried Kway Teow",
+    "price" : 4,
+    "description" : "Fried Kway Teow with fried delights",
+    "foodImageName" : "javafx.scene.image.Image@320017d8",
+    "stallNo" : 8,
+    "canteen" : "The Deck",
+    "stallName" : "Snacks and Fried Kway Teow",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Laksa Yong Tau Foo",
+    "price" : 4,
+    "description" : "Spicy and Delicious",
+    "foodImageName" : "javafx.scene.image.Image@1ac74c78",
+    "stallNo" : 9,
+    "canteen" : "The Deck",
+    "stallName" : "Yong Tau Foo and Laksa",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Vegetarian Set",
+    "price" : 4,
+    "description" : "Vegetable with rice",
+    "foodImageName" : "javafx.scene.image.Image@1e28c34c",
+    "stallNo" : 10,
+    "canteen" : "The Deck",
+    "stallName" : "Vegetarian",
     "tags" : [ ],
     "tagged" : [ ]
   }, {
     "name" : "Fried Fish",
     "price" : 5,
     "description" : "Fried Fish and chips",
-    "foodImageName" : "javafx.scene.image.Image@6035ccbc",
+    "foodImageName" : "javafx.scene.image.Image@17176e62",
     "stallNo" : 11,
     "canteen" : "The Deck",
     "stallName" : "Western",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Carbonara",
+    "price" : 6,
+    "description" : "Pasta with Cream Sauce",
+    "foodImageName" : "javafx.scene.image.Image@462eb367",
+    "stallNo" : 12,
+    "canteen" : "The Deck",
+    "stallName" : "Pasta Express",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Assorted Salads",
+    "price" : 6,
+    "description" : "Variety of salads",
+    "foodImageName" : "javafx.scene.image.Image@47db4c58",
+    "stallNo" : 13,
+    "canteen" : "The Deck",
+    "stallName" : "Salad Express",
+    "tags" : [ ],
+    "tagged" : [ ]
+  }, {
+    "name" : "Ayam Penyet",
+    "price" : 5,
+    "description" : "Ayam Penyet",
+    "foodImageName" : "javafx.scene.image.Image@4b2c1abb",
+    "stallNo" : 14,
+    "canteen" : "The Deck",
+    "stallName" : "Uncle Penyet",
     "tags" : [ ],
     "tagged" : [ ]
   } ]
