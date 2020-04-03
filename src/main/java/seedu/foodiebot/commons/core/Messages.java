@@ -16,7 +16,7 @@ public class Messages {
         + "You have $%.2f available to spend today.\n";
     public static final String MESSAGE_BUDGET_VIEW = "Your %s budget is $%.2f.\n"
             + "Your remaining budget is $%.2f, with $%.2f to spend today.\n"
-            + "Here is your %s spending:\n";
+            + "Here are your %s spendings:\n";
     public static final String MESSAGE_NOTAVAILABLE = "No information available";
     public static final String MESSAGE_INVALID_DATE = "Invalid date format!";
     public static final String MESSAGE_INVALID_PREFIX = "Invalid prefix!";
@@ -25,4 +25,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_CANTEEN_NAME = "Invalid canteen name!";
     public static final String MESSAGE_INVALID_FAVORITE_NAME_SPECIFIED = "Please specify the number in the menu "
         + "of the food stall";
+    public static final String MESSAGE_NO_FOOD_WITH_TAG = "There is no food with the tag : ";
 }

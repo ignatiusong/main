@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -139,13 +140,6 @@ public class ModelManager implements Model {
         updateFilteredCanteenList(PREDICATE_SHOW_ALL);
     }
 
-    @Override
-    public void setCanteen(Canteen target, Canteen editedCanteen) {
-        requireAllNonNull(target, editedCanteen);
-
-        foodieBot.setCanteen(target, editedCanteen);
-    }
-
     /**
      * Reads the stored budget in the Json file.
      *
@@ -169,9 +163,7 @@ public class ModelManager implements Model {
 
 
             return Optional.of(budget);
-        } catch (DataConversionException e) {
-            return Optional.empty();
-        } catch (IOException e) {
+        } catch (DataConversionException | IOException e) {
             return Optional.empty();
         }
 
@@ -374,9 +366,7 @@ public class ModelManager implements Model {
                 filteredTransactionsList = new FilteredList<PurchasedFood>(newBot.get().getTransactionsList());
             }
 
-        } catch (DataConversionException e) {
-            // return Optional.empty();
-        } catch (IOException e) {
+        } catch (DataConversionException | IOException e) {
             // return Optional.empty();
         }
     }
@@ -413,9 +403,7 @@ public class ModelManager implements Model {
             Storage storage = new StorageManager(foodieBotStorage);
             Optional<ReadOnlyFoodieBot> newBot = storage.readFoodieBot(Stall.class.getSimpleName());
             foodieBot.setStalls(newBot.get().getStallList());
-        } catch (DataConversionException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (DataConversionException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -437,9 +425,7 @@ public class ModelManager implements Model {
                 filteredFavoriteFoodList = new FilteredList<Food>(newBot.get().getFavoriteList());
             }
 
-        } catch (DataConversionException e) {
-            // return Optional.empty();
-        } catch (IOException e) {
+        } catch (DataConversionException | IOException e) {
             // return Optional.empty();
         }
     }
@@ -456,11 +442,13 @@ public class ModelManager implements Model {
             Storage storage = new StorageManager(foodieBotStorage);
             Optional<ReadOnlyFoodieBot> newBot = storage.readFoodieBot(Food.class.getSimpleName());
             foodieBot.setFood(newBot.get().getFoodList());
-        } catch (DataConversionException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (DataConversionException | IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public LocalDate getAppDateFirstLaunched() {
+        return userPrefs.getDateFirstLaunched().get();
     }
 
     @Override
@@ -477,8 +465,11 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return foodieBot.equals(other.foodieBot)
-                && userPrefs.equals(other.userPrefs)
-                && filteredCanteens.equals(other.filteredCanteens);
+        boolean equal1 = foodieBot.equals(other.foodieBot);
+        boolean equal2 = userPrefs.equals(other.userPrefs);
+        boolean equal3 = filteredFavoriteFoodList.equals(other.filteredFavoriteFoodList);
+        boolean equal4 = filteredTransactionsList.equals(other.filteredTransactionsList);
+        boolean equal5 = filteredCanteens.equals(other.filteredCanteens);
+        return equal1 & equal2 & equal3 & equal4 & equal5;
     }
 }

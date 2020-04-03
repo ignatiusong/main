@@ -1,5 +1,7 @@
 package seedu.foodiebot.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.foodiebot.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.foodiebot.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.foodiebot.logic.commands.GoToCanteenCommand.MESSAGE_SUCCESS;
@@ -71,5 +73,12 @@ public class GoToCanteenCommandTest {
                 Messages.MESSAGE_NOTAVAILABLE);
     }
 
-
+    @Test
+    public void is_equal_command() {
+        GoToCanteenCommand command = new GoToCanteenCommand("", "");
+        GoToCanteenCommand copy = new GoToCanteenCommand("", "");
+        assertTrue(command.equals(command));
+        assertTrue(command.equals(copy));
+        assertFalse(command.equals(new FavoritesCommand("view")));
+    }
 }

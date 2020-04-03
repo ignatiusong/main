@@ -7,6 +7,7 @@ import java.util.Set;
 import seedu.foodiebot.model.canteen.Name;
 import seedu.foodiebot.model.canteen.Stall;
 import seedu.foodiebot.model.tag.Tag;
+import seedu.foodiebot.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Stall objects.
@@ -21,8 +22,6 @@ public class StallBuilder {
     public static final String DEFAULT_OVERALL_PRICERATING = "$";
     public static final int DEFAULT_IS_FAVORITE = 0;
     public static final Tag DEFAULT_TAG = new Tag("spicy");
-    private final Set<Tag> tags = new HashSet<>();
-
 
     private Name name;
     private String canteenName;
@@ -31,6 +30,7 @@ public class StallBuilder {
     private String cuisine;
     private String overallPriceRating;
     private int favorite;
+    private Set<Tag> tags = new HashSet<>();
 
     public StallBuilder() {
         this.name = new Name(DEFAULT_NAME);
@@ -106,6 +106,16 @@ public class StallBuilder {
         this.overallPriceRating = overallPriceRating;
         return this;
     }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Stall} that we are
+     * building.
+     */
+    public StallBuilder withTags(String... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
 
     /**
      * Sets the {@code favorite} of the {@code Stall} that we are building.

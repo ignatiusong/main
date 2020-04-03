@@ -5,7 +5,7 @@ import static seedu.foodiebot.logic.parser.CommandParserTestUtil.assertParseFail
 import static seedu.foodiebot.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.foodiebot.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.foodiebot.logic.commands.FavoritesCommand;
@@ -13,8 +13,8 @@ import seedu.foodiebot.logic.commands.FavoritesCommand;
 class FavoritesCommandParserTest {
     private FavoritesCommandParser parser = new FavoritesCommandParser();
 
-    @BeforeAll
-    public static void setStallContext() {
+    @BeforeEach
+    public void setStallContext() {
         ParserContext.setCurrentContext(ParserContext.STALL_CONTEXT);
     }
 
@@ -22,6 +22,7 @@ class FavoritesCommandParserTest {
     void parse_validArgs_returnsFavoritesCommand() {
         assertParseSuccess(parser, "set 1", new FavoritesCommand(INDEX_FIRST_ITEM, "set"));
         assertParseSuccess(parser, "view", new FavoritesCommand("view"));
+        assertParseSuccess(parser, "remove 1", new FavoritesCommand(INDEX_FIRST_ITEM, "remove"));
     }
 
     @Test
@@ -33,5 +34,12 @@ class FavoritesCommandParserTest {
             FavoritesCommand.MESSAGE_USAGE));
 
         assertParseFailure(parser, "set 0", ParserUtil.MESSAGE_INVALID_INDEX);
+    }
+    @Test
+    public void parse_invalidContext() {
+        ParserContext.setCurrentContext(ParserContext.MAIN_CONTEXT);
+        assertParseFailure(parser, "set 1", ParserContext.INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext()
+            + "\n" + ParserContext.SUGGESTED_CONTEXT_MESSAGE
+            + ParserContext.STALL_CONTEXT);
     }
 }

@@ -9,7 +9,7 @@ class TransactionsCommandParserTest {
 
     @Test
     void parse() throws ParseException {
-        /*assertParseSuccess(parser, "2020-02-20 2020-02-25",
+        /*assertParseSuccess(parser, "f/2020-02-20 t/2020-02-25",
                 new TransactionsCommand(DateRange.of(
                         LocalDate.of(2020, 2, 20),
                         LocalDate.of(2020, 2, 25))));*/

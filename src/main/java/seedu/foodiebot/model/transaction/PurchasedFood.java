@@ -99,6 +99,7 @@ public class PurchasedFood extends Food implements Comparable<PurchasedFood> {
 
         PurchasedFood otherFood = (PurchasedFood) other;
         return otherFood.getName().equals(getName())
+                && otherFood.getReview() == getReview()
                 && otherFood.getPrice() == (getPrice())
                 && otherFood.getTags().equals(getTags());
     }

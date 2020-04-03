@@ -12,11 +12,22 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.foodiebot.logic.commands.BudgetCommand;
 import seedu.foodiebot.logic.commands.ClearCommand;
+import seedu.foodiebot.logic.commands.EnterCanteenCommand;
+import seedu.foodiebot.logic.commands.EnterStallCommand;
 import seedu.foodiebot.logic.commands.ExitCommand;
+import seedu.foodiebot.logic.commands.FilterCommand;
 import seedu.foodiebot.logic.commands.FindCommand;
+import seedu.foodiebot.logic.commands.GoToCanteenCommand;
 import seedu.foodiebot.logic.commands.HelpCommand;
 import seedu.foodiebot.logic.commands.ListCommand;
+import seedu.foodiebot.logic.commands.RandomizeCommand;
+import seedu.foodiebot.logic.commands.RateCommand;
+import seedu.foodiebot.logic.commands.ReportCommand;
+import seedu.foodiebot.logic.commands.ReviewCommand;
+import seedu.foodiebot.logic.commands.SelectItemCommand;
+import seedu.foodiebot.logic.commands.TransactionsCommand;
 import seedu.foodiebot.logic.parser.exceptions.ParseException;
 import seedu.foodiebot.model.canteen.NameContainsKeywordsPredicate;
 
@@ -24,51 +35,73 @@ public class FoodieBotParserTest {
 
     private final FoodieBotParser parser = new FoodieBotParser();
 
-    /*
-    @Test
-    public void parseCommand_add() throws Exception {
-        Canteen canteen = new CanteenBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(CanteenUtil.getAddCommand(canteen));
-        //assertEquals(new AddCommand(canteen), command);
-    }
-
-     */
-
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
-    /*@Test
     @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command =
-            (DeleteCommand)
-                parser.parseCommand(
-                    DeleteCommand.COMMAND_WORD
-                        + " "
-                        + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    public void parseCommand_goToCanteen() throws Exception {
+        assertTrue(parser.parseCommand(GoToCanteenCommand.COMMAND_WORD + " 1 f/com1") instanceof GoToCanteenCommand);
     }
 
     @Test
-    /* @Test
-    public void parseCommand_edit() throws Exception {
-        Canteen canteen = new CanteenBuilder().build();
-        EditCanteenDescriptor descriptor = new EditCanteenDescriptorBuilder(canteen).build();
-        EditCommand command =
-                (EditCommand)
-                        parser.parseCommand(
-                                EditCommand.COMMAND_WORD
-                                        + " "
-                                        + INDEX_FIRST_PERSON.getOneBased()
-                                        + " "
-                                        + CanteenUtil.getEditCanteenDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    public void parseCommand_enterCanteenOrStall() throws Exception {
+        ParserContext.setCurrentContext(ParserContext.MAIN_CONTEXT);
+        assertTrue(parser.parseCommand(EnterCanteenCommand.COMMAND_WORD + " The Deck") instanceof EnterCanteenCommand);
+        ParserContext.setCurrentContext(ParserContext.CANTEEN_CONTEXT);
+        assertTrue(parser.parseCommand(EnterStallCommand.COMMAND_WORD + " 1") instanceof EnterStallCommand);
+
     }
 
-    */
+    @Test
+    public void parseCommand_selectItem() throws Exception {
+        ParserContext.setCurrentContext(ParserContext.STALL_CONTEXT);
+        assertTrue(parser.parseCommand(SelectItemCommand.COMMAND_WORD + " 1") instanceof SelectItemCommand);
+    }
+
+    @Test
+    public void parseCommand_budget() throws Exception {
+        assertTrue(parser.parseCommand(BudgetCommand.COMMAND_WORD + " set m/1") instanceof BudgetCommand);
+    }
+
+    @Test
+    public void parseCommand_report() throws Exception {
+        assertTrue(parser.parseCommand(ReportCommand.COMMAND_WORD + " ") instanceof ReportCommand);
+    }
+
+    @Test
+    public void parseCommand_randomize() throws Exception {
+        assertTrue(parser.parseCommand(RandomizeCommand.COMMAND_WORD + " ") instanceof RandomizeCommand);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " asian") instanceof FilterCommand);
+    }
+
+    @Test
+    public void parseCommand_transactions() throws Exception {
+        assertTrue(parser.parseCommand(TransactionsCommand.COMMAND_WORD + " ") instanceof TransactionsCommand);
+    }
+
+    @Test
+    public void parseCommand_rate() throws Exception {
+        ParserContext.setCurrentContext(ParserContext.TRANSACTIONS_CONTEXT);
+        assertTrue(parser.parseCommand(RateCommand.COMMAND_WORD + " 1 7") instanceof RateCommand);
+        ParserContext.setCurrentContext(ParserContext.MAIN_CONTEXT);
+        assertThrows(ParseException.class, () -> parser.parseCommand(RateCommand.COMMAND_WORD + " 1 7"));
+    }
+
+    @Test
+    public void parseCommand_review() throws Exception {
+        ParserContext.setCurrentContext(ParserContext.TRANSACTIONS_CONTEXT);
+        assertTrue(parser.parseCommand(ReviewCommand.COMMAND_WORD + " 1 review") instanceof ReviewCommand);
+        ParserContext.setCurrentContext(ParserContext.MAIN_CONTEXT);
+        assertThrows(ParseException.class, () -> parser.parseCommand(ReviewCommand.COMMAND_WORD + " 1 review"));
+    }
+
 
     @Test
     public void parseCommand_exit() throws Exception {

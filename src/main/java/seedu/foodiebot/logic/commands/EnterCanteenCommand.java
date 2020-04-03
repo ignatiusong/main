@@ -1,6 +1,7 @@
 package seedu.foodiebot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.foodiebot.model.Model.PREDICATE_SHOW_ALL;
 
 import java.util.List;
 import java.util.Optional;
@@ -67,10 +68,9 @@ public class EnterCanteenCommand extends Command {
                 canteenList = model.getFilteredCanteenList();
             }
             if (index.get().getZeroBased() <= canteenList.size()) {
-                model.updateFilteredStallList(Model.PREDICATE_SHOW_ALL);
+                model.updateFilteredStallList(PREDICATE_SHOW_ALL);
                 Canteen canteen = canteenList.get(index.get().getZeroBased());
                 ParserContext.setCanteenContext(canteen);
-                ParserContext.setCurrentCanteen(Optional.of(canteen));
                 logger.info("Enter " + canteen.getName());
                 model.updateFilteredStallList(s -> s.getCanteenName().equalsIgnoreCase(
                         canteen.getName().toString()));

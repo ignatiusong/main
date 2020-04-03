@@ -1,5 +1,6 @@
 package seedu.foodiebot.logic;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.foodiebot.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.foodiebot.testutil.Assert.assertThrows;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.foodiebot.logic.commands.CommandResult;
 import seedu.foodiebot.logic.commands.ListCommand;
 import seedu.foodiebot.logic.commands.exceptions.CommandException;
+import seedu.foodiebot.logic.parser.ParserContext;
 import seedu.foodiebot.logic.parser.exceptions.ParseException;
 import seedu.foodiebot.model.Model;
 import seedu.foodiebot.model.ModelManager;
@@ -31,15 +33,17 @@ public class LogicManagerTest {
 
     private Model model = new ModelManager();
     private Logic logic;
+    private Logic logicCopy;
 
     @BeforeEach
     public void setUp() {
         JsonFoodieBotStorage addressBookStorage =
-                new JsonFoodieBotStorage(temporaryFolder.resolve("addressBook.json"));
+            new JsonFoodieBotStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+            new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
+
     }
 
     @Test
@@ -47,6 +51,20 @@ public class LogicManagerTest {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
+
+    @Test
+    public void execute_no_errors() {
+        assertDoesNotThrow(() -> logic.setGuiSettings(logic.getGuiSettings()));
+        assertDoesNotThrow(() -> logic.getFilteredCanteenListSortedByDistance());
+        assertDoesNotThrow(() -> logic.getFilteredStallList(false));
+        assertDoesNotThrow(() -> logic.getFilteredFoodList(false));
+        assertDoesNotThrow(() -> logic.getFilteredFavoriteFoodList(false));
+        assertDoesNotThrow(() -> logic.getFilteredTransactionsList());
+        assertDoesNotThrow(() -> logic.getFilteredRandomizeList());
+        assertDoesNotThrow(() -> logic.getReport());
+        assertDoesNotThrow(() -> logic.getFoodieBot());
+    }
+
 
     /*
     @Test
@@ -61,11 +79,11 @@ public class LogicManagerTest {
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
 
-    /* @Test
-     public void execute_storageThrowsIoException_throwsCommandException() {
-         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-         JsonFoodieBotStorage addressBookStorage =
-                 new JsonFoodieBotIoExceptionThrowingStub(
+    @Test
+    public void execute_storageThrowsIoException_throwsCommandException() throws
+        ParseException, IOException, CommandException {
+        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
+        /* JsonFoodieBotStorage addressBookStorage = new JsonFoodieBotIoExceptionThrowingStub(
                          temporaryFolder.resolve("ioExceptionAddressBook.json"));
          JsonUserPrefsStorage userPrefsStorage =
                  new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
@@ -78,9 +96,18 @@ public class LogicManagerTest {
          ModelManager expectedModel = new ModelManager();
          expectedModel.addCanteen(expectedCanteen);
          String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
-     }
- */
+         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);*/
+        JsonFoodieBotStorage addressBookStorage =
+            new JsonFoodieBotIoExceptionThrowingStub(
+                temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+            new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ParserContext.setCurrentContext(ParserContext.STALL_CONTEXT);
+        logicCopy = new LogicManager(model, storage);
+        assertThrows(CommandException.class, () -> logicCopy.execute("favorites set 2142"));
+    }
+
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(
@@ -96,8 +123,8 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(
-            String inputCommand, String expectedMessage, Model expectedModel)
-            throws CommandException, ParseException, IOException {
+        String inputCommand, String expectedMessage, Model expectedModel)
+        throws CommandException, ParseException, IOException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -130,9 +157,9 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(
-            String inputCommand,
-            Class<? extends Throwable> expectedException,
-            String expectedMessage) {
+        String inputCommand,
+        Class<? extends Throwable> expectedException,
+        String expectedMessage) {
         Model expectedModel = new ModelManager(model.getFoodieBot(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
@@ -145,10 +172,10 @@ public class LogicManagerTest {
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(
-            String inputCommand,
-            Class<? extends Throwable> expectedException,
-            String expectedMessage,
-            Model expectedModel) {
+        String inputCommand,
+        Class<? extends Throwable> expectedException,
+        String expectedMessage,
+        Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
@@ -163,7 +190,7 @@ public class LogicManagerTest {
 
         @Override
         public void saveFoodieBot(ReadOnlyFoodieBot addressBook, Path filePath, String modelType)
-                throws IOException {
+            throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

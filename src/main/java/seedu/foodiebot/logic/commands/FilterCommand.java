@@ -29,9 +29,14 @@ public class FilterCommand extends Command {
 
     private Tag tag;
     private Integer price;
+    private boolean hasTagError;
 
     public FilterCommand(String tag) {
-        this.tag = new Tag(tag);
+        try {
+            this.tag = new Tag(tag);
+        } catch (IllegalArgumentException ex) {
+            hasTagError = true;
+        }
     }
 
     public FilterCommand(int price) {
@@ -41,7 +46,9 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         String context = ParserContext.getCurrentContext();
-
+        if (hasTagError) {
+            return new CommandResult(COMMAND_WORD, Tag.MESSAGE_CONSTRAINTS);
+        }
         if (price != null) {
             if (ParserContext.getCurrentContext().equals(ParserContext.STALL_CONTEXT)) {
                 Stall stall = ParserContext.getCurrentStall().get();
@@ -75,5 +82,20 @@ public class FilterCommand extends Command {
     @Override
     public boolean needToSaveCommand() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof FilterCommand)) {
+            return false;
+        }
+
+        FilterCommand otherFilter = (FilterCommand) other;
+        //TODO replace with strong equality
+        return true;
     }
 }

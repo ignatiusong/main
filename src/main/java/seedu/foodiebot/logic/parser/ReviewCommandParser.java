@@ -31,9 +31,7 @@ public class ReviewCommandParser implements Parser<ReviewCommand> {
             Index index = Index.fromOneBased(Integer.parseInt(enteredText[0]));
             Review review = new Review(enteredText[1]);
             return new ReviewCommand(index, review);
-        } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_FAILURE + MESSAGE_USAGE);
-        } catch (IndexOutOfBoundsException oobe) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new ParseException(MESSAGE_FAILURE + MESSAGE_USAGE);
         }
     }

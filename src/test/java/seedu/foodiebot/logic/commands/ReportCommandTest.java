@@ -1,6 +1,7 @@
 package seedu.foodiebot.logic.commands;
 
 import static seedu.foodiebot.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.foodiebot.testutil.Assert.assertThrows;
 import static seedu.foodiebot.testutil.TypicalCanteens.getTypicalFoodieBot;
 
 import java.time.LocalDate;
@@ -19,10 +20,10 @@ class ReportCommandTest {
     private Model model;
     private Model expectedModel;
     private LocalDate startDate = LocalDate.of(2020, 1, 20);
+    private LocalDate sameEndDate = LocalDate.of(2020, 1, 20);
     private LocalDate endDate = LocalDate.of(2020, 2, 20);
     private DateRange dr = DateRange.of
             (startDate, endDate);
-
     ReportCommandTest() throws ParseException {
     }
 
@@ -39,6 +40,11 @@ class ReportCommandTest {
         assertCommandSuccess(new ReportCommand(dr),
               ReportCommand.COMMAND_WORD, model,
                 String.format(ReportCommand.MESSAGE_SUCCESS, startDate, endDate), model);
+        assertCommandSuccess(new ReportCommand(dr),
+            ReportCommand.COMMAND_WORD, model,
+            String.format(ReportCommand.MESSAGE_SUCCESS, startDate, sameEndDate), model);
+        assertThrows(ParseException.class, () -> new ReportCommand(DateRange.of
+            (endDate, startDate)));
     }
 
     @Test

@@ -21,6 +21,5 @@ public class FavoriteFood extends Food {
      */
     public FavoriteFood(String name, int price, String description, String foodImageName,
             int stallNo, String canteen, String stallName, Set<Tag> tags) {
-        super(name, price, description, foodImageName, stallNo, canteen, stallName, tags);
-    }
+        super(name, price, description, foodImageName, stallNo, canteen, stallName, tags); }
 }

@@ -1,5 +1,6 @@
 package seedu.foodiebot.model.canteen;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -28,18 +29,18 @@ public class UniqueCanteenListTest {
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_itemNotInList_returnsFalse() {
         assertFalse(uniqueCanteenList.contains(DECK));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_itemInList_returnsTrue() {
         uniqueCanteenList.add(DECK);
         assertTrue(uniqueCanteenList.contains(DECK));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_itemWithSameIdentityFieldsInList_returnsTrue() {
         uniqueCanteenList.add(DECK);
         Canteen editedCanteen = new CanteenBuilder(DECK).withTags(VALID_TAG_ASIAN).build();
         assertTrue(uniqueCanteenList.contains(editedCanteen));
@@ -115,7 +116,7 @@ public class UniqueCanteenListTest {
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsCanteenNotFoundException() {
+    public void remove_itemDoesNotExist_throwsCanteenNotFoundException() {
         assertThrows(CanteenNotFoundException.class, () -> uniqueCanteenList.remove(DECK));
     }
 
@@ -153,8 +154,8 @@ public class UniqueCanteenListTest {
     @Test
     public void setCanteens_list_replacesOwnListWithProvidedList() {
         uniqueCanteenList.add(DECK);
-        List<Canteen> personList = Collections.singletonList(NUSFLAVORS);
-        uniqueCanteenList.setCanteens(personList);
+        List<Canteen> itemList = Collections.singletonList(NUSFLAVORS);
+        uniqueCanteenList.setCanteens(itemList);
         UniqueCanteenList expectedUniqueCanteenList = new UniqueCanteenList();
         expectedUniqueCanteenList.add(NUSFLAVORS);
         assertEquals(expectedUniqueCanteenList, uniqueCanteenList);
@@ -173,5 +174,9 @@ public class UniqueCanteenListTest {
         assertThrows(
             UnsupportedOperationException.class, (
             ) -> uniqueCanteenList.asUnmodifiableObservableList().remove(0));
+
+        UniqueCanteenList canteenList = new UniqueCanteenList();
+        assertDoesNotThrow(canteenList::iterator);
+        assertDoesNotThrow(canteenList::hashCode);
     }
 }

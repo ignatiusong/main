@@ -27,7 +27,7 @@ public class TransactionsCommandParser implements Parser<TransactionsCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FROM_DATE, PREFIX_TO_DATE,
                 PREFIX_DATE_BY_WEEK, PREFIX_DATE_BY_MONTH, PREFIX_DATE_BY_YEAR);
 
-        if (argMultimap.size() == 1) {
+        if (argMultimap.getValue(new Prefix("")).get().equals("")) {
             // The multimap only contains the preamble. No prefixes are present.
             return new TransactionsCommand(DateRange.generate());
 

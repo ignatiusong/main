@@ -16,7 +16,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "cheap", "rice" ]
+    "tags" : [ "rice", "cheap" ]
   }, {
     "name" : "Indian",
     "canteenName" : "The Deck",
@@ -43,7 +43,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "rice", "halal", "spicy", "cheap" ]
+    "tags" : [ "halal", "spicy", "rice", "cheap" ]
   }, {
     "name" : "Noodle",
     "canteenName" : "The Deck",
@@ -79,7 +79,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "expensive", "noodle" ]
+    "tags" : [ "noodle", "expensive" ]
   }, {
     "name" : "Vegetarian",
     "canteenName" : "The Deck",
@@ -106,7 +106,7 @@
     "cuisine" : "western",
     "overallPriceRating" : "$$",
     "favorite" : 0,
-    "tags" : [ "expensive", "western" ]
+    "tags" : [ "western", "expensive" ]
   }, {
     "name" : "Salad Express",
     "canteenName" : "The Deck",
@@ -151,7 +151,7 @@
     "cuisine" : "Indian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "asian", "spicy", "cheap" ]
+    "tags" : [ "cheap", "asian", "spicy" ]
   }, {
     "name" : "Japenese and Korean",
     "canteenName" : "Nus Flavors",
@@ -160,7 +160,7 @@
     "cuisine" : "Fusion",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "expensive", "asian" ]
+    "tags" : [ "asian", "expensive" ]
   }, {
     "name" : "Mala Hot Pot",
     "canteenName" : "Nus Flavors",
@@ -169,7 +169,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "asian", "expensive", "spicy" ]
+    "tags" : [ "expensive", "spicy", "asian" ]
   }, {
     "name" : "Minced Meat Noodle",
     "canteenName" : "Nus Flavors",
@@ -196,7 +196,7 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "expensive", "asian" ]
+    "tags" : [ "asian", "expensive" ]
   }, {
     "name" : "Western",
     "canteenName" : "Nus Flavors",
@@ -223,6 +223,6 @@
     "cuisine" : "asian",
     "overallPriceRating" : "$",
     "favorite" : 0,
-    "tags" : [ "expensive", "asian" ]
+    "tags" : [ "asian", "expensive" ]
   } ]
 }

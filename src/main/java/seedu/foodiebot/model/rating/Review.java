@@ -29,7 +29,7 @@ public class Review {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Review // instanceof handles nulls
-                && this.review.get().equals(((Review) other).getReview()));
+                && this.review.get().equals(((Review) other).getReview().get()));
     }
 
     @Override

@@ -175,11 +175,6 @@ public class LogicManager implements Logic {
     public ObservableList<Stall> getFilteredStallList(boolean isInitialised) {
         return model.getFilteredStallList(isInitialised);
     }
-
-    public ObservableList<Stall> getFilteredStallList() {
-        return model.getFilteredStallList();
-    }
-
     @Override
     public ObservableList<Food> getFilteredFoodList(boolean isInitialised) {
         return model.getFilteredFoodList(isInitialised);

@@ -40,7 +40,7 @@ public class RandomizeListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new StallCard(stall, getIndex() + 1).getRoot());
+                setGraphic(new RandomizeCard(stall, getIndex() + 1).getRoot());
             }
         }
     }

@@ -29,15 +29,11 @@ public class RateCommandParser implements Parser<RateCommand> {
         }
         Index index;
         Rating rating;
-        String[] enteredText = argMultimap.getPreamble().split(" ");
+        String[] enteredText = argMultimap.getPreamble().split("\\s+");
         try {
             index = Index.fromOneBased(Integer.parseInt(enteredText[0]));
             rating = new Rating(Integer.parseInt(enteredText[1]));
-        } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_FAILURE + MESSAGE_USAGE);
-        } catch (IllegalArgumentException iae) {
-            throw new ParseException(MESSAGE_FAILURE + MESSAGE_USAGE);
-        } catch (IndexOutOfBoundsException oobe) {
+        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             throw new ParseException(MESSAGE_FAILURE + MESSAGE_USAGE);
         }
         return new RateCommand(index, rating);

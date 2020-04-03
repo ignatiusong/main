@@ -6,6 +6,8 @@ import java.util.List;
 
 import seedu.foodiebot.model.FoodieBot;
 import seedu.foodiebot.model.canteen.Canteen;
+import seedu.foodiebot.model.food.Food;
+import seedu.foodiebot.model.util.SampleDataUtil;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -48,6 +50,10 @@ public class TypicalCanteens {
         FoodieBot ab = new FoodieBot();
         for (Canteen canteen : getTypicalCanteens()) {
             ab.addCanteen(canteen);
+        }
+
+        for (Food food : SampleDataUtil.getSampleFoods()) {
+            ab.addFood(food);
         }
         return ab;
     }

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.foodiebot.commons.exceptions.IllegalValueException;
 import seedu.foodiebot.model.FoodieBot;
 import seedu.foodiebot.model.ReadOnlyFoodieBot;
 import seedu.foodiebot.model.budget.Budget;
@@ -29,14 +30,26 @@ public class JsonAdaptedBudget {
             @JsonProperty("dateTimeOfCreation") String dateTimeOfCreation,
             @JsonProperty("cycleRangeStart") String cycleRangeStart,
             @JsonProperty("cycleRangeEnd") String cycleRangeEnd) {
-        this.totalBudget = Float.parseFloat(totalBudget);
-        this.remainingBudget = Float.parseFloat(remainingBudget);
+        float remainingBudget1;
+        float totalBudget1;
+        try {
+            totalBudget1 = Float.parseFloat(totalBudget);
+            remainingBudget1 = Float.parseFloat(remainingBudget);
+        } catch (NumberFormatException | NullPointerException ex) {
+            try {
+                throw new IllegalValueException(ex.getLocalizedMessage());
+            } catch (IllegalValueException e) {
+                totalBudget1 = (float) 0;
+                remainingBudget1 = (float) 0;
+            }
+        }
+        this.remainingBudget = remainingBudget1;
+        this.totalBudget = totalBudget1;
         this.duration = duration;
         this.dateTimeOfCreation = LocalDateTime.parse(dateTimeOfCreation);
         this.cycleRangeStart = LocalDate.parse(cycleRangeStart);
         this.cycleRangeEnd = LocalDate.parse(cycleRangeEnd);
     }
-
     /** Converts a given {@code Budget} into this class for Jackson use. */
     public JsonAdaptedBudget(Budget source) {
         totalBudget = source.getTotalBudget();

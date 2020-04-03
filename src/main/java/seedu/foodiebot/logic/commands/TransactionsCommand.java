@@ -11,7 +11,10 @@ import java.util.logging.Logger;
 
 import seedu.foodiebot.commons.core.LogsCenter;
 import seedu.foodiebot.commons.core.date.DateRange;
+import seedu.foodiebot.commons.core.date.DefiniteDate;
+import seedu.foodiebot.logic.commands.exceptions.CommandException;
 import seedu.foodiebot.logic.parser.ParserContext;
+import seedu.foodiebot.logic.parser.exceptions.ParseException;
 import seedu.foodiebot.model.Model;
 
 /** Gets the latest food transactions where reviews and single-user ratings can be added. */
@@ -49,10 +52,18 @@ public class TransactionsCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ParserContext.setCurrentContext(ParserContext.TRANSACTIONS_CONTEXT);
         logger.info("Enter transactions");
+
+        try {
+            if (dateRange.getStartDate().equals(DefiniteDate.MIN_DATE)) {
+                dateRange.shiftStartDate(model.getUserPrefs().getDateFirstLaunched().get());
+            }
+        } catch (ParseException pe) {
+            throw new CommandException(pe.getMessage());
+        }
 
         model.loadFilteredTransactionsList();
         model.updateFilteredTransactionsList(purchase -> dateRange.contains(purchase.getDateAdded()));

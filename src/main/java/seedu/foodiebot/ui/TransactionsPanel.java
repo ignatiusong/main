@@ -27,6 +27,11 @@ public class TransactionsPanel extends UiPart<Region> {
         simpleListView.setCellFactory(listView -> new TransactionsPanel.TransactionListViewCell());
     }
 
+
+    public ListView<PurchasedFood> getSimpleListView() {
+        return simpleListView;
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code PurchasedFood} using a {@code
      * TransactionsCard}.

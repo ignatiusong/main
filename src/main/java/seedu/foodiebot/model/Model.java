@@ -57,13 +57,6 @@ public interface Model {
     /** Adds the given canteen. {@code canteen} must not already exist in the address book. */
     void addCanteen(Canteen canteen);
 
-    /**
-     * Replaces the given canteen {@code target} with {@code editedCanteen}. {@code target} must
-     * exist in the address book. The canteen identity of {@code editedCanteen} must not be the same
-     * as another existing canteen in the address book.
-     */
-    void setCanteen(Canteen target, Canteen editedCanteen);
-
     void setBudget(Budget budget);
 
     Optional<Budget> getBudget();

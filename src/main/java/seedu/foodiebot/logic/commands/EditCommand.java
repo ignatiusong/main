@@ -16,9 +16,9 @@ import seedu.foodiebot.commons.util.CollectionUtil;
 import seedu.foodiebot.logic.commands.exceptions.CommandException;
 import seedu.foodiebot.model.Model;
 import seedu.foodiebot.model.canteen.Canteen;
-import seedu.foodiebot.model.canteen.CanteenStub;
 import seedu.foodiebot.model.canteen.Name;
 import seedu.foodiebot.model.tag.Tag;
+import seedu.foodiebot.model.util.SampleDataUtil;
 
 /** Edits the details of an existing person in the address book. */
 public class EditCommand extends Command {
@@ -71,7 +71,7 @@ public class EditCommand extends Command {
         }
 
         Canteen canteenToEdit = lastShownList.get(index.getZeroBased());
-        CanteenStub editedCanteen = createEditedPerson(canteenToEdit, editCanteenDescriptor);
+        Canteen editedCanteen = createEditedPerson(canteenToEdit, editCanteenDescriptor);
 
         /*if (!canteenToEdit.isSameCanteen(editedCanteen) && model.hasCanteen(editedCanteen)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -87,7 +87,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit} edited with
      * {@code editPersonDescriptor}.
      */
-    private static CanteenStub createEditedPerson(
+    private static Canteen createEditedPerson(
             Canteen canteenToEdit, EditCanteenDescriptor editCanteenDescriptor) {
         assert canteenToEdit != null;
 
@@ -97,8 +97,7 @@ public class EditCommand extends Command {
         String updatedBlockName = editCanteenDescriptor.getNearestBlockName();
         Set<Tag> updatedTags = editCanteenDescriptor.getTags().orElse(canteenToEdit.getTags());
 
-        return new CanteenStub(
-                updatedName, updatedNumberOfStalls, updatedTags);
+        return SampleDataUtil.getSampleCanteens()[0];
     }
 
     @Override

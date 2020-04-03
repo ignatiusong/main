@@ -69,4 +69,21 @@ public class ReviewCommand extends Command {
         return true;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ReviewCommand)) {
+            return false;
+        }
+
+        ReviewCommand otherReview = (ReviewCommand) other;
+        return otherReview.index.orElseGet(() -> Index.fromZeroBased(0))
+            .equals(index.orElseGet(() -> Index.fromZeroBased(0)))
+            && otherReview.review.orElseGet(() -> new Review(""))
+            .equals(review.orElseGet(() -> new Review("")));
+    }
+
 }

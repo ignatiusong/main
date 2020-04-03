@@ -1,0 +1,2298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.10">
+<title>FoodieBot - Developer Guide</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment @import statement to use as custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,*::before,*::after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
+abbr{text-transform:none}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
+blockquote cite::before{content:"\2014 \0020"}
+blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
+:not(pre)>code.nobreak{word-wrap:normal}
+:not(pre)>code.nowrap{white-space:nowrap}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:100%;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details>summary:first-of-type{cursor:pointer;display:list-item;outline:none;margin-bottom:.75em}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class="paragraph"]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+table.tableblock #preamble>.sectionbody>[class="paragraph"]:first-of-type p{font-size:inherit}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class="highlight"],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos{border-right:1px solid currentColor;opacity:.35;padding-right:.5em}
+pre.pygments .lineno{border-right:1px solid currentColor;opacity:.35;display:inline-block;margin-right:.75em}
+pre.pygments .lineno::before{content:"";margin-right:-.125em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;text-align:left;margin-right:0}
+table.tableblock{max-width:100%;border-collapse:separate}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+td.tableblock>.content>:last-child.sidebarblock{margin-bottom:0}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
+table.grid-all>tfoot>tr>.tableblock{border-width:1px 1px 0 0}
+table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
+table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px}
+table.grid-rows>tfoot>tr>.tableblock{border-width:1px 0 0}
+table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
+table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
+table.frame-all{border-width:1px}
+table.frame-sides{border-width:0 1px}
+table.frame-topbot,table.frame-ends{border-width:1px 0}
+table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd),table.stripes-even tr:nth-of-type(even),table.stripes-hover tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
+ul.inline{display:-ms-flexbox;display:-webkit-box;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media print,amzn-kf8{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body class="article">
+<div id="header">
+<h1>FoodieBot - Developer Guide</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-18">
+<p>By: <code>F11-03</code>      Since: <code>Feb 2020</code>      Licence: <code>MIT</code></p>
+</div>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle"></div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">1. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#_software_overview">1.1. Software Overview</a></li>
+<li><a href="#_purpose">1.2. Purpose</a></li>
+<li><a href="#_audience">1.3. Audience</a></li>
+</ul>
+</li>
+<li><a href="#_setting_up">2. Setting up</a></li>
+<li><a href="#_definitions">3. Definitions</a></li>
+<li><a href="#_design">4. Design</a>
+<ul class="sectlevel2">
+<li><a href="#Design-Architecture">4.1. Architecture</a></li>
+<li><a href="#Design-Ui">4.2. UI component</a></li>
+<li><a href="#Design-Logic">4.3. Logic component</a></li>
+<li><a href="#Design-Model">4.4. Model component</a></li>
+<li><a href="#Design-Storage">4.5. Storage component</a></li>
+<li><a href="#Design-Commons">4.6. Common classes</a></li>
+<li><a href="#_design_considerations">4.7. Design Considerations</a></li>
+</ul>
+</li>
+<li><a href="#_implementation">5. Implementation</a>
+<ul class="sectlevel2">
+<li><a href="#_proposed_list_feature">5.1. [Proposed] List feature</a></li>
+<li><a href="#_budget_command">5.2. Budget Command</a></li>
+<li><a href="#_enter_command">5.3. Enter Command</a></li>
+<li><a href="#_filter_command">5.4. Filter Command</a></li>
+<li><a href="#_goto_command">5.5. Goto Command</a></li>
+<li><a href="#_randomize_command">5.6. Randomize Command</a></li>
+<li><a href="#_rate_command">5.7. Rate Command</a></li>
+<li><a href="#_review_command">5.8. Review Command</a></li>
+<li><a href="#_report_command_please_update_idk_how_it_works">5.9. Report Command (Please Update, IDK how it works)</a></li>
+<li><a href="#_select_command">5.10. Select Command</a></li>
+<li><a href="#_transactions_command">5.11. Transactions Command</a></li>
+</ul>
+</li>
+<li><a href="#_testing">6. Testing</a></li>
+<li><a href="#_dev_ops">7. Dev Ops</a></li>
+<li><a href="#_product_scope">Appendix A: Product Scope</a></li>
+<li><a href="#_user_stories">Appendix B: User Stories</a>
+<ul class="sectlevel2">
+<li><a href="#_user_story_for_version_2_0">B.1. User Story for Version 2.0</a></li>
+</ul>
+</li>
+<li><a href="#_use_cases">Appendix C: Use Cases</a></li>
+<li><a href="#_non_functional_requirements">Appendix D: Non Functional Requirements</a></li>
+<li><a href="#_glossary">Appendix E: Glossary</a></li>
+<li><a href="#_product_survey">Appendix F: Product Survey</a></li>
+</ul>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-20">
+<h2 id="_introduction">1. Introduction</h2>
+<div class="sectionbody">
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-22">
+<h3 id="_software_overview">1.1. Software Overview</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-24">
+<p>FoodieBot is a campus food application which can help users look for food they want, by recommending the canteens nearest to them,
+providing randomized food suggestions, helping users plan their budget and provide info on food around
+NUS.
+FoodieBot is the one stop application to solve all meal decision problems on NUS.</p>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-29">
+<h3 id="_purpose">1.2. Purpose</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-31">
+<p>The purpose of this document is to describe the architecture and system design of the FoodieBot. This documentation is for anyone who
+wishes to understand more about FoodieBot and how it works.</p>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-34">
+<h3 id="_audience">1.3. Audience</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-36">
+<p>Our target users are students, staff and tourists, in general anyone who comes to or visits NUS.
+In particular, for the indecisive user, this application can give a random food suggestion tailored to each user based on their budget and/ or past food selections etcetera.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-39">
+<h2 id="_setting_up">2. Setting up</h2>
+<div class="sectionbody">
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-40">
+<p>Our application is being managed by the dependency management tool Gradle.
+The project is available at <a href="https://github.com/AY1920S2-CS2103T-F11-3/main" class="bare">https://github.com/AY1920S2-CS2103T-F11-3/main</a>. After cloning the repository, you can follow these steps:</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-43">
+<p>For IntelliJ users</p>
+</div>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-45">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-45">
+<p>Run gradle build.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-46">
+<p>Run gradle run.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-48">
+<h2 id="_definitions">3. Definitions</h2>
+<div class="sectionbody">
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-50">
+<p>Defined below are common terminology that will be used frequently throughout this document.</p>
+</div>
+<div class="dlist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-52">
+<dl>
+<dt class="hdlist1"><span class="BLUE">Context</span></dt>
+<dd>
+<p>Refers to which state the application is in. Use interchangeably with user interface.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-55">
+<h2 id="_design">4. Design</h2>
+<div class="sectionbody">
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-57">
+<h3 id="Design-Architecture">4.1. Architecture</h3>
+<div class="imageblock has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-60">
+<div class="content">
+<img src="images/ArchitectureDiagram.png" alt="ArchitectureDiagram">
+</div>
+<div class="title">Figure 1. Architecture Diagram</div>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-62">
+<p>The <strong><em>Architecture Diagram</em></strong> given above explains the high-level design of the App. Given below is a quick overview of each component.</p>
+</div>
+<div class="admonitionblock tip has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-65">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+The <code>.puml</code> files used to create diagrams in this document can be found in the <a href="https://github.com/AY1920S2-CS2103T-F11-3/main/tree/master/docs/diagrams/">diagrams</a> folder.
+Refer to the <a href="UsingPlantUml.html">Using PlantUML guide</a> to learn how to create and edit diagrams.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-68">
+<p><code>Main</code> has two classes called <a href="https://github.com/AY1920S2-CS2103T-F11-3/main/tree/master/src/main/java/seedu/foodiebot/Main.java"><code>Main</code></a> and <a href="https://github.com/AY1920S2-CS2103T-F11-3/main/tree/master/src/main/java/seedu/foodiebot/MainApp.java"><code>MainApp</code></a>. It is responsible for,</p>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-70">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-70">
+<p>At app launch: Initializes the components in the correct sequence, and connects them up with each other.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-71">
+<p>At shut down: Shuts down the components and invokes cleanup methods where necessary.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-73">
+<p><a href="#Design-Commons"><strong><code>Commons</code></strong></a> represents a collection of classes used by multiple other components.
+The following class plays an important role at the architecture level:</p>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-76">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-76">
+<p><code>LogsCenter</code> : Used by many classes to write log messages to the App&#8217;s log file.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-78">
+<p>The rest of the App consists of four components.</p>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-80">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-80">
+<p><a href="#Design-Ui"><strong><code>UI</code></strong></a>: The UI of the App.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-81">
+<p><a href="#Design-Logic"><strong><code>Logic</code></strong></a>: The command executor.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-82">
+<p><a href="#Design-Model"><strong><code>Model</code></strong></a>: Holds the data of the App in-memory.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-83">
+<p><a href="#Design-Storage"><strong><code>Storage</code></strong></a>: Reads data from, and writes data to, the hard disk.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-85">
+<p>Each of the four components</p>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-87">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-87">
+<p>Defines its <em>API</em> in an <code>interface</code> with the same name as the Component.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-88">
+<p>Exposes its functionality using a <code>{Component Name}Manager</code> class.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-90">
+<p>For example, the <code>Logic</code> component (see the class diagram given below) defines it&#8217;s API in the <code>Logic.java</code> interface and exposes its functionality using the <code>LogicManager.java</code> class.</p>
+</div>
+<div class="imageblock has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-93">
+<div class="content">
+<img src="images/LogicClassDiagram.png" alt="LogicClassDiagram">
+</div>
+<div class="title">Figure 2. Class Diagram of the Logic Component</div>
+</div>
+<h4 id="_how_the_architecture_components_interact_with_each_other" class="discrete has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-96">How the architecture components interact with each other</h4>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-98">
+<p>The <em>Sequence Diagram</em> below shows how the components interact with each other for the scenario where the user issues the command <code>favorites set 1</code>.</p>
+</div>
+<div class="imageblock has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-101">
+<div class="content">
+<img src="images/ArchitectureSequenceDiagram.png" alt="ArchitectureSequenceDiagram">
+</div>
+<div class="title">Figure 3. Component interactions for <code>favorites set 1</code> command</div>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-103">
+<p>The sections below give more details of each component.</p>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-106">
+<h3 id="Design-Ui">4.2. UI component</h3>
+<div class="imageblock has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-109">
+<div class="content">
+<img src="images/UiClassDiagram.png" alt="UiClassDiagram">
+</div>
+<div class="title">Figure 4. Structure of the UI Component</div>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-111">
+<p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103T-F11-3/main/tree/master/src/main/java/seedu/foodiebot/ui/Ui.java"><code>Ui.java</code></a></p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-113">
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>CanteenListPanel</code>, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-115">
+<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/AY1920S2-CS2103T-F11-3/main/tree/master/src/main/java/seedu/foodiebot/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/AY1920S2-CS2103T-F11-3/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-117">
+<p>The <code>UI</code> component,</p>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-119">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-119">
+<p>Executes user commands using the <code>Logic</code> component.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-120">
+<p>Listens for changes to <code>Model</code> data so that the UI can be updated with the modified data.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-123">
+<h3 id="Design-Logic">4.3. Logic component</h3>
+<div id="fig-LogicClassDiagram" class="imageblock has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-127">
+<div class="content">
+<img src="images/LogicClassDiagram.png" alt="LogicClassDiagram">
+</div>
+<div class="title">Figure 5. Structure of the Logic Component</div>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-129">
+<p><strong>API</strong> :
+<a href="https://github.com/AY1920S2-CS2103T-F11-3/main/tree/master/src/main/java/seedu/foodiebot/logic/Logic.java"><code>Logic.java</code></a></p>
+</div>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-132">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-132">
+<p><code>Logic</code> uses the <code>FoodieBotParser</code> class to parse the user command.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-133">
+<p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-134">
+<p>The command execution can affect the <code>Model</code> (e.g. adding a person).</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-135">
+<p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-136">
+<p>In addition, the <code>CommandResult</code> object can also instruct the <code>Ui</code> to perform certain actions, such as displaying help to the user.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-139">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The lifeline for <code>DeleteCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-142">
+<h3 id="Design-Model">4.4. Model component</h3>
+<div class="imageblock has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-145">
+<div class="content">
+<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram">
+</div>
+<div class="title">Figure 6. Structure of the Model Component</div>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-147">
+<p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103T-F11-3/main/tree/master/src/main/java/seedu/foodiebot/model/Model.java"><code>Model.java</code></a></p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-149">
+<p>The <code>Model</code>,</p>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-151">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-151">
+<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-152">
+<p>stores the FoodieBot data.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-153">
+<p>exposes an unmodifiable <code>ObservableList&lt;Canteen&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-154">
+<p>does not depend on any of the other three components.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-157">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+As a more OOP model, we can store a <code>Tag</code> list in <code>FoodieBot</code>, which <code>Canteen</code> can reference. This would allow <code>FoodieBot</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Canteen</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+<br>
+<span class="image"><img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram"></span>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-162">
+<h3 id="Design-Storage">4.5. Storage component</h3>
+<div class="imageblock has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-165">
+<div class="content">
+<img src="images/StorageClassDiagram.png" alt="StorageClassDiagram">
+</div>
+<div class="title">Figure 7. Structure of the Storage Component</div>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-167">
+<p><strong>API</strong> : <a href="https://github.com/AY1920S2-CS2103T-F11-3/main/tree/master/src/main/java/seedu/foodiebot/storage/Storage.java"><code>Storage.java</code></a></p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-169">
+<p>The <code>Storage</code> component,</p>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-171">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-171">
+<p>can save <code>UserPref</code> objects in json format and read it back.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-172">
+<p>can save the FoodieBot data in json format and read it back.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-175">
+<h3 id="Design-Commons">4.6. Common classes</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-177">
+<p>Classes used by multiple components are in the <code>seedu.foodiebot.commons</code> package.</p>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-180">
+<h3 id="_design_considerations">4.7. Design Considerations</h3>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-181">
+<h4 id="_aspect_executing_similar_tasks_but_for_different_objects">4.7.1. Aspect: Executing similar tasks but for different objects</h4>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-183">
+<p>e.g. Selecting canteens, stalls, food.</p>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-185">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-185">
+<p>Alternative 1 (current choice): Create a context class that
+executes commands based on the context the user is in.</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-187">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-187">
+<p>Pros: Higher quality user interface, user does not need to remember
+so many commands.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-189">
+<p>Cons: More difficult to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-191">
+<p>Alternative 2: Create different commands for different objects</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-192">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-192">
+<p>Pros: Easier to implement. There will not be any chance
+of overlapping commands</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-194">
+<p>Cons: Reduce quality of user interface as user has to remember many
+different commands.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-198">
+<h2 id="_implementation">5. Implementation</h2>
+<div class="sectionbody">
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-200">
+<h3 id="_proposed_list_feature">5.1. [Proposed] List feature</h3>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-201">
+<h4 id="_proposed_implementation">5.1.1. Proposed Implementation</h4>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-203">
+<p>The list command is facilitated by <code>ListCommandParser</code>.
+It extends <code>FoodieBotParser</code> to handle list canteen commands.
+It implements the following operations:</p>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-207">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-207">
+<p><code>ListCommand#execute()</code>&#8201;&#8212;&#8201;Updates the canteen list to show all the canteens or filtered by location.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-210">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<code>ListCommand</code> extends <code>Command</code> with <code>Command#execute()</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-212">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-212">
+<p><code>ListCommandParser#arePrefixesPresent()</code>&#8201;&#8212;&#8201;Checks if the prefixes specified in <code>parse()</code> are found in the command entered by the user.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-213">
+<p><code>ListCommandParser#parse()</code>&#8201;&#8212;&#8201;Identifies if prefixes have been specified and handles them respectively.<br>
+For example, if ListCommand has the nearest block name passed through as a parameter <code>list f\com1</code>, ListCommand will filter the canteen list with the given block name with <code>new ListCommand("com1")</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-216">
+<p>The following sequence diagram shows how the list operation works:</p>
+</div>
+<div class="imageblock has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-219">
+<div class="content">
+<img src="images/ListSequenceDiagram.png" alt="ListSequenceDiagram">
+</div>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-221">
+<p>The following activity diagram summarizes what happens when a user executes a list command:</p>
+</div>
+<div class="imageblock has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-224">
+<div class="content">
+<img src="images/ListActivityDiagram.png" alt="ListActivityDiagram">
+</div>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-227">
+<h4 id="_list_design_considerations">5.1.2. List Design Considerations</h4>
+<div class="sect4 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-228">
+<h5 id="_aspect_user_command_format">Aspect: User command format</h5>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-230">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-230">
+<p><strong>Alternative 1 (current choice):</strong> <code>list f/com</code></p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-231">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-231">
+<p>Pros: Easy to implement.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-232">
+<p>Cons: <code>f/</code> is an optional prefix, user might forget that it exists as no error is shown in the command result box</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-233">
+<p><strong>Alternative 2:</strong> find nearest <code>BLOCK_NAME</code></p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-234">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-234">
+<p>Pros: The user finds it natural to type the word find.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-235">
+<p>Cons: Can be confusing whether find shows the list of canteens, food, or location of the canteen on campus. Having the 'find' command is also one additional command for the user to remember.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-237">
+<h3 id="_budget_command">5.2. Budget Command</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-239">
+<p>The <code>budget</code> command is implemented by the <code>BudgetCommand</code> class.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-241">
+<p>This command is accessed by the <code>LogicManager#execute()</code> to set the budget for the user or to view the current budget of the user.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-243">
+<p>The following <em>activity diagram</em> illustrate the different scenario for the budge command:</p>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-247">
+<h4 id="_budget_command_implementation">5.2.1. Budget Command Implementation</h4>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-249">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-249">
+<p>The <code>LogicManager</code> first executes <code>FoodieBotParser</code> to create a <code>BudgetCommandParse</code> object.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-250">
+<p><code>BudgetCommandParse</code> then parse the budget command to determine if the action of the budget is <code>set</code>, <code>view</code> or invalid.<br>
+This process returns a new <code>BudgetCommand</code> object.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-252">
+<p>The <code>LogicManager</code> then access then <code>BudgetCommand#execute()</code> to determine the type of execution.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-253">
+<p>If the action is <code>set</code> then the <code>budget</code> object saves the user input accordingly.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-254">
+<p>If the action is <code>view</code> then the budge is retrieve from the storage.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-255">
+<p>The <code>BudgetCommand#execute()</code> returns a <code>CommandResult</code> object to the <code>LogicManger</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-257">
+<p>Below is the <em>sequence diagram</em> that summarizes what happens during the execution of the <code>budget</code> command:</p>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-261">
+<h4 id="_budget_design_considerations">5.2.2. Budget Design Considerations</h4>
+<div class="sect4 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-262">
+<h5 id="_aspect">Aspect:</h5>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-264">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-264">
+<p><strong>Alternative 1 (current choice):</strong> `</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-265">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-265">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-266">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-267">
+<p><strong>Alternative 2:</strong></p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-268">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-268">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-269">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-271">
+<h3 id="_enter_command">5.3. Enter Command</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-273">
+<p>The <code>Enter</code> command is implemented by either the <code>EnterCanteenCommand</code> class or the <code>EnterStallCommand</code> class.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-275">
+<p>These commands are accessed by the <code>LogicManager#execute()</code> to switch the user interface accordingly base on where the user is at.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-277">
+<p>The following <em>activity diagram</em> illustrates the different scenario for the enter command:</p>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-281">
+<h4 id="_enter_command_implementation">5.3.1. Enter Command Implementation</h4>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-283">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-283">
+<p>The <code>LogicManager</code> first executes <code>FoodieBotParser</code> which parses the user input into a <code>ParserContext</code> to determine if the user is currently on the main context.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-284">
+<p>If the user has input <code>enter</code> on the main context, it creates a <code>EnterCanteenCommandParser</code> object that parses in the user input to determine which canteen to enter.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-285">
+<p>Otherwise if the user has Input <code>enter</code> on the stall context, it creates a <code>EnterStallCommandParser</code> object that parses in the user input to determine which stall to enter
+This process returns a new <code>EnterCanteenCommand</code> <strong>/</strong> <code>EnterStallCommand</code> object accordingly to the <code>LogicManager</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-287">
+<p>The <code>LogicManager</code> then access <code>EnterCanteenCommand#execute()</code> <strong>/</strong> <code>EnterStallCommand#execute()</code> to switch the current display to the stalls/food available within the selected canteen/stall.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-288">
+<p>Both <code>EnterCanteenCommand#execute()</code> and <code>EnterStallCommand#execute()</code> returns a <code>CommandResult</code> object to the <code>LogicManger</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-290">
+<p>Below is the <em>sequence diagram</em> that summarizes what happens during the execution of the <code>enter</code> command:</p>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-294">
+<h4 id="_enter_design_considerations">5.3.2. Enter Design Considerations</h4>
+<div class="sect4 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-295">
+<h5 id="_aspect_2">Aspect:</h5>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-297">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-297">
+<p><strong>Alternative 1 (current choice):</strong> `</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-298">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-298">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-299">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-300">
+<p><strong>Alternative 2:</strong></p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-301">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-301">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-302">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-304">
+<h3 id="_filter_command">5.4. Filter Command</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-306">
+<p>The <code>filter</code> command is implemented by the <code>FilterCommand</code> class.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-308">
+<p>This command is accessed by the <code>LogicManager#execute()</code> to filter outputs according to th euser input.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-310">
+<p>The following <em>activity diagram</em> illustrates what happens when a user executes the <code>filter</code> command:</p>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-314">
+<h4 id="_filter_command_implementation">5.4.1. Filter Command Implementation</h4>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-316">
+<p>The <code>LogicManager</code> first executes <code>FoodieBotParser</code> to create a <code>FilterCommandParser</code> object.
+. <code>FilterCommandParser</code> then parse the filter command to determine if the filter output should be by price range or tags<br>
+This process returns a new <code>FilterCommand</code> object.
+. The <code>LogicManager</code> then access <code>FilterCommand#execute()</code> which filter the options based on the user input and the context where <code>filter</code> is called.
+. If the filter option is based on a price, the current context has to be the stall, otherwise an error message is thrown.
+. If the option is based on a tag, the filter option will return a list of option base on the current context.
+. <code>FilterCommand#execute()</code> returns a <code>CommandResult</code> to the <code>LogicManager</code>.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-324">
+<p>Below is the <em>sequence diagram</em> that summarizes what happens during the execution of the <code>filter</code> command:</p>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-328">
+<h4 id="_filter_design_considerations">5.4.2. Filter Design Considerations</h4>
+<div class="sect4 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-329">
+<h5 id="_aspect_3">Aspect:</h5>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-331">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-331">
+<p><strong>Alternative 1 (current choice):</strong> `</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-332">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-332">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-333">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-334">
+<p><strong>Alternative 2:</strong></p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-335">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-335">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-336">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-340">
+<h3 id="_goto_command">5.5. Goto Command</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-342">
+<p>The <code>goto</code> command is implemented by the <code>GoToCanteenCommand</code> class.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-344">
+<p>This command is accessed by the <code>LogicManager#execute()</code> to display the direction to a canteen base on the user input.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-346">
+<p>The following <em>activity diagram</em> illustrates what happens when a user executes the <code>goto</code> command:</p>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-350">
+<h4 id="_goto_command_implementation">5.5.1. Goto Command Implementation</h4>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-352">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-352">
+<p>The <code>LogicManager</code> first executes <code>FoodieBotParser</code> to create a <code>GoToCanteenCommandParser</code> object.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-353">
+<p><code>GoToCanteenCommandParser</code> then parse the goto command to determine the canteen name and the current location.<br>
+This process returns a new <code>GoToCanteenCommand</code> object.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-355">
+<p>The <code>LogicManager</code> then access <code>GoToCanteenCommand#execute()</code> to retrieve the directions based on the user input.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-356">
+<p><code>GoToCanteenCommand#execute()</code> creates a new <code>DirectionsCommandResults</code> that extends the <code>CommandResult</code> which is to be returned
+to the <code>LogicManager</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-359">
+<p>Below is the <em>sequence diagram</em> that summarizes what happens during the execution of the <code>goto</code> command:</p>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-363">
+<h4 id="_goto_design_considerations">5.5.2. Goto Design Considerations</h4>
+<div class="sect4 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-364">
+<h5 id="_aspect_4">Aspect:</h5>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-366">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-366">
+<p><strong>Alternative 1 (current choice):</strong> `</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-367">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-367">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-368">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-369">
+<p><strong>Alternative 2:</strong></p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-370">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-370">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-371">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-373">
+<h3 id="_randomize_command">5.6. Randomize Command</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-375">
+<p>The <code>randomize</code> command is implemented  by the <code>RandomizeCommand</code> class.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-377">
+<p>This command is accessed by the <code>LogicManager#execute()</code> to generate 5 random options based on the user input.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-379">
+<p>The following <em>activity diagram</em> illustrates the different scenario for the randomize command:</p>
+</div>
+<div class="imageblock has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-381">
+<div class="content">
+<img src="images/RandomizeActivityDiagram.png" alt="RandomizeActivityDiagram">
+</div>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-383">
+<h4 id="_randomize_command_implementation">5.6.1. Randomize Command Implementation</h4>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-385">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-385">
+<p>The <code>LogicManager</code> first executes <code>FoodieBotParser</code> to create a <code>RandomizeCommandParser</code> object.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-386">
+<p><code>RandomizeCommandParser</code> then parse the randomize command to separate the prefix if any and return a command object.
+In this case a <code>RandomizeCommand</code> object is created and returned to the <code>LogicManager</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-388">
+<p>The <code>LogicManager</code> then access <code>RandomizeCommand#execute()</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-389">
+<p>From <code>RandomizeCommand#execute()</code>, <code>randomize</code> objects are called to generate 5 random options based on the user input.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-390">
+<p>The <code>RandomizeCommand#execute()</code> returns a  <code>CommandResult</code> object to the <code>LogicManger</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-392">
+<p>Below is the <em>sequence diagram</em> that summarizes what happens during the execution of the <code>randomize</code> command:</p>
+</div>
+<div class="imageblock has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-394">
+<div class="content">
+<img src="images/RandomizeSequenceDiagram.png" alt="RandomizeSequenceDiagram">
+</div>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-396">
+<h4 id="_randomize_design_considerations">5.6.2. Randomize Design Considerations</h4>
+<div class="sect4 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-397">
+<h5 id="_aspect_context_where_randomize_can_be_called_from">Aspect: Context where <code>randomize</code> can be called from</h5>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-399">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-399">
+<p><strong>Alternative 1 (current choice):</strong> <code>randomize</code> function is only called from the canteen context.</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-400">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-400">
+<p>Pros: Easy to implement.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-401">
+<p>Cons: Prefix are necessary to indicate if randomize is to be within one canteen only.</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-402">
+<p><strong>Alternative 2:</strong> <code>randomize</code> can be called after entering a canteen.</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-403">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-403">
+<p>Pros: Reduce user inputs.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-404">
+<p>Cons: Additional method will be needed to store the knowledge of the current canteen entered.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-406">
+<h3 id="_rate_command">5.7. Rate Command</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-408">
+<p>The <code>rate</code> command is implemented by the <code>RateCommand</code> class.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-410">
+<p>This command is accessed by the <code>LogicManager#execute()</code> to rate a food item.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-412">
+<p>The following <em>activity diagram</em> illustrates what happens when a user executes the <code>rate</code> command:</p>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-416">
+<h4 id="_rate_command_implementation">5.7.1. Rate Command Implementation</h4>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-418">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-418">
+<p>The <code>LogicManager</code> first executes <code>FoodieBotParser</code> to create a <code>RateCommandParser</code> object.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-419">
+<p><code>RateCommandParser</code> then parse in the user input to ensure that the <code>rate</code> command is only use in the transaction context
+and that the inputs are valid.<br>
+This process creates and return a <code>RateCommand</code> object to the <code>LogicManager</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-422">
+<p>The <code>LogicManager</code> then access the <code>RateCommand#execute()</code> to retrieve the food item from the transaction storage and
+update the rating of the food.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-424">
+<p>The <code>RateCommand#execute()</code> returns a  <code>CommandResult</code> object to the <code>LogicManger</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-426">
+<p>Below is the <em>sequence diagram</em> that summarizes what happens during the execution of the <code>rate</code> command:</p>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-430">
+<h4 id="_rate_design_considerations">5.7.2. Rate Design Considerations</h4>
+<div class="sect4 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-431">
+<h5 id="_aspect_5">Aspect:</h5>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-433">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-433">
+<p><strong>Alternative 1 (current choice):</strong> `</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-434">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-434">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-435">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-436">
+<p><strong>Alternative 2:</strong></p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-437">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-437">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-438">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-440">
+<h3 id="_review_command">5.8. Review Command</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-442">
+<p>The <code>review</code> command is implemented by the <code>ReviewCommand</code> class.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-444">
+<p>This command is accessed by the <code>LogicManager#execute()</code> to review a food item.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-446">
+<p>The following <em>activity diagram</em> illustrates what happens when a user executes the <code>review</code> command:</p>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-450">
+<h4 id="_review_command_implementation">5.8.1. Review Command Implementation</h4>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-452">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-452">
+<p>The <code>LogicManager</code> first executes <code>FoodieBotParser</code> to create a <code>ReviewCommandParser</code> object.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-453">
+<p><code>ReviewCommandParser</code> then parse in the user input to ensure that the <code>review</code> command is only use in the transaction context
+and that the inputs are valid.<br>
+This process creates and return a <code>ReviewCommand</code> object to the <code>LogicManager</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-456">
+<p>The <code>LogicManager</code> then access the <code>ReviewCommand#execute()</code> to retrieve the food item from the transaction storage and
+update the review of the food.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-458">
+<p>The <code>ReviewCommand#execute()</code> returns a  <code>CommandResult</code> object to the <code>LogicManger</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-460">
+<p>Below is the <em>sequence diagram</em> that summarizes what happens during the execution of the <code>review</code> command:</p>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-464">
+<h4 id="_review_design_considerations">5.8.2. Review Design Considerations</h4>
+<div class="sect4 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-465">
+<h5 id="_aspect_6">Aspect:</h5>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-467">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-467">
+<p><strong>Alternative 1 (current choice):</strong> `</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-468">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-468">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-469">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-470">
+<p><strong>Alternative 2:</strong></p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-471">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-471">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-472">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-474">
+<h3 id="_report_command_please_update_idk_how_it_works">5.9. Report Command (Please Update, IDK how it works)</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-476">
+<p>The <code>report</code> command is implemented by the <code>ReportCommand</code> class.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-478">
+<p>This command is accessed by the <code>LogicManager#execute()</code> to review a food item.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-480">
+<p>The following <em>activity diagram</em> illustrates what happens when a user executes the <code>report</code> command:</p>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-484">
+<h4 id="_report_command_implementation">5.9.1. Report Command Implementation</h4>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-486">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-486">
+<p>The <code>LogicManager</code> first executes <code>FoodieBotParser</code> to create a <code>ReportCommandParser</code> object.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-487">
+<p><code>ReportCommandParser</code> then parse the user input to determine the period of report to display.<br>
+This Process returns a <code>ReportCommand</code> object to the <code>LogicManager</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-489">
+<p>The <code>LogicManager</code> then access <code>ReportCommand#execute()</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-490">
+<p>The <code>ReportCommand#execute()</code></p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-491">
+<p>The <code>ReportCommand#execute()</code> returns a  <code>CommandResult</code> object to the <code>LogicManger</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-493">
+<p>Below is the <em>sequence diagram</em> that summarizes what happens during the execution of the <code>report</code> command:</p>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-497">
+<h4 id="_review_design_considerations_2">5.9.2. Review Design Considerations</h4>
+<div class="sect4 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-498">
+<h5 id="_aspect_7">Aspect:</h5>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-500">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-500">
+<p><strong>Alternative 1 (current choice):</strong> `</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-501">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-501">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-502">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-503">
+<p><strong>Alternative 2:</strong></p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-504">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-504">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-505">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-508">
+<h3 id="_select_command">5.10. Select Command</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-510">
+<p>The <code>select</code> command is implemented  by the <code>SelectItemCommand</code> class.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-512">
+<p>This command is accessed by the <code>LogicManager#execute()</code> to store the current selected food item into the storage as well as to update the current budget of the user.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-514">
+<p>The following <em>activity diagram</em> illustrates what happens when a user executes the <code>select</code> command:</p>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-518">
+<h4 id="_select_command_implementation">5.10.1. Select Command Implementation</h4>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-520">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-520">
+<p>The <code>LogicManager</code> first executes <code>FoodieBotParser</code> to create a <code>SelectItemCommandParser</code> object.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-521">
+<p><code>SelectItemCommandParser</code> then parse the select command to ensure that the select command is called only on the stall context.
+This process also checks if the user input is the food index or the food name that is available in that stall.
+Returning a <code>SelectItemCommand</code> object to the <code>LogicManager</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-524">
+<p>The <code>LogicManager</code> then access <code>SelectItemCommand#execute()</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-525">
+<p>The <code>SelectItemCommand#execute()</code> retrieve that food selected and update other variables within its class for storage.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-526">
+<p>The <code>SelectItemCommand#execute()</code> returns a  <code>CommandResult</code> object to the <code>LogicManger</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-528">
+<p>Below is the <em>sequence diagram</em> that summarizes what happens during the execution of the <code>select</code> command:</p>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-532">
+<h4 id="_select_design_considerations">5.10.2. Select Design Considerations</h4>
+<div class="sect4 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-533">
+<h5 id="_aspect_8">Aspect:</h5>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-535">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-535">
+<p><strong>Alternative 1 (current choice):</strong> `</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-536">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-536">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-537">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-538">
+<p><strong>Alternative 2:</strong></p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-539">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-539">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-540">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-542">
+<h3 id="_transactions_command">5.11. Transactions Command</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-544">
+<p>The <code>transaction</code> command is implemented  by the <code>TransactionsCommand</code> class.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-546">
+<p>This command is accessed by the <code>LogicManager#execute()</code> to display the transaction of the given period if stated.</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-548">
+<p>The following <em>activity diagram</em> illustrates what happens when a user executes the <code>transactions</code> command:</p>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-552">
+<h4 id="_transactions_command_implementation">5.11.1. Transactions Command Implementation</h4>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-554">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-554">
+<p>The <code>LogicManager</code> first executes <code>FoodieBotParser</code> to create a <code>TransactionsCommandParser</code> object.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-555">
+<p><code>TransactionsCommandParser</code> then parse the user input to determine the period of transaction report to display.<br>
+This Process returns a <code>TransactionsCommand</code> object to the <code>LogicManager</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-557">
+<p>The <code>LogicManager</code> then access <code>TransactionsCommand#execute()</code>.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-558">
+<p>The <code>TransactionsCommand#execute()</code> retrieve the transaction list from storage and display the list within the given period or everything of period is not stated.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-559">
+<p>The <code>TransactionsCommand#execute()</code> returns a  <code>CommandResult</code> object to the <code>LogicManger</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-561">
+<p>Below is the <em>sequence diagram</em> that summarizes what happens during the execution of the <code>transactions</code> command:</p>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-565">
+<h4 id="_transactions_design_considerations">5.11.2. Transactions Design Considerations</h4>
+<div class="sect4 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-566">
+<h5 id="_aspect_9">Aspect:</h5>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-568">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-568">
+<p><strong>Alternative 1 (current choice):</strong> `</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-569">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-569">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-570">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-571">
+<p><strong>Alternative 2:</strong></p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-572">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-572">
+<p>Pros:</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-573">
+<p>Cons:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-576">
+<h2 id="_testing">6. Testing</h2>
+<div class="sectionbody">
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-578">
+<p>Refer to the guide <a href="Testing.html">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-580">
+<h2 id="_dev_ops">7. Dev Ops</h2>
+<div class="sectionbody">
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-582">
+<p>Refer to the guide <a href="DevOps.html">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-585">
+<h2 id="_product_scope">Appendix A: Product Scope</h2>
+<div class="sectionbody">
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-587">
+<p><strong>Target user profile</strong>:</p>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-589">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-589">
+<p>has a need to keep track for food expenses</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-590">
+<p>are indecisive on what food to have in campus</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-591">
+<p>does not know which canteens are near them</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-592">
+<p>is comfortable with command-line inputs on desktop</p>
+</li>
+</ul>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-594">
+<p><strong>Value proposition</strong>: get a food choice decided without having to work with GUI controls</p>
+</div>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-598">
+<h2 id="_user_stories">Appendix B: User Stories</h2>
+<div class="sectionbody">
+<div class="admonitionblock note has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-600">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The user is not particularly limited to student and staff, it can be anyone who comes to visit NUS and is introduced to use the app
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-602">
+<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
+</div>
+<table class="tableblock frame-all grid-all has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-605" style="width: 80%;">
+<colgroup>
+<col style="width: 22%;">
+<col style="width: 23%;">
+<col style="width: 25%;">
+<col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see usage instructions.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">refer to instructions when I forget how to use the App.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find nearest canteens.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">get to the canteen quickly.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see which stores are open.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remove entries that I no longer need.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who is new to NUS (tourist, visitor or freshman).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">get a clear directory to the canteen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">make my way to the canteen with ease.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user in campus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">randomize a food choice.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">try something new every now and then.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who is budget conscious</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know which food items fall within my budget.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I would not overspend.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">take down some personal notes about the store, for example which dish at the mixed veg store is good.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see which is my favourite food amongst the NUS canteens.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who has an idea of what s/he wants to have</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search for food items.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see which canteens sell them.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see which food items I have not tried.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">try all food items in the canteen.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with disability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know if there is convenient access to the canteen.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">try all food items in the canteen.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student on budget</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search through prices of food items in different canteens.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">discover which are the cheapest food items.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who do not carry a lot of cash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see the type of payment methods available.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prepare myself beforehand.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">track the frequency of the food I eat.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eat certain food in moderation and save money if i have been eating expensive food frequently.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see some images of the food .</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">get some better understanding of the food aside from just the food description.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user who is health conscious</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view the dietary options available for each canteen.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know which stall i can visit.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-640">
+<h3 id="_user_story_for_version_2_0">B.1. User Story for Version 2.0</h3>
+<table class="tableblock frame-all grid-all has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-642" style="width: 80%;">
+<colgroup>
+<col style="width: 22%;">
+<col style="width: 23%;">
+<col style="width: 25%;">
+<col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>v2.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">place an order.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">receive the food when I arrive.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>v2.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">store owner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add new food items on the menu.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">easily update the menu.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>v2.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">store owner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">set menu items to be on promotion.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">attract more students to select the menu item.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>v2.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view the crowd condition.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">avoid going to the canteen if it is too crowded.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>v2.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">send invitation to a friend.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have meals together with friends.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-659">
+<h2 id="_use_cases">Appendix C: Use Cases</h2>
+<div class="sectionbody">
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-661">
+<p>(For all use cases below, the System is FoodieBot and the Actor is the user, unless specified otherwise)</p>
+</div>
+<h3 id="_use_case_uc1_select_a_randomised_stall_suggestion" class="discrete has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-664">Use case: UC1 - Select a randomised stall suggestion</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-666">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-668">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-668">
+<p>User requests to randomise</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-669">
+<p>FoodieBot shows the randomised suggestions</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-670">
+<p>User selects one of the randomised suggestion</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-673">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-675">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-678">
+<ul class="none">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-678">
+<p>1a. User wants to remove a randomised suggestion.</p>
+<div class="ulist none has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-681">
+<ul class="none">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-681">
+<p>1a1. User request to remove suggestion.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-684">
+<p>1a2. FoodieBot updates the food item not to be suggested in the future</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-686">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="_use_case_uc2_set_budget" class="discrete has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-690">Use case: UC2 - Set Budget</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-692">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-694">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-694">
+<p>(Optional) User requests to view budget</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-695">
+<p>FoodieBot shows the current budget with list of expenses</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-696">
+<p>User request to set budget</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-697">
+<p>FoodieBot updates the budget for the specified period</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-700">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-702">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-705">
+<ul class="none">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-705">
+<p>3a. The given amount is invalid.</p>
+<div class="ulist none has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-708">
+<ul class="none">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-708">
+<p>3a1. FoodieBot shows an error message.</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-710">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-713">
+<ul class="none">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-713">
+<p>3b. The given period is invalid.</p>
+<div class="ulist none has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-716">
+<ul class="none">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-716">
+<p>3b1. FoodieBot shows an error message.</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-718">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="_use_case_uc3_review_food_item" class="discrete has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-722">Use case: UC3 - Review Food Item</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-724">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-726">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-726">
+<p>User requests to view transactions</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-727">
+<p>FoodieBot shows a list of transactions</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-728">
+<p>User request to review the food item in the list</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-729">
+<p>FoodieBot shows the edit screen for user to update</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-730">
+<p>FoodieBot saves the user review</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-733">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-736">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-739">
+<ul class="none">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-739">
+<p>2a. The list is empty.</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-741">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-744">
+<ul class="none">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-744">
+<p>3a. The given index is invalid.</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-746">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-746">
+<p>3a1. FoodieBot shows an error message.</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-748">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-751">
+<ul class="none">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-751">
+<p>5. The cancel command is supplied.</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-753">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="_use_case_uc4_rate_food_item" class="discrete has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-757">Use case: UC4 - Rate Food Item</h3>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-760">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-762">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-762">
+<p>User requests to view transactions</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-763">
+<p>FoodieBot shows a list of transactions</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-764">
+<p>User request to rate the food item in the list</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-765">
+<p>FoodieBot updates the review for the food item on the list</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-768">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-770">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-773">
+<ul class="none">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-773">
+<p>2a. The list is empty.</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-775">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-779">
+<ul class="none">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-779">
+<p>3a. The given index is invalid.</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-781">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-781">
+<p>3a1. FoodieBot shows an error message.</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-783">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-787">
+<ul class="none">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-787">
+<p>3b. The given rating is invalid.</p>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-789">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-789">
+<p>3b1. FoodieBot shows an error message.</p>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-791">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-794">
+<div class="content">
+<img src="images/UseCase.png" alt="UseCase" width="400">
+</div>
+</div>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-795">
+<p>Fig1. Use Case Diagram</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-798">
+<h2 id="_non_functional_requirements">Appendix D: Non Functional Requirements</h2>
+<div class="sectionbody">
+<div class="olist arabic has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-800">
+<ol class="arabic">
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-800">
+<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>11</code> or above installed.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-801">
+<p>Should be able to hold up to 1000 food items without a noticeable sluggishness in performance for typical usage.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-802">
+<p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-803">
+<p>Should be usable by users who have never used an e-directory</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-804">
+<p>The application should have images for the food items, if the food items are shown to the user</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-805">
+<p>The system should be backward compatible with data produced by earlier versions of the system</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-809">
+<h2 id="_glossary">Appendix E: Glossary</h2>
+<div class="sectionbody">
+<div class="dlist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-810">
+<dl>
+<dt class="hdlist1">Activity Diagram</dt>
+<dd>
+<p>Use to a model workflow.</p>
+</dd>
+<dt class="hdlist1">API</dt>
+<dd>
+<p>Application Programming Interface</p>
+</dd>
+<dt class="hdlist1">CLI</dt>
+<dd>
+<p>Command Line Interface</p>
+</dd>
+<dt class="hdlist1">In-Memory</dt>
+<dd>
+<p>Type of database that relies primarily on memory for data storage.</p>
+</dd>
+<dt class="hdlist1">MSS</dt>
+<dd>
+<p>Main Success Scenario</p>
+</dd>
+<dt class="hdlist1">Mainstream OS</dt>
+<dd>
+<p>Windows, Linux, Unix, OS-X</p>
+</dd>
+<dt class="hdlist1">PlantUML</dt>
+<dd>
+<p>Component used to write diagrams.</p>
+</dd>
+<dt class="hdlist1">Sequence Diagram</dt>
+<dd>
+<p>Captures the interactions between multiple objects for a given scenario.</p>
+</dd>
+<dt class="hdlist1">UI</dt>
+<dd>
+<p>User Interface</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1 has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-840">
+<h2 id="_product_survey">Appendix F: Product Survey</h2>
+<div class="sectionbody">
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-842">
+<p><strong>Product Name</strong> Pizza on iOS appstore</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-845">
+<p>Author: Bryan Wu</p>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-847">
+<p>Pros:</p>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-849">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-849">
+<p>Allow randomisation for food that requires choosing of ingredients</p>
+</li>
+</ul>
+</div>
+<div class="paragraph has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-851">
+<p>Cons:</p>
+</div>
+<div class="ulist has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-853">
+<ul>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-853">
+<p>Allow choosing of ingredients for pizza only</p>
+</li>
+<li class="has-source-line data-line-D:/main/docs/DeveloperGuide.adoc-854">
+<p>Does not recommend which stores sell the pizza</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2020-03-29 23:13:20 +0800
+</div>
+</div>
+</body>
+</html>

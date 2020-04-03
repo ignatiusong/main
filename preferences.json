@@ -1,10 +1,10 @@
 {
   "guiSettings" : {
-    "windowWidth" : 1550.4000244140625,
-    "windowHeight" : 838.4000244140625,
+    "windowWidth" : 740.0,
+    "windowHeight" : 600.0,
     "windowCoordinates" : {
-      "x" : 620,
-      "y" : 139
+      "x" : 398,
+      "y" : 74
     }
   },
   "foodieBotFilePath" : "foodiebot.json",
@@ -12,5 +12,8 @@
   "budgetFilePath" : "foodiebot-budget.json",
   "foodFilePath" : "foodiebot-food.json",
   "favoriteFoodFilePath" : "foodiebot-favorites.json",
-  "transactionsFilePath" : "foodiebot-transactions.json"
+  "transactionsFilePath" : "foodiebot-transactions.json",
+  "dateFirstLaunched" : {
+    "value" : "2020-04-02"
+  }
 }

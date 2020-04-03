@@ -6,7 +6,6 @@ import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_DATE_BY_WEEK;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Objects;
 
 import seedu.foodiebot.commons.core.date.DateRange;
@@ -170,17 +169,6 @@ public class Budget {
                     ? "weekly"
                     : "monthly";
     }
-    /** Return the date where the budget is created. */
-    public LocalDate getDateOfCreation() {
-        // return this.dateOfCreation;
-        return this.dateTimeOfCreation.toLocalDate();
-    }
-
-    /** Return the time when the budget is created. */
-    public LocalTime getTimeOfCreation() {
-        // return this.timeOfCreation;
-        return this.dateTimeOfCreation.toLocalTime();
-    }
 
     public LocalDateTime getDateTimeOfCreation() {
         return this.dateTimeOfCreation;
@@ -194,17 +182,11 @@ public class Budget {
     /** . */
     public void subtractFromRemainingBudget(float expenses) {
         this.remainingBudget -= expenses;
-        if (this.remainingBudget < 0) {
-            this.remainingBudget = 0;
-        }
     }
 
     /** . */
     public void addToRemainingBudget(float expenses) {
         this.remainingBudget += expenses;
-        if (this.remainingBudget > this.totalBudget) {
-            this.remainingBudget = this.totalBudget;
-        }
     }
     /** Check if this is a default value */
     public boolean isDefaultBudget() {

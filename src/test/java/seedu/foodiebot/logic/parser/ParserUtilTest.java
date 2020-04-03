@@ -13,9 +13,11 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.foodiebot.commons.core.index.Index;
 import seedu.foodiebot.logic.parser.exceptions.ParseException;
 import seedu.foodiebot.model.canteen.Name;
 import seedu.foodiebot.model.tag.Tag;
+import seedu.foodiebot.model.util.SampleDataUtil;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "T@eDeck";
@@ -71,17 +73,6 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
-    }
-
-
-    @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
-    }
-
-    @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
     }
 
     @Test
@@ -143,5 +134,41 @@ public class ParserUtilTest {
         String testString = "test";
         String resultString = ParserUtil.parseFilterTag(testString);
         assertEquals(testString, resultString);
+    }
+
+    @Test
+    public void parseStallIndex_invalidIndex_throwsParseException() {
+        assertThrows(IndexOutOfBoundsException.class, () ->
+            ParserUtil.parseStallIndex("1000", SampleDataUtil.getSampleCanteens()[0]));
+    }
+
+    @Test
+    public void parseStallIndex_validIndex_returnsIndex() throws ParseException {
+        assertEquals(Index.fromOneBased(1),
+            ParserUtil.parseStallIndex("1", SampleDataUtil.getSampleCanteens()[0]));
+    }
+
+    @Test
+    public void parseBlockName() throws ParseException {
+        assertEquals("UHC",
+            ParserUtil.parseBlockName("UHC"));
+        assertThrows(ParseException.class, () ->
+            ParserUtil.parseBlockName("Invalid"));
+    }
+
+    @Test
+    public void parseCanteenIndex() throws ParseException {
+        assertEquals(Index.fromOneBased(1),
+            ParserUtil.parseCanteenIndex("1"));
+        assertThrows(ParseException.class, () ->
+            ParserUtil.parseBlockName("Invalid"));
+    }
+
+    @Test
+    public void parseCanteenName() throws ParseException {
+        assertEquals("The Deck",
+            ParserUtil.parseCanteenName("The Deck"));
+        assertThrows(ParseException.class, () ->
+            ParserUtil.parseCanteenName("Invalid"));
     }
 }

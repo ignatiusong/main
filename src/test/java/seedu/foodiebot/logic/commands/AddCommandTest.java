@@ -141,11 +141,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setCanteen(Canteen target, Canteen editedCanteen) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Canteen> getFilteredCanteenList() {
             throw new AssertionError("This method should not be called.");
         }

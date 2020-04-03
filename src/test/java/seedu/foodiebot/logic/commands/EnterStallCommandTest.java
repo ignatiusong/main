@@ -5,7 +5,6 @@ import static seedu.foodiebot.testutil.TypicalCanteens.getTypicalFoodieBot;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +31,7 @@ class EnterStallCommandTest {
     void execute_success() {
         Canteen testCanteen = new Canteen(new Name("The Deck"), 0, 0, "",
                 "", "", new HashSet<>(), "", new ArrayList<>());
-        ParserContext.setCurrentCanteen(Optional.of(testCanteen));
+        ParserContext.setCanteenContext(testCanteen);
         assertCommandSuccess(new EnterStallCommand("Western"), EnterStallCommand.COMMAND_WORD, model,
                 "", expectedModel);
     }

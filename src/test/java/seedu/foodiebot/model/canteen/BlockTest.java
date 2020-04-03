@@ -1,5 +1,6 @@
 package seedu.foodiebot.model.canteen;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.foodiebot.testutil.Assert.assertThrows;
@@ -23,6 +24,8 @@ class BlockTest {
         // null name
         assertThrows(NullPointerException.class, () -> Block.isValidBlock(null));
 
+        Block block = new Block(new Name("com1"));
+        assertEquals(block.getName().toString(), "com1");
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only

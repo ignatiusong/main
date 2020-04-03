@@ -76,9 +76,6 @@ public class Canteen {
         return numberOfStalls;
     }
 
-    public List<Stall> getStallsList() {
-        return stallsList;
-    }
 
     public int getDistance() {
         return distance;

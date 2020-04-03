@@ -12,13 +12,15 @@ import seedu.foodiebot.logic.parser.exceptions.ParseException;
 /** An abstraction of a date range represented as a tuple. */
 public class DateRange {
 
-    private final LocalDate startDate;
-    private final LocalDate endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private final DateRangeStyle style;
 
     /** Constructor of the DateRange object. */
-    private DateRange(LocalDate startDate, LocalDate endDate) {
+    private DateRange(LocalDate startDate, LocalDate endDate, DateRangeStyle style) {
         this.startDate = startDate;
         this.endDate = endDate;
+        this.style = style;
     }
 
     /**
@@ -49,16 +51,16 @@ public class DateRange {
         switch(style) {
         case LENIENT:
             if (endDate.isBefore(startDate)) {
-                return new DateRange(endDate, startDate);
+                return new DateRange(endDate, startDate, style);
             } else {
-                return new DateRange(startDate, endDate);
+                return new DateRange(startDate, endDate, style);
             }
 
         case SMART:
             if (endDate.isBefore(startDate)) {
                 break;
             }
-            return new DateRange(startDate, endDate);
+            return new DateRange(startDate, endDate, style);
 
         case STRICT:
             if (endDate.isBefore(startDate) || startDate.isAfter(LocalDate.now())) {
@@ -66,9 +68,9 @@ public class DateRange {
             }
 
             if (endDate.isAfter(LocalDate.now())) {
-                return new DateRange(startDate, LocalDate.now());
+                return new DateRange(startDate, LocalDate.now(), style);
             } else {
-                return new DateRange(startDate, endDate);
+                return new DateRange(startDate, endDate, style);
             }
 
         default:
@@ -117,7 +119,7 @@ public class DateRange {
     /** Constructs a new DateRange object. This method should be used if only one one date can be supplied,
      * with the type whether it is a start or an end date.
      * @param dateString The start/end date of the date range.
-     * @param conceptualDate Specifies if the dateString supplied is a start date or end date.
+     * @param conceptualDate Specifies if the dateString is a start date or end date.
      * @param style The date range style to conform to.
      * @return a new DateRange object.
      * @throws ParseException If the attempt to create a date range does not conform to the requirements
@@ -267,7 +269,7 @@ public class DateRange {
      * @return a DateRange object.
      */
     public static DateRange generate() throws ParseException {
-        return DateRange.of(DefiniteDate.MIN_DATE, DefiniteDate.MAX_DATE);
+        return DateRange.of(DefiniteDate.MIN_DATE, LocalDate.now());
     }
 
     /** Gets the start date of the DateRange. */
@@ -278,6 +280,37 @@ public class DateRange {
     /** Gets the end date of the DateRange. */
     public LocalDate getEndDate() {
         return this.endDate;
+    }
+
+    /** Shifts the current start date to a new date. */
+    public void shiftStartDate(LocalDate newStartDate) throws ParseException {
+        // TODO CHECK IF IT VIOLATES DATERANGE STRUCTURE
+
+        switch(this.style) {
+        case LENIENT:
+            if (newStartDate.isBefore(this.endDate)) {
+                this.startDate = newStartDate;
+            } else {
+                this.startDate = this.endDate;
+                this.endDate = newStartDate;
+            }
+            break;
+        case STRICT:
+            if (!newStartDate.isAfter(LocalDate.now()) && !newStartDate.isAfter(this.endDate)) {
+                this.startDate = newStartDate;
+            } else {
+                throw new ParseException(MESSAGE_INVALID_DATE_RANGE);
+            }
+            break;
+        default:
+            if (!newStartDate.isAfter(this.endDate)) {
+                this.startDate = newStartDate;
+            } else {
+                throw new ParseException(MESSAGE_INVALID_DATE_RANGE);
+            }
+            break;
+        }
+
     }
 
     /** Returns a boolean value if the supplied date is present in the DateRange object.

@@ -80,9 +80,15 @@ public class Randomize {
         ObservableList<Stall> internalList = FXCollections.observableArrayList(optionsList);
         ObservableList<Stall> internalUnmodifiableList =
                 FXCollections.unmodifiableObservableList(internalList);
-        System.out.println(internalList);
-        resetInternalList();
         return internalUnmodifiableList;
+    }
+
+    /**
+     * This method returns a List of stall objects.
+     * @return List of Stall object.
+     */
+    public List<Stall> getOptionsList() {
+        return optionsList;
     }
 
     /**
@@ -94,9 +100,10 @@ public class Randomize {
         if (listOutput.isEmpty() && prefix.contains("t")) {
             output.append("There are no stall with this tag: ")
                     .append(action);
-        } else if (isLessThanFiveOption) {
-            output.append("There are less than 5 stores in this canteen. This is all the result.");
         }
+        //else if (isLessThanFiveOption) {
+        //    output.append("There are less than 5 stores in this canteen. This is all the result.");
+        //}
         return output.toString();
     }
 
@@ -106,6 +113,7 @@ public class Randomize {
      * @param file which is provided from the RandomizeCommand
      */
     public void setCanteens(FileReader file) throws CommandException {
+        resetInternalList();
         JSONParser parser = new JSONParser();
         try {
             JSONObject obj = (JSONObject) parser.parse(file);
@@ -125,7 +133,6 @@ public class Randomize {
 
     /**
      * This function save canteen name and number of stalls from the canteen selected by index.
-     *
      * @param canteen which is provided from the RandomizeCommand
      */
     public void setCanteenIndex(Canteen canteen) {
@@ -136,8 +143,15 @@ public class Randomize {
     }
 
     /**
+     * This method check if the canteen name provided by user is valid.
+     * @return true if canteen name is valid.
+     */
+    public boolean ifCanteenNamePresent() {
+        return mapStalls.containsKey(action);
+    }
+
+    /**
      * This method produce a list of options by Canteen from jsonfile (foodiebot-stalls.json).
-     *
      * @param file which is provided from the RandomizeCommand.
      */
     public void getOptions(FileReader file) throws CommandException {
@@ -146,7 +160,8 @@ public class Randomize {
             JSONObject obj = (JSONObject) parser.parse(file);
             jsonArrayStall = (JSONArray) obj.get("stalls");
             List<Stall> listStall = generateListByCriteria("", "");
-            generateFiveOptions(listStall);
+            //generateFiveOptions(listStall);
+            generateOneOption(listStall);
         } catch (IOException | ParseException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_FILEREADER);
         }
@@ -154,7 +169,6 @@ public class Randomize {
 
     /**
      * This method produce a list of options from the jsonfile (foodiebot-stalls.json).
-     *
      * @param file which is provided from the RandomizeCommand.
      */
     public void getOptionsByCanteen(FileReader file) throws CommandException {
@@ -162,15 +176,52 @@ public class Randomize {
         try {
             JSONObject obj = (JSONObject) parser.parse(file);
             jsonArrayStall = (JSONArray) obj.get("stalls");
-            generateOptionsByCanteen(action);
+            //generateOptionsByCanteen(action);
+            selectedCanteen = action;
+            List<Stall> matchingCanteen = generateListByCriteria("canteen", selectedCanteen);
+            generateOneOption(matchingCanteen);
         } catch (IOException | ParseException e) {
             throw new CommandException(Messages.MESSAGE_INVALID_FILEREADER);
         }
     }
 
     /**
+     * This method produce a list of options from the jsonfile (foodiebot-stalls.json).
+     * @param file which is provided from the RandomizeCommand.
+     */
+    public void getOptionsByTags(FileReader file) throws CommandException {
+        JSONParser parser = new JSONParser();
+        try {
+            JSONObject obj = (JSONObject) parser.parse(file);
+            jsonArrayStall = (JSONArray) obj.get("stalls");
+            //generateListByTag(action);
+            List<Stall> matchingTag = generateListByCriteria("tags", action);
+            if (matchingTag.size() <= 0) {
+                throw new CommandException(Messages.MESSAGE_NO_FOOD_WITH_TAG + action);
+            } else {
+                generateOneOption(matchingTag);
+            }
+        } catch (IOException | ParseException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_FILEREADER);
+        }
+    }
+
+    /**
+     * This methods generate 1 random option.
+     * @param stalls
+     */
+    private void generateOneOption(List<Stall> stalls) {
+        int index = rand.nextInt(stalls.size());
+        Stall stall = stalls.get(index);
+        selectedCanteen = stall.getCanteenName();
+        selectedStall = stall.getName().toString();
+        listOutput.add(new String[]{selectedCanteen, selectedStall});
+        stalls.remove(index);
+        optionsList.add(stall);
+    }
+
+    /**
      * This method generate the list od options by the selected canteen.
-     *
      * @param canteenName The user input on the selected canteen.
      */
     private void generateOptionsByCanteen(String canteenName) throws CommandException {
@@ -180,7 +231,7 @@ public class Randomize {
             int canteenSize = mapStalls.get(canteenName);
             if (canteenSize >= 5) {
                 isLessThanFiveOption = false;
-                generateFiveOptions(matchingCanteen);
+                //generateFiveOptions(matchingCanteen);
             } else {
                 isLessThanFiveOption = true;
                 for (int i = 0; i < canteenSize; i++) {
@@ -197,7 +248,6 @@ public class Randomize {
 
     /**
      * This method add the option to the list
-     *
      * @param listOfStalls List of Stall object with the matching canteen.
      */
     private void generateFiveOptions(List<Stall> listOfStalls) {
@@ -214,7 +264,6 @@ public class Randomize {
 
     /**
      * This method check if the current option already exist in the list.
-     *
      * @param canteen This is the selected canteen
      * @param stall   This is the selected stall
      * @return Boolean true if option is not on the list, false otherwise
@@ -231,31 +280,14 @@ public class Randomize {
     }
 
     /**
-     * This method produce a list of options from the jsonfile (foodiebot-stalls.json).
-     *
-     * @param file which is provided from the RandomizeCommand.
-     */
-    public void getOptionsByTags(FileReader file) throws CommandException {
-        JSONParser parser = new JSONParser();
-        try {
-            JSONObject obj = (JSONObject) parser.parse(file);
-            jsonArrayStall = (JSONArray) obj.get("stalls");
-            generateListByTag(action);
-        } catch (IOException | ParseException e) {
-            throw new CommandException(Messages.MESSAGE_INVALID_FILEREADER);
-        }
-    }
-
-    /**
-     * This method generate the list od options by the selected canteen.
-     *
+     * This method generate the list of options by the selected canteen.
      * @param tag The user input on the selected tag.
      */
     private void generateListByTag(String tag) {
         List<Stall> matchingTag = generateListByCriteria("tags", tag);
         if (matchingTag.size() >= 5) {
             isLessThanFiveOption = false;
-            generateFiveOptions(matchingTag);
+            //generateFiveOptions(matchingTag);
         } else {
             isLessThanFiveOption = true;
             for (int i = 0; i < matchingTag.size(); i++) {
@@ -270,7 +302,6 @@ public class Randomize {
 
     /**
      * This method return a list of stalls object that satisfy the criteria.
-     *
      * @param type     define by which to filter by canteen or tags.
      * @param criteria more information on on type in details.
      * @return List of stalls that satisfy the type and criteria.
@@ -298,7 +329,6 @@ public class Randomize {
 
     /**
      * This method create a new Stall Object.
-     *
      * @param jsonStall JSONObject with the detail for a stall.
      * @return Stall object.
      */

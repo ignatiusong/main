@@ -16,7 +16,7 @@ class JsonSerializableStallTest {
     }
 
     @Test
-    public void constructor_validFoodieBot() {
+    public void constructor_validStall() {
         new JsonSerializableStall(createSampleModel().getFoodieBot());
     }
 

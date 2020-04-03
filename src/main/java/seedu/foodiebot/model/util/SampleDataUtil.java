@@ -10,7 +10,6 @@ import seedu.foodiebot.model.ReadOnlyFoodieBot;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Name;
 import seedu.foodiebot.model.canteen.Stall;
-import seedu.foodiebot.model.favorites.FavoriteFood;
 import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.tag.Tag;
 
@@ -64,13 +63,13 @@ public class SampleDataUtil {
                         new Stall(new Name("Western"), "The Deck", 11, "Western.png",
                         "western",
                         "$", 0, getTagSet("expensive", "western"), new ArrayList<>()),
-                        new Stall(new Name("Pasta Express"), "The Deck", 13, "PastaExpress.png",
+                        new Stall(new Name("Pasta Express"), "The Deck", 12, "PastaExpress.png",
                         "western",
                         "$$", 0, getTagSet("western", "expensive"), new ArrayList<>()),
-                        new Stall(new Name("Salad Express"), "The Deck", 14, "SaladExpress.png",
+                        new Stall(new Name("Salad Express"), "The Deck", 13, "SaladExpress.png",
                         "asian",
                         "$", 0, getTagSet("expensive"), new ArrayList<>()),
-                        new Stall(new Name("Uncle Penyet"), "The Deck", 15, "UnclePenyet.png",
+                        new Stall(new Name("Uncle Penyet"), "The Deck", 14, "UnclePenyet.png",
                         "fusion",
                         "$", 0, getTagSet("asian", "western", "rice", "spicy", "expensive"), new ArrayList<>())));
         ArrayList<Stall> flavourStalls = new ArrayList<Stall>(
@@ -84,7 +83,7 @@ public class SampleDataUtil {
                         new Stall(new Name("Indian Cuisine"), "Nus Flavors", 3, "Indian Cuisine.png",
                                 "Indian",
                                 "$", 0, getTagSet("asian", "spicy", "cheap"), new ArrayList<>()),
-                        new Stall(new Name("Japenese and Korean"), "Nus Flavors", 4, "JapKor.png",
+                        new Stall(new Name("Japanese and Korean"), "Nus Flavors", 4, "JapKor.png",
                                 "Fusion",
                                 "$", 0, getTagSet("asian", "expensive"), new ArrayList<>()),
                         new Stall(new Name("Mala Hot Pot"), "Nus Flavors", 5, "MalaHotPot.png",
@@ -163,13 +162,13 @@ public class SampleDataUtil {
             new Stall(new Name("Western"), "The Deck", 11, "Western.png",
                 "western",
                 "$", 0, getTagSet("expensive", "western"), new ArrayList<>()),
-            new Stall(new Name("Pasta Express"), "The Deck", 13, "PastaExpress.png",
+            new Stall(new Name("Pasta Express"), "The Deck", 12, "PastaExpress.png",
                 "western",
                 "$$", 0, getTagSet("western", "expensive"), new ArrayList<>()),
-            new Stall(new Name("Salad Express"), "The Deck", 14, "SaladExpress.png",
+            new Stall(new Name("Salad Express"), "The Deck", 13, "SaladExpress.png",
                 "asian",
                 "$", 0, getTagSet("expensive"), new ArrayList<>()),
-            new Stall(new Name("Uncle Penyet"), "The Deck", 15, "UnclePenyet.png",
+            new Stall(new Name("Uncle Penyet"), "The Deck", 14, "UnclePenyet.png",
                 "fusion",
                 "$", 0, getTagSet("asian", "western", "rice", "spicy", "expensive"), new ArrayList<>()),
             new Stall(new Name("Duck and Chicken Rice"), "Nus Flavors", 1, "DuckandChickenRice.png",
@@ -181,7 +180,7 @@ public class SampleDataUtil {
             new Stall(new Name("Indian Cuisine"), "Nus Flavors", 3, "Indian Cuisine.png",
                 "Indian",
                 "$", 0, getTagSet("asian", "spicy", "cheap"), new ArrayList<>()),
-            new Stall(new Name("Japenese and Korean"), "Nus Flavors", 4, "JapKor.png",
+            new Stall(new Name("Japanese and Korean"), "Nus Flavors", 4, "JapKor.png",
                 "Fusion",
                 "$", 0, getTagSet("asian", "expensive"), new ArrayList<>()),
             new Stall(new Name("Mala Hot Pot"), "Nus Flavors", 5, "MalaHotPot.png",
@@ -209,40 +208,73 @@ public class SampleDataUtil {
     }
 
     public static Food[] getSampleFoods() {
-        return new Food[] { new Food("Combo Set", 6, "1 Meat, 1 Pasta, 2 Sides", "Combo Set.png",
-                        1, "Nus Flavors", "Western", getTagSet("western", "expensive")),
-                            new Food("Cai Fan", 3, "1 Meat, 2 Veg", "Cai Fan.png",
+        return new Food[] { new Food("Roasted Chicken Rice", 4, "Roasted Meat and Chicken Rice",
+                        "Roasted Chicken Rice.png", 1, "Nus Flavors",
+                        "Duck and Chicken Rice", getTagSet("asian", "cheap", "rice")),
+                            new Food("Fish Bee Hoon", 4, "Been Hoon with Fish", "Fish Bee Hoon.png",
+                        2, "Nus Flavors", "Five Grains Bee Hoon", getTagSet("asian", "cheap", "noodle")),
+                            new Food("Roti Prata Set", 3, "2 Pieces and Curry", "Roti Prata Set.png",
+                        3, "Nus Flavors", "Indian Cuisine", getTagSet("cheap", "indian")),
+                            new Food("Beef Rice Set", 5, "Fried Korean Beef with Rice", "Beef Rice Set.png",
+                        4, "Nus Flavors", "Japanese and Korean", getTagSet("korean", "expensive")),
+                            new Food("Mala", 10, "Assorted Meat and Veg with Mala Sauce", "Mala.png",
+                        5, "Nus Flavors", "Mala Hot Pot", getTagSet("asian", "expensive", "spicy")),
+                            new Food("Fried Meatball Noodle", 5, "Fried Meatball with Minced Meat Noodles",
+                        "Fried Meatball Noodle.png", 6, "Nus Flavors",
+                        "Minced Meat Noodle", getTagSet("asian", "noodle")),
+                            new Food("Cai Fan Set", 3, "2 Meat 1 Veg", "Cai Fan Set.png",
+                        7, "Nus Flavors", "Mixed Veg Rice", getTagSet("asian", "cheap", "rice")),
+                            new Food("Popcorn Chicken with Veg Set", 6, "Popcorn Chicken, vegetable and rice",
+                        "Popcorn Chicken with Veg Set.png", 8, "Nus Flavors",
+                        "Taiwan Cuisine", getTagSet("asian", "expensive")),
+                            new Food("Combo Set", 6, "1 Meat, 1 Pasta, 2 Sides", "Combo Set.png",
+                        9, "Nus Flavors", "Western", getTagSet("western", "expensive")),
+                            new Food("Fried Rice", 4, "Local Fried Rice", "Fried Rice.png",
+                        10, "Nus Flavors", "Wok Fried", getTagSet("asian", "expensive", "rice")),
+                            new Food("Xiao Long Bao", 5, "7 pieces", "Xiao Long Bao.png",
+                        11, "Nus Flavors", "Xiao Long Bao", getTagSet("asian", "expensive")),
+                            new Food("Cai Fan", 3, "1 Meat, 2 Veg", "Cai Fan Set.png",
                         1, "The Deck", "Chinese Cooked Food", getTagSet("expensive")),
-                            new Food("Ayam Penyet", 5, "Ayam Penyet", "Ayam Penyet.png",
-                        15, "The Deck", "Uncle Penyet", getTagSet("asian", "western", "expensive")),
+                            new Food("Assorted Claypot Chicken with Rice", 4, "Black sauce chicken wtih rice",
+                        "Assorted Claypot Chicken with Rice.png", 2, "The Deck",
+                        "Claypot Seafood Soup", getTagSet("asian", "cheap", "rice")),
+                            new Food("Roti Prata", 3, "2 pieces and curry", "Roti Prata.png",
+                        3, "The Deck", "Indian", getTagSet("indian", "spicy", "cheap")),
+                            new Food("Katsudon Rice Set", 5, "Chicken Cutlet with rice", "Katsudon Rice Set.png",
+                        4, "The Deck", "Japanese", getTagSet("japanese", "expensive", "rice")),
+                            new Food("Beef Rendang", 5, "Nasi Goodness", "Beef Rendang.png",
+                        5, "The Deck", "Muslim", getTagSet("asian", "expensive", "spicy")),
+                            new Food("Mini Hot Pot Noodle", 4, "Minced Meat Noodle with Soup",
+                        "Mini Hot Pot Noodle.png", 6, "The Deck",
+                        "Noodle", getTagSet("asian", "cheap", "noodles")),
+                            new Food("Chicken Rice Set", 4, "Rice, Chicken, Vegetable and Soup", "Chicken Rice Set.png",
+                        7, "The Deck", "Roasted Delights", getTagSet("asian", "cheap")),
+                            new Food("Fried Kway Teow", 4, "Fried Kway Teow with fried delights", "Fried Kway Teow.png",
+                        8, "The Deck", "Snacks and Fried Kway Teow", getTagSet("asian", "cheap")),
+                            new Food("Laksa Yong Tau Foo", 4, "Spicy and Delicious", "Laksa Yong Tau Foo.png",
+                        9, "The Deck", "Yong Tau Foo and Laksa", getTagSet("asian", "expensive", "spicy")),
+                            new Food("Vegetarian Set", 4, "Vegetable with rice", "Vegetarian Set.png",
+                        10, "The Deck", "Vegetarian", getTagSet("asian", "cheap", "vegetarian")),
                             new Food("Fried Fish", 5, "Fried Fish and chips", "Fried Fish.png",
                         11, "The Deck", "Western", getTagSet("western", "expensive")),
+                            new Food("Carbonara", 6, "Pasta with Cream Sauce", "Carbonara.png",
+                        12, "The Deck", "Pasta Express", getTagSet("western", "expensive")),
+                            new Food("Assorted Salads", 6, "Variety of salads", "Assorted Salads.png",
+                        13, "The Deck", "Salad Express", getTagSet("vegetarian", "expensive")),
+                            new Food("Ayam Penyet", 5, "Ayam Penyet", "Ayam Penyet.png",
+                        14, "The Deck", "Uncle Penyet", getTagSet("asian", "western", "expensive")),
         };
     }
 
-
-    private static FavoriteFood[] getSampleFavoriteFood() {
-        return new FavoriteFood[]{new FavoriteFood("Combo Set", 6, "1 Meat, 1 Pasta, 2 Sides", "Combo Set.png",
-                1, "Nus Flavors", "Western", getTagSet("1")),
-            new FavoriteFood("Cai Fan", 3, "1 Meat, 2 Veg", "Cai Fan.png",
-                1, "The Deck", "Chinese Cooked Food", getTagSet("expensive")),
-            new FavoriteFood("Ayam Penyet", 5, "Ayam Penyet", "Ayam Penyet.png",
-                15, "The Deck", "Uncle Penyet", getTagSet("asian", "western", "expensive")),
-            new FavoriteFood("Fried Fish", 5, "Fried Fish and chips", "Fried Fish.png",
-                11, "The Deck", "Western", getTagSet("western", "expensive")),
-        };
-    }
 
     public static ReadOnlyFoodieBot getSampleFoodieBot() {
         FoodieBot sampleFb = new FoodieBot();
         for (Canteen sampleCanteen : getSampleCanteens()) {
             sampleFb.addCanteen(sampleCanteen);
         }
-
         for (Stall sampleStall : getSampleStalls()) {
             sampleFb.addStall(sampleStall);
         }
-
         for (Food sampleFood : getSampleFoods()) {
             sampleFb.addFood(sampleFood);
         }

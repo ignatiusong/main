@@ -7,6 +7,9 @@ import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_FROM_DATE;
 import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_TO_DATE;
 
 import seedu.foodiebot.commons.core.date.DateRange;
+import seedu.foodiebot.commons.core.date.DefiniteDate;
+import seedu.foodiebot.logic.commands.exceptions.CommandException;
+import seedu.foodiebot.logic.parser.exceptions.ParseException;
 import seedu.foodiebot.model.Model;
 
 /** Get the latest expenses within a date range and output in report format */
@@ -43,10 +46,18 @@ public class ReportCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.loadFilteredTransactionsList();
 
+        try {
+            if (dateRange.getStartDate().equals(DefiniteDate.MIN_DATE)) {
+                dateRange.shiftStartDate(model.getUserPrefs().getDateFirstLaunched().get());
+            }
+        } catch (ParseException pe) {
+            throw new CommandException(pe.getMessage());
+        }
+
+        model.loadFilteredTransactionsList();
         model.getReport().create(
                 model.getFilteredTransactionsList(), purchase -> dateRange.contains(purchase.getDateAdded()));
 

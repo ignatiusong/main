@@ -17,6 +17,7 @@ public class ParserContext {
     public static final String INVALID_CONTEXT_MESSAGE = "Wrong context to use this command. Current Context: ";
     public static final String SUGGESTED_CONTEXT_MESSAGE = "Context to use this command in: ";
     public static final String FAVORITE_CONTEXT = "FAVORITE";
+    public static final String RANDOMIZE_CONTEXT = "RANDOMIZE";
 
     private static String currentContext = ParserContext.MAIN_CONTEXT;
     private static String previousContext = ParserContext.MAIN_CONTEXT;
@@ -41,16 +42,9 @@ public class ParserContext {
         return currentCanteen;
     }
 
-    public static void setCurrentCanteen(Optional<Canteen> canteen) {
-        currentCanteen = canteen;
-    }
 
     public static Optional<Stall> getCurrentStall() {
         return currentStall;
-    }
-
-    public static void setCurrentStall(Optional<Stall> stall) {
-        currentStall = stall;
     }
 
     public static void setCanteenContext(Canteen canteen) {
@@ -61,12 +55,12 @@ public class ParserContext {
          * there is a check in MainWindow for EnterCanteenCommand, whether it is MAIN or
          * CANTEEN, so should only change currentContext after it passes through check
          */
-        ParserContext.setCurrentCanteen(Optional.of(canteen));
+        currentCanteen = Optional.ofNullable(canteen);
     }
 
     public static void setStallContext(Stall stall) {
         //ParserContext.setCurrentContext(ParserContext.STALL_CONTEXT);
-        ParserContext.setCurrentStall(Optional.of(stall));
+        currentStall = Optional.ofNullable(stall);
     }
 
 }

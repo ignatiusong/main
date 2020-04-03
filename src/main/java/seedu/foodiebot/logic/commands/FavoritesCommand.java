@@ -17,6 +17,7 @@ import seedu.foodiebot.commons.core.index.Index;
 import seedu.foodiebot.logic.parser.ParserContext;
 import seedu.foodiebot.model.Model;
 import seedu.foodiebot.model.food.Food;
+import seedu.foodiebot.model.stall.exceptions.DuplicateStallException;
 
 /**
  * Displays the food items favorited by the user.
@@ -29,6 +30,7 @@ public class FavoritesCommand extends Command {
 
     public static final String MESSAGE_VIEW_SUCCESS = "Listed all favorites";
     public static final String MESSAGE_SET_SUCCESS = "Favorited %s";
+    public static final String MESSAGE_SET_DUPLICATE_FOOD = "Already in your favorites: %s";
     public static final String MESSAGE_REMOVE_SUCCESS = "Removed %s";
 
 
@@ -63,7 +65,12 @@ public class FavoritesCommand extends Command {
                         return new ActionCommandResult(COMMAND_WORD, action, Food.INVALID_FOOD_INDEX);
                     }
                     Food food = foodList.get(indexInteger);
-                    model.setFavorite(food);
+                    try {
+                        model.setFavorite(food);
+                    } catch (DuplicateStallException ex) {
+                        return new ActionCommandResult(COMMAND_WORD, action,
+                            String.format(MESSAGE_SET_DUPLICATE_FOOD, food.getName()));
+                    }
                     return new ActionCommandResult(COMMAND_WORD, action,
                         String.format(MESSAGE_SET_SUCCESS, food.getName()));
                 }

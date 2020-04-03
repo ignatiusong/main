@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import seedu.foodiebot.testutil.CanteenBuilder;
 
 public class NameContainsKeywordsPredicateTest {
-
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");

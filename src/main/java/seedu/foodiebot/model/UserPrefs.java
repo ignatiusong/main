@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.foodiebot.commons.core.GuiSettings;
 
@@ -18,6 +20,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private Path foodFilePath = Paths.get("foodiebot-food.json");
     private Path favoriteFoodFilePath = Paths.get("foodiebot-favorites.json");
     private Path transactionsFilePath = Paths.get("foodiebot-transactions.json");
+    private Optional<LocalDate> dateFirstLaunched = Optional.empty();
 
 
     /** Creates a {@code UserPrefs} with default values. */
@@ -34,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setFoodieBotFilePath(newUserPrefs.getFoodieBotFilePath());
+        setDateFirstLaunched(newUserPrefs.getDateFirstLaunched());
     }
 
     public GuiSettings getGuiSettings() {
@@ -67,6 +71,14 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public Path getTransactionsFilePath() {
         return transactionsFilePath;
+    }
+
+    public Optional<LocalDate> getDateFirstLaunched() {
+        return dateFirstLaunched;
+    }
+
+    public void setDateFirstLaunched(Optional<LocalDate> newDate) {
+        this.dateFirstLaunched = newDate;
     }
 
     public void setFoodieBotFilePath(Path foodieBotFilePath) {

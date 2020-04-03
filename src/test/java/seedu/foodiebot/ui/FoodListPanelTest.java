@@ -25,7 +25,6 @@ import seedu.foodiebot.model.util.SampleDataUtil;
 class FoodListPanelTest {
     private static final Food COMBO_SET = new Food("Combo Set", 6, "1 Meat, 1 Pasta, 2 Sides", "Combo Set.png",
             1, "Nus Flavors", "Western", getTagSet("western", "expensive"));
-
     private FoodListPanel panel = new FoodListPanel(
             FXCollections.observableArrayList(SampleDataUtil.getSampleFoods()));
     private ListView<Food> listView;
@@ -48,8 +47,8 @@ class FoodListPanelTest {
 
     @Test
     void init(FxRobot robot) {
-        FxAssert.verifyThat(listView, ListViewMatchers.hasListCell(
-                COMBO_SET));
+        FxAssert.verifyThat(listView, ListViewMatchers.hasItems(
+                25));
         FxAssert.verifyThat(listView, ListViewMatchers.hasItems(
                 SampleDataUtil.getSampleFoods().length));
     }

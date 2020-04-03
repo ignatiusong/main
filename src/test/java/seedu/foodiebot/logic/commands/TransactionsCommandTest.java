@@ -36,13 +36,13 @@ class TransactionsCommandTest {
     void execute_success() {
         model = new ModelManager(getTypicalFoodieBot(), new UserPrefs());
         expectedModel = new ModelManager(model.getFoodieBot(), new UserPrefs());
-        assertCommandSuccess(new ReportCommand(dr),
-                ReportCommand.COMMAND_WORD, model,
-                String.format(ReportCommand.MESSAGE_SUCCESS, startDate, endDate), model);
+        assertCommandSuccess(new TransactionsCommand(dr),
+            TransactionsCommand.COMMAND_WORD, model,
+                String.format(TransactionsCommand.MESSAGE_SUCCESS, startDate, endDate), model);
     }
 
     @Test
     void needToSaveCommand() {
-        assert (!new ReportCommand(dr).needToSaveCommand());
+        assert (!new TransactionsCommand(dr).needToSaveCommand());
     }
 }

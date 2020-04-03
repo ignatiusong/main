@@ -41,6 +41,8 @@ public class SelectItemCommand extends Command {
             + "Your remaining budget is $%.2f\nYou still have $%.2f to spend today:)";
     public static final String MESSAGE_FAILURE = "Food not found!";
     public static final String INVALID_INDEX_MESSAGE = "Please provide a valid index!";
+    public static final String EXCEEDED_BUDGET = "You will exceed your budget with this purchase!\n"
+            + "Try increasing your budget.";
     private static final Logger logger = LogsCenter.getLogger(SelectItemCommand.class);
 
     private final Optional<String> foodName;
@@ -62,6 +64,15 @@ public class SelectItemCommand extends Command {
         requireNonNull(foodName);
         this.index = Optional.empty();
         this.foodName = Optional.of(foodName);
+    }
+
+    /** Save the purchased food into transactions */
+    public void saveTransaction(Model model, PurchasedFood purchase) throws IOException {
+        model.addPurchasedFood(purchase);
+        ReadOnlyFoodieBot foodieBot = model.getFoodieBot();
+        Path budgetFilePath = new UserPrefs().getBudgetFilePath();
+
+        JsonUtil.saveJsonFile(new JsonAdaptedBudget(foodieBot), budgetFilePath);
     }
 
     @Override
@@ -94,37 +105,37 @@ public class SelectItemCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        if (food.isPresent()) {
-
-            model.loadFilteredTransactionsList();
-
-            LocalDate dateAdded = LocalDate.now();
-            LocalTime timeAdded = LocalTime.now();
-            Rating rating = new Rating();
-            Review review = new Review();
-            PurchasedFood purchase = new PurchasedFood(food.get(), dateAdded, timeAdded, rating, review);
-
-            model.addPurchasedFood(purchase);
+        if (food.isEmpty()) {
+            throw new CommandException(MESSAGE_FAILURE);
         }
+
+        model.loadFilteredTransactionsList();
+
+        LocalDate dateAdded = LocalDate.now();
+        LocalTime timeAdded = LocalTime.now().withNano(0);
+        Rating rating = new Rating();
+        Review review = new Review();
+        PurchasedFood purchase = new PurchasedFood(food.get(), dateAdded, timeAdded, rating, review);
 
         if (model.getBudget().isPresent()) {
             Budget savedBudget = model.getBudget().get();
+
+            if (savedBudget.getRemainingBudget() < priceOfFood) {
+                throw new CommandException(EXCEEDED_BUDGET);
+            }
+
             savedBudget.subtractFromRemainingBudget(priceOfFood);
-
             model.setBudget(savedBudget);
-            ReadOnlyFoodieBot foodieBot = model.getFoodieBot();
-            Path budgetFilePath = new UserPrefs().getBudgetFilePath();
-
-            JsonUtil.saveJsonFile(new JsonAdaptedBudget(foodieBot), budgetFilePath);
-
             Budget newBudget = model.getBudget().get();
 
+            saveTransaction(model, purchase);
             return new CommandResult(COMMAND_WORD, String.format(
                     MESSAGE_SUCCESS_BUDGET, nameOfFood,
                     priceOfFood,
                     newBudget.getRemainingBudget(),
                     newBudget.getRemainingDailyBudget()));
         } else {
+            saveTransaction(model, purchase);
             return new CommandResult(COMMAND_WORD, String.format(
                     MESSAGE_SUCCESS, nameOfFood, priceOfFood));
         }

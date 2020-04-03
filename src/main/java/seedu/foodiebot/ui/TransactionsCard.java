@@ -52,7 +52,7 @@ public class TransactionsCard extends UiPart<Region> {
         price.setText("$" + food.getPrice());
         stallName.setText(food.getStallName());
         description.setText(food.getDescription());
-        datePurchased.setText("Purchased: " + food.getDateAdded().toString());
+        datePurchased.setText("Purchased: " + food.getDateAdded() + " at " + food.getTimeAdded());
         rating.setText("Rating: " + food.getRating().toString());
         review.setText("Review: " + food.getReview().toString());
     }

@@ -14,6 +14,7 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import javafx.application.Platform;
+import javafx.scene.input.Clipboard;
 import javafx.stage.Stage;
 
 @ExtendWith(ApplicationExtension.class)
@@ -43,6 +44,11 @@ public class HelpWindowTest {
         Platform.runLater(() -> {
             robot.interact(() -> helpWindow.show());
             assertTrue(helpWindow.isShowing());
+            helpWindow.focus();
+            helpWindow.copyUrl();
+            assertFalse(Clipboard.getSystemClipboard().getString().isBlank());
+            robot.interact(() -> helpWindow.hide());
+            assertFalse(helpWindow.isShowing());
         });
     }
 

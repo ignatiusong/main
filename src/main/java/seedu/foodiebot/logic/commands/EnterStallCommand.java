@@ -11,6 +11,7 @@ import seedu.foodiebot.commons.core.index.Index;
 import seedu.foodiebot.logic.parser.ParserContext;
 import seedu.foodiebot.model.Model;
 import seedu.foodiebot.model.canteen.Stall;
+import seedu.foodiebot.model.randomize.Randomize;
 
 /**
  * Represents a command telling the user to enter a particular stall
@@ -31,7 +32,10 @@ public class EnterStallCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(EnterStallCommand.class);
 
     private final Optional<String> stallName;
-    private final Optional<Index> index;
+    private Optional<Index> index;
+
+    private Randomize randomize = Randomize.checkRandomize();
+
 
     /**
      * @param index of the canteen in the filtered stall list to edit
@@ -55,24 +59,47 @@ public class EnterStallCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        String currentCanteenName = ParserContext.getCurrentCanteen().get().getName().toString();
+        String currContext = ParserContext.getCurrentContext();
+        String currentCanteenName = "";
+        if (!currContext.equals("RANDOMIZE")) {
+            currentCanteenName = ParserContext.getCurrentCanteen().get().getName().toString();
+        } else {
+            try {
+                int idx = Integer.parseInt(stallName.get());
+                index = Optional.of(Index.fromOneBased(idx));
+            } catch (NumberFormatException ne) {
+                ne.printStackTrace();
+            }
+        }
         if (index.isPresent()) {
-            Stall stall = model.getFilteredStallList().get(index.get().getZeroBased());
+            Stall stall;
+            if (currContext.equals("RANDOMIZE")) {
+                stall = model.getFilteredRandomizeList().get(index.get().getZeroBased());
+                currentCanteenName = stall.getCanteenName();
+            } else {
+                stall = model.getFilteredStallList().get(index.get().getZeroBased());
+            }
             ParserContext.setStallContext(stall);
             logger.info("Enter " + stall.getName());
+            String finalCurrentCanteenName = currentCanteenName;
             model.updateFilteredFoodList(f -> f.getStallName().equalsIgnoreCase(stall.getName().toString())
-                    && f.getCanteen().equals(currentCanteenName));
-
+                    && f.getCanteen().equals(finalCurrentCanteenName));
         } else if (stallName.isPresent()) {
-            List<Stall> stalls = model.getFilteredStallList();
+            List<Stall> stalls;
+            if (currContext.equals("RANDOMIZE")) {
+                stalls = randomize.getOptionsList();
+            } else {
+                stalls = model.getFilteredStallList();
+            }
             boolean found = false;
             for (Stall s : stalls) {
                 if (s.getName().toString().equalsIgnoreCase(stallName.get())) {
+                    currentCanteenName = s.getCanteenName();
                     ParserContext.setStallContext(s);
-                    ParserContext.setCurrentStall(Optional.of(s));
                     //Might have 2 stalls from 2 canteens with same name
+                    String finalCurrentCanteenName1 = currentCanteenName;
                     model.updateFilteredFoodList(f -> f.getStallName().equalsIgnoreCase(s.getName().toString())
-                            && f.getCanteen().equals(currentCanteenName));
+                            && f.getCanteen().equals(finalCurrentCanteenName1));
                     found = true;
                     break;
                 }

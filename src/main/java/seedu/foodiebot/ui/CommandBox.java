@@ -1,7 +1,8 @@
 package seedu.foodiebot.ui;
 
+import static java.util.logging.Level.INFO;
+
 import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.fxmisc.richtext.InlineCssTextField;
@@ -10,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
-
 import seedu.foodiebot.commons.core.LogsCenter;
 import seedu.foodiebot.logic.commands.CommandResult;
 import seedu.foodiebot.logic.commands.exceptions.CommandException;
@@ -26,6 +26,9 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
     private static final Logger logger = LogsCenter.getLogger(CommandBox.class);
     protected boolean match = false;
+    protected boolean suggested = true;
+    protected String lastMatch = "";
+
     private final CommandExecutor commandExecutor;
 
     @FXML
@@ -35,47 +38,70 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.commandExecutor = commandExecutor;
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-                String pattern = "goto [a-zA-Z0-9]+ f\\/[^.]";
-                if (this.match && commandTextField.getText().matches(pattern)) {
-                    String text = commandTextField.getText().substring(commandTextField.getText().indexOf('/') + 1);
+                String pattern = "goto [a-zA-Z0-9\\s}]+ f\\/[a-zA-Z0-9]+";
+                if (suggested & commandTextField.getText().matches(pattern)) {
+                    String text = "";
+                    try {
+                        text = commandTextField.getText().substring(commandTextField.getText().indexOf('/') + 1,
+                            commandTextField.getText().indexOf('/') + 2 + lastMatch.length());
+                    } catch (IndexOutOfBoundsException ex) {
+                        logger.fine(ex.getLocalizedMessage());
+                    }
                     String userEntered = commandTextField.getText().substring(0,
                         commandTextField.getText().indexOf('/') + 1);
-
+                    logger.log(INFO, "text " + text);
+                    this.match = false;
+                    suggested = false;
                     for (String s : Block.BLOCKS) {
-                        if (s.toLowerCase().startsWith(text.stripLeading())) {
-                            commandTextField.setText(userEntered.concat(s));
-                            commandTextField.requestFocus();
+                        if (s.toLowerCase().startsWith(text.stripLeading().toLowerCase())) {
+                            logger.log(INFO, "new " + newValue);
+                            lastMatch = text;
+                            logger.log(INFO, "lastMatch " + lastMatch);
+                            if (lastMatch.length() > s.length()) {
+                                continue;
+                            }
+
+                            String temp = userEntered.concat(lastMatch).concat(s.substring(lastMatch.length()));
+                            commandTextField.setText(temp.toLowerCase());
+                            commandTextField.setStyle(0, commandTextField.getText()
+                                    .indexOf('/') + 1 + lastMatch.length(),
+                                "-fx-fill: #fff;");
+                            commandTextField.setStyle(commandTextField.getText().indexOf('/') + 1 + lastMatch.length(),
+                                commandTextField.getText().length(), "-fx-fill: #696969;");
                             commandTextField.setOnKeyPressed(event -> {
                                 if (event.getCode() == KeyCode.BACK_SPACE) {
-                                    commandTextField.clear();
-                                    commandTextField.setText(userEntered);
+                                    if (commandTextField.getText().length() > userEntered.length()) {
+                                        suggested = true;
+                                        lastMatch = "";
+                                        commandTextField.setText(userEntered);
+                                    } else {
+                                        this.match = false;
+                                        if (!lastMatch.isEmpty()) {
+                                            lastMatch = lastMatch.substring(0, lastMatch.length() - 1);
+                                        }
+                                    }
                                 }
+
                             });
-                            commandTextField.setStyle(0, commandTextField.getText().indexOf('/') + 1,
-                                "-fx-fill: #fff;");
-                            commandTextField.setStyle(commandTextField.getText().indexOf('/') + 1,
-                                commandTextField.getText().length() , "-fx-fill: #696969;");
-                            logger.log(Level.INFO, text.stripLeading());
-                            this.match = false;
+                            this.match = true;
                             break;
                         }
                     }
 
-
-                } else {
-                    pattern = "goto [a-zA-Z0-9]+ f[(\\/]$";
-                    if (commandTextField.getText().matches(pattern)) {
-                        this.match = true;
-                        commandTextField.setOnKeyPressed(event -> {
-                            if (event.getCode() == KeyCode.BACK_SPACE) {
-
-                            }
-
-                            if (event.getCode() == KeyCode.DELETE) {
-                                commandTextField.clear();
-                            }
-                        });
+                    if (!suggested) {
+                        suggested = true;
                     }
+
+                    if (!match) {
+                        text = commandTextField.getText().substring(commandTextField.getText().indexOf('/') + 1,
+                            commandTextField.getText().indexOf('/') + 2 + lastMatch.length());
+                        String temp = userEntered.concat(text);
+                        commandTextField.setText(temp);
+                        suggested = false;
+
+                    }
+
+
                 }
             }
         );
@@ -103,6 +129,7 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToDefault() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        commandTextField.setStyle(0, commandTextField.getText().length(), "-fx-fill: #fff");
     }
 
     /**
@@ -117,6 +144,11 @@ public class CommandBox extends UiPart<Region> {
 
         styleClass.add(ERROR_STYLE_CLASS);
         commandTextField.setStyle(0, commandTextField.getText().length(), "-fx-fill: #d06651");
+        commandTextField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.BACK_SPACE) {
+                setStyleToDefault();
+            }
+        });
     }
 
     /**

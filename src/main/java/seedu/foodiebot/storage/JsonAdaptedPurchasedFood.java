@@ -65,7 +65,7 @@ public class JsonAdaptedPurchasedFood {
         this.canteen = canteen;
         this.stallName = stallName;
         this.dateAdded = LocalDate.parse(dateAdded);
-        this.timeAdded = LocalTime.parse(timeAdded);
+        this.timeAdded = LocalTime.parse(timeAdded).withNano(0);
         this.rating = rating;
         this.review = review;
     }

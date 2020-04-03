@@ -1,6 +1,8 @@
 package seedu.foodiebot.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX;
+import static seedu.foodiebot.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.foodiebot.logic.parser.CommandParserTestUtil.assertParseSuccess;
 //import static seedu.foodiebot.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
@@ -29,7 +31,7 @@ class EnterStallCommandParserTest {
 
     @Test
     public void parse_invalidIndex_returnsEnterStallCommand() {
-        //assertParseFailure(parser, "0", MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+        assertParseFailure(parser, "0", MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
 
     @Test

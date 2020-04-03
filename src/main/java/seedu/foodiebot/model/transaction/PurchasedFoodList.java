@@ -16,7 +16,8 @@ import seedu.foodiebot.model.stall.exceptions.StallNotFoundException;
  */
 public class PurchasedFoodList implements Iterable<PurchasedFood> {
     private final ObservableList<PurchasedFood> internalList = FXCollections.observableArrayList();
-
+    private final ObservableList<PurchasedFood> internalUnmodifiableList =
+        FXCollections.unmodifiableObservableList(internalList);
     /**
      * Returns true if the list contains an equivalent food as the given argument.
      */
@@ -99,6 +100,13 @@ public class PurchasedFoodList implements Iterable<PurchasedFood> {
         internalList.sort((a, b) -> b.getDateAdded().atTime(b.getTimeAdded())
                 .compareTo(a.getDateAdded().atTime(a.getTimeAdded())));
         return internalList;
+    }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<PurchasedFood> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
     }
 
     @Override

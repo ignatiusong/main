@@ -1,23 +1,31 @@
 package seedu.foodiebot.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static seedu.foodiebot.model.Model.PREDICATE_SHOW_ALL;
 import static seedu.foodiebot.testutil.Assert.assertThrows;
 import static seedu.foodiebot.testutil.TypicalCanteens.DECK;
 import static seedu.foodiebot.testutil.TypicalCanteens.NUSFLAVORS;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.function.Predicate;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.foodiebot.commons.core.GuiSettings;
-import seedu.foodiebot.model.canteen.Canteen;
+import seedu.foodiebot.model.budget.Budget;
 import seedu.foodiebot.model.canteen.NameContainsKeywordsPredicate;
+import seedu.foodiebot.model.rating.Rating;
+import seedu.foodiebot.model.rating.Review;
+import seedu.foodiebot.model.stall.exceptions.StallNotFoundException;
+import seedu.foodiebot.model.transaction.PurchasedFood;
+import seedu.foodiebot.model.util.SampleDataUtil;
 import seedu.foodiebot.testutil.FoodieBotBuilder;
 
 public class ModelManagerTest {
@@ -128,8 +136,59 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(foodieBot, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        Predicate<Canteen> showAllPredicate = unused -> true;
-        modelManager.updateFilteredCanteenList(showAllPredicate);
+        modelManager.updateFilteredCanteenList(PREDICATE_SHOW_ALL);
+
+        modelManager.updateFilteredStallList(
+            f -> f.getName().equals("Cai Fan"));
+
+        modelManager.updateFilteredStallList(PREDICATE_SHOW_ALL);
+        assertTrue(modelManager.equals(new ModelManager(foodieBot, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredCanteenList(PREDICATE_SHOW_ALL);
+
+        //Favorites
+        assertDoesNotThrow(() -> modelManager.setFavorite(SampleDataUtil.getSampleFoods()[1]));
+        assertFalse(modelManager.equals(new ModelManager(foodieBot, userPrefs)));
+        //Reset Favorites
+        assertThrows(StallNotFoundException.class, () -> modelManager
+            .removeFavorite(SampleDataUtil.getSampleFoods()[0]));
+
+        assertDoesNotThrow(() -> modelManager
+            .removeFavorite(SampleDataUtil.getSampleFoods()[1]));
+        assertTrue(modelManager.equals(new ModelManager(foodieBot, userPrefs)));
+
+        //Transactions
+        PurchasedFood food = new PurchasedFood(SampleDataUtil.getSampleFoods()[0],
+            LocalDate.now(), LocalTime.now(), new Rating(5), new Review());
+        modelManager.addPurchasedFood(food);
+        assertFalse(modelManager.equals(new ModelManager(foodieBot, userPrefs)));
+
+        modelManager = modelManagerCopy;
+
+        //Get filtered list does not modify existing list
+        modelManager.getFilteredCanteenListSortedByDistance();
+        assertTrue(modelManager.equals(new ModelManager(foodieBot, userPrefs)));
+
+        assertDoesNotThrow(() -> modelManager.getFilteredStallList());
+        assertDoesNotThrow(() -> modelManager.getFilteredFoodList());
+        assertDoesNotThrow(() -> modelManager.loadFilteredTransactionsList());
+        assertDoesNotThrow(() -> modelManager.getFilteredFoodList(true));
+        assertDoesNotThrow(() -> modelManager.getFilteredFoodList(false));
+        assertDoesNotThrow(() -> modelManager.updateFilteredFoodList(PREDICATE_SHOW_ALL));
+        assertDoesNotThrow(() -> modelManager.updateModelManagerFavoriteList());
+        assertDoesNotThrow(() -> modelManager.updateModelManagerStalls());
+
+        //Budget
+        modelManager.setBudget(new Budget(15f, "d/"));
+        assertFalse(modelManager.equals(new ModelManager(foodieBot, userPrefs)));
+        try {
+            assertEquals(modelManager.getBudget().get().getTotalBudget(), 15f);
+        } catch (NoSuchElementException ex) {
+            //failing test
+        }
+
+        assertEquals(modelManager, modelManager);
 
 
         // different userPrefs -> returns false

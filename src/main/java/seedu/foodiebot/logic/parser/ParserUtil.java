@@ -10,11 +10,9 @@ import seedu.foodiebot.commons.core.index.Index;
 import seedu.foodiebot.commons.util.StringUtil;
 import seedu.foodiebot.logic.commands.FilterCommand;
 import seedu.foodiebot.logic.parser.exceptions.ParseException;
-import seedu.foodiebot.model.canteen.Address;
 import seedu.foodiebot.model.canteen.Block;
 import seedu.foodiebot.model.canteen.Canteen;
 import seedu.foodiebot.model.canteen.Name;
-import seedu.foodiebot.model.food.Food;
 import seedu.foodiebot.model.tag.Tag;
 
 /** Contains utility methods used for parsing strings in the various *Parser classes. */
@@ -68,7 +66,6 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
-
     /**
      * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be
      * trimmed.
@@ -83,33 +80,6 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
-
-    /**
-     * Parses a {@code String name} into a numberOfStalls. Leading and trailing whitespaces will be
-     * trimmed.
-     *
-     * @throws ParseException if the given {@code name} is invalid.
-     */
-    public static int parseNoOfStalls(String numberOfStalls) throws ParseException {
-        requireNonNull(numberOfStalls);
-
-        return Integer.parseInt(numberOfStalls);
-    }
-    /**
-     * Parses a {@code String address} into an {@code Address}. Leading and trailing whitespaces
-     * will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
-    }
-
     /**
      * Parses a {@code String blockName} into an {@code blockName}. Leading and trailing whitespaces
      * will be trimmed.
@@ -138,21 +108,6 @@ public class ParserUtil {
             throw new ParseException(Canteen.MESSAGE_CONSTRAINTS);
         }
         return trimmedCanteenName;
-    }
-    /**
-     * Parses a {@code String foodName} into a {@code foodName}. Leading and trailing whitespaces will
-     * be trimmed
-     *
-     * @throws ParseException if the given {@code foodName} is invalid
-     */
-    public static String parseFoodName(String foodName) throws ParseException {
-        requireNonNull(foodName);
-        String trimmedFoodName = foodName.trim();
-        if (!Food.isValidFood(trimmedFoodName)) {
-            throw new ParseException(Food.MESSAGE_CONSTRAINTS);
-        }
-        return trimmedFoodName;
-
     }
 
     /**

@@ -5,7 +5,7 @@ import static seedu.foodiebot.logic.parser.CommandParserTestUtil.assertParseFail
 import static seedu.foodiebot.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.foodiebot.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.foodiebot.logic.commands.EnterCanteenCommand;
@@ -14,8 +14,8 @@ class EnterCanteenCommandParserTest {
 
     private EnterCanteenCommandParser parser = new EnterCanteenCommandParser();
 
-    @BeforeAll
-    public static void setMainContext() {
+    @BeforeEach
+    public void setMainContext() {
         ParserContext.setCurrentContext(ParserContext.MAIN_CONTEXT);
     }
 
@@ -35,5 +35,13 @@ class EnterCanteenCommandParserTest {
     @Test
     public void parse_validName_returnsCanteenCommand() {
         assertParseSuccess(parser, "The Deck", new EnterCanteenCommand("The Deck"));
+    }
+
+    @Test
+    public void parse_invalidContext() {
+        ParserContext.setCurrentContext(ParserContext.STALL_CONTEXT);
+        assertParseFailure(parser, "1", ParserContext.INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext()
+            + "\n" + ParserContext.SUGGESTED_CONTEXT_MESSAGE
+            + ParserContext.MAIN_CONTEXT + ", " + ParserContext.CANTEEN_CONTEXT);
     }
 }

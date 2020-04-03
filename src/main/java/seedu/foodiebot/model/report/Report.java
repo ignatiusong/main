@@ -1,5 +1,6 @@
 package seedu.foodiebot.model.report;
 
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 
@@ -57,6 +58,34 @@ public class Report {
         report.clear();
     }
 
+    private float getTotalSpent() {
+        return totalSpent;
+    }
+
+    /**
+     * Returns true if both canteens have the same identity and data fields. This defines a stronger
+     * notion of equality between two canteens.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Report)) {
+            return false;
+        }
+
+        Report otherReport = (Report) other;
+        return otherReport.getTotalSpent() == getTotalSpent();
+    }
+
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(totalSpent, report);
+    }
     @Override
     public String toString() {
         String header = String.format(TOTAL_SPENT, totalSpent) + "\n"
