@@ -61,8 +61,9 @@ public class CommandBox extends UiPart<Region> {
                                 continue;
                             }
 
-                            String temp = userEntered.concat(lastMatch).concat(s.substring(lastMatch.length()));
-                            commandTextField.setText(temp.toLowerCase());
+                            String temp = userEntered.concat(lastMatch.toLowerCase())
+                                .concat(s.substring(lastMatch.length()).toLowerCase());
+                            commandTextField.setText(temp);
                             commandTextField.setStyle(0, commandTextField.getText()
                                     .indexOf('/') + 1 + lastMatch.length(),
                                 "-fx-fill: #fff;");
@@ -70,10 +71,11 @@ public class CommandBox extends UiPart<Region> {
                                 commandTextField.getText().length(), "-fx-fill: #696969;");
                             commandTextField.setOnKeyPressed(event -> {
                                 if (event.getCode() == KeyCode.BACK_SPACE) {
-                                    if (commandTextField.getText().length() > userEntered.length()) {
+                                    String current = commandTextField.getText();
+                                    if (commandTextField.getText().indexOf("/") > 1) {
                                         suggested = true;
                                         lastMatch = "";
-                                        commandTextField.setText(userEntered);
+                                        commandTextField.setText(current.substring(0, current.indexOf("/") + 1));
                                     } else {
                                         this.match = false;
                                         if (!lastMatch.isEmpty()) {

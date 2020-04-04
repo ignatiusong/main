@@ -26,6 +26,7 @@ public class MainScene extends BaseScene {
         canteenListPanel = new CanteenListPanel(logic.getFilteredCanteenList(), false);
         addToListPanel(canteenListPanel);
         getResultDisplayPlaceholder().getChildren().add(getResultDisplay().getRoot());
+        showPinnedItem(false);
     }
 
     @Override

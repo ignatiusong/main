@@ -4,8 +4,8 @@ import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORM
 import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_DATE_BY_MONTH;
 import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_DATE_BY_WEEK;
 import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_DATE_BY_YEAR;
-import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_FROM_DATE;
-import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_TO_DATE;
+import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_TO;
 
 import seedu.foodiebot.commons.core.date.ConceptualDate;
 import seedu.foodiebot.commons.core.date.DateFormatter;
@@ -24,24 +24,24 @@ public class ReportCommandParser implements Parser<ReportCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ReportCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FROM_DATE, PREFIX_TO_DATE,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FROM, PREFIX_TO,
                 PREFIX_DATE_BY_WEEK, PREFIX_DATE_BY_MONTH, PREFIX_DATE_BY_YEAR);
 
         if (argMultimap.getValue(new Prefix("")).get().equals("")) {
             // The multimap only contains the preamble. No prefixes are present.
             return new ReportCommand(DateRange.generate());
 
-        } else if (argMultimap.containsExact(PREFIX_FROM_DATE, PREFIX_TO_DATE)) {
-            String start = getArgString(argMultimap, PREFIX_FROM_DATE);
-            String end = getArgString(argMultimap, PREFIX_TO_DATE);
+        } else if (argMultimap.containsExact(PREFIX_FROM, PREFIX_TO)) {
+            String start = getArgString(argMultimap, PREFIX_FROM);
+            String end = getArgString(argMultimap, PREFIX_TO);
             return new ReportCommand(DateRange.of(start, end, DateRangeStyle.STRICT));
 
-        } else if (argMultimap.containsExact(PREFIX_FROM_DATE)) {
-            String start = getArgString(argMultimap, PREFIX_FROM_DATE);
+        } else if (argMultimap.containsExact(PREFIX_FROM)) {
+            String start = getArgString(argMultimap, PREFIX_FROM);
             return new ReportCommand(DateRange.of(start, ConceptualDate.START_DATE));
 
-        } else if (argMultimap.containsExact(PREFIX_TO_DATE)) {
-            String end = getArgString(argMultimap, PREFIX_TO_DATE);
+        } else if (argMultimap.containsExact(PREFIX_TO)) {
+            String end = getArgString(argMultimap, PREFIX_TO);
             return new ReportCommand(DateRange.of(end, ConceptualDate.END_DATE));
 
         } else if (argMultimap.containsExact(PREFIX_DATE_BY_WEEK)) {

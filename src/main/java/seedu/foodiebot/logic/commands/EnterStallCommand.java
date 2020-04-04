@@ -108,7 +108,8 @@ public class EnterStallCommand extends Command {
                 return new CommandResult(COMMAND_WORD, Stall.MESSAGE_CONSTRAINTS);
             }
         }
-        return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS);
+        return new CommandResult(COMMAND_WORD, "Stall menu of  "
+            + ParserContext.getCurrentStall().get().getName());
     }
 
     @Override

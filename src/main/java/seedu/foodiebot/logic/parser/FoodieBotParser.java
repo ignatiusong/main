@@ -8,13 +8,11 @@ import java.util.regex.Pattern;
 
 import seedu.foodiebot.logic.commands.BackCommand;
 import seedu.foodiebot.logic.commands.BudgetCommand;
-import seedu.foodiebot.logic.commands.ClearCommand;
 import seedu.foodiebot.logic.commands.Command;
 import seedu.foodiebot.logic.commands.EnterCanteenCommand;
 import seedu.foodiebot.logic.commands.ExitCommand;
 import seedu.foodiebot.logic.commands.FavoritesCommand;
 import seedu.foodiebot.logic.commands.FilterCommand;
-import seedu.foodiebot.logic.commands.FindCommand;
 import seedu.foodiebot.logic.commands.GoToCanteenCommand;
 import seedu.foodiebot.logic.commands.HelpCommand;
 import seedu.foodiebot.logic.commands.ListCommand;
@@ -49,15 +47,6 @@ public class FoodieBotParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-        /*case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);*/
-
         case GoToCanteenCommand.COMMAND_WORD:
             return new GoToCanteenCommandParser().parse(arguments);
 
@@ -106,12 +95,6 @@ public class FoodieBotParser {
                         + "\n" + ParserContext.SUGGESTED_CONTEXT_MESSAGE
                         + ParserContext.TRANSACTIONS_CONTEXT);
             }
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);

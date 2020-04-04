@@ -92,7 +92,8 @@ public class EnterCanteenCommand extends Command {
                 return new CommandResult(COMMAND_WORD, Canteen.MESSAGE_CONSTRAINTS);
             }
         }
-        return new CommandResult(COMMAND_WORD, MESSAGE_SUCCESS);
+        return new CommandResult(COMMAND_WORD, "Stalls in "
+            + ParserContext.getCurrentCanteen().get().getName());
     }
     @Override
     public boolean equals(Object other) {

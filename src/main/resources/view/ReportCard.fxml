@@ -5,15 +5,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="id" fx:id="id" styleClass="stack-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="id" fx:id="id" styleClass="stack-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 
     <children>
-        <VBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" HBox.hgrow="ALWAYS">
+        <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
             <children>
+
                 <!--  prefHeight here is the height of the scrollbar-->
-                <ScrollPane fitToWidth="true" prefHeight="233.0" prefWidth="600" styleClass="stack-pane" stylesheets="@DarkTheme.css">
+                <ScrollPane fitToWidth="true" vbarPolicy="AS_NEEDED" styleClass="stack-pane">
                     <content>
-                        <VBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="436.0" prefWidth="598.0" styleClass="stack-pane">
+                        <VBox VBox.vgrow="ALWAYS" styleClass="stack-pane">
                             <children>
                                 <!--  alternatively use spacing property in vbox -->
                                 <Label fx:id="textArea" styleClass="label-bright" />
@@ -21,6 +22,7 @@
                         </VBox>
                     </content>
                 </ScrollPane>
+
             </children>
         </VBox>
     </children>

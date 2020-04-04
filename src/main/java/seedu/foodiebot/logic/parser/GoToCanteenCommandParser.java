@@ -1,7 +1,7 @@
 package seedu.foodiebot.logic.parser;
 
 import static seedu.foodiebot.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_FROM_DATE;
+import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_FROM;
 
 import java.util.stream.Stream;
 
@@ -30,15 +30,21 @@ public class GoToCanteenCommandParser implements Parser<GoToCanteenCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public GoToCanteenCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FROM_DATE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FROM);
         String enteredText = argMultimap.getPreamble();
-        if (!arePrefixesPresent(argMultimap, PREFIX_FROM_DATE)) {
+        if (!ParserContext.getCurrentContext().equals(ParserContext.MAIN_CONTEXT)) {
+            throw new ParseException(ParserContext.INVALID_CONTEXT_MESSAGE + ParserContext.getCurrentContext()
+                + "\n" + ParserContext.SUGGESTED_CONTEXT_MESSAGE
+                + ParserContext.MAIN_CONTEXT);
+        }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_FROM)) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, GoToCanteenCommand.MESSAGE_USAGE));
         }
 
         Index index;
-        String nearestBlockName = ParserUtil.parseBlockName(argMultimap.getValue(PREFIX_FROM_DATE).get());
+        String nearestBlockName = ParserUtil.parseBlockName(argMultimap.getValue(PREFIX_FROM).get());
 
         try {
             index = ParserUtil.parseIndex(enteredText);

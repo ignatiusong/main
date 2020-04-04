@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+
+
+<VBox fx:id="stallList" styleClass="pane-with-border" minWidth="340" prefWidth="340" minHeight="150" prefHeight="150"
+      alignment="BOTTOM_CENTER" xmlns:fx="http://javafx.com/fxml">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10" />
+    </padding>
+
+
+    <Label fx:id="bottomLabel" text="Current Canteen" textFill="white"></Label>
+
+    <StackPane fx:id="extraListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+</VBox>

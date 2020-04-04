@@ -1,7 +1,7 @@
 package seedu.foodiebot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_FROM_DATE;
+import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_FROM;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,13 +27,13 @@ public class GoToCanteenCommand extends Command {
             + "Parameters: "
             + "CANTEEN_NAME "
             + "["
-            + PREFIX_FROM_DATE
+            + PREFIX_FROM
             + "NEAREST_BLOCK_NAME]...\n"
             + "Example: "
             + COMMAND_WORD
             + " "
             + "deck "
-            + PREFIX_FROM_DATE
+            + PREFIX_FROM
             + "com1 ";
 
     public static final String MESSAGE_SUCCESS = "";

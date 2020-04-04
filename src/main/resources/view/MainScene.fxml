@@ -11,8 +11,10 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.stage.Screen?>
 
-    <VBox fx:id="vbox" xmlns:fx="http://javafx.com/fxml">
+<?import javafx.scene.control.Label?>
+<VBox fx:id="vbox" xmlns:fx="http://javafx.com/fxml">
     <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
@@ -40,21 +42,27 @@
             </padding>
         </StackPane>
 
-        <VBox fx:id="canteenList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS"
-        minHeight="220">
+        <Label fx:id="topLabel" text="List of Canteens in NUS" textAlignment="CENTER"
+            ></Label>
+
+    <VBox fx:id="stallList" styleClass="pane-with-border" minWidth="340" prefWidth="340" minHeight="150" prefHeight="150"
+          >
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10" />
+        </padding>
+        <StackPane fx:id="extraListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+    </VBox>
+
+
+
+        <VBox fx:id="canteenList" styleClass="pane-with-border" minWidth="340" VBox.vgrow="ALWAYS">
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
             <StackPane fx:id="listPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
 
-    <VBox fx:id="stallList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS"
-      alignment="bottom_center">
-        <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-        </padding>
-        <StackPane fx:id="extraListPanelPlaceholder" VBox.vgrow="ALWAYS" alignment="BOTTOM_CENTER"/>
-    </VBox>
+
 
 
     <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

@@ -1,6 +1,7 @@
 package seedu.foodiebot.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.foodiebot.logic.parser.CliSyntax.PREFIX_FROM;
 
 import seedu.foodiebot.model.Model;
 
@@ -13,6 +14,18 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all canteens";
     public static final String MESSAGE_NEAREST_BLOCK = "Canteens near you";
+
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + " LIST:  List the canteens\n"
+            + "Parameters: "
+            + PREFIX_FROM
+            + "CURRENT_LOCATION \n"
+            + "Example: "
+            + COMMAND_WORD
+            + " "
+            + PREFIX_FROM
+            + "com1 ";
+
 
     private final String nearestBlockName;
 

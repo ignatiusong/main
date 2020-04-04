@@ -36,8 +36,18 @@ This symbol indicates tips for the particular feature.
 
 === Definition of Common Words Use
 
+Context::
+There are some commands that are only permissable at certain state of the application.
+For instance, the `review` and `rate` commands are only allowed after navigating to the transactions screen.
+We refer to this state as a *context* , transactions context commands are not allowed in other contexts.
+The requirement of commands to be executed in the relevant context is less particular in the case of canteen and stall as they share similar commands like `enter` and `select`.
+
 GUI::
 Graphic User Interface is a type of interface that allows users to interact with.
+
+Index::
+It is a number that is linked to the item of the list
+An index is limited to the maximum number of items shown in the list, the item does not exist if an invalid index is specified in commands that use an index.
 
 
 
@@ -85,6 +95,12 @@ Allows the user to return to the previous screen if one is available
 
 Format: `back`
 
+=== Exit Command: `*exit*`
+
+Allows the user to exit the app
+
+Format: `exit`
+
 === List All Canteens: `*list*`
 
 Displays a list of available canteens on campus.
@@ -114,9 +130,37 @@ Includes instructions on how to travel there as well as bus services that go to 
 
 Format: `goto CANTEEN_NAME f/ CURRENT_LOCATION`
 
+Parameters:
+
+* `CANTEEN_NAME`: The canteen name
+* `CURRENT_LOCATION`: The nearest block from your current location
+
+These `CURRENT LOCATION`(s) are available for directions:
+
+* com1
+
+These `CURRENT LOCATION`(s) will be added in future releases
+(but are recognised as valid locations):
+
+* pgpr
+* uhc
+* utown
+
+
+Examples:
+
+****
+`*goto 1 f/com1*`::
+Gets the direction to the canteen at the first index from com1.
+`*goto The Deck f/com1*`::
+Gets the direction to The Deck from com1.
+****
+
 //* Suggestions for the `CANTEEN_NAME` and `CURRENT_LOCATION` field will be provided as you type.
 
 NOTE: `CANTEEN_NAME` and `CURRENT_LOCATION` field has to be one of the suggestions. Otherwise an error message will be displayed telling the user to provide a valid `CANTEEN_NAME` and `CURRENT_LOCATION`.
+
+
 
 image::wireframe/goto.png[width="700", align="left"]
 
@@ -127,15 +171,26 @@ Format: `enter`
 
 Parameters:
 
+* `INDEX`: An index from the list has to be specified.
 
-* `INDEX`: Enter the canteen with the entered index.
+* `CANTEEN_NAME`: The canteen name has to be from one of the canteens displayed. Partial names are not allowed.
 
-* `CANTEEN_NAME`: Enter the canteen with the entered name.
+Examples:
+
+****
+`*enter 1*`::
+Enters the canteen with the canteen index.
+
+`*enter The Deck*`::
+ Enters the canteen with the canteen name.
+****
 
 NOTE: Information about the cuisine sold at the stall, the rating of the stall and various other things will be implemented in v2.0. +
 The stall's rating is determined from the user's past experiences of the food items which were selected.
 
-=== View All Food Items in a Stall: `*enter*`
+
+
+=== View All Food Items in a Stall: `*enter*` (Same command as canteen)
 
 Displays the food items available at the specified stall.
 
@@ -145,9 +200,19 @@ Format: `enter`
 
 Parameters:
 
-* `INDEX`: Enter the stall with the entered index.
+* `INDEX`: An index from the list has to be specified.
 
-* `STALL_NAME`: Enter the stall with the entered name.
+* `STALL_NAME`:  The stall name has to be from one of the stalls displayed. Partial names are not allowed.
+
+Examples:
+
+****
+`*enter 1*`::
+Enters the stall with the stall index.
+
+`*enter Western*`::
+Enters the stall with the stall name.
+****
 
 NOTE: Information about the cuisine sold at the stall, the rating of the food item and various other things will be implemented in v2.0. +
 The stall's rating is determined from the user's past experiences of the food items which were selected.
@@ -201,7 +266,7 @@ image::wireframe/randomize.png[width="700", align="left"]
 
 === Set a Budget : `*budget set*`
 
-Sets a daily, weekly or monthly budget. The budget can be changed.
+Set a daily, weekly or monthly budget. The budget can be changed.
 
 NOTE: Changing the budget will reset the budget overview for the current budget cycle. +
 For example, if you have $5 remaining from a weekly budget of $20, setting a new monthly budget of $150
@@ -275,7 +340,7 @@ Format: `transactions`
 Parameters:
 
 * `[f/FROM_DATE] [t/TO_DATE]` - Displays transactions from and till the given dates.
-** Example: `report f/ 12-02-2020 t/ 30-04-2020`
+** Example: transactions `f/ 12-02-2020 t/ 30-04-2020`
 * `[w/DATE]` - Displays transactions for the week (Monday-Sunday) of the input date.
 ** Example: transactions `w/ 12-02-2020`
 * `[m/MONTH]` - Displays transactions of the input month.
@@ -303,8 +368,8 @@ Parameters:
 Examples:
 
 ****
-`*rate 5 This was yummy!*`::
-Adds review "This was yummy!" to the 5th item in the transactions list.
+`*review 1 The food is delicious! Love the bbq sauce*`::
+Adds a personal review to the 1st item in the transactions list.
 ****
 
 TIP: You can update existing reviews by using the same command.
@@ -345,13 +410,13 @@ Parameters:
 
 === View Favorited Food Items: `*favorites view*`
 
-View the food items that have been set as favorites.
+Views the food items that have been set as favorites.
 
 Format: `favorites view`
 
 === Remove Favorited Food Items: `*favorites remove*`
 
-View the food items that have been set as favorites.
+Views the food items that have been set as favorites.
 
 Format: `favorites remove INDEX`
 
@@ -361,7 +426,7 @@ Parameters:
 
 === Filter Canteens or Stalls: `*filter*`
 
-Filter canteens or stalls based on the tag entered.
+Filters canteens or stalls based on the tag entered.
 
 Format: `filter TAG`
 
@@ -376,17 +441,6 @@ Examples:
 Only displays canteens with the asian tag.
 ****
 
-=== Filter Canteens or Stalls: `*filter*`
-
-Filter canteens or stalls based on whether they have the tag entered by the user. This depends on the menu
-that the user is currently in. If they are in the canteen menu, this will filter the canteens and similarly in
-the stall menu, this will filter the stalls.
-
-Format: `filter TAG`
-
-* Example:
-** `filter asian` - Only displays canteens with the asian tag.
-
 == FAQ
 *Q*: How can I update the list of canteens if there are changes to the canteens on campus? +
 *A*: You can manually download foodiebot.json file which we have published link:https://github.com/AY1920S2-CS2103T-F11-3/main/blob/master/foodiebot.json[here].
@@ -399,20 +453,17 @@ Format: `filter TAG`
 |=======================================================================
 |Command |Function |Example
 
-|budget set PERIOD AMOUNT |Sets a budget for the allocated period |budget set w/ 9.50
+|budget set PERIOD AMOUNT |Set a budget for the allocated period |budget set w/ 9.50
 
 |budget view |Views the current budget|
 
 |enter CANTEEN_NAME |Displays the menu for the selected canteen |enter The Deck
 
-|favorites set |Sets the food item in the stall as a favorite |favorites set 1
+|favorites set |Set the food item in the stall as a favorite |favorites set 1
 
 |favorites view |Displays all favorited food |favorites view
 
 |filter |Shows only canteens or stalls with a specified tag |filter asian
-
-|find nearest BLOCK_NAME |Finds the nearest canteen from location |find nearest COM1
-
 
 |goto CANTEEN_NAME f/ CURRENT_LOCATION |Gets direction to canteen from the current location |goto The Deck f/ COM1
 

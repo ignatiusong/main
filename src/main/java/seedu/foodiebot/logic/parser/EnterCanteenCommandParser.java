@@ -30,6 +30,7 @@ public class EnterCanteenCommandParser implements Parser<EnterCanteenCommand> {
 
         try {
             index = ParserUtil.parseCanteenIndex(enteredText);
+            //ParserContext.setCurrentContext(ParserContext.CANTEEN_CONTEXT);
             return new EnterCanteenCommand(index);
         } catch (Exception ex) {
             if (ex instanceof IndexOutOfBoundsException) {
