@@ -32,7 +32,7 @@ public class GoToCanteenCommand extends Command {
             + "Example: "
             + COMMAND_WORD
             + " "
-            + "deck "
+            + "The Deck "
             + PREFIX_FROM
             + "com1 ";
 

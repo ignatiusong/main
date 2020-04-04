@@ -1,1 +1,3 @@
 *.pdf binary
+*.json merge=ours
+*.html merge=ours

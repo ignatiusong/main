@@ -234,11 +234,12 @@ public class BaseScene {
                 : logic.getFilteredCanteenList(), commandResult.isLocationSpecified()));
         showPinnedItem(false);
     }
-
     /** .*/
     void showPinnedItem(boolean value) {
         if (!value) {
-            vbox.getChildren().remove(stallList);
+            if (vbox != null) {
+                vbox.getChildren().remove(stallList);
+            }
         }
     }
 
@@ -368,6 +369,9 @@ public class BaseScene {
                     break;
                 case ParserContext.RANDOMIZE_CONTEXT:
                     handleListRandomize();
+                    break;
+                case ParserContext.DIRECTIONS_CONTEXT:
+                    handleListCanteens(commandResult);
                     break;
                 case ParserContext.FAVORITE_CONTEXT:
                     switch (ParserContext.getPreviousContext()) {

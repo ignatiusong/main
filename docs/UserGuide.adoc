@@ -225,6 +225,7 @@ Saves the selected food into transactions to help the user track his history of 
 Format: `select`
 
 Parameters:
+
 * `INDEX`: Select the food with the given index from the list displayed on the GUI
 * `FOOD_NAME`: Select the food with the given name from the list displayed on the GUI
 
@@ -426,19 +427,22 @@ Parameters:
 
 === Filter Canteens or Stalls: `*filter*`
 
-Filters canteens or stalls based on the tag entered.
+Filters canteens or stalls based on the tag or food price entered .
 
 Format: `filter TAG`
 
 Parameters:
 
-* `TAG` - a label tag assiociated with the food item.
+* `TAG` - a label tag associated with the food item.
 
 Examples:
 
 ****
 `*filter asian*`::
 Only displays canteens with the asian tag.
+
+`*filter 5*`::
+Only displays food that are priced at 5 or below.
 ****
 
 == FAQ

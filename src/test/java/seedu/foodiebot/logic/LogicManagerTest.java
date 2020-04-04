@@ -56,9 +56,9 @@ public class LogicManagerTest {
     public void execute_no_errors() {
         assertDoesNotThrow(() -> logic.setGuiSettings(logic.getGuiSettings()));
         assertDoesNotThrow(() -> logic.getFilteredCanteenListSortedByDistance());
-        assertDoesNotThrow(() -> logic.getFilteredStallList(false));
-        assertDoesNotThrow(() -> logic.getFilteredFoodList(false));
-        assertDoesNotThrow(() -> logic.getFilteredFavoriteFoodList(false));
+        assertDoesNotThrow(() -> logic.getFilteredStallList(true));
+        assertDoesNotThrow(() -> logic.getFilteredFoodList(true));
+        assertDoesNotThrow(() -> logic.getFilteredFavoriteFoodList(true));
         assertDoesNotThrow(() -> logic.getFilteredTransactionsList());
         assertDoesNotThrow(() -> logic.getFilteredRandomizeList());
         assertDoesNotThrow(() -> logic.getReport());

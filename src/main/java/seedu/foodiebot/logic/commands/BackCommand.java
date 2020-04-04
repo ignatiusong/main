@@ -24,6 +24,7 @@ public class BackCommand extends Command {
 
     public static final String INVALID_CONTEXT_MESSAGE =
             "Cannot go back any further";
+    private static final String MESSAGE_EXIT_DIRECTIONS = "Exit Directions. ";
 
     @Override
     public CommandResult execute(Model model) {
@@ -52,6 +53,10 @@ public class BackCommand extends Command {
         case ParserContext.RANDOMIZE_CONTEXT:
             ParserContext.setCurrentContext(ParserContext.MAIN_CONTEXT);
             return new CommandResult(COMMAND_WORD, MESSAGE_EXIT_RANDOMIZE, false, false);
+
+        case ParserContext.DIRECTIONS_CONTEXT:
+            ParserContext.setCurrentContext(ParserContext.MAIN_CONTEXT);
+            return new CommandResult(COMMAND_WORD, MESSAGE_EXIT_DIRECTIONS, false, false);
 
         case ParserContext.TRANSACTIONS_CONTEXT:
             ParserContext.setCurrentContext(ParserContext.MAIN_CONTEXT);
